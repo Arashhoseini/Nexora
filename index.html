@@ -1,433 +1,211 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#eaf5ff">
-  <meta name="description" content="Nexora — a refined digital experience.">
-  <title>Nexora — A New Digital Experience</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071426">
+  <title>Nexora — Digital Services</title>
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-
   <style>
-    :root {
-      --ice: #edf7ff;
-      --blue: #477fe9;
-      --deep: #203c66;
-      --muted: #748ba9;
-      --glass: rgba(255,255,255,.72);
-    }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
-      min-height: 100vh;
-      min-height: 100svh;
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
-      color: var(--deep);
-      background:
-        radial-gradient(ellipse at 12% 12%, #fff 0, transparent 38%),
-        radial-gradient(ellipse at 88% 80%, #b8d9ff 0, transparent 40%),
-        linear-gradient(145deg, #f4faff, #e3f1ff 52%, #d7eaff);
+      font-family: Arial, sans-serif;
+      color: #eef7ff;
+      background: #071426;
+    }
+    header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      padding: 28px 18px 20px;
-      overflow-x: hidden;
-      position: relative;
+      padding: 20px 7%;
+      border-bottom: 1px solid #203750;
     }
-
-    body::before, body::after {
-      content: "";
-      position: fixed;
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: rgba(119,177,255,.28);
-      filter: blur(65px);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    body::before { top: -100px; right: -100px; }
-    body::after { bottom: -110px; left: -100px; }
-
-    .shell {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 430px;
-      animation: appear .7s ease both;
-    }
-
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .brand {
-      text-align: center;
-      margin: 0 0 28px;
-    }
-
-    .emblem {
-      width: 78px;
-      height: 78px;
-      margin: 0 auto 17px;
-      border-radius: 26px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(145deg, #fff, #d7eaff);
-      border: 1px solid rgba(255,255,255,.95);
-      box-shadow: 0 12px 32px #6097d329,
-                  inset 0 1px 1px #fff;
-      position: relative;
-    }
-
-    .emblem span {
-      font-size: 43px;
-      line-height: 1;
+    .logo {
+      font-size: 26px;
       font-weight: 800;
-      letter-spacing: -4px;
-      padding-right: 4px;
-      background: linear-gradient(140deg, #82baff, #3d69ce);
-      color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
+      color: #8de5ff;
+      letter-spacing: 2px;
     }
-
-    .brand-name {
-      margin: 0;
-      font-size: 32px;
-      font-weight: 750;
-      letter-spacing: 5px;
-      color: #244b7d;
-    }
-
-    .brand-caption {
-      margin: 10px 0 0;
-      color: #7189a8;
+    .tag {
+      color: #9db4cc;
       font-size: 12px;
-      letter-spacing: 2.3px;
-      text-transform: uppercase;
     }
-
-    .panel {
-      padding: 34px 26px 24px;
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,.92);
-      background: var(--glass);
-      box-shadow: 0 24px 70px rgba(65,112,170,.13),
-                  inset 0 1px 0 rgba(255,255,255,.8);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+    main {
+      max-width: 1050px;
+      margin: auto;
+      padding: 65px 22px;
+    }
+    .hero {
+      padding: 38px 0 48px;
       text-align: center;
     }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      border: 1px solid #dcecff;
+    .pill {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid #275477;
       border-radius: 30px;
-      background: #f7fbff;
-      color: #6386b5;
-      font-size: 11px;
-      padding: 7px 12px;
-      margin-bottom: 19px;
-      letter-spacing: .5px;
+      color: #8de5ff;
+      font-size: 13px;
     }
-
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #6e9bea;
-      box-shadow: 0 0 9px #6e9bea;
+    h1 {
+      font-size: clamp(36px, 7vw, 64px);
+      margin: 22px 0 15px;
+      line-height: 1.1;
     }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(24px, 6vw, 29px);
-      letter-spacing: -.7px;
-      color: #24436b;
+    h1 span { color: #75dfff; }
+    .intro {
+      max-width: 580px;
+      margin: auto;
+      line-height: 1.8;
+      color: #afc1d5;
     }
-
-    .description {
-      max-width: 300px;
-      margin: 13px auto 27px;
-      font-size: 14px;
-      line-height: 1.9;
-      color: var(--muted);
-    }
-
-    .login {
-      width: 100%;
-      min-height: 57px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 11px;
-      padding: 14px 18px;
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: 16px;
-      color: white;
-      background: linear-gradient(115deg, #658fea, #526ed2 55%, #6256c9);
-      box-shadow: 0 11px 25px rgba(83,112,211,.27),
-                  inset 0 1px 0 rgba(255,255,255,.25);
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 22px;
+      background: #7be0ff;
+      color: #071426;
+      font-weight: bold;
       font-size: 15px;
-      font-weight: 700;
       cursor: pointer;
-      transition: transform .2s, box-shadow .2s, opacity .2s;
     }
-
-    .login:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 30px rgba(83,112,211,.33);
+    button:disabled { opacity: .6; cursor: wait; }
+    .hero button { margin-top: 26px; }
+    #status {
+      min-height: 24px;
+      margin-top: 15px;
+      color: #a8dff4;
+      font-size: 14px;
     }
-
-    .login:active { transform: scale(.99); }
-    .login:disabled { opacity: .65; cursor: wait; }
-
-    .pi-symbol {
+    .section-title { margin: 25px 0; font-size: 25px; }
+    .services {
       display: grid;
-      place-items: center;
-      width: 27px;
-      height: 27px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,.9);
-      font-family: Georgia, serif;
-      font-size: 17px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
     }
-
-    .status {
-      min-height: 20px;
-      margin: 15px 0 0;
-      color: #7087a4;
-      font-size: 12px;
+    .card {
+      background: #0c2037;
+      border: 1px solid #1d3a55;
+      border-radius: 18px;
+      padding: 24px;
+    }
+    .symbol { font-size: 28px; }
+    .card h3 { margin-bottom: 9px; }
+    .card p {
+      color: #a9bdd1;
       line-height: 1.7;
-      overflow-wrap: anywhere;
+      font-size: 14px;
     }
-
-    .separator {
-      height: 1px;
-      margin: 24px 0 19px;
-      background: linear-gradient(90deg, transparent, #d8e7f8, transparent);
+    .account {
+      margin-top: 35px;
+      padding: 25px;
+      border-radius: 18px;
+      border: 1px solid #244761;
+      background: #0a1b30;
     }
-
-    .language-label {
-      margin: 0 0 12px;
-      color: #92a4ba;
-      font-size: 10px;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-    }
-
-    .languages {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      direction: ltr;
-    }
-
-    .lang {
-      min-width: 104px;
-      border: 1px solid #dbe8f7;
-      border-radius: 11px;
-      padding: 10px 14px;
-      background: rgba(255,255,255,.62);
-      color: #7187a4;
-      font-size: 12px;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .lang.active {
-      background: #e6f1ff;
-      color: #315fa8;
-      border-color: #a8c8f4;
-      box-shadow: inset 0 0 0 1px #d4e6ff;
-      font-weight: 700;
-    }
-
-    .footer {
+    footer {
+      padding: 25px;
       text-align: center;
-      margin-top: 22px;
-      color: #829ab6;
-      font-size: 11px;
-      letter-spacing: .3px;
+      color: #7890a8;
+      border-top: 1px solid #203750;
+      font-size: 12px;
     }
-
-    button:focus-visible {
-      outline: 3px solid #8bb9ff;
-      outline-offset: 3px;
-    }
-
-    [hidden] { display: none !important; }
-
-    @media (max-width: 360px) {
-      .panel { padding: 29px 19px 22px; }
-      .brand-name { font-size: 29px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
+    a { color: #8de5ff; }
   </style>
 </head>
-
 <body>
-  <main class="shell">
-    <header class="brand">
-      <div class="emblem" aria-hidden="true"><span>N</span></div>
-      <h1 class="brand-name">NEXORA</h1>
-      <p class="brand-caption" id="tagline">A refined digital experience</p>
-    </header>
+  <header>
+    <div class="logo">NEXORA</div>
+    <div class="tag">DIGITAL PLATFORM</div>
+  </header>
 
-    <section class="panel" aria-labelledby="welcomeTitle">
-      <div class="eyebrow">
-        <span class="dot"></span>
-        <span id="eyebrowText">YOUR DIGITAL SPACE</span>
-      </div>
-
-      <h2 id="welcomeTitle">Welcome to Nexora</h2>
-
-      <p class="description" id="description">
-        A fresh space for your digital journey.
-        Simple, elegant and designed around you.
+  <main>
+    <section class="hero">
+      <div class="pill">Your digital space</div>
+      <h1>Explore more with<br><span>Nexora.</span></h1>
+      <p class="intro">
+        A simple place to discover digital services, manage your profile,
+        and explore new tools in one modern platform.
       </p>
-
-      <button class="login" id="loginButton" type="button"
-              onclick="loginWithPi()">
-        <span class="pi-symbol" aria-hidden="true">π</span>
-        <span id="loginText">Continue with Pi</span>
-      </button>
-
-      <p class="status" id="status" role="status" aria-live="polite">
-        Open Nexora in Pi Browser to sign in.
-      </p>
-
-      <div class="separator"></div>
-
-      <p class="language-label" id="languageLabel">CHOOSE LANGUAGE</p>
-
-      <div class="languages" aria-label="Choose language">
-        <button type="button" class="lang active"
-                id="englishButton" onclick="setLanguage('en')"
-                aria-pressed="true">English</button>
-        <button type="button" class="lang"
-                id="persianButton" onclick="setLanguage('fa')"
-                aria-pressed="false">فارسی</button>
-      </div>
+      <button id="loginBtn" onclick="loginWithPi()">Sign in with Pi</button>
+      <div id="status" role="status">Welcome to Nexora.</div>
     </section>
 
-    <footer class="footer" id="footer">
-      © Nexora · A new digital experience
-    </footer>
+    <h2 class="section-title">Explore Services</h2>
+    <section class="services">
+      <article class="card">
+        <div class="symbol">✦</div>
+        <h3>Digital Tools</h3>
+        <p>Discover useful tools for everyday digital tasks.</p>
+      </article>
+      <article class="card">
+        <div class="symbol">◈</div>
+        <h3>Your Profile</h3>
+        <p>Your personal account area will be available after secure account setup.</p>
+      </article>
+      <article class="card">
+        <div class="symbol">⌘</div>
+        <h3>Services Hub</h3>
+        <p>A central place to explore services as the Nexora platform grows.</p>
+      </article>
+    </section>
+
+    <section class="account">
+      <h2>Your Nexora Account</h2>
+      <p id="accountInfo">Sign in with Pi to test authentication.</p>
+    </section>
   </main>
 
+  <footer>
+    Nexora · Digital Services Platform
+  </footer>
+
   <script>
-    let language = "en";
-    let piReady = false;
-
-    const copy = {
-      en: {
-        tagline: "A refined digital experience",
-        eyebrow: "YOUR DIGITAL SPACE",
-        title: "Welcome to Nexora",
-        description: "A fresh space for your digital journey. Simple, elegant and designed around you.",
-        login: "Continue with Pi",
-        status: "Open Nexora in Pi Browser to sign in.",
-        loading: "Connecting to Pi...",
-        unavailable: "Pi SDK is unavailable. Open this app in Pi Browser.",
-        failed: "Sign-in could not be completed. Please try again.",
-        greeting: "Welcome, ",
-        language: "CHOOSE LANGUAGE",
-        footer: "© Nexora · A new digital experience"
-      },
-      fa: {
-        tagline: "تجربه‌ای دیجیتال، متفاوت و شیک",
-        eyebrow: "فضای دیجیتال شما",
-        title: "به نکساورا خوش آمدید",
-        description: "فضایی تازه برای مسیر دیجیتال شما؛ ساده، زیبا و متناسب با نیازهای شما.",
-        login: "ادامه با حساب Pi",
-        status: "برای ورود، Nexora را در Pi Browser باز کنید.",
-        loading: "در حال اتصال به Pi...",
-        unavailable: "امکان اتصال به Pi نیست؛ اپ را در Pi Browser باز کنید.",
-        failed: "ورود انجام نشد. لطفاً دوباره تلاش کنید.",
-        greeting: "خوش آمدید، ",
-        language: "انتخاب زبان",
-        footer: "© Nexora · تجربه‌ای تازه در دنیای دیجیتال"
-      }
-    };
-
-    function setLanguage(value) {
-      language = value;
-      const t = copy[value];
-
-      document.documentElement.lang = value;
-      document.documentElement.dir = value === "fa" ? "rtl" : "ltr";
-      document.getElementById("tagline").textContent = t.tagline;
-      document.getElementById("eyebrowText").textContent = t.eyebrow;
-      document.getElementById("welcomeTitle").textContent = t.title;
-      document.getElementById("description").textContent = t.description;
-      document.getElementById("loginText").textContent = t.login;
-      document.getElementById("languageLabel").textContent = t.language;
-      document.getElementById("footer").textContent = t.footer;
-
-      document.getElementById("englishButton").classList.toggle("active", value === "en");
-      document.getElementById("persianButton").classList.toggle("active", value === "fa");
-      document.getElementById("englishButton").setAttribute("aria-pressed", String(value === "en"));
-      document.getElementById("persianButton").setAttribute("aria-pressed", String(value === "fa"));
-
-      document.getElementById("status").textContent = t.status;
-    }
-
-    try {
-      if (window.Pi) {
-        Pi.init({ version: "2.0", sandbox: true });
-        piReady = true;
-      }
-    } catch (error) {
-      console.error("Pi SDK initialization failed:", error);
-    }
+    const statusBox = document.getElementById("status");
+    const loginBtn = document.getElementById("loginBtn");
+    const accountInfo = document.getElementById("accountInfo");
 
     async function loginWithPi() {
-      const button = document.getElementById("loginButton");
-      const status = document.getElementById("status");
-      const t = copy[language];
-
-      if (!window.Pi || !piReady) {
-        status.textContent = t.unavailable;
+      if (!window.Pi) {
+        statusBox.textContent =
+          "Pi Browser and the Pi SDK are required for Pi sign-in.";
         return;
       }
 
-      button.disabled = true;
-      status.textContent = t.loading;
+      loginBtn.disabled = true;
+      statusBox.textContent = "Connecting to Pi...";
 
       try {
-        const auth = await Pi.authenticate(
-          ["username"],
-          function (incompletePayment) {
-            console.log("Incomplete Pi payment:", incompletePayment);
-          }
-        );
+        const scopes = ["username"];
+        const auth = await window.Pi.authenticate(scopes);
 
-        status.textContent = t.greeting + auth.user.username;
+        if (auth && auth.user) {
+          statusBox.textContent = "Pi sign-in response received.";
+          accountInfo.textContent =
+            "Signed-in Pi username: " +
+            (auth.user.username || "Username unavailable");
+        } else {
+          statusBox.textContent = "Could not complete sign-in.";
+        }
       } catch (error) {
-        console.error("Pi authentication error:", error);
-        status.textContent = t.failed;
+        statusBox.textContent =
+          "Sign-in failed. Open Nexora in Pi Browser and try again.";
+        console.error(error);
       } finally {
-        button.disabled = false;
+        loginBtn.disabled = false;
+      }
+    }
+
+    if (window.Pi) {
+      try {
+        window.Pi.init({ version: "2.0", sandbox: true });
+      } catch (error) {
+        console.error("Pi SDK initialization failed:", error);
       }
     }
   </script>
 </body>
 </html>
+```
