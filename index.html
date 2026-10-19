@@ -4,30 +4,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#071a3a">
+<meta name="theme-color" content="#071a3d">
 <title>Nexora | Marketplace</title>
 
 <style>
-:root{
-  --navy:#071a3a;
-  --navy2:#0d2b5c;
-  --blue:#1264e8;
-  --blue2:#2680ff;
-  --white:#ffffff;
-  --bg:#f4f7fb;
-  --card:#ffffff;
-  --text:#172033;
-  --muted:#667085;
-  --border:#dfe5ee;
-  --shadow:0 10px 30px rgba(7,26,58,.10);
-  --radius:18px;
-  --font-size:16px;
-}
-
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
+}
+
+:root{
+  --navy:#071a3d;
+  --navy2:#0b2859;
+  --blue:#1464d2;
+  --blue2:#1f78e8;
+  --white:#fff;
+  --bg:#f4f7fb;
+  --card:#fff;
+  --text:#16213a;
+  --muted:#6b7890;
+  --border:#e4e9f1;
+  --gold:#e3a72f;
+  --green:#15956a;
+  --shadow:0 8px 25px rgba(9,31,68,.08);
+  --radius:18px;
 }
 
 html{
@@ -42,9 +43,8 @@ body{
     sans-serif;
   background:var(--bg);
   color:var(--text);
-  font-size:var(--font-size);
+  font-size:16px;
   line-height:1.7;
-  min-height:100vh;
 }
 
 button,
@@ -64,233 +64,297 @@ a{
 }
 
 /* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+  background:#04132e;
+  color:#dce7f7;
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+}
+
+.topbar-inner{
+  width:min(1400px,94%);
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+}
+
+/* =========================
    HEADER
 ========================= */
 
-.top-header{
-  background:linear-gradient(135deg,#06152f,#0a2b61);
-  color:#fff;
+.header{
+  background:var(--navy);
+  color:white;
   position:sticky;
   top:0;
   z-index:1000;
-  box-shadow:0 5px 25px rgba(0,0,0,.18);
+  box-shadow:0 5px 20px rgba(0,0,0,.16);
 }
 
-.header-inner{
-  max-width:1400px;
+.header-main{
+  width:min(1400px,94%);
   margin:auto;
-  min-height:82px;
+  min-height:78px;
   display:flex;
   align-items:center;
   gap:22px;
-  padding:14px 22px;
 }
 
 .logo{
   display:flex;
   align-items:center;
-  gap:12px;
-  min-width:170px;
+  gap:10px;
+  min-width:145px;
 }
 
 .logo-icon{
-  width:48px;
-  height:48px;
-  border-radius:14px;
-  background:#fff;
-  color:var(--blue);
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  background:linear-gradient(145deg,#2583f4,#0d4db4);
   display:grid;
   place-items:center;
-  font-size:25px;
+  font-size:23px;
   font-weight:900;
+  box-shadow:0 5px 18px rgba(22,105,220,.35);
 }
 
-.logo-name{
-  font-size:24px;
+.logo-text{
+  font-size:23px;
   font-weight:900;
   letter-spacing:.3px;
 }
 
-.logo-sub{
-  font-size:12px;
-  opacity:.75;
-}
-
-.search-box{
+.search{
   flex:1;
-  display:flex;
-  max-width:650px;
+  max-width:720px;
   height:50px;
-  background:#fff;
-  border-radius:14px;
+  display:flex;
+  background:white;
+  border-radius:12px;
   overflow:hidden;
+  border:3px solid rgba(255,255,255,.08);
 }
 
-.search-box input{
+.search-category{
+  border:0;
+  background:#f0f3f7;
+  padding:0 14px;
+  color:#34435c;
+  border-left:1px solid #dce2eb;
+}
+
+.search input{
   flex:1;
   border:0;
   outline:0;
-  padding:0 18px;
-  color:#172033;
-  font-size:16px;
+  padding:0 17px;
+  font-size:15px;
+  color:#17243c;
+  min-width:0;
 }
 
-.search-box button{
-  width:62px;
+.search-btn{
+  width:58px;
   border:0;
-  background:var(--blue);
-  color:#fff;
-  font-size:20px;
+  background:#ffca28;
+  color:#17243c;
+  font-size:21px;
+  font-weight:bold;
 }
 
 .header-actions{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:9px;
 }
 
 .header-btn{
-  min-width:46px;
-  height:46px;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(255,255,255,.08);
-  color:#fff;
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  font-size:20px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.07);
+  color:white;
+  min-width:48px;
+  height:48px;
+  padding:0 12px;
+  border-radius:11px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
 }
 
 .header-btn:hover{
-  background:rgba(255,255,255,.17);
+  background:rgba(255,255,255,.14);
+}
+
+.header-btn span{
+  font-size:20px;
 }
 
 .sell-btn{
+  background:#ffb800;
+  color:#15233c;
   border:0;
-  background:#fff;
-  color:var(--navy);
-  padding:12px 18px;
-  border-radius:12px;
   font-weight:800;
+  padding:0 18px;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav{
+  background:#0b2859;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.nav-inner{
+  width:min(1400px,94%);
+  margin:auto;
+  min-height:45px;
+  display:flex;
+  align-items:center;
+  gap:26px;
+  overflow:auto;
+}
+
+.nav-item{
   white-space:nowrap;
+  color:#dbe7f8;
+  font-size:14px;
+}
+
+.nav-item:hover{
+  color:white;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  background:
+    radial-gradient(circle at 10% 20%,rgba(61,133,242,.35),transparent 30%),
+    linear-gradient(120deg,#071a3d,#0d3471);
+  color:white;
+}
+
+.hero-inner{
+  width:min(1400px,94%);
+  margin:auto;
+  min-height:350px;
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  align-items:center;
+  gap:30px;
+}
+
+.hero-title{
+  font-size:clamp(30px,4vw,52px);
+  line-height:1.25;
+  font-weight:900;
+  margin-bottom:16px;
+}
+
+.hero-text{
+  color:#d7e4f7;
+  max-width:650px;
+  font-size:18px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  margin-top:28px;
+  flex-wrap:wrap;
+}
+
+.primary{
+  background:white;
+  color:#0a2a5c;
+  border:0;
+  padding:13px 24px;
+  border-radius:11px;
+  font-weight:800;
+}
+
+.secondary{
+  background:rgba(255,255,255,.1);
+  color:white;
+  border:1px solid rgba(255,255,255,.3);
+  padding:13px 24px;
+  border-radius:11px;
+  font-weight:700;
+}
+
+.hero-panel{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:24px;
+  padding:24px;
+  backdrop-filter:blur(12px);
+}
+
+.hero-panel-title{
+  font-weight:800;
+  font-size:18px;
+  margin-bottom:18px;
+}
+
+.hero-stat{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:13px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.hero-stat:last-child{
+  border-bottom:0;
 }
 
 /* =========================
    MAIN
 ========================= */
 
-.container{
-  width:min(1400px,calc(100% - 36px));
-  margin:auto;
-}
-
-.hero{
-  margin-top:28px;
-  background:
-    radial-gradient(circle at 80% 20%,rgba(38,128,255,.28),transparent 30%),
-    linear-gradient(135deg,#071a3a,#0c3979);
-  color:#fff;
-  border-radius:26px;
-  padding:55px 45px;
-  overflow:hidden;
-  position:relative;
-}
-
-.hero h1{
-  font-size:clamp(30px,4vw,48px);
-  line-height:1.2;
-  margin-bottom:16px;
-}
-
-.hero p{
-  font-size:18px;
-  max-width:700px;
-  opacity:.9;
-  margin-bottom:28px;
-}
-
-.hero-actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.primary-btn,
-.secondary-btn{
-  border:0;
-  padding:14px 24px;
-  border-radius:13px;
-  font-weight:800;
-  font-size:16px;
-}
-
-.primary-btn{
-  background:#fff;
-  color:#08214a;
-}
-
-.secondary-btn{
-  background:#1264e8;
-  color:#fff;
+.main{
+  width:min(1400px,94%);
+  margin:35px auto 80px;
 }
 
 .section{
-  margin-top:35px;
+  margin-bottom:40px;
 }
 
 .section-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:15px;
   margin-bottom:18px;
+  gap:20px;
 }
 
-.section-head h2{
+.section-title{
   font-size:25px;
+  font-weight:900;
 }
 
-.section-head span{
-  color:var(--muted);
-  font-size:15px;
-}
-
-/* =========================
-   TABS
-========================= */
-
-.mode-tabs{
-  background:#fff;
-  padding:8px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  display:flex;
-  gap:7px;
-  margin-top:28px;
-  box-shadow:var(--shadow);
-}
-
-.mode-tab{
-  flex:1;
-  border:0;
-  background:transparent;
-  padding:14px 10px;
-  border-radius:11px;
-  color:var(--muted);
-  font-weight:800;
-  font-size:16px;
-}
-
-.mode-tab.active{
-  background:var(--navy);
-  color:#fff;
+.section-link{
+  color:var(--blue);
+  font-weight:700;
 }
 
 /* =========================
-   CATEGORIES
+   CATEGORY
 ========================= */
 
-.category-grid{
+.categories{
   display:grid;
   grid-template-columns:repeat(8,1fr);
   gap:14px;
@@ -299,259 +363,390 @@ a{
 .category{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:18px;
+  border-radius:var(--radius);
+  padding:22px 12px;
   min-height:135px;
-  padding:20px 12px;
-  text-align:center;
-  box-shadow:0 5px 18px rgba(7,26,58,.05);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
   transition:.2s;
+  box-shadow:0 4px 14px rgba(9,31,68,.04);
 }
 
 .category:hover{
   transform:translateY(-4px);
+  border-color:#b8cdf0;
   box-shadow:var(--shadow);
 }
 
 .category-icon{
-  width:58px;
-  height:58px;
-  margin:0 auto 12px;
-  border-radius:16px;
-  background:#eaf2ff;
-  color:var(--blue);
+  width:56px;
+  height:56px;
   display:grid;
   place-items:center;
-  font-size:27px;
+  border-radius:16px;
+  background:#edf4ff;
+  color:#125ac0;
+  font-size:28px;
 }
 
-.category strong{
-  display:block;
-  font-size:16px;
-}
-
-.category small{
-  color:var(--muted);
+.category-name{
+  font-weight:800;
+  font-size:15px;
 }
 
 /* =========================
-   PRODUCTS
+   TABS
 ========================= */
 
-.product-grid{
+.market-tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:22px;
+  background:white;
+  border:1px solid var(--border);
+  padding:7px;
+  border-radius:14px;
+  width:max-content;
+  box-shadow:var(--shadow);
+}
+
+.market-tab{
+  border:0;
+  background:transparent;
+  padding:11px 25px;
+  border-radius:10px;
+  font-weight:800;
+  color:#65728a;
+}
+
+.market-tab.active{
+  background:var(--navy);
+  color:white;
+}
+
+/* =========================
+   PRODUCT GRID
+========================= */
+
+.products{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:20px;
 }
 
 .product{
-  background:#fff;
+  background:var(--card);
   border:1px solid var(--border);
-  border-radius:20px;
+  border-radius:18px;
   overflow:hidden;
-  box-shadow:0 7px 22px rgba(7,26,58,.06);
+  box-shadow:0 5px 18px rgba(9,31,68,.06);
   transition:.2s;
+  position:relative;
 }
 
 .product:hover{
   transform:translateY(-5px);
-  box-shadow:var(--shadow);
+  box-shadow:0 15px 35px rgba(9,31,68,.12);
 }
 
 .product-image{
-  height:190px;
+  height:215px;
   background:
-    linear-gradient(135deg,#dceaff,#eef5ff);
+    linear-gradient(135deg,#dceaff,#f8fbff);
   display:grid;
   place-items:center;
-  font-size:60px;
+  font-size:70px;
+  position:relative;
+}
+
+.product-badge{
+  position:absolute;
+  top:12px;
+  right:12px;
+  background:#0b2859;
+  color:white;
+  border-radius:7px;
+  padding:5px 9px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.favorite{
+  position:absolute;
+  top:10px;
+  left:10px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  font-size:18px;
 }
 
 .product-body{
-  padding:19px;
+  padding:18px;
+}
+
+.product-category{
+  color:#75829a;
+  font-size:12px;
+  margin-bottom:5px;
 }
 
 .product-title{
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:7px;
+  font-size:17px;
+  font-weight:850;
+  line-height:1.5;
+  min-height:51px;
 }
 
-.product-desc{
-  color:var(--muted);
-  font-size:15px;
-  min-height:48px;
+.product-meta{
+  display:flex;
+  justify-content:space-between;
+  margin-top:13px;
+  color:#68758c;
+  font-size:13px;
 }
 
 .product-footer{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:8px;
-  margin-top:16px;
+  justify-content:space-between;
+  border-top:1px solid var(--border);
+  margin-top:15px;
+  padding-top:14px;
 }
 
-.location{
-  color:var(--muted);
-  font-size:14px;
+.seller{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:12px;
+  font-weight:700;
 }
 
-.favorite{
-  width:42px;
-  height:42px;
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:11px;
-  font-size:20px;
-}
-
-.favorite.active{
-  color:#e63946;
+.avatar{
+  width:31px;
+  height:31px;
+  border-radius:50%;
+  background:#dbe9ff;
+  display:grid;
+  place-items:center;
 }
 
 /* =========================
-   SELLER
+   CLASSIC FEATURE BOXES
 ========================= */
 
-.seller-grid{
+.feature-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
 
-.seller{
-  background:#fff;
+.feature{
+  background:white;
   border:1px solid var(--border);
-  border-radius:20px;
-  padding:22px;
+  border-radius:18px;
+  padding:24px;
   display:flex;
   gap:16px;
-  align-items:center;
+  align-items:flex-start;
+  box-shadow:0 5px 16px rgba(9,31,68,.05);
 }
 
-.avatar{
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#1264e8,#55a0ff);
-  color:#fff;
+.feature-icon{
+  width:52px;
+  height:52px;
+  min-width:52px;
+  border-radius:14px;
   display:grid;
   place-items:center;
+  background:#eaf2ff;
+  color:#125cc6;
   font-size:25px;
-  font-weight:900;
-  flex-shrink:0;
 }
 
-.seller-info{
-  flex:1;
+.feature h3{
+  margin-bottom:4px;
+  font-size:17px;
 }
 
-.seller-name{
-  font-size:18px;
-  font-weight:800;
-}
-
-.seller-info p{
+.feature p{
   color:var(--muted);
   font-size:14px;
 }
 
+/* =========================
+   SELLERS
+========================= */
+
+.sellers{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.seller-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 5px 16px rgba(9,31,68,.05);
+}
+
+.seller-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.seller-big-avatar{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#e4efff;
+  font-size:25px;
+}
+
+.seller-name{
+  font-weight:850;
+}
+
+.verified{
+  color:#178a62;
+  font-size:12px;
+}
+
+.rating{
+  margin-top:15px;
+  color:#d79712;
+}
+
 .follow{
-  border:1px solid var(--blue);
-  color:var(--blue);
-  background:#fff;
-  padding:9px 14px;
-  border-radius:10px;
-  font-weight:700;
+  margin-top:15px;
+  width:100%;
+  height:40px;
+  border:1px solid #c9d8ee;
+  background:white;
+  color:#1459b7;
+  border-radius:9px;
+  font-weight:800;
 }
 
 /* =========================
-   SUPPORT BANNER
+   PROMO
 ========================= */
 
-.support-banner{
-  margin-top:35px;
-  background:#071a3a;
-  color:#fff;
-  border-radius:22px;
-  padding:30px;
+.promo{
+  border-radius:24px;
+  background:linear-gradient(120deg,#0b2859,#145fc8);
+  color:white;
+  padding:34px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:20px;
+  gap:30px;
 }
 
-.support-banner h2{
-  font-size:26px;
+.promo h2{
+  font-size:27px;
   margin-bottom:6px;
 }
 
-.support-banner p{
-  opacity:.8;
+.promo p{
+  color:#dbe8fa;
+}
+
+.promo button{
+  background:white;
+  border:0;
+  color:#0b2859;
+  border-radius:10px;
+  padding:13px 22px;
+  font-weight:900;
+  white-space:nowrap;
 }
 
 /* =========================
    FOOTER
 ========================= */
 
-footer{
-  margin-top:50px;
-  background:#06152f;
-  color:#fff;
-  padding:45px 0;
+.footer{
+  background:#061633;
+  color:#d6e1f1;
+  padding:50px 0 25px;
 }
 
-.footer-grid{
+.footer-inner{
+  width:min(1400px,94%);
+  margin:auto;
   display:grid;
-  grid-template-columns:2fr 1fr 1fr 1fr;
+  grid-template-columns:2fr repeat(3,1fr);
   gap:35px;
 }
 
-footer h3{
-  margin-bottom:13px;
+.footer h3{
+  color:white;
+  margin-bottom:14px;
 }
 
-footer p,
-footer li{
-  color:#b8c4d8;
+.footer p,
+.footer li{
+  color:#9eabc0;
+  font-size:14px;
 }
 
-footer ul{
+.footer ul{
   list-style:none;
 }
 
-footer li{
-  margin:8px 0;
-  cursor:pointer;
+.footer li{
+  margin-bottom:9px;
+}
+
+.copyright{
+  width:min(1400px,94%);
+  margin:35px auto 0;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:20px;
+  color:#7f8ca3;
+  font-size:12px;
 }
 
 /* =========================
    MODAL
 ========================= */
 
-.modal{
+.overlay{
   position:fixed;
   inset:0;
-  background:rgba(2,10,25,.65);
-  backdrop-filter:blur(4px);
+  background:rgba(2,12,29,.65);
+  z-index:2000;
   display:none;
   align-items:center;
   justify-content:center;
-  padding:20px;
-  z-index:2000;
+  padding:18px;
 }
 
-.modal.show{
+.overlay.show{
   display:flex;
 }
 
-.modal-card{
-  width:min(720px,100%);
+.modal{
+  background:white;
+  width:min(620px,100%);
   max-height:90vh;
   overflow:auto;
-  background:#fff;
-  border-radius:24px;
-  padding:28px;
-  box-shadow:0 30px 80px rgba(0,0,0,.3);
+  border-radius:22px;
+  padding:26px;
+  box-shadow:0 25px 80px rgba(0,0,0,.25);
 }
 
 .modal-head{
@@ -561,39 +756,32 @@ footer li{
   margin-bottom:22px;
 }
 
-.modal-head h2{
-  font-size:25px;
-}
-
 .close{
+  width:38px;
+  height:38px;
   border:0;
-  background:#edf1f6;
-  width:42px;
-  height:42px;
-  border-radius:10px;
-  font-size:20px;
+  background:#eef2f7;
+  border-radius:50%;
 }
 
 .form-group{
-  margin-bottom:17px;
+  margin-bottom:16px;
 }
 
 .form-group label{
   display:block;
-  margin-bottom:7px;
-  font-weight:700;
+  font-weight:750;
+  margin-bottom:6px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea{
   width:100%;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:13px 14px;
+  border:1px solid #d4dce8;
+  border-radius:10px;
+  padding:12px;
   outline:0;
-  background:#fff;
-  color:var(--text);
 }
 
 .form-group textarea{
@@ -601,55 +789,14 @@ footer li{
   resize:vertical;
 }
 
-.save-btn{
+.form-submit{
   width:100%;
   border:0;
-  background:var(--blue);
-  color:#fff;
+  background:var(--navy);
+  color:white;
   padding:14px;
-  border-radius:12px;
-  font-weight:800;
-}
-
-/* =========================
-   SETTINGS
-========================= */
-
-.settings-list{
-  display:grid;
-  gap:10px;
-}
-
-.setting-item{
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-}
-
-.setting-info strong{
-  display:block;
-  font-size:16px;
-}
-
-.setting-info small{
-  color:var(--muted);
-}
-
-.setting-control{
-  min-width:160px;
-}
-
-.setting-control select,
-.setting-control input{
-  width:100%;
-  padding:10px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#fff;
+  border-radius:11px;
+  font-weight:850;
 }
 
 /* =========================
@@ -658,207 +805,248 @@ footer li{
 
 .toast{
   position:fixed;
-  left:50%;
   bottom:25px;
-  transform:translate(-50%,120px);
-  background:#071a3a;
-  color:#fff;
-  padding:14px 20px;
-  border-radius:12px;
+  right:25px;
   z-index:5000;
+  background:#071a3d;
+  color:white;
+  padding:14px 18px;
+  border-radius:11px;
+  box-shadow:0 12px 35px rgba(0,0,0,.2);
+  transform:translateY(100px);
+  opacity:0;
   transition:.3s;
-  box-shadow:var(--shadow);
 }
 
 .toast.show{
-  transform:translate(-50%,0);
+  transform:translateY(0);
+  opacity:1;
 }
 
 /* =========================
-   MOBILE NAV
+   MOBILE
 ========================= */
 
 .mobile-nav{
   display:none;
 }
 
-/* =========================
-   DARK MODE
-========================= */
-
-body.dark{
-  --bg:#07111f;
-  --card:#0d1b2e;
-  --text:#f1f5fb;
-  --muted:#9baac0;
-  --border:#20324a;
-}
-
-body.dark .product,
-body.dark .category,
-body.dark .seller,
-body.dark .mode-tabs,
-body.dark .modal-card,
-body.dark .favorite{
-  background:#0d1b2e;
-  color:#f1f5fb;
-}
-
-body.dark .category-icon{
-  background:#102b50;
-}
-
-body.dark .form-group input,
-body.dark .form-group select,
-body.dark .form-group textarea,
-body.dark .setting-control select,
-body.dark .setting-control input{
-  background:#081523;
-  color:#fff;
-  border-color:#29415d;
-}
-
-body.dark .close{
-  background:#18283c;
-  color:#fff;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
 @media(max-width:1100px){
-  .category-grid{
+  .categories{
     grid-template-columns:repeat(4,1fr);
   }
 
-  .product-grid{
+  .products{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .sellers{
     grid-template-columns:repeat(2,1fr);
+  }
+
+  .header-main{
+    flex-wrap:wrap;
+    padding:12px 0;
+  }
+
+  .search{
+    order:3;
+    flex-basis:100%;
+    max-width:none;
   }
 }
 
-@media(max-width:800px){
-  .header-inner{
-    flex-wrap:wrap;
-    padding:12px 14px;
+@media(max-width:760px){
+  body{
+    font-size:15px;
+    padding-bottom:65px;
+  }
+
+  .topbar{
+    display:none;
+  }
+
+  .header-main{
+    width:94%;
+    min-height:65px;
+    gap:10px;
   }
 
   .logo{
     min-width:auto;
   }
 
-  .search-box{
-    order:3;
-    flex-basis:100%;
-    max-width:none;
+  .logo-text{
+    font-size:20px;
+  }
+
+  .logo-icon{
+    width:39px;
+    height:39px;
+  }
+
+  .header-actions{
+    margin-right:auto;
+  }
+
+  .header-btn{
+    width:40px;
+    height:40px;
+    min-width:40px;
+    padding:0;
+  }
+
+  .header-btn label{
+    display:none;
   }
 
   .sell-btn{
     display:none;
   }
 
-  .hero{
-    padding:35px 25px;
-    border-radius:20px;
+  .search{
+    height:46px;
   }
 
-  .hero h1{
+  .search-category{
+    display:none;
+  }
+
+  .nav{
+    display:none;
+  }
+
+  .hero-inner{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding:42px 0;
+  }
+
+  .hero-title{
     font-size:32px;
   }
 
-  .category-grid{
+  .hero-text{
+    font-size:16px;
+  }
+
+  .hero-panel{
+    display:none;
+  }
+
+  .main{
+    width:94%;
+    margin-top:25px;
+  }
+
+  .section-title{
+    font-size:21px;
+  }
+
+  .categories{
+    display:flex;
+    overflow:auto;
+    padding-bottom:8px;
+  }
+
+  .category{
+    min-width:115px;
+    min-height:120px;
+  }
+
+  .products{
     grid-template-columns:repeat(2,1fr);
+    gap:12px;
   }
 
-  .product-grid{
+  .product-image{
+    height:155px;
+    font-size:48px;
+  }
+
+  .product-body{
+    padding:13px;
+  }
+
+  .product-title{
+    font-size:14px;
+  }
+
+  .product-meta{
+    font-size:11px;
+  }
+
+  .feature-grid{
     grid-template-columns:1fr;
   }
 
-  .seller-grid{
+  .sellers{
     grid-template-columns:1fr;
   }
 
-  .support-banner{
-    flex-direction:column;
-    align-items:flex-start;
+  .promo{
+    padding:25px;
+    display:block;
   }
 
-  .footer-grid{
+  .promo button{
+    margin-top:18px;
+  }
+
+  .footer-inner{
     grid-template-columns:1fr 1fr;
   }
 
   .mobile-nav{
     position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    height:68px;
-    background:#fff;
-    border-top:1px solid var(--border);
     display:flex;
-    justify-content:space-around;
-    align-items:center;
+    bottom:0;
+    right:0;
+    left:0;
+    height:64px;
+    background:white;
+    border-top:1px solid var(--border);
     z-index:1500;
-  }
-
-  body.dark .mobile-nav{
-    background:#0b192b;
+    box-shadow:0 -5px 20px rgba(0,0,0,.08);
+    justify-content:space-around;
   }
 
   .mobile-nav button{
     border:0;
-    background:transparent;
-    color:var(--muted);
+    background:white;
+    color:#637087;
+    font-size:11px;
     display:flex;
     flex-direction:column;
     align-items:center;
+    justify-content:center;
     gap:2px;
-    font-size:12px;
   }
 
-  .mobile-nav button span{
+  .mobile-nav span{
     font-size:21px;
   }
 }
 
-@media(max-width:500px){
-  .container{
-    width:min(100% - 24px,1400px);
+@media(max-width:430px){
+  .products{
+    grid-template-columns:1fr 1fr;
   }
 
-  .header-actions{
-    margin-left:auto;
+  .product-image{
+    height:135px;
   }
 
-  .header-btn{
-    width:42px;
-    min-width:42px;
+  .product-footer{
+    display:block;
   }
 
-  .hero p{
-    font-size:16px;
+  .seller{
+    margin-top:7px;
   }
 
-  .mode-tab{
-    font-size:14px;
-    padding:12px 5px;
-  }
-
-  .setting-item{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
-  .setting-control{
-    width:100%;
-  }
-
-  .footer-grid{
+  .footer-inner{
     grid-template-columns:1fr;
-  }
-
-  body{
-    padding-bottom:65px;
   }
 }
 </style>
@@ -866,420 +1054,662 @@ body.dark .close{
 
 <body>
 
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>خرید و فروش آسان، سریع و مطمئن در Nexora</span>
+    <span>پشتیبانی کاربران · امنیت · خدمات</span>
+  </div>
+</div>
+
 <!-- HEADER -->
-<header class="top-header">
-  <div class="header-inner">
+<header class="header">
+
+  <div class="header-main">
 
     <a class="logo" href="#">
       <div class="logo-icon">N</div>
-      <div>
-        <div class="logo-name">Nexora</div>
-        <div class="logo-sub" data-i18n="marketplace">Marketplace</div>
-      </div>
+      <div class="logo-text">Nexora</div>
     </a>
 
-    <div class="search-box">
+    <div class="search">
+
+      <select class="search-category">
+        <option>همه دسته‌ها</option>
+        <option>کالای دیجیتال</option>
+        <option>خودرو</option>
+        <option>خانه</option>
+        <option>پوشاک</option>
+        <option>خدمات</option>
+      </select>
+
       <input
         id="searchInput"
-        type="search"
+        type="text"
         placeholder="جستجو در Nexora..."
-        data-placeholder="search"
       >
-      <button onclick="searchProducts()">⌕</button>
+
+      <button class="search-btn" onclick="searchProducts()">
+        🔍
+      </button>
+
     </div>
 
     <div class="header-actions">
-      <button class="header-btn" onclick="openModal('notificationsModal')" title="اعلان‌ها">🔔</button>
-      <button class="header-btn" onclick="openSettings()" title="تنظیمات">⚙️</button>
-      <button class="header-btn" onclick="openModal('profileModal')" title="حساب">👤</button>
-      <button class="sell-btn" onclick="openModal('sellModal')" data-i18n="sellAd">
-        ثبت آگهی
+
+      <button class="header-btn" onclick="openModal('notifications')">
+        <span>🔔</span>
       </button>
+
+      <button class="header-btn" onclick="openModal('profile')">
+        <span>👤</span>
+        <label>حساب من</label>
+      </button>
+
+      <button
+        class="header-btn sell-btn"
+        onclick="openModal('listing')">
+        + ثبت آگهی
+      </button>
+
     </div>
 
   </div>
+
+  <nav class="nav">
+    <div class="nav-inner">
+
+      <a class="nav-item" href="#categories">دسته‌بندی‌ها</a>
+      <a class="nav-item" href="#featured">پیشنهادهای ویژه</a>
+      <a class="nav-item" href="#sellers">فروشندگان</a>
+      <a class="nav-item" href="#services">خدمات Nexora</a>
+      <a class="nav-item" href="#">تخفیف‌ها</a>
+      <a class="nav-item" href="#">محبوب‌ترین‌ها</a>
+      <a class="nav-item" href="#">راهنما</a>
+
+    </div>
+  </nav>
+
 </header>
 
+<!-- HERO -->
+<section class="hero">
 
-<main class="container">
-
-  <!-- HERO -->
-  <section class="hero">
-
-    <h1 data-i18n="heroTitle">
-      هر چیزی که می‌خواهی، اینجاست.
-    </h1>
-
-    <p data-i18n="heroText">
-      در Nexora کالا، خدمات و فرصت‌های مختلف را پیدا کن، بفروش و با دیگران ارتباط بگیر.
-    </p>
-
-    <div class="hero-actions">
-      <button class="primary-btn" onclick="scrollToSection('products')" data-i18n="browse">
-        مشاهده آگهی‌ها
-      </button>
-
-      <button class="secondary-btn" onclick="openModal('sellModal')" data-i18n="sell">
-        فروش در Nexora
-      </button>
-    </div>
-
-  </section>
-
-
-  <!-- BUY / SELL / SERVICE -->
-  <section class="mode-tabs">
-
-    <button class="mode-tab active" onclick="changeMode(this,'buy')" data-i18n="buy">
-      🛒 خرید
-    </button>
-
-    <button class="mode-tab" onclick="changeMode(this,'sell')" data-i18n="sell">
-      🏷️ فروش
-    </button>
-
-    <button class="mode-tab" onclick="changeMode(this,'service')" data-i18n="services">
-      🛠️ خدمات
-    </button>
-
-  </section>
-
-
-  <!-- CATEGORIES -->
-  <section class="section">
-
-    <div class="section-head">
-      <h2 data-i18n="categories">دسته‌بندی‌ها</h2>
-      <span data-i18n="allCategories">مشاهده همه</span>
-    </div>
-
-    <div class="category-grid">
-
-      <div class="category">
-        <div class="category-icon">📱</div>
-        <strong data-i18n="mobile">موبایل</strong>
-        <small>Mobile</small>
-      </div>
-
-      <div class="category">
-        <div class="category-icon">🚗</div>
-        <strong data-i18n="cars">خودرو</strong>
-        <small>Cars</small>
-      </div>
-
-      <div class="category">
-        <div class="category-icon">🏠</div>
-        <strong data-i18n="realEstate">املاک</strong>
-        <small>Real Estate</small>
-      </div>
-
-      <div class="category">
-        <div class="category-icon">💻</div>
-        <strong data-i18n="computer">کامپیوتر</strong>
-        <small>Computer</small>
-      </div>
-
-      <div class="category">
-        <div class="category-icon">👕</div>
-        <strong data-i18n="fashion">پوشاک</strong>
-        <small>Fashion</small>
-      </div>
-
-      <div class="category">
-        <div class="category-icon">🎮</div>
-        <strong data-i18n="gaming">گیم</strong>
-        <small>Gaming</small>
-      </div>
-
-      <div class="category">
-        <div class="category-icon">🛋️</div>
-        <strong data-i18n="home">خانه</strong>
-        <small>Home</small>
-      </div>
-
-      <div class="category">
-        <div class="category-icon">🛠️</div>
-        <strong data-i18n="services">خدمات</strong>
-        <small>Services</small>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- PRODUCTS -->
-  <section class="section" id="products">
-
-    <div class="section-head">
-      <div>
-        <h2 data-i18n="featured">آگهی‌های منتخب</h2>
-        <span data-i18n="featuredText">آگهی‌های جدید و محبوب</span>
-      </div>
-    </div>
-
-    <div class="product-grid" id="productGrid">
-
-      <article class="product" data-search="iphone موبایل گوشی">
-        <div class="product-image">📱</div>
-        <div class="product-body">
-          <div class="product-title">گوشی هوشمند جدید</div>
-          <div class="product-desc">
-            دستگاه تمیز و آماده استفاده با امکانات کامل.
-          </div>
-          <div class="product-footer">
-            <span class="location">📍 تهران</span>
-            <button class="favorite" onclick="favorite(this)">♡</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="product" data-search="laptop computer لپتاپ کامپیوتر">
-        <div class="product-image">💻</div>
-        <div class="product-body">
-          <div class="product-title">لپ‌تاپ حرفه‌ای</div>
-          <div class="product-desc">
-            مناسب کار، دانشگاه، برنامه‌نویسی و استفاده روزمره.
-          </div>
-          <div class="product-footer">
-            <span class="location">📍 تهران</span>
-            <button class="favorite" onclick="favorite(this)">♡</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="product" data-search="car خودرو ماشین">
-        <div class="product-image">🚗</div>
-        <div class="product-body">
-          <div class="product-title">خودرو تمیز و آماده انتقال</div>
-          <div class="product-desc">
-            وضعیت مناسب و قابل بررسی حضوری.
-          </div>
-          <div class="product-footer">
-            <span class="location">📍 اصفهان</span>
-            <button class="favorite" onclick="favorite(this)">♡</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="product" data-search="home furniture خانه مبلمان">
-        <div class="product-image">🛋️</div>
-        <div class="product-body">
-          <div class="product-title">مبلمان مدرن</div>
-          <div class="product-desc">
-            طراحی مدرن برای خانه و فضای کاری.
-          </div>
-          <div class="product-footer">
-            <span class="location">📍 شیراز</span>
-            <button class="favorite" onclick="favorite(this)">♡</button>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-
-  <!-- SELLERS -->
-  <section class="section">
-
-    <div class="section-head">
-      <h2 data-i18n="topSellers">فروشندگان برتر</h2>
-    </div>
-
-    <div class="seller-grid">
-
-      <div class="seller">
-        <div class="avatar">N</div>
-        <div class="seller-info">
-          <div class="seller-name">Nexora Store</div>
-          <p data-i18n="verifiedSeller">فروشنده تأییدشده</p>
-        </div>
-        <button class="follow" onclick="follow(this)" data-i18n="follow">دنبال کردن</button>
-      </div>
-
-      <div class="seller">
-        <div class="avatar">A</div>
-        <div class="seller-info">
-          <div class="seller-name">Aria Market</div>
-          <p data-i18n="verifiedSeller">فروشنده تأییدشده</p>
-        </div>
-        <button class="follow" onclick="follow(this)" data-i18n="follow">دنبال کردن</button>
-      </div>
-
-      <div class="seller">
-        <div class="avatar">P</div>
-        <div class="seller-info">
-          <div class="seller-name">Pars Shop</div>
-          <p data-i18n="verifiedSeller">فروشنده تأییدشده</p>
-        </div>
-        <button class="follow" onclick="follow(this)" data-i18n="follow">دنبال کردن</button>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- SUPPORT -->
-  <section class="support-banner">
+  <div class="hero-inner">
 
     <div>
-      <h2 data-i18n="supportTitle">به کمک نیاز داری؟</h2>
-      <p data-i18n="supportText">
-        تیم پشتیبانی Nexora آماده پاسخگویی به شماست.
+
+      <h1 class="hero-title">
+        همه‌چیز برای خرید و فروش،
+        <br>
+        در یک جای بهتر
+      </h1>
+
+      <p class="hero-text">
+        Nexora یک بازار آنلاین مدرن برای پیدا کردن کالا،
+        فروش محصولات، خدمات و ارتباط مستقیم با فروشندگان است.
+      </p>
+
+      <div class="hero-actions">
+        <button class="primary" onclick="openModal('listing')">
+          شروع فروش
+        </button>
+
+        <button class="secondary" onclick="document.getElementById('featured').scrollIntoView()">
+          مشاهده آگهی‌ها
+        </button>
+      </div>
+
+    </div>
+
+    <div class="hero-panel">
+
+      <div class="hero-panel-title">
+        چرا Nexora؟
+      </div>
+
+      <div class="hero-stat">
+        <span>🔎 جستجوی سریع</span>
+        <strong>هوشمند</strong>
+      </div>
+
+      <div class="hero-stat">
+        <span>🛡️ تجربه امن</span>
+        <strong>محافظت‌شده</strong>
+      </div>
+
+      <div class="hero-stat">
+        <span>💬 ارتباط مستقیم</span>
+        <strong>سریع</strong>
+      </div>
+
+      <div class="hero-stat">
+        <span>🌎 بازار چندزبانه</span>
+        <strong>جهانی</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<main class="main">
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+
+  <div class="section-head">
+    <h2 class="section-title">دسته‌بندی‌ها</h2>
+    <a class="section-link" href="#">مشاهده همه ←</a>
+  </div>
+
+  <div class="categories">
+
+    <a class="category" href="#">
+      <div class="category-icon">📱</div>
+      <div class="category-name">موبایل</div>
+    </a>
+
+    <a class="category" href="#">
+      <div class="category-icon">🚗</div>
+      <div class="category-name">خودرو</div>
+    </a>
+
+    <a class="category" href="#">
+      <div class="category-icon">💻</div>
+      <div class="category-name">کامپیوتر</div>
+    </a>
+
+    <a class="category" href="#">
+      <div class="category-icon">🏠</div>
+      <div class="category-name">خانه</div>
+    </a>
+
+    <a class="category" href="#">
+      <div class="category-icon">👕</div>
+      <div class="category-name">پوشاک</div>
+    </a>
+
+    <a class="category" href="#">
+      <div class="category-icon">🎮</div>
+      <div class="category-name">بازی</div>
+    </a>
+
+    <a class="category" href="#">
+      <div class="category-icon">🔧</div>
+      <div class="category-name">خدمات</div>
+    </a>
+
+    <a class="category" href="#">
+      <div class="category-icon">📦</div>
+      <div class="category-name">سایر</div>
+    </a>
+
+  </div>
+
+</section>
+
+<!-- MARKET TABS -->
+<section class="section">
+
+  <div class="market-tabs">
+
+    <button class="market-tab active" onclick="switchTab(this)">
+      همه
+    </button>
+
+    <button class="market-tab" onclick="switchTab(this)">
+      خرید
+    </button>
+
+    <button class="market-tab" onclick="switchTab(this)">
+      فروش
+    </button>
+
+    <button class="market-tab" onclick="switchTab(this)">
+      خدمات
+    </button>
+
+  </div>
+
+</section>
+
+<!-- FEATURED -->
+<section class="section" id="featured">
+
+  <div class="section-head">
+    <h2 class="section-title">پیشنهادهای منتخب</h2>
+    <a class="section-link" href="#">همه آگهی‌ها ←</a>
+  </div>
+
+  <div class="products">
+
+    <article class="product">
+
+      <div class="product-image">
+        📱
+        <span class="product-badge">ویژه</span>
+        <button class="favorite" onclick="favorite(this)">♡</button>
+      </div>
+
+      <div class="product-body">
+
+        <div class="product-category">
+          موبایل و لوازم دیجیتال
+        </div>
+
+        <h3 class="product-title">
+          گوشی هوشمند نسل جدید
+        </h3>
+
+        <div class="product-meta">
+          <span>📍 تهران</span>
+          <span>امروز</span>
+        </div>
+
+        <div class="product-footer">
+
+          <div class="seller">
+            <div class="avatar">A</div>
+            فروشنده معتبر
+          </div>
+
+          <span>✓ تأیید شده</span>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="product">
+
+      <div class="product-image">
+        💻
+        <span class="product-badge">پیشنهاد</span>
+        <button class="favorite" onclick="favorite(this)">♡</button>
+      </div>
+
+      <div class="product-body">
+
+        <div class="product-category">
+          لپ‌تاپ و کامپیوتر
+        </div>
+
+        <h3 class="product-title">
+          لپ‌تاپ حرفه‌ای مناسب کار و طراحی
+        </h3>
+
+        <div class="product-meta">
+          <span>📍 تهران</span>
+          <span>۲ ساعت پیش</span>
+        </div>
+
+        <div class="product-footer">
+
+          <div class="seller">
+            <div class="avatar">M</div>
+            فروشگاه دیجیتال
+          </div>
+
+          <span>★ 4.9</span>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="product">
+
+      <div class="product-image">
+        🚗
+        <span class="product-badge">محبوب</span>
+        <button class="favorite" onclick="favorite(this)">♡</button>
+      </div>
+
+      <div class="product-body">
+
+        <div class="product-category">
+          خودرو
+        </div>
+
+        <h3 class="product-title">
+          خودروی خانوادگی کم‌کارکرد
+        </h3>
+
+        <div class="product-meta">
+          <span>📍 تهران</span>
+          <span>دیروز</span>
+        </div>
+
+        <div class="product-footer">
+
+          <div class="seller">
+            <div class="avatar">R</div>
+            فروشنده
+          </div>
+
+          <span>✓ تأیید شده</span>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="product">
+
+      <div class="product-image">
+        🏠
+        <span class="product-badge">جدید</span>
+        <button class="favorite" onclick="favorite(this)">♡</button>
+      </div>
+
+      <div class="product-body">
+
+        <div class="product-category">
+          خانه و املاک
+        </div>
+
+        <h3 class="product-title">
+          واحد مدرن با امکانات کامل
+        </h3>
+
+        <div class="product-meta">
+          <span>📍 تهران</span>
+          <span>امروز</span>
+        </div>
+
+        <div class="product-footer">
+
+          <div class="seller">
+            <div class="avatar">S</div>
+            مشاور املاک
+          </div>
+
+          <span>★ 4.8</span>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+
+  <div class="section-head">
+    <h2 class="section-title">تجربه بهتر در Nexora</h2>
+  </div>
+
+  <div class="feature-grid">
+
+    <div class="feature">
+      <div class="feature-icon">🛡️</div>
+      <div>
+        <h3>خرید مطمئن‌تر</h3>
+        <p>
+          اطلاعات فروشنده و آگهی را بررسی کن و با اطمینان بیشتری تصمیم بگیر.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <div>
+        <h3>جستجوی سریع</h3>
+        <p>
+          کالا و خدمات موردنظر خود را سریع‌تر پیدا کن.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">💬</div>
+      <div>
+        <h3>ارتباط مستقیم</h3>
+        <p>
+          با فروشنده درباره آگهی ارتباط برقرار کن.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SELLERS -->
+<section class="section" id="sellers">
+
+  <div class="section-head">
+    <h2 class="section-title">فروشندگان منتخب</h2>
+    <a class="section-link" href="#">مشاهده همه ←</a>
+  </div>
+
+  <div class="sellers">
+
+    <div class="seller-card">
+
+      <div class="seller-top">
+        <div class="seller-big-avatar">🏪</div>
+        <div>
+          <div class="seller-name">فروشگاه دیجیتال</div>
+          <div class="verified">✓ فروشنده تأیید شده</div>
+        </div>
+      </div>
+
+      <div class="rating">★★★★★</div>
+
+      <button class="follow" onclick="followSeller(this)">
+        دنبال کردن
+      </button>
+
+    </div>
+
+    <div class="seller-card">
+
+      <div class="seller-top">
+        <div class="seller-big-avatar">👨</div>
+        <div>
+          <div class="seller-name">فروشنده حرفه‌ای</div>
+          <div class="verified">✓ فروشنده تأیید شده</div>
+        </div>
+      </div>
+
+      <div class="rating">★★★★★</div>
+
+      <button class="follow" onclick="followSeller(this)">
+        دنبال کردن
+      </button>
+
+    </div>
+
+    <div class="seller-card">
+
+      <div class="seller-top">
+        <div class="seller-big-avatar">🏠</div>
+        <div>
+          <div class="seller-name">املاک Nexora</div>
+          <div class="verified">✓ فروشنده تأیید شده</div>
+        </div>
+      </div>
+
+      <div class="rating">★★★★☆</div>
+
+      <button class="follow" onclick="followSeller(this)">
+        دنبال کردن
+      </button>
+
+    </div>
+
+    <div class="seller-card">
+
+      <div class="seller-top">
+        <div class="seller-big-avatar">🛍️</div>
+        <div>
+          <div class="seller-name">فروشگاه آنلاین</div>
+          <div class="verified">✓ فروشنده تأیید شده</div>
+        </div>
+      </div>
+
+      <div class="rating">★★★★★</div>
+
+      <button class="follow" onclick="followSeller(this)">
+        دنبال کردن
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PROMO -->
+<section class="section">
+
+  <div class="promo">
+
+    <div>
+      <h2>می‌خواهی چیزی بفروشی؟</h2>
+      <p>
+        آگهی خودت را بساز و آن را در بازار Nexora قرار بده.
       </p>
     </div>
 
-    <button
-      class="primary-btn"
-      onclick="openSupport()"
-      data-i18n="contactSupport"
-    >
-      تماس با پشتیبانی
+    <button onclick="openModal('listing')">
+      ثبت آگهی جدید
     </button>
 
-  </section>
+  </div>
+
+</section>
 
 </main>
 
-
 <!-- FOOTER -->
-<footer>
+<footer class="footer">
 
-  <div class="container footer-grid">
+  <div class="footer-inner">
 
     <div>
       <h3>Nexora</h3>
-      <p data-i18n="footerText">
-        بازار آنلاین مدرن برای خرید، فروش و خدمات.
+      <p>
+        یک بازار آنلاین مدرن برای خرید، فروش و خدمات.
       </p>
     </div>
 
     <div>
-      <h3 data-i18n="quickLinks">دسترسی سریع</h3>
+      <h3>خرید</h3>
       <ul>
-        <li onclick="scrollToSection('products')" data-i18n="products">آگهی‌ها</li>
-        <li onclick="openModal('sellModal')" data-i18n="sellAd">ثبت آگهی</li>
-        <li onclick="openSettings()" data-i18n="settings">تنظیمات</li>
+        <li>دسته‌بندی‌ها</li>
+        <li>آگهی‌های جدید</li>
+        <li>محبوب‌ترین‌ها</li>
+        <li>فروشندگان</li>
       </ul>
     </div>
 
     <div>
-      <h3 data-i18n="help">راهنما</h3>
+      <h3>فروش</h3>
       <ul>
-        <li onclick="openSupport()" data-i18n="support">پشتیبانی</li>
-        <li onclick="showAbout()" data-i18n="about">درباره Nexora</li>
-        <li onclick="showRules()" data-i18n="rules">قوانین</li>
+        <li>ثبت آگهی</li>
+        <li>فروشندگان</li>
+        <li>راهنمای فروش</li>
+        <li>قوانین</li>
       </ul>
     </div>
 
     <div>
-      <h3 data-i18n="contact">تماس</h3>
+      <h3>پشتیبانی</h3>
       <ul>
-        <li id="footerPhone">📞 ۰۹۱۲۱۲۳۴۵۶۷</li>
-        <li id="footerEmail">✉️ support@nexora.example</li>
+        <li>مرکز راهنما</li>
+        <li>تماس با ما</li>
+        <li>امنیت</li>
+        <li>حریم خصوصی</li>
       </ul>
     </div>
 
   </div>
 
-</footer>
+  <div class="copyright">
+    © 2026 Nexora — All rights reserved.
+  </div>
 
+</footer>
 
 <!-- MOBILE NAV -->
 <nav class="mobile-nav">
 
   <button onclick="window.scrollTo({top:0,behavior:'smooth'})">
     <span>⌂</span>
-    <label data-i18n="homeNav">خانه</label>
+    خانه
   </button>
 
-  <button onclick="scrollToSection('products')">
-    <span>🔎</span>
-    <label data-i18n="searchNav">جستجو</label>
+  <button onclick="document.getElementById('categories').scrollIntoView()">
+    <span>▦</span>
+    دسته‌ها
   </button>
 
-  <button onclick="openModal('sellModal')">
+  <button onclick="openModal('listing')">
     <span>＋</span>
-    <label data-i18n="sellNav">فروش</label>
+    ثبت آگهی
   </button>
 
-  <button onclick="openSettings()">
-    <span>⚙</span>
-    <label data-i18n="settingsNav">تنظیمات</label>
+  <button onclick="openModal('profile')">
+    <span>♙</span>
+    حساب
   </button>
 
 </nav>
 
+<!-- LISTING MODAL -->
+<div class="overlay" id="listingModal">
 
-<!-- PROFILE MODAL -->
-<div class="modal" id="profileModal">
-
-  <div class="modal-card">
-
-    <div class="modal-head">
-      <h2 data-i18n="profile">حساب کاربری</h2>
-      <button class="close" onclick="closeModal('profileModal')">×</button>
-    </div>
-
-    <div class="form-group">
-      <label data-i18n="username">نام کاربری</label>
-      <input id="username" placeholder="نام کاربری">
-    </div>
-
-    <div class="form-group">
-      <label data-i18n="email">ایمیل</label>
-      <input id="userEmail" type="email" placeholder="example@email.com">
-    </div>
-
-    <button class="save-btn" onclick="saveProfile()" data-i18n="save">
-      ذخیره تغییرات
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- SELL MODAL -->
-<div class="modal" id="sellModal">
-
-  <div class="modal-card">
+  <div class="modal">
 
     <div class="modal-head">
-      <h2 data-i18n="newAd">ثبت آگهی جدید</h2>
-      <button class="close" onclick="closeModal('sellModal')">×</button>
+      <h2>ثبت آگهی جدید</h2>
+      <button class="close" onclick="closeModal('listing')">×</button>
     </div>
 
     <div class="form-group">
-      <label data-i18n="adTitle">عنوان آگهی</label>
-      <input id="adTitle" placeholder="مثلاً گوشی، خودرو، لپ‌تاپ...">
+      <label>عنوان آگهی</label>
+      <input id="listingTitle" placeholder="مثلاً گوشی هوشمند..." />
     </div>
 
     <div class="form-group">
-      <label data-i18n="category">دسته‌بندی</label>
-      <select id="adCategory">
+      <label>دسته‌بندی</label>
+      <select id="listingCategory">
         <option>موبایل</option>
-        <option>خودرو</option>
-        <option>املاک</option>
         <option>کامپیوتر</option>
-        <option>پوشاک</option>
-        <option>گیم</option>
+        <option>خودرو</option>
         <option>خانه</option>
+        <option>پوشاک</option>
         <option>خدمات</option>
+        <option>سایر</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label data-i18n="location">موقعیت</label>
-      <input id="adLocation" placeholder="شهر یا منطقه">
+      <label>شهر</label>
+      <input id="listingCity" placeholder="شهر" />
     </div>
 
     <div class="form-group">
-      <label data-i18n="description">توضیحات</label>
-      <textarea id="adDescription" placeholder="توضیحات آگهی..."></textarea>
+      <label>توضیحات</label>
+      <textarea id="listingDescription"
+        placeholder="توضیحات آگهی..."></textarea>
     </div>
 
-    <button class="save-btn" onclick="publishDemoAd()" data-i18n="publish">
+    <button class="form-submit" onclick="publishDemoListing()">
       انتشار آگهی
     </button>
 
@@ -1287,1347 +1717,268 @@ body.dark .close{
 
 </div>
 
+<!-- PROFILE MODAL -->
+<div class="overlay" id="profileModal">
 
-<!-- NOTIFICATIONS -->
-<div class="modal" id="notificationsModal">
-
-  <div class="modal-card">
-
-    <div class="modal-head">
-      <h2 data-i18n="notifications">اعلان‌ها</h2>
-      <button class="close" onclick="closeModal('notificationsModal')">×</button>
-    </div>
-
-    <div class="setting-item">
-      <div class="setting-info">
-        <strong data-i18n="welcomeNotification">به Nexora خوش آمدید!</strong>
-        <small data-i18n="notificationText">
-          تنظیمات و امکانات خود را از بخش تنظیمات مدیریت کنید.
-        </small>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- SETTINGS -->
-<div class="modal" id="settingsModal">
-
-  <div class="modal-card">
+  <div class="modal">
 
     <div class="modal-head">
-      <h2 data-i18n="settingsTitle">تنظیمات Nexora</h2>
-      <button class="close" onclick="closeModal('settingsModal')">×</button>
+      <h2>حساب من</h2>
+      <button class="close" onclick="closeModal('profile')">×</button>
     </div>
 
-    <div class="settings-list">
+    <div class="feature">
 
-      <!-- LANGUAGE -->
-      <div class="setting-item">
+      <div class="feature-icon">👤</div>
 
-        <div class="setting-info">
-          <strong data-i18n="language">زبان سایت</strong>
-          <small data-i18n="languageDesc">
-            زبان رابط کاربری را انتخاب کنید.
-          </small>
-        </div>
+      <div>
+        <h3 id="profileName">
+          کاربر Nexora
+        </h3>
 
-        <div class="setting-control">
-          <select id="languageSelect" onchange="changeLanguage(this.value)">
-            <option value="fa">🇮🇷 فارسی</option>
-            <option value="en">🇬🇧 English</option>
-            <option value="ar">🇸🇦 العربية</option>
-            <option value="tr">🇹🇷 Türkçe</option>
-            <option value="de">🇩🇪 Deutsch</option>
-            <option value="fr">🇫🇷 Français</option>
-            <option value="es">🇪🇸 Español</option>
-            <option value="it">🇮🇹 Italiano</option>
-            <option value="pt">🇵🇹 Português</option>
-            <option value="ru">🇷🇺 Русский</option>
-            <option value="zh">🇨🇳 中文</option>
-            <option value="ja">🇯🇵 日本語</option>
-            <option value="ko">🇰🇷 한국어</option>
-            <option value="hi">🇮🇳 हिन्दी</option>
-            <option value="ur">🇵🇰 اردو</option>
-            <option value="nl">🇳🇱 Nederlands</option>
-            <option value="pl">🇵🇱 Polski</option>
-            <option value="sv">🇸🇪 Svenska</option>
-            <option value="no">🇳🇴 Norsk</option>
-            <option value="da">🇩🇰 Dansk</option>
-          </select>
-        </div>
-
-      </div>
-
-
-      <!-- THEME -->
-      <div class="setting-item">
-
-        <div class="setting-info">
-          <strong data-i18n="theme">ظاهر سایت</strong>
-          <small data-i18n="themeDesc">
-            حالت روشن یا تاریک را انتخاب کنید.
-          </small>
-        </div>
-
-        <div class="setting-control">
-          <select id="themeSelect" onchange="changeTheme(this.value)">
-            <option value="light">☀️ روشن</option>
-            <option value="dark">🌙 تاریک</option>
-          </select>
-        </div>
-
-      </div>
-
-
-      <!-- FONT -->
-      <div class="setting-item">
-
-        <div class="setting-info">
-          <strong data-i18n="fontSize">اندازه نوشته</strong>
-          <small data-i18n="fontDesc">
-            اندازه متن‌های سایت را تغییر دهید.
-          </small>
-        </div>
-
-        <div class="setting-control">
-          <select id="fontSelect" onchange="changeFontSize(this.value)">
-            <option value="15px">کوچک</option>
-            <option value="16px">عادی</option>
-            <option value="18px">بزرگ</option>
-            <option value="20px">خیلی بزرگ</option>
-          </select>
-        </div>
-
-      </div>
-
-
-      <!-- NOTIFICATIONS -->
-      <div class="setting-item">
-
-        <div class="setting-info">
-          <strong data-i18n="notificationsSetting">اعلان‌ها</strong>
-          <small data-i18n="notificationsDesc">
-            دریافت اعلان‌های Nexora.
-          </small>
-        </div>
-
-        <div class="setting-control">
-          <select id="notificationSelect" onchange="saveSetting('notifications',this.value)">
-            <option value="on">فعال</option>
-            <option value="off">خاموش</option>
-          </select>
-        </div>
-
-      </div>
-
-
-      <!-- SUPPORT PHONE -->
-      <div class="setting-item">
-
-        <div class="setting-info">
-          <strong data-i18n="supportPhone">شماره پشتیبانی</strong>
-          <small data-i18n="supportPhoneDesc">
-            شماره تماس پشتیبانی را خودتان تعیین کنید.
-          </small>
-        </div>
-
-        <div class="setting-control">
-          <input
-            id="supportPhoneInput"
-            type="tel"
-            placeholder="شماره تماس"
-          >
-        </div>
-
-      </div>
-
-
-      <!-- SUPPORT EMAIL -->
-      <div class="setting-item">
-
-        <div class="setting-info">
-          <strong data-i18n="supportEmail">ایمیل پشتیبانی</strong>
-          <small data-i18n="supportEmailDesc">
-            ایمیل پشتیبانی Nexora.
-          </small>
-        </div>
-
-        <div class="setting-control">
-          <input
-            id="supportEmailInput"
-            type="email"
-            placeholder="support@example.com"
-          >
-        </div>
-
-      </div>
-
-
-      <!-- SITE NAME -->
-      <div class="setting-item">
-
-        <div class="setting-info">
-          <strong data-i18n="siteName">نام سایت</strong>
-          <small data-i18n="siteNameDesc">
-            نامی که در سایت نمایش داده می‌شود.
-          </small>
-        </div>
-
-        <div class="setting-control">
-          <input
-            id="siteNameInput"
-            type="text"
-            placeholder="Nexora"
-          >
-        </div>
-
-      </div>
-
-
-      <!-- LOCATION -->
-      <div class="setting-item">
-
-        <div class="setting-info">
-          <strong data-i18n="defaultLocation">موقعیت پیش‌فرض</strong>
-          <small data-i18n="defaultLocationDesc">
-            شهر پیش‌فرض سایت.
-          </small>
-        </div>
-
-        <div class="setting-control">
-          <input
-            id="locationInput"
-            type="text"
-            placeholder="تهران"
-          >
-        </div>
-
+        <p>
+          برای استفاده از امکانات حساب کاربری، پروفایل خود را تکمیل کنید.
+        </p>
       </div>
 
     </div>
 
     <br>
 
-    <button class="save-btn" onclick="saveAllSettings()" data-i18n="saveSettings">
-      ذخیره همه تنظیمات
+    <button class="form-submit" onclick="toast('بخش حساب کاربری به‌زودی فعال می‌شود')">
+      مدیریت حساب
     </button>
 
   </div>
 
 </div>
 
+<!-- NOTIFICATIONS -->
+<div class="overlay" id="notificationsModal">
 
-<!-- TOAST -->
+  <div class="modal">
+
+    <div class="modal-head">
+      <h2>اعلان‌ها</h2>
+      <button class="close" onclick="closeModal('notifications')">×</button>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🔔</div>
+      <div>
+        <h3>خوش آمدید به Nexora</h3>
+        <p>
+          اعلان‌های مربوط به آگهی‌ها، پیام‌ها و فعالیت حساب شما اینجا نمایش داده می‌شوند.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
 <div class="toast" id="toast"></div>
-
 
 <script>
 
-/* =====================================
-   TRANSLATIONS
-===================================== */
+/* =========================
+   MODALS
+========================= */
 
-const translations = {
+function openModal(type){
 
-  fa:{
-    marketplace:"بازار آنلاین",
-    search:"جستجو در Nexora...",
-    sellAd:"ثبت آگهی",
-    heroTitle:"هر چیزی که می‌خواهی، اینجاست.",
-    heroText:"در Nexora کالا، خدمات و فرصت‌های مختلف را پیدا کن، بفروش و با دیگران ارتباط بگیر.",
-    browse:"مشاهده آگهی‌ها",
-    sell:"فروش در Nexora",
-    buy:"🛒 خرید",
-    services:"🛠️ خدمات",
-    categories:"دسته‌بندی‌ها",
-    allCategories:"مشاهده همه",
-    mobile:"موبایل",
-    cars:"خودرو",
-    realEstate:"املاک",
-    computer:"کامپیوتر",
-    fashion:"پوشاک",
-    gaming:"گیم",
-    home:"خانه",
-    featured:"آگهی‌های منتخب",
-    featuredText:"آگهی‌های جدید و محبوب",
-    topSellers:"فروشندگان برتر",
-    verifiedSeller:"فروشنده تأییدشده",
-    follow:"دنبال کردن",
-    supportTitle:"به کمک نیاز داری؟",
-    supportText:"تیم پشتیبانی Nexora آماده پاسخگویی به شماست.",
-    contactSupport:"تماس با پشتیبانی",
-    footerText:"بازار آنلاین مدرن برای خرید، فروش و خدمات.",
-    quickLinks:"دسترسی سریع",
-    products:"آگهی‌ها",
-    settings:"تنظیمات",
-    help:"راهنما",
-    support:"پشتیبانی",
-    about:"درباره Nexora",
-    rules:"قوانین",
-    contact:"تماس",
-    homeNav:"خانه",
-    searchNav:"جستجو",
-    sellNav:"فروش",
-    settingsNav:"تنظیمات",
-    profile:"حساب کاربری",
-    username:"نام کاربری",
-    email:"ایمیل",
-    save:"ذخیره تغییرات",
-    newAd:"ثبت آگهی جدید",
-    adTitle:"عنوان آگهی",
-    category:"دسته‌بندی",
-    location:"موقعیت",
-    description:"توضیحات",
-    publish:"انتشار آگهی",
-    notifications:"اعلان‌ها",
-    welcomeNotification:"به Nexora خوش آمدید!",
-    notificationText:"تنظیمات و امکانات خود را از بخش تنظیمات مدیریت کنید.",
-    settingsTitle:"تنظیمات Nexora",
-    language:"زبان سایت",
-    languageDesc:"زبان رابط کاربری را انتخاب کنید.",
-    theme:"ظاهر سایت",
-    themeDesc:"حالت روشن یا تاریک را انتخاب کنید.",
-    fontSize:"اندازه نوشته",
-    fontDesc:"اندازه متن‌های سایت را تغییر دهید.",
-    notificationsSetting:"اعلان‌ها",
-    notificationsDesc:"دریافت اعلان‌های Nexora.",
-    supportPhone:"شماره پشتیبانی",
-    supportPhoneDesc:"شماره تماس پشتیبانی را خودتان تعیین کنید.",
-    supportEmail:"ایمیل پشتیبانی",
-    supportEmailDesc:"ایمیل پشتیبانی Nexora.",
-    siteName:"نام سایت",
-    siteNameDesc:"نامی که در سایت نمایش داده می‌شود.",
-    defaultLocation:"موقعیت پیش‌فرض",
-    defaultLocationDesc:"شهر پیش‌فرض سایت.",
-    saveSettings:"ذخیره همه تنظیمات"
-  },
+  const modal = document.getElementById(type + "Modal");
 
-  en:{
-    marketplace:"Online Marketplace",
-    search:"Search Nexora...",
-    sellAd:"Post an Ad",
-    heroTitle:"Everything you need, in one place.",
-    heroText:"Discover products, services and opportunities on Nexora.",
-    browse:"Browse Listings",
-    sell:"Sell on Nexora",
-    buy:"🛒 Buy",
-    services:"🛠️ Services",
-    categories:"Categories",
-    allCategories:"View all",
-    mobile:"Mobile",
-    cars:"Cars",
-    realEstate:"Real Estate",
-    computer:"Computer",
-    fashion:"Fashion",
-    gaming:"Gaming",
-    home:"Home",
-    featured:"Featured Listings",
-    featuredText:"New and popular listings",
-    topSellers:"Top Sellers",
-    verifiedSeller:"Verified seller",
-    follow:"Follow",
-    supportTitle:"Need help?",
-    supportText:"Nexora support team is ready to help.",
-    contactSupport:"Contact Support",
-    footerText:"A modern marketplace for buying, selling and services.",
-    quickLinks:"Quick Links",
-    products:"Listings",
-    settings:"Settings",
-    help:"Help",
-    support:"Support",
-    about:"About Nexora",
-    rules:"Rules",
-    contact:"Contact",
-    homeNav:"Home",
-    searchNav:"Search",
-    sellNav:"Sell",
-    settingsNav:"Settings",
-    profile:"Account",
-    username:"Username",
-    email:"Email",
-    save:"Save Changes",
-    newAd:"Create New Listing",
-    adTitle:"Listing Title",
-    category:"Category",
-    location:"Location",
-    description:"Description",
-    publish:"Publish Listing",
-    notifications:"Notifications",
-    welcomeNotification:"Welcome to Nexora!",
-    notificationText:"Manage your Nexora experience from Settings.",
-    settingsTitle:"Nexora Settings",
-    language:"Language",
-    languageDesc:"Choose your interface language.",
-    theme:"Appearance",
-    themeDesc:"Choose light or dark mode.",
-    fontSize:"Text Size",
-    fontDesc:"Change the size of website text.",
-    notificationsSetting:"Notifications",
-    notificationsDesc:"Receive Nexora notifications.",
-    supportPhone:"Support Phone",
-    supportPhoneDesc:"Set your support phone number.",
-    supportEmail:"Support Email",
-    supportEmailDesc:"Set your Nexora support email.",
-    siteName:"Site Name",
-    siteNameDesc:"Name displayed throughout the website.",
-    defaultLocation:"Default Location",
-    defaultLocationDesc:"Default city for the website.",
-    saveSettings:"Save All Settings"
-  },
-
-  ar:{
-    marketplace:"السوق الإلكتروني",
-    search:"ابحث في Nexora...",
-    sellAd:"نشر إعلان",
-    heroTitle:"كل ما تحتاجه في مكان واحد.",
-    heroText:"اكتشف المنتجات والخدمات والفرص على Nexora.",
-    browse:"مشاهدة الإعلانات",
-    sell:"البيع على Nexora",
-    buy:"🛒 شراء",
-    services:"🛠️ خدمات",
-    categories:"الفئات",
-    allCategories:"عرض الكل",
-    mobile:"الهواتف",
-    cars:"السيارات",
-    realEstate:"العقارات",
-    computer:"الكمبيوتر",
-    fashion:"الأزياء",
-    gaming:"الألعاب",
-    home:"المنزل",
-    featured:"إعلانات مميزة",
-    topSellers:"أفضل البائعين",
-    verifiedSeller:"بائع موثوق",
-    follow:"متابعة",
-    supportTitle:"هل تحتاج إلى مساعدة؟",
-    contactSupport:"اتصل بالدعم",
-    settings:"الإعدادات",
-    profile:"الحساب",
-    username:"اسم المستخدم",
-    email:"البريد الإلكتروني",
-    save:"حفظ التغييرات",
-    newAd:"إعلان جديد",
-    category:"الفئة",
-    location:"الموقع",
-    description:"الوصف",
-    publish:"نشر الإعلان",
-    notifications:"الإشعارات",
-    language:"اللغة",
-    theme:"المظهر",
-    fontSize:"حجم النص",
-    supportPhone:"هاتف الدعم",
-    supportEmail:"بريد الدعم",
-    siteName:"اسم الموقع",
-    defaultLocation:"الموقع الافتراضي",
-    saveSettings:"حفظ جميع الإعدادات"
-  },
-
-  tr:{
-    marketplace:"Online Pazar",
-    search:"Nexora'da ara...",
-    sellAd:"İlan Ver",
-    heroTitle:"İhtiyacın olan her şey burada.",
-    browse:"İlanlara Bak",
-    sell:"Nexora'da Sat",
-    buy:"🛒 Satın Al",
-    services:"🛠️ Hizmetler",
-    categories:"Kategoriler",
-    mobile:"Telefon",
-    cars:"Arabalar",
-    realEstate:"Emlak",
-    computer:"Bilgisayar",
-    fashion:"Moda",
-    gaming:"Oyun",
-    home:"Ev",
-    featured:"Öne Çıkan İlanlar",
-    topSellers:"En İyi Satıcılar",
-    follow:"Takip Et",
-    settings:"Ayarlar",
-    profile:"Hesap",
-    username:"Kullanıcı adı",
-    email:"E-posta",
-    save:"Değişiklikleri Kaydet",
-    notifications:"Bildirimler",
-    language:"Dil",
-    theme:"Görünüm",
-    fontSize:"Yazı Boyutu",
-    supportPhone:"Destek Telefonu",
-    supportEmail:"Destek E-postası",
-    siteName:"Site Adı",
-    defaultLocation:"Varsayılan Konum",
-    saveSettings:"Tüm Ayarları Kaydet"
-  },
-
-  de:{
-    marketplace:"Online-Marktplatz",
-    search:"Auf Nexora suchen...",
-    sellAd:"Anzeige erstellen",
-    heroTitle:"Alles, was du brauchst, an einem Ort.",
-    browse:"Anzeigen ansehen",
-    sell:"Auf Nexora verkaufen",
-    buy:"🛒 Kaufen",
-    services:"🛠️ Dienstleistungen",
-    categories:"Kategorien",
-    mobile:"Handys",
-    cars:"Autos",
-    realEstate:"Immobilien",
-    computer:"Computer",
-    fashion:"Mode",
-    gaming:"Gaming",
-    home:"Haus",
-    featured:"Ausgewählte Anzeigen",
-    topSellers:"Top-Verkäufer",
-    follow:"Folgen",
-    settings:"Einstellungen",
-    profile:"Konto",
-    username:"Benutzername",
-    email:"E-Mail",
-    save:"Änderungen speichern",
-    notifications:"Benachrichtigungen",
-    language:"Sprache",
-    theme:"Darstellung",
-    fontSize:"Textgröße",
-    supportPhone:"Support-Telefon",
-    supportEmail:"Support-E-Mail",
-    siteName:"Seitenname",
-    defaultLocation:"Standardort",
-    saveSettings:"Alle Einstellungen speichern"
-  },
-
-  fr:{
-    marketplace:"Marché en ligne",
-    search:"Rechercher sur Nexora...",
-    sellAd:"Publier une annonce",
-    heroTitle:"Tout ce dont vous avez besoin, au même endroit.",
-    browse:"Voir les annonces",
-    sell:"Vendre sur Nexora",
-    buy:"🛒 Acheter",
-    services:"🛠️ Services",
-    categories:"Catégories",
-    mobile:"Téléphones",
-    cars:"Voitures",
-    realEstate:"Immobilier",
-    computer:"Ordinateurs",
-    fashion:"Mode",
-    gaming:"Jeux",
-    home:"Maison",
-    featured:"Annonces sélectionnées",
-    topSellers:"Meilleurs vendeurs",
-    follow:"Suivre",
-    settings:"Paramètres",
-    profile:"Compte",
-    username:"Nom d'utilisateur",
-    email:"E-mail",
-    save:"Enregistrer",
-    notifications:"Notifications",
-    language:"Langue",
-    theme:"Apparence",
-    fontSize:"Taille du texte",
-    supportPhone:"Téléphone support",
-    supportEmail:"E-mail support",
-    siteName:"Nom du site",
-    defaultLocation:"Emplacement par défaut",
-    saveSettings:"Enregistrer les paramètres"
-  },
-
-  es:{
-    marketplace:"Mercado online",
-    search:"Buscar en Nexora...",
-    sellAd:"Publicar anuncio",
-    heroTitle:"Todo lo que necesitas, en un solo lugar.",
-    browse:"Ver anuncios",
-    sell:"Vender en Nexora",
-    buy:"🛒 Comprar",
-    services:"🛠️ Servicios",
-    categories:"Categorías",
-    mobile:"Móviles",
-    cars:"Coches",
-    realEstate:"Inmuebles",
-    computer:"Ordenadores",
-    fashion:"Moda",
-    gaming:"Videojuegos",
-    home:"Hogar",
-    featured:"Anuncios destacados",
-    topSellers:"Mejores vendedores",
-    follow:"Seguir",
-    settings:"Configuración",
-    profile:"Cuenta",
-    username:"Usuario",
-    email:"Correo",
-    save:"Guardar cambios",
-    notifications:"Notificaciones",
-    language:"Idioma",
-    theme:"Apariencia",
-    fontSize:"Tamaño del texto",
-    supportPhone:"Teléfono de soporte",
-    supportEmail:"Correo de soporte",
-    siteName:"Nombre del sitio",
-    defaultLocation:"Ubicación predeterminada",
-    saveSettings:"Guardar configuración"
-  },
-
-  ru:{
-    marketplace:"Онлайн-маркет",
-    search:"Поиск в Nexora...",
-    sellAd:"Разместить объявление",
-    heroTitle:"Всё необходимое в одном месте.",
-    browse:"Смотреть объявления",
-    sell:"Продать на Nexora",
-    buy:"🛒 Купить",
-    services:"🛠️ Услуги",
-    categories:"Категории",
-    mobile:"Телефоны",
-    cars:"Автомобили",
-    realEstate:"Недвижимость",
-    computer:"Компьютеры",
-    fashion:"Одежда",
-    gaming:"Игры",
-    home:"Дом",
-    featured:"Избранные объявления",
-    topSellers:"Лучшие продавцы",
-    follow:"Подписаться",
-    settings:"Настройки",
-    profile:"Аккаунт",
-    username:"Имя пользователя",
-    email:"Электронная почта",
-    save:"Сохранить",
-    notifications:"Уведомления",
-    language:"Язык",
-    theme:"Внешний вид",
-    fontSize:"Размер текста",
-    supportPhone:"Телефон поддержки",
-    supportEmail:"Почта поддержки",
-    siteName:"Название сайта",
-    defaultLocation:"Местоположение",
-    saveSettings:"Сохранить настройки"
-  },
-
-  zh:{
-    marketplace:"在线市场",
-    search:"搜索 Nexora...",
-    sellAd:"发布商品",
-    heroTitle:"你需要的一切，都在这里。",
-    browse:"浏览商品",
-    sell:"在 Nexora 出售",
-    buy:"🛒 购买",
-    services:"🛠️ 服务",
-    categories:"分类",
-    mobile:"手机",
-    cars:"汽车",
-    realEstate:"房地产",
-    computer:"电脑",
-    fashion:"服装",
-    gaming:"游戏",
-    home:"家居",
-    featured:"精选商品",
-    topSellers:"热门卖家",
-    follow:"关注",
-    settings:"设置",
-    profile:"账户",
-    username:"用户名",
-    email:"邮箱",
-    save:"保存更改",
-    notifications:"通知",
-    language:"语言",
-    theme:"外观",
-    fontSize:"文字大小",
-    supportPhone:"客服电话",
-    supportEmail:"客服邮箱",
-    siteName:"网站名称",
-    defaultLocation:"默认位置",
-    saveSettings:"保存所有设置"
-  },
-
-  ja:{
-    marketplace:"オンラインマーケット",
-    search:"Nexoraを検索...",
-    sellAd:"出品する",
-    heroTitle:"必要なものが、ここにあります。",
-    browse:"商品を見る",
-    sell:"Nexoraで販売",
-    buy:"🛒 購入",
-    services:"🛠️ サービス",
-    categories:"カテゴリー",
-    mobile:"スマートフォン",
-    cars:"自動車",
-    realEstate:"不動産",
-    computer:"コンピューター",
-    fashion:"ファッション",
-    gaming:"ゲーム",
-    home:"ホーム",
-    featured:"おすすめ商品",
-    topSellers:"人気販売者",
-    follow:"フォロー",
-    settings:"設定",
-    profile:"アカウント",
-    username:"ユーザー名",
-    email:"メール",
-    save:"変更を保存",
-    notifications:"通知",
-    language:"言語",
-    theme:"外観",
-    fontSize:"文字サイズ",
-    supportPhone:"サポート電話",
-    supportEmail:"サポートメール",
-    siteName:"サイト名",
-    defaultLocation:"デフォルト位置",
-    saveSettings:"設定を保存"
+  if(modal){
+    modal.classList.add("show");
   }
 
-};
-
-
-/* =====================================
-   OPEN / CLOSE MODALS
-===================================== */
-
-function openModal(id){
-  document.getElementById(id).classList.add("show");
 }
 
-function closeModal(id){
-  document.getElementById(id).classList.remove("show");
+function closeModal(type){
+
+  const modal = document.getElementById(type + "Modal");
+
+  if(modal){
+    modal.classList.remove("show");
+  }
+
 }
 
-document.querySelectorAll(".modal").forEach(modal=>{
-  modal.addEventListener("click",e=>{
-    if(e.target===modal){
-      modal.classList.remove("show");
+document.querySelectorAll(".overlay").forEach(overlay => {
+
+  overlay.addEventListener("click", e => {
+
+    if(e.target === overlay){
+      overlay.classList.remove("show");
     }
+
   });
+
 });
 
 
-/* =====================================
-   SETTINGS
-===================================== */
-
-function openSettings(){
-
-  const saved = JSON.parse(
-    localStorage.getItem("nexoraSettings") || "{}"
-  );
-
-  document.getElementById("languageSelect").value =
-    saved.language || "fa";
-
-  document.getElementById("themeSelect").value =
-    saved.theme || "light";
-
-  document.getElementById("fontSelect").value =
-    saved.fontSize || "16px";
-
-  document.getElementById("notificationSelect").value =
-    saved.notifications || "on";
-
-  document.getElementById("supportPhoneInput").value =
-    saved.supportPhone || "۰۹۱۲۱۲۳۴۵۶۷";
-
-  document.getElementById("supportEmailInput").value =
-    saved.supportEmail || "support@nexora.example";
-
-  document.getElementById("siteNameInput").value =
-    saved.siteName || "Nexora";
-
-  document.getElementById("locationInput").value =
-    saved.location || "تهران";
-
-  openModal("settingsModal");
-}
-
-
-function saveAllSettings(){
-
-  const settings = {
-    language:document.getElementById("languageSelect").value,
-    theme:document.getElementById("themeSelect").value,
-    fontSize:document.getElementById("fontSelect").value,
-    notifications:document.getElementById("notificationSelect").value,
-    supportPhone:document.getElementById("supportPhoneInput").value,
-    supportEmail:document.getElementById("supportEmailInput").value,
-    siteName:document.getElementById("siteNameInput").value,
-    location:document.getElementById("locationInput").value
-  };
-
-  localStorage.setItem(
-    "nexoraSettings",
-    JSON.stringify(settings)
-  );
-
-  applySettings();
-
-  closeModal("settingsModal");
-
-  toast(
-    settings.language==="fa"
-      ? "تنظیمات با موفقیت ذخیره شد."
-      : "Settings saved successfully."
-  );
-}
-
-
-function saveSetting(key,value){
-
-  const settings = JSON.parse(
-    localStorage.getItem("nexoraSettings") || "{}"
-  );
-
-  settings[key]=value;
-
-  localStorage.setItem(
-    "nexoraSettings",
-    JSON.stringify(settings)
-  );
-}
-
-
-function applySettings(){
-
-  const settings = JSON.parse(
-    localStorage.getItem("nexoraSettings") || "{}"
-  );
-
-  document.documentElement.style.setProperty(
-    "--font-size",
-    settings.fontSize || "16px"
-  );
-
-  if(settings.theme==="dark"){
-    document.body.classList.add("dark");
-  }else{
-    document.body.classList.remove("dark");
-  }
-
-  if(settings.language){
-    applyLanguage(settings.language);
-  }
-
-  const phone =
-    settings.supportPhone || "۰۹۱۲۱۲۳۴۵۶۷";
-
-  const email =
-    settings.supportEmail || "support@nexora.example";
-
-  document.getElementById("footerPhone").textContent =
-    "📞 " + phone;
-
-  document.getElementById("footerEmail").textContent =
-    "✉️ " + email;
-
-  if(settings.siteName){
-    document.title =
-      settings.siteName + " | Marketplace";
-
-    document.querySelectorAll(".logo-name").forEach(el=>{
-      el.textContent=settings.siteName;
-    });
-  }
-}
-
-
-/* =====================================
-   LANGUAGE
-===================================== */
-
-function changeLanguage(lang){
-
-  const settings = JSON.parse(
-    localStorage.getItem("nexoraSettings") || "{}"
-  );
-
-  settings.language=lang;
-
-  localStorage.setItem(
-    "nexoraSettings",
-    JSON.stringify(settings)
-  );
-
-  applyLanguage(lang);
-}
-
-
-function applyLanguage(lang){
-
-  const data =
-    translations[lang] ||
-    translations.fa;
-
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-
-    const key=el.getAttribute("data-i18n");
-
-    if(data[key]){
-      el.textContent=data[key];
-    }
-
-  });
-
-  document.querySelectorAll("[data-placeholder]").forEach(el=>{
-
-    const key=el.getAttribute("data-placeholder");
-
-    if(data[key]){
-      el.placeholder=data[key];
-    }
-
-  });
-
-  const rtlLanguages=[
-    "fa",
-    "ar",
-    "ur"
-  ];
-
-  const rtl=rtlLanguages.includes(lang);
-
-  document.documentElement.lang=lang;
-
-  document.documentElement.dir=
-    rtl ? "rtl" : "ltr";
-}
-
-
-/* =====================================
-   THEME
-===================================== */
-
-function changeTheme(theme){
-
-  const settings = JSON.parse(
-    localStorage.getItem("nexoraSettings") || "{}"
-  );
-
-  settings.theme=theme;
-
-  localStorage.setItem(
-    "nexoraSettings",
-    JSON.stringify(settings)
-  );
-
-  if(theme==="dark"){
-    document.body.classList.add("dark");
-  }else{
-    document.body.classList.remove("dark");
-  }
-}
-
-
-/* =====================================
-   FONT
-===================================== */
-
-function changeFontSize(size){
-
-  document.documentElement.style.setProperty(
-    "--font-size",
-    size
-  );
-
-  const settings = JSON.parse(
-    localStorage.getItem("nexoraSettings") || "{}"
-  );
-
-  settings.fontSize=size;
-
-  localStorage.setItem(
-    "nexoraSettings",
-    JSON.stringify(settings)
-  );
-}
-
-
-/* =====================================
-   SEARCH
-===================================== */
-
-function searchProducts(){
-
-  const query =
-    document.getElementById("searchInput")
-    .value
-    .trim()
-    .toLowerCase();
-
-  const products =
-    document.querySelectorAll(".product");
-
-  let found=0;
-
-  products.forEach(product=>{
-
-    const text=
-      product.innerText.toLowerCase();
-
-    const keywords=
-      product.dataset.search || "";
-
-    const match=
-      !query ||
-      text.includes(query) ||
-      keywords.includes(query);
-
-    product.style.display=
-      match ? "" : "none";
-
-    if(match) found++;
-
-  });
-
-  scrollToSection("products");
-
-  if(query){
-    toast(
-      found
-      ? `${found} نتیجه پیدا شد.`
-      : "نتیجه‌ای پیدا نشد."
-    );
-  }
-}
-
-document
-  .getElementById("searchInput")
-  .addEventListener("keydown",e=>{
-    if(e.key==="Enter"){
-      searchProducts();
-    }
-  });
-
-
-/* =====================================
-   FAVORITES
-===================================== */
-
-function favorite(button){
-
-  button.classList.toggle("active");
-
-  if(button.classList.contains("active")){
-    button.textContent="♥";
-    toast("به علاقه‌مندی‌ها اضافه شد.");
-  }else{
-    button.textContent="♡";
-    toast("از علاقه‌مندی‌ها حذف شد.");
-  }
-}
-
-
-/* =====================================
-   FOLLOW
-===================================== */
-
-function follow(button){
-
-  if(button.dataset.following==="true"){
-
-    button.dataset.following="false";
-    button.textContent=
-      translations[
-        getCurrentLanguage()
-      ]?.follow || "دنبال کردن";
-
-  }else{
-
-    button.dataset.following="true";
-    button.textContent="✓ دنبال می‌کنید";
-
-  }
-
-}
-
-
-/* =====================================
-   PROFILE
-===================================== */
-
-function saveProfile(){
-
-  const username=
-    document.getElementById("username").value;
-
-  const email=
-    document.getElementById("userEmail").value;
-
-  localStorage.setItem(
-    "nexoraProfile",
-    JSON.stringify({
-      username,
-      email
-    })
-  );
-
-  closeModal("profileModal");
-
-  toast("اطلاعات حساب ذخیره شد.");
-}
-
-
-function loadProfile(){
-
-  const profile =
-    JSON.parse(
-      localStorage.getItem("nexoraProfile") || "{}"
-    );
-
-  if(profile.username){
-    document.getElementById("username").value=
-      profile.username;
-  }
-
-  if(profile.email){
-    document.getElementById("userEmail").value=
-      profile.email;
-  }
-}
-
-
-/* =====================================
-   PUBLISH DEMO AD
-===================================== */
-
-function publishDemoAd(){
-
-  const title=
-    document.getElementById("adTitle").value.trim();
-
-  const location=
-    document.getElementById("adLocation").value.trim();
-
-  const description=
-    document.getElementById("adDescription").value.trim();
-
-  if(!title){
-    toast("لطفاً عنوان آگهی را وارد کنید.");
-    return;
-  }
-
-  const card=document.createElement("article");
-
-  card.className="product";
-
-  card.dataset.search=
-    `${title} ${description} ${location}`;
-
-  card.innerHTML=`
-    <div class="product-image">📦</div>
-
-    <div class="product-body">
-
-      <div class="product-title">
-        ${escapeHtml(title)}
-      </div>
-
-      <div class="product-desc">
-        ${escapeHtml(description || "آگهی جدید در Nexora")}
-      </div>
-
-      <div class="product-footer">
-
-        <span class="location">
-          📍 ${escapeHtml(location || "موقعیت نامشخص")}
-        </span>
-
-        <button
-          class="favorite"
-          onclick="favorite(this)"
-        >
-          ♡
-        </button>
-
-      </div>
-
-    </div>
-  `;
-
-  document
-    .getElementById("productGrid")
-    .prepend(card);
-
-  closeModal("sellModal");
-
-  document.getElementById("adTitle").value="";
-  document.getElementById("adLocation").value="";
-  document.getElementById("adDescription").value="";
-
-  toast("آگهی در نسخه نمایشی اضافه شد.");
-
-  scrollToSection("products");
-}
-
-
-/* =====================================
-   SUPPORT
-===================================== */
-
-function openSupport(){
-
-  const settings =
-    JSON.parse(
-      localStorage.getItem("nexoraSettings") || "{}"
-    );
-
-  const phone=
-    settings.supportPhone ||
-    "۰۹۱۲۱۲۳۴۵۶۷";
-
-  const email=
-    settings.supportEmail ||
-    "support@nexora.example";
-
-  alert(
-`پشتیبانی Nexora
-
-📞 تلفن:
-${phone}
-
-✉️ ایمیل:
-${email}`
-  );
-}
-
-
-/* =====================================
-   ABOUT / RULES
-===================================== */
-
-function showAbout(){
-
-  alert(
-`Nexora
-
-یک بازار آنلاین برای خرید، فروش و ارائه خدمات.
-
-این نسخه برای GitHub Pages طراحی شده است.`
-  );
-}
-
-
-function showRules(){
-
-  alert(
-`قوانین Nexora
-
-• اطلاعات آگهی باید صحیح باشد.
-• از انتشار محتوای غیرقانونی خودداری کنید.
-• اطلاعات حساس خود را در آگهی عمومی قرار ندهید.`
-  );
-}
-
-
-/* =====================================
-   MODE
-===================================== */
-
-function changeMode(button,mode){
-
-  document
-    .querySelectorAll(".mode-tab")
-    .forEach(btn=>{
-      btn.classList.remove("active");
-    });
-
-  button.classList.add("active");
-
-  if(mode==="buy"){
-    toast("حالت خرید فعال شد.");
-  }
-
-  if(mode==="sell"){
-    openModal("sellModal");
-  }
-
-  if(mode==="service"){
-    toast("حالت خدمات فعال شد.");
-  }
-}
-
-
-/* =====================================
-   UTILITIES
-===================================== */
-
-function scrollToSection(id){
-
-  document
-    .getElementById(id)
-    ?.scrollIntoView({
-      behavior:"smooth"
-    });
-}
-
+/* =========================
+   TOAST
+========================= */
+
+let toastTimer;
 
 function toast(message){
 
-  const el=
-    document.getElementById("toast");
+  const box = document.getElementById("toast");
 
-  el.textContent=message;
+  box.textContent = message;
+  box.classList.add("show");
 
-  el.classList.add("show");
+  clearTimeout(toastTimer);
 
-  clearTimeout(window.toastTimer);
+  toastTimer = setTimeout(() => {
+    box.classList.remove("show");
+  }, 2600);
 
-  window.toastTimer=
-    setTimeout(()=>{
-      el.classList.remove("show");
-    },2500);
 }
 
 
-function getCurrentLanguage(){
+/* =========================
+   FAVORITES
+========================= */
 
-  const settings =
-    JSON.parse(
-      localStorage.getItem("nexoraSettings") || "{}"
-    );
+function favorite(button){
 
-  return settings.language || "fa";
+  if(button.textContent === "♡"){
+
+    button.textContent = "♥";
+    button.style.color = "#d43c55";
+
+    toast("به علاقه‌مندی‌ها اضافه شد");
+
+  }else{
+
+    button.textContent = "♡";
+    button.style.color = "";
+
+    toast("از علاقه‌مندی‌ها حذف شد");
+
+  }
+
 }
 
 
-function escapeHtml(text){
+/* =========================
+   FOLLOW
+========================= */
 
-  return String(text)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+function followSeller(button){
+
+  if(button.textContent === "دنبال کردن"){
+
+    button.textContent = "✓ دنبال می‌کنید";
+    button.style.background = "#edf5ff";
+
+    toast("فروشنده دنبال شد");
+
+  }else{
+
+    button.textContent = "دنبال کردن";
+    button.style.background = "";
+
+    toast("دنبال کردن لغو شد");
+
+  }
+
 }
 
 
-/* =====================================
-   STARTUP
-===================================== */
+/* =========================
+   MARKET TABS
+========================= */
 
-window.addEventListener("load",()=>{
+function switchTab(button){
 
-  loadProfile();
+  document.querySelectorAll(".market-tab")
+    .forEach(tab => tab.classList.remove("active"));
 
-  const settings =
-    JSON.parse(
-      localStorage.getItem("nexoraSettings") || "{}"
-    );
+  button.classList.add("active");
 
-  if(!settings.language){
-    settings.language="fa";
+  toast("دسته «" + button.textContent.trim() + "» انتخاب شد");
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchProducts(){
+
+  const input = document.getElementById("searchInput");
+
+  const query = input.value.trim();
+
+  if(!query){
+
+    toast("عبارت موردنظر را وارد کنید");
+
+    input.focus();
+
+    return;
+
   }
 
-  if(!settings.theme){
-    settings.theme="light";
+  toast("جستجو برای «" + query + "»");
+
+  document.getElementById("featured")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   DEMO LISTING
+========================= */
+
+function publishDemoListing(){
+
+  const title =
+    document.getElementById("listingTitle").value.trim();
+
+  const city =
+    document.getElementById("listingCity").value.trim();
+
+  if(!title){
+
+    toast("عنوان آگهی را وارد کنید");
+
+    return;
+
   }
 
-  if(!settings.fontSize){
-    settings.fontSize="16px";
+  closeModal("listing");
+
+  toast("آگهی شما آماده انتشار شد");
+
+  document.getElementById("listingTitle").value = "";
+  document.getElementById("listingCity").value = "";
+  document.getElementById("listingDescription").value = "";
+
+}
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener("keydown", e => {
+
+  if(e.key === "Escape"){
+
+    document.querySelectorAll(".overlay")
+      .forEach(x => x.classList.remove("show"));
+
   }
-
-  localStorage.setItem(
-    "nexoraSettings",
-    JSON.stringify(settings)
-  );
-
-  applySettings();
 
 });
 
