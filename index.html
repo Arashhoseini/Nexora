@@ -2,1260 +2,1319 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-  <title>Nexora | Pi Marketplace</title>
-  <meta name="description" content="Nexora - بازار خرید و فروش با Pi">
-
-  <!-- Pi SDK -->
-  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-
-  <style>
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    :root{
-      --navy:#061a38;
-      --navy2:#0b2b58;
-      --blue:#1565d8;
-      --blue2:#287be8;
-      --light:#f4f8ff;
-      --white:#ffffff;
-      --text:#12213a;
-      --muted:#6d7b91;
-      --border:#e1e9f5;
-      --pi:#f5a623;
-      --green:#18a673;
-      --danger:#dc3545;
-      --shadow:0 14px 40px rgba(8,35,75,.10);
-      --radius:22px;
-    }
-
-    body{
-      font-family:
-        Tahoma,
-        Arial,
-        "Segoe UI",
-        sans-serif;
-      background:var(--light);
-      color:var(--text);
-      min-height:100vh;
-    }
-
-    button,
-    input,
-    textarea,
-    select{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-      border:0;
-    }
-
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
-
-    /* HEADER */
-
-    header{
-      background:
-        linear-gradient(135deg,#04142d,#082c5d 60%,#0d4c98);
-      color:white;
-      position:sticky;
-      top:0;
-      z-index:1000;
-      box-shadow:0 8px 30px rgba(0,0,0,.16);
-    }
-
-    .header-inner{
-      max-width:1400px;
-      margin:auto;
-      padding:16px 22px;
-      display:flex;
-      align-items:center;
-      gap:20px;
-    }
-
-    .logo{
-      min-width:145px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size:25px;
-      font-weight:900;
-    }
-
-    .logo-icon{
-      width:42px;
-      height:42px;
-      border-radius:14px;
-      background:linear-gradient(135deg,#f8b84e,#e99000);
-      display:grid;
-      place-items:center;
-      color:white;
-      font-size:24px;
-      box-shadow:0 7px 20px rgba(245,166,35,.35);
-    }
-
-    .search{
-      flex:1;
-      position:relative;
-    }
-
-    .search input{
-      width:100%;
-      height:48px;
-      border-radius:15px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(255,255,255,.12);
-      color:white;
-      outline:none;
-      padding:0 48px 0 18px;
-      font-size:15px;
-    }
-
-    .search input::placeholder{
-      color:#d7e3f5;
-    }
-
-    .search-icon{
-      position:absolute;
-      right:17px;
-      top:12px;
-      font-size:21px;
-    }
-
-    .pi-connect{
-      min-width:150px;
-      height:48px;
-      border-radius:15px;
-      background:#f5a623;
-      color:white;
-      font-weight:900;
-      box-shadow:0 8px 20px rgba(245,166,35,.28);
-      transition:.2s;
-    }
-
-    .pi-connect:hover{
-      transform:translateY(-2px);
-    }
-
-    /* NAV */
-
-    .nav{
-      max-width:1400px;
-      margin:auto;
-      padding:0 22px 15px;
-      display:flex;
-      gap:9px;
-      overflow:auto;
-    }
-
-    .nav button{
-      white-space:nowrap;
-      background:rgba(255,255,255,.09);
-      color:#edf5ff;
-      border:1px solid rgba(255,255,255,.08);
-      padding:9px 15px;
-      border-radius:12px;
-      font-size:14px;
-    }
-
-    .nav button:hover,
-    .nav button.active{
-      background:white;
-      color:var(--navy);
-    }
-
-    /* HERO */
-
-    .hero{
-      max-width:1400px;
-      margin:25px auto;
-      padding:0 22px;
-    }
-
-    .hero-box{
-      min-height:300px;
-      border-radius:30px;
-      overflow:hidden;
-      background:
-        radial-gradient(circle at 80% 30%,rgba(54,136,255,.35),transparent 30%),
-        linear-gradient(135deg,#051a39,#0b3973);
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:45px;
-      box-shadow:var(--shadow);
-    }
-
-    .hero-content{
-      max-width:680px;
-    }
-
-    .hero-badge{
-      display:inline-flex;
-      background:rgba(255,255,255,.1);
-      border:1px solid rgba(255,255,255,.18);
-      padding:8px 14px;
-      border-radius:30px;
-      margin-bottom:20px;
-      font-size:14px;
-    }
-
-    .hero h1{
-      font-size:42px;
-      line-height:1.3;
-      margin-bottom:15px;
-    }
-
-    .hero p{
-      color:#d8e6f8;
-      font-size:17px;
-      line-height:2;
-    }
-
-    .hero-actions{
-      display:flex;
-      gap:12px;
-      margin-top:25px;
-      flex-wrap:wrap;
-    }
-
-    .primary{
-      background:#f5a623;
-      color:white;
-      padding:13px 23px;
-      border-radius:14px;
-      font-weight:900;
-    }
-
-    .secondary{
-      background:white;
-      color:var(--navy);
-      padding:13px 23px;
-      border-radius:14px;
-      font-weight:900;
-    }
-
-    .hero-pi{
-      width:230px;
-      height:230px;
-      border-radius:50%;
-      background:
-        radial-gradient(circle,#ffd47b,#f5a623 55%,#d98700);
-      display:grid;
-      place-items:center;
-      font-size:105px;
-      font-weight:900;
-      box-shadow:
-        0 0 70px rgba(245,166,35,.32);
-      transform:rotate(-7deg);
-    }
-
-    /* MAIN */
-
-    .container{
-      max-width:1400px;
-      margin:auto;
-      padding:0 22px 70px;
-    }
-
-    .section{
-      margin-top:35px;
-    }
-
-    .section-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:18px;
-      gap:15px;
-    }
-
-    .section-title{
-      font-size:25px;
-      font-weight:900;
-      color:var(--navy);
-    }
-
-    .section-sub{
-      color:var(--muted);
-      margin-top:5px;
-      font-size:14px;
-    }
-
-    .categories{
-      display:grid;
-      grid-template-columns:repeat(8,1fr);
-      gap:13px;
-    }
-
-    .category{
-      background:white;
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:19px 10px;
-      text-align:center;
-      transition:.2s;
-      box-shadow:0 5px 18px rgba(10,40,80,.04);
-    }
-
-    .category:hover{
-      transform:translateY(-4px);
-      box-shadow:var(--shadow);
-    }
-
-    .category-icon{
-      font-size:31px;
-      margin-bottom:8px;
-    }
-
-    .category span{
-      font-weight:700;
-      font-size:14px;
-    }
-
-    /* PRODUCTS */
-
-    .products{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:20px;
-    }
-
-    .card{
-      background:white;
-      border:1px solid var(--border);
-      border-radius:22px;
-      overflow:hidden;
-      box-shadow:0 6px 20px rgba(10,40,80,.05);
-      transition:.22s;
-    }
-
-    .card:hover{
-      transform:translateY(-5px);
-      box-shadow:var(--shadow);
-    }
-
-    .image{
-      height:220px;
-      position:relative;
-      background:#edf3fa;
-      overflow:hidden;
-    }
-
-    .image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .badge{
-      position:absolute;
-      top:13px;
-      right:13px;
-      background:rgba(4,24,53,.85);
-      color:white;
-      padding:7px 10px;
-      border-radius:10px;
-      font-size:12px;
-      font-weight:800;
-      backdrop-filter:blur(8px);
-    }
-
-    .favorite{
-      position:absolute;
-      top:12px;
-      left:12px;
-      width:38px;
-      height:38px;
-      border-radius:50%;
-      background:white;
-      color:#52647d;
-      font-size:19px;
-      box-shadow:0 5px 15px rgba(0,0,0,.12);
-    }
-
-    .card-body{
-      padding:18px;
-    }
-
-    .card-title{
-      font-size:17px;
-      font-weight:900;
-      margin-bottom:8px;
-      line-height:1.6;
-    }
-
-    .seller{
-      color:var(--muted);
-      font-size:13px;
-      margin-bottom:15px;
-    }
-
-    .price-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .price{
-      font-size:21px;
-      font-weight:1000;
-      color:var(--navy);
-      direction:ltr;
-      white-space:nowrap;
-    }
-
-    .pi-symbol{
-      color:#e69500;
-    }
-
-    .buy{
-      background:var(--navy);
-      color:white;
-      border-radius:11px;
-      padding:9px 13px;
-      font-size:13px;
-      font-weight:800;
-    }
-
-    .buy:hover{
-      background:var(--blue);
-    }
-
-    /* FEATURES */
-
-    .features{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:18px;
-    }
-
-    .feature{
-      background:white;
-      border:1px solid var(--border);
-      padding:25px;
-      border-radius:20px;
-    }
-
-    .feature-icon{
-      font-size:32px;
-      margin-bottom:10px;
-    }
-
-    .feature h3{
-      margin-bottom:7px;
-    }
-
-    .feature p{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.8;
-    }
-
-    /* SELL BUTTON */
-
-    .sell-box{
-      margin-top:40px;
-      background:
-        linear-gradient(135deg,#08234a,#0b4a9c);
-      color:white;
-      border-radius:25px;
-      padding:30px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    .sell-box h2{
-      margin-bottom:8px;
-    }
-
-    .sell-box p{
-      color:#d9e8fa;
-    }
-
-    .sell-button{
-      background:#f5a623;
-      color:white;
-      padding:14px 25px;
-      border-radius:14px;
-      font-weight:900;
-      white-space:nowrap;
-    }
-
-    /* MODAL */
-
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(0,15,35,.68);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      z-index:3000;
-      backdrop-filter:blur(8px);
-    }
-
-    .modal.show{
-      display:flex;
-    }
-
-    .modal-box{
-      width:min(560px,100%);
-      max-height:90vh;
-      overflow:auto;
-      background:white;
-      border-radius:25px;
-      padding:25px;
-      box-shadow:0 25px 70px rgba(0,0,0,.25);
-    }
-
-    .modal-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:20px;
-    }
-
-    .modal-head h2{
-      color:var(--navy);
-    }
-
-    .close{
-      width:38px;
-      height:38px;
-      border-radius:12px;
-      background:#edf3fa;
-      color:#253c5c;
-      font-size:21px;
-    }
-
-    .field{
-      margin-bottom:15px;
-    }
-
-    .field label{
-      display:block;
-      font-weight:800;
-      margin-bottom:7px;
-      font-size:14px;
-    }
-
-    .field input,
-    .field textarea,
-    .field select{
-      width:100%;
-      border:1px solid var(--border);
-      border-radius:13px;
-      padding:12px;
-      outline:none;
-      background:#fbfdff;
-    }
-
-    .field textarea{
-      min-height:110px;
-      resize:vertical;
-    }
-
-    .form-button{
-      width:100%;
-      padding:14px;
-      background:var(--navy);
-      color:white;
-      border-radius:14px;
-      font-weight:900;
-    }
-
-    /* PI PROFILE */
-
-    .pi-profile{
-      display:flex;
-      gap:15px;
-      align-items:center;
-      padding:15px;
-      background:#f5f9ff;
-      border-radius:16px;
-      margin-bottom:20px;
-    }
-
-    .pi-avatar{
-      width:52px;
-      height:52px;
-      border-radius:50%;
-      background:linear-gradient(135deg,#f8bd55,#e69100);
-      display:grid;
-      place-items:center;
-      color:white;
-      font-weight:900;
-      font-size:22px;
-    }
-
-    .pi-profile small{
-      display:block;
-      color:var(--muted);
-      margin-top:4px;
-      word-break:break-all;
-    }
-
-    /* TOAST */
-
-    .toast{
-      position:fixed;
-      bottom:25px;
-      left:25px;
-      max-width:360px;
-      background:#061a38;
-      color:white;
-      padding:15px 19px;
-      border-radius:14px;
-      box-shadow:0 15px 40px rgba(0,0,0,.25);
-      transform:translateY(120px);
-      opacity:0;
-      transition:.3s;
-      z-index:5000;
-      line-height:1.7;
-    }
-
-    .toast.show{
-      transform:translateY(0);
-      opacity:1;
-    }
-
-    /* MOBILE NAV */
-
-    .mobile-nav{
-      display:none;
-    }
-
-    /* RESPONSIVE */
-
-    @media(max-width:1100px){
-      .categories{
-        grid-template-columns:repeat(4,1fr);
-      }
-
-      .products{
-        grid-template-columns:repeat(3,1fr);
-      }
-
-      .features{
-        grid-template-columns:repeat(2,1fr);
-      }
-    }
-
-    @media(max-width:800px){
-      .header-inner{
-        flex-wrap:wrap;
-      }
-
-      .logo{
-        min-width:auto;
-      }
-
-      .search{
-        order:3;
-        flex-basis:100%;
-      }
-
-      .hero-box{
-        padding:30px;
-      }
-
-      .hero h1{
-        font-size:31px;
-      }
-
-      .hero-pi{
-        display:none;
-      }
-
-      .products{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .image{
-        height:190px;
-      }
-    }
-
-    @media(max-width:560px){
-      body{
-        padding-bottom:70px;
-      }
-
-      .header-inner{
-        padding:12px 14px;
-      }
-
-      .pi-connect{
-        min-width:125px;
-      }
-
-      .hero{
-        padding:0 14px;
-      }
-
-      .container{
-        padding:0 14px 40px;
-      }
-
-      .hero-box{
-        min-height:330px;
-        padding:25px;
-      }
-
-      .hero h1{
-        font-size:27px;
-      }
-
-      .hero p{
-        font-size:15px;
-      }
-
-      .categories{
-        grid-template-columns:repeat(4,1fr);
-        gap:8px;
-      }
-
-      .category{
-        padding:13px 5px;
-      }
-
-      .category-icon{
-        font-size:24px;
-      }
-
-      .category span{
-        font-size:12px;
-      }
-
-      .products{
-        grid-template-columns:1fr 1fr;
-        gap:12px;
-      }
-
-      .image{
-        height:145px;
-      }
-
-      .card-body{
-        padding:12px;
-      }
-
-      .card-title{
-        font-size:14px;
-      }
-
-      .seller{
-        font-size:11px;
-      }
-
-      .price{
-        font-size:16px;
-      }
-
-      .buy{
-        padding:7px 9px;
-        font-size:11px;
-      }
-
-      .features{
-        grid-template-columns:1fr;
-      }
-
-      .sell-box{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .mobile-nav{
-        position:fixed;
-        display:flex;
-        bottom:0;
-        left:0;
-        right:0;
-        height:65px;
-        background:white;
-        border-top:1px solid var(--border);
-        z-index:2000;
-        justify-content:space-around;
-        box-shadow:0 -8px 25px rgba(0,0,0,.08);
-      }
-
-      .mobile-nav button{
-        background:none;
-        color:#687992;
-        font-size:12px;
-        font-weight:700;
-      }
-
-      .mobile-nav button strong{
-        display:block;
-        font-size:21px;
-        margin-bottom:2px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Nexora | Pi Marketplace</title>
+
+<!-- Pi SDK رسمی -->
+<script src="https://sdk.minepi.com/pi-sdk.js"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+--navy:#061a38;
+--navy2:#0b2b58;
+--blue:#1565d8;
+--blue2:#287be8;
+--light:#f4f8ff;
+--white:#fff;
+--text:#12213a;
+--muted:#6d7b91;
+--border:#e1e9f5;
+--pi:#f5a623;
+--green:#18a673;
+--danger:#dc3545;
+--shadow:0 14px 40px rgba(8,35,75,.10);
+--radius:22px;
+}
+
+body{
+font-family:Tahoma,Arial,"Segoe UI",sans-serif;
+background:var(--light);
+color:var(--text);
+min-height:100vh
+}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0}
+a{text-decoration:none;color:inherit}
+
+/* HEADER */
+
+header{
+background:linear-gradient(135deg,#04142d,#082c5d 60%,#0d4c98);
+color:white;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 8px 30px rgba(0,0,0,.16)
+}
+
+.header-inner{
+max-width:1400px;
+margin:auto;
+padding:16px 22px;
+display:flex;
+align-items:center;
+gap:20px
+}
+
+.logo{
+min-width:145px;
+display:flex;
+align-items:center;
+gap:10px;
+font-size:25px;
+font-weight:900
+}
+
+.logo-icon{
+width:42px;
+height:42px;
+border-radius:14px;
+background:linear-gradient(135deg,#f8b84e,#e99000);
+display:grid;
+place-items:center;
+color:#fff;
+font-size:24px;
+box-shadow:0 7px 20px rgba(245,166,35,.35)
+}
+
+.search{
+flex:1;
+position:relative
+}
+
+.search input{
+width:100%;
+height:48px;
+border-radius:15px;
+border:1px solid rgba(255,255,255,.16);
+background:rgba(255,255,255,.12);
+color:#fff;
+outline:none;
+padding:0 48px 0 18px;
+font-size:15px
+}
+
+.search input::placeholder{color:#d7e3f5}
+
+.search-icon{
+position:absolute;
+right:17px;
+top:12px;
+font-size:21px
+}
+
+.header-actions{
+display:flex;
+gap:8px;
+align-items:center
+}
+
+.pi-connect{
+min-width:150px;
+height:48px;
+border-radius:15px;
+background:#f5a623;
+color:#fff;
+font-weight:900;
+box-shadow:0 8px 20px rgba(245,166,35,.28);
+transition:.2s
+}
+
+.pi-connect:hover{transform:translateY(-2px)}
+
+.language-select{
+height:48px;
+border-radius:15px;
+padding:0 10px;
+background:rgba(255,255,255,.12);
+color:white;
+border:1px solid rgba(255,255,255,.15);
+outline:none
+}
+
+.language-select option{
+color:#111;
+background:#fff
+}
+
+/* NAV */
+
+.nav{
+max-width:1400px;
+margin:auto;
+padding:0 22px 15px;
+display:flex;
+gap:9px;
+overflow:auto
+}
+
+.nav button{
+white-space:nowrap;
+background:rgba(255,255,255,.09);
+color:#edf5ff;
+border:1px solid rgba(255,255,255,.08);
+padding:9px 15px;
+border-radius:12px;
+font-size:14px
+}
+
+.nav button:hover,
+.nav button.active{
+background:white;
+color:var(--navy)
+}
+
+/* HERO */
+
+.hero{
+max-width:1400px;
+margin:25px auto;
+padding:0 22px
+}
+
+.hero-box{
+min-height:300px;
+border-radius:30px;
+overflow:hidden;
+background:
+radial-gradient(circle at 80% 30%,rgba(54,136,255,.35),transparent 30%),
+linear-gradient(135deg,#051a39,#0b3973);
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:45px;
+box-shadow:var(--shadow)
+}
+
+.hero-content{max-width:680px}
+
+.hero-badge{
+display:inline-flex;
+background:rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.18);
+padding:8px 14px;
+border-radius:30px;
+margin-bottom:20px;
+font-size:14px
+}
+
+.hero h1{
+font-size:42px;
+line-height:1.3;
+margin-bottom:15px
+}
+
+.hero p{
+color:#d8e6f8;
+font-size:17px;
+line-height:2
+}
+
+.hero-actions{
+display:flex;
+gap:12px;
+margin-top:25px;
+flex-wrap:wrap
+}
+
+.primary{
+background:#f5a623;
+color:#fff;
+padding:13px 23px;
+border-radius:14px;
+font-weight:900
+}
+
+.secondary{
+background:#fff;
+color:var(--navy);
+padding:13px 23px;
+border-radius:14px;
+font-weight:900
+}
+
+.hero-pi{
+width:230px;
+height:230px;
+border-radius:50%;
+background:radial-gradient(circle,#ffd47b,#f5a623 55%,#d98700);
+display:grid;
+place-items:center;
+font-size:105px;
+font-weight:900;
+box-shadow:0 0 70px rgba(245,166,35,.32);
+transform:rotate(-7deg)
+}
+
+/* MAIN */
+
+.container{
+max-width:1400px;
+margin:auto;
+padding:0 22px 70px
+}
+
+.section{margin-top:35px}
+
+.section-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:18px;
+gap:15px
+}
+
+.section-title{
+font-size:25px;
+font-weight:900;
+color:var(--navy)
+}
+
+.section-sub{
+color:var(--muted);
+margin-top:5px;
+font-size:14px
+}
+
+/* CATEGORIES */
+
+.categories{
+display:grid;
+grid-template-columns:repeat(8,1fr);
+gap:13px
+}
+
+.category{
+background:#fff;
+border:1px solid var(--border);
+border-radius:18px;
+padding:19px 10px;
+text-align:center;
+transition:.2s;
+box-shadow:0 5px 18px rgba(10,40,80,.04)
+}
+
+.category:hover{
+transform:translateY(-4px);
+box-shadow:var(--shadow)
+}
+
+.category-icon{
+font-size:31px;
+margin-bottom:8px
+}
+
+.category span{
+font-weight:700;
+font-size:14px
+}
+
+/* PRODUCTS */
+
+.products{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px
+}
+
+.card{
+background:#fff;
+border:1px solid var(--border);
+border-radius:22px;
+overflow:hidden;
+box-shadow:0 6px 20px rgba(10,40,80,.05);
+transition:.22s
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:var(--shadow)
+}
+
+.image{
+height:220px;
+position:relative;
+background:#edf3fa;
+overflow:hidden
+}
+
+.image img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block
+}
+
+.badge{
+position:absolute;
+top:13px;
+right:13px;
+background:rgba(4,24,53,.85);
+color:#fff;
+padding:7px 10px;
+border-radius:10px;
+font-size:12px;
+font-weight:800;
+backdrop-filter:blur(8px)
+}
+
+.favorite{
+position:absolute;
+top:12px;
+left:12px;
+width:38px;
+height:38px;
+border-radius:50%;
+background:#fff;
+color:#52647d;
+font-size:19px;
+box-shadow:0 5px 15px rgba(0,0,0,.12)
+}
+
+.card-body{padding:18px}
+
+.card-title{
+font-size:17px;
+font-weight:900;
+margin-bottom:8px;
+line-height:1.6
+}
+
+.seller{
+color:var(--muted);
+font-size:13px;
+margin-bottom:15px
+}
+
+.price-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px
+}
+
+.price{
+font-size:21px;
+font-weight:1000;
+color:var(--navy);
+direction:ltr;
+white-space:nowrap
+}
+
+.pi-symbol{color:#e69500}
+
+.buy{
+background:var(--navy);
+color:white;
+border-radius:11px;
+padding:9px 13px;
+font-size:13px;
+font-weight:800
+}
+
+.buy:hover{background:var(--blue)}
+
+/* FEATURES */
+
+.features{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px
+}
+
+.feature{
+background:#fff;
+border:1px solid var(--border);
+padding:25px;
+border-radius:20px
+}
+
+.feature-icon{
+font-size:32px;
+margin-bottom:10px
+}
+
+.feature h3{margin-bottom:7px}
+
+.feature p{
+color:var(--muted);
+font-size:14px;
+line-height:1.8
+}
+
+/* SELL */
+
+.sell-box{
+margin-top:40px;
+background:linear-gradient(135deg,#08234a,#0b4a9c);
+color:#fff;
+border-radius:25px;
+padding:30px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px
+}
+
+.sell-box h2{margin-bottom:8px}
+
+.sell-box p{color:#d9e8fa}
+
+.sell-button{
+background:#f5a623;
+color:#fff;
+padding:14px 25px;
+border-radius:14px;
+font-weight:900;
+white-space:nowrap
+}
+
+/* MODAL */
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,15,35,.68);
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:3000;
+backdrop-filter:blur(8px)
+}
+
+.modal.show{display:flex}
+
+.modal-box{
+width:min(560px,100%);
+max-height:90vh;
+overflow:auto;
+background:#fff;
+border-radius:25px;
+padding:25px;
+box-shadow:0 25px 70px rgba(0,0,0,.25)
+}
+
+.modal-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:20px
+}
+
+.modal-head h2{color:var(--navy)}
+
+.close{
+width:38px;
+height:38px;
+border-radius:12px;
+background:#edf3fa;
+color:#253c5c;
+font-size:21px
+}
+
+.field{margin-bottom:15px}
+
+.field label{
+display:block;
+font-weight:800;
+margin-bottom:7px;
+font-size:14px
+}
+
+.field input,
+.field textarea,
+.field select{
+width:100%;
+border:1px solid var(--border);
+border-radius:13px;
+padding:12px;
+outline:none;
+background:#fbfdff
+}
+
+.field textarea{
+min-height:110px;
+resize:vertical
+}
+
+.form-button{
+width:100%;
+padding:14px;
+background:var(--navy);
+color:#fff;
+border-radius:14px;
+font-weight:900
+}
+
+/* PI PROFILE */
+
+.pi-profile{
+display:flex;
+gap:15px;
+align-items:center;
+padding:15px;
+background:#f5f9ff;
+border-radius:16px;
+margin-bottom:20px
+}
+
+.pi-avatar{
+width:52px;
+height:52px;
+border-radius:50%;
+background:linear-gradient(135deg,#f8bd55,#e69100);
+display:grid;
+place-items:center;
+color:white;
+font-weight:900;
+font-size:22px
+}
+
+.pi-profile small{
+display:block;
+color:var(--muted);
+margin-top:4px;
+word-break:break-all
+}
+
+.connection-status{
+padding:12px;
+border-radius:12px;
+margin-bottom:15px;
+background:#fff8e8;
+color:#9b6500;
+font-size:13px;
+line-height:1.8
+}
+
+.connection-status.connected{
+background:#eafaf3;
+color:#14744e
+}
+
+/* TOAST */
+
+.toast{
+position:fixed;
+bottom:25px;
+left:25px;
+max-width:360px;
+background:#061a38;
+color:#fff;
+padding:15px 19px;
+border-radius:14px;
+box-shadow:0 15px 40px rgba(0,0,0,.25);
+transform:translateY(120px);
+opacity:0;
+transition:.3s;
+z-index:5000;
+line-height:1.7
+}
+
+.toast.show{
+transform:translateY(0);
+opacity:1
+}
+
+/* MOBILE NAV */
+
+.mobile-nav{display:none}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+.categories{grid-template-columns:repeat(4,1fr)}
+
+.products{grid-template-columns:repeat(3,1fr)}
+
+.features{grid-template-columns:repeat(2,1fr)}
+
+}
+
+@media(max-width:800px){
+
+.header-inner{flex-wrap:wrap}
+
+.logo{min-width:auto}
+
+.search{
+order:3;
+flex-basis:100%
+}
+
+.hero-box{padding:30px}
+
+.hero h1{font-size:31px}
+
+.hero-pi{display:none}
+
+.products{grid-template-columns:repeat(2,1fr)}
+
+.image{height:190px}
+
+}
+
+@media(max-width:560px){
+
+body{padding-bottom:70px}
+
+.header-inner{padding:12px 14px}
+
+.header-actions{
+width:100%;
+justify-content:space-between
+}
+
+.pi-connect{
+min-width:125px
+}
+
+.language-select{
+flex:1
+}
+
+.hero{padding:0 14px}
+
+.container{padding:0 14px 40px}
+
+.hero-box{
+min-height:330px;
+padding:25px
+}
+
+.hero h1{font-size:27px}
+
+.hero p{font-size:15px}
+
+.categories{
+grid-template-columns:repeat(4,1fr);
+gap:8px
+}
+
+.category{padding:13px 5px}
+
+.category-icon{font-size:24px}
+
+.category span{font-size:12px}
+
+.products{
+grid-template-columns:1fr 1fr;
+gap:12px
+}
+
+.image{height:145px}
+
+.card-body{padding:12px}
+
+.card-title{font-size:14px}
+
+.seller{font-size:11px}
+
+.price{font-size:16px}
+
+.buy{
+padding:7px 9px;
+font-size:11px
+}
+
+.features{grid-template-columns:1fr}
+
+.sell-box{
+flex-direction:column;
+align-items:flex-start
+}
+
+.mobile-nav{
+position:fixed;
+display:flex;
+bottom:0;
+left:0;
+right:0;
+height:65px;
+background:#fff;
+border-top:1px solid var(--border);
+z-index:2000;
+justify-content:space-around;
+box-shadow:0 -8px 25px rgba(0,0,0,.08)
+}
+
+.mobile-nav button{
+background:none;
+color:#687992;
+font-size:12px;
+font-weight:700
+}
+
+.mobile-nav button strong{
+display:block;
+font-size:21px;
+margin-bottom:2px
+}
+
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="header-inner">
 
-    <div class="logo">
-      <div class="logo-icon">N</div>
-      Nexora
-    </div>
+<div class="header-inner">
 
-    <div class="search">
-      <span class="search-icon">⌕</span>
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="جستجوی ماشین، خانه، موبایل و..."
-      >
-    </div>
+<div class="logo">
+<div class="logo-icon">N</div>
+Nexora
+</div>
 
-    <button class="pi-connect" id="connectPi">
-      🟣 اتصال به Pi
-    </button>
+<div class="search">
+<span class="search-icon">⌕</span>
+<input
+id="searchInput"
+type="search"
+placeholder="جستجوی ماشین، خانه، موبایل و..."
+>
+</div>
 
-  </div>
+<div class="header-actions">
 
-  <nav class="nav">
-    <button class="active" onclick="filterCategory('all',this)">همه</button>
-    <button onclick="filterCategory('cars',this)">🚘 ماشین</button>
-    <button onclick="filterCategory('homes',this)">🏠 خانه</button>
-    <button onclick="filterCategory('electronics',this)">📱 دیجیتال</button>
-    <button onclick="filterCategory('small',this)">📦 وسایل کوچک</button>
-    <button onclick="filterCategory('fashion',this)">👕 پوشاک</button>
-    <button onclick="filterCategory('gaming',this)">🎮 گیم</button>
-    <button onclick="filterCategory('services',this)">🛠 خدمات</button>
-  </nav>
+<select
+id="languageSelect"
+class="language-select"
+aria-label="Language"
+>
+<option value="fa">🇮🇷 فارسی</option>
+<option value="en">🇬🇧 English</option>
+<option value="zh">🇨🇳 中文</option>
+<option value="es">🇪🇸 Español</option>
+<option value="fr">🇫🇷 Français</option>
+<option value="de">🇩🇪 Deutsch</option>
+<option value="it">🇮🇹 Italiano</option>
+<option value="pt">🇵🇹 Português</option>
+<option value="ru">🇷🇺 Русский</option>
+<option value="ja">🇯🇵 日本語</option>
+<option value="ko">🇰🇷 한국어</option>
+<option value="ar">🇸🇦 العربية</option>
+<option value="hi">🇮🇳 हिन्दी</option>
+<option value="tr">🇹🇷 Türkçe</option>
+<option value="nl">🇳🇱 Nederlands</option>
+<option value="pl">🇵🇱 Polski</option>
+<option value="id">🇮🇩 Bahasa Indonesia</option>
+<option value="vi">🇻🇳 Tiếng Việt</option>
+<option value="th">🇹🇭 ไทย</option>
+<option value="uk">🇺🇦 Українська</option>
+<option value="el">🇬🇷 Ελληνικά</option>
+<option value="sv">🇸🇪 Svenska</option>
+<option value="da">🇩🇰 Dansk</option>
+<option value="no">🇳🇴 Norsk</option>
+<option value="fi">🇫🇮 Suomi</option>
+<option value="cs">🇨🇿 Čeština</option>
+<option value="ro">🇷🇴 Română</option>
+<option value="hu">🇭🇺 Magyar</option>
+<option value="he">🇮🇱 עברית</option>
+<option value="fil">🇵🇭 Filipino</option>
+</select>
+
+<button
+class="pi-connect"
+id="connectPi"
+onclick="connectPi()"
+>
+🟣 اتصال به Pi
+</button>
+
+</div>
+
+</div>
+
+<nav class="nav">
+
+<button class="active" onclick="filterCategory('all',this)">
+همه
+</button>
+
+<button onclick="filterCategory('cars',this)">
+🚘 ماشین
+</button>
+
+<button onclick="filterCategory('homes',this)">
+🏠 خانه
+</button>
+
+<button onclick="filterCategory('electronics',this)">
+📱 دیجیتال
+</button>
+
+<button onclick="filterCategory('small',this)">
+📦 وسایل کوچک
+</button>
+
+<button onclick="filterCategory('fashion',this)">
+👕 پوشاک
+</button>
+
+<button onclick="filterCategory('gaming',this)">
+🎮 گیم
+</button>
+
+<button onclick="filterCategory('services',this)">
+🛠 خدمات
+</button>
+
+</nav>
+
 </header>
 
 
 <section class="hero">
-  <div class="hero-box">
 
-    <div class="hero-content">
+<div class="hero-box">
 
-      <span class="hero-badge">
-        🟣 Nexora × Pi Network
-      </span>
+<div class="hero-content">
 
-      <h1>
-        بازار مدرن خرید و فروش با Pi
-      </h1>
+<span class="hero-badge">
+🟣 Nexora × Pi Network
+</span>
 
-      <p>
-        ماشین‌های لوکس، خانه‌ها، موبایل، وسایل دیجیتال
-        و هزاران کالا را با قیمت‌گذاری Pi در Nexora پیدا کنید.
-      </p>
+<h1>
+بازار مدرن خرید و فروش با Pi
+</h1>
 
-      <div class="hero-actions">
-        <button class="primary" onclick="connectPi()">
-          اتصال حساب Pi
-        </button>
+<p>
+ماشین‌های لوکس، خانه‌ها، موبایل، وسایل دیجیتال
+و هزاران کالا را با قیمت‌گذاری Pi در Nexora پیدا کنید.
+</p>
 
-        <button class="secondary" onclick="openSell()">
-          + ثبت آگهی
-        </button>
-      </div>
+<div class="hero-actions">
 
-    </div>
+<button class="primary" onclick="connectPi()">
+اتصال حساب Pi
+</button>
 
-    <div class="hero-pi">π</div>
+<button class="secondary" onclick="openSell()">
++ ثبت آگهی
+</button>
 
-  </div>
+</div>
+
+</div>
+
+<div class="hero-pi">π</div>
+
+</div>
+
 </section>
 
 
 <main class="container">
 
-  <!-- CATEGORIES -->
 
-  <section class="section">
+<section class="section">
 
-    <div class="section-head">
-      <div>
-        <div class="section-title">دسته‌بندی‌ها</div>
-        <div class="section-sub">
-          همه چیز در یک بازار
-        </div>
-      </div>
-    </div>
+<div class="section-head">
 
-    <div class="categories">
+<div>
 
-      <div class="category" onclick="filterCategory('cars')">
-        <div class="category-icon">🚘</div>
-        <span>ماشین</span>
-      </div>
+<div class="section-title">
+دسته‌بندی‌ها
+</div>
 
-      <div class="category" onclick="filterCategory('homes')">
-        <div class="category-icon">🏠</div>
-        <span>خانه</span>
-      </div>
+<div class="section-sub">
+همه چیز در یک بازار
+</div>
 
-      <div class="category" onclick="filterCategory('electronics')">
-        <div class="category-icon">📱</div>
-        <span>دیجیتال</span>
-      </div>
+</div>
 
-      <div class="category" onclick="filterCategory('small')">
-        <div class="category-icon">📦</div>
-        <span>وسایل کوچک</span>
-      </div>
-
-      <div class="category" onclick="filterCategory('fashion')">
-        <div class="category-icon">👕</div>
-        <span>پوشاک</span>
-      </div>
-
-      <div class="category" onclick="filterCategory('gaming')">
-        <div class="category-icon">🎮</div>
-        <span>گیم</span>
-      </div>
-
-      <div class="category" onclick="filterCategory('services')">
-        <div class="category-icon">🛠</div>
-        <span>خدمات</span>
-      </div>
-
-      <div class="category" onclick="filterCategory('all')">
-        <div class="category-icon">✨</div>
-        <span>همه</span>
-      </div>
-
-    </div>
-  </section>
+</div>
 
 
-  <!-- PRODUCTS -->
+<div class="categories">
 
-  <section class="section">
+<div class="category" onclick="filterCategory('cars')">
+<div class="category-icon">🚘</div>
+<span>ماشین</span>
+</div>
 
-    <div class="section-head">
+<div class="category" onclick="filterCategory('homes')">
+<div class="category-icon">🏠</div>
+<span>خانه</span>
+</div>
 
-      <div>
-        <div class="section-title">آگهی‌های ویژه</div>
-        <div class="section-sub">
-          قیمت‌ها همگی بر اساس Pi هستند
-        </div>
-      </div>
+<div class="category" onclick="filterCategory('electronics')">
+<div class="category-icon">📱</div>
+<span>دیجیتال</span>
+</div>
 
-      <div>
-        <strong id="listingCount">0</strong>
-        آگهی
-      </div>
+<div class="category" onclick="filterCategory('small')">
+<div class="category-icon">📦</div>
+<span>وسایل کوچک</span>
+</div>
 
-    </div>
+<div class="category" onclick="filterCategory('fashion')">
+<div class="category-icon">👕</div>
+<span>پوشاک</span>
+</div>
 
-    <div class="products" id="products"></div>
+<div class="category" onclick="filterCategory('gaming')">
+<div class="category-icon">🎮</div>
+<span>گیم</span>
+</div>
 
-  </section>
+<div class="category" onclick="filterCategory('services')">
+<div class="category-icon">🛠</div>
+<span>خدمات</span>
+</div>
 
+<div class="category" onclick="filterCategory('all')">
+<div class="category-icon">✨</div>
+<span>همه</span>
+</div>
 
-  <!-- FEATURES -->
+</div>
 
-  <section class="section">
-
-    <div class="section-title">
-      چرا Nexora؟
-    </div>
-
-    <div class="features">
-
-      <div class="feature">
-        <div class="feature-icon">🟣</div>
-        <h3>Pi Native</h3>
-        <p>
-          اتصال حساب Pioneer و آماده‌سازی برای پرداخت‌های Pi.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🔐</div>
-        <h3>امنیت</h3>
-        <p>
-          احراز هویت از طریق Pi SDK و معماری مناسب برای بک‌اند.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🚘</div>
-        <h3>بازار متنوع</h3>
-        <p>
-          از خودرو و خانه تا وسایل کوچک و دیجیتال.
-        </p>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">⚡</div>
-        <h3>سریع و ساده</h3>
-        <p>
-          طراحی واکنش‌گرا برای موبایل و Pi Browser.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
+</section>
 
 
-  <!-- SELL -->
+<section class="section">
 
-  <section class="sell-box">
+<div class="section-head">
 
-    <div>
-      <h2>کالایت را در Nexora بفروش</h2>
-      <p>
-        آگهی خودت را ثبت کن و قیمت را به Pi تعیین کن.
-      </p>
-    </div>
+<div>
 
-    <button class="sell-button" onclick="openSell()">
-      + ثبت آگهی
-    </button>
+<div class="section-title">
+آگهی‌های ویژه
+</div>
 
-  </section>
+<div class="section-sub">
+قیمت‌ها همگی بر اساس Pi هستند
+</div>
+
+</div>
+
+<div>
+<strong id="listingCount">0</strong>
+آگهی
+</div>
+
+</div>
+
+<div class="products" id="products"></div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-title">
+چرا Nexora؟
+</div>
+
+<div class="features">
+
+<div class="feature">
+<div class="feature-icon">🟣</div>
+<h3>Pi Native</h3>
+<p>
+اتصال حساب Pioneer و آماده‌سازی برای پرداخت‌های Pi.
+</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🔐</div>
+<h3>امنیت</h3>
+<p>
+احراز هویت از طریق Pi SDK و معماری مناسب برای بک‌اند.
+</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🚘</div>
+<h3>بازار متنوع</h3>
+<p>
+از خودرو و خانه تا وسایل کوچک و دیجیتال.
+</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">⚡</div>
+<h3>سریع و ساده</h3>
+<p>
+طراحی واکنش‌گرا برای موبایل و Pi Browser.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="sell-box">
+
+<div>
+<h2>کالایت را در Nexora بفروش</h2>
+<p>
+آگهی خودت را ثبت کن و قیمت را به Pi تعیین کن.
+</p>
+</div>
+
+<button class="sell-button" onclick="openSell()">
++ ثبت آگهی
+</button>
+
+</section>
 
 </main>
 
 
-<!-- MOBILE NAV -->
-
 <nav class="mobile-nav">
 
-  <button onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <strong>⌂</strong>
-    خانه
-  </button>
+<button onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<strong>⌂</strong>
+خانه
+</button>
 
-  <button onclick="filterCategory('cars')">
-    <strong>🚘</strong>
-    ماشین
-  </button>
+<button onclick="filterCategory('cars')">
+<strong>🚘</strong>
+ماشین
+</button>
 
-  <button onclick="openSell()">
-    <strong>＋</strong>
-    فروش
-  </button>
+<button onclick="openSell()">
+<strong>＋</strong>
+فروش
+</button>
 
-  <button onclick="connectPi()">
-    <strong>π</strong>
-    Pi
-  </button>
+<button onclick="connectPi()">
+<strong>π</strong>
+Pi
+</button>
 
-  <button onclick="openProfile()">
-    <strong>◎</strong>
-    حساب
-  </button>
+<button onclick="openProfile()">
+<strong>◎</strong>
+حساب
+</button>
 
 </nav>
 
 
-<!-- PI PROFILE MODAL -->
+<!-- PROFILE -->
 
 <div class="modal" id="profileModal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-head">
-      <h2>حساب Pi</h2>
-      <button class="close" onclick="closeModal('profileModal')">×</button>
-    </div>
+<div class="modal-head">
 
-    <div id="profileContent">
+<h2>حساب Pi</h2>
 
-      <div class="pi-profile">
+<button
+class="close"
+onclick="closeModal('profileModal')"
+>
+×
+</button>
 
-        <div class="pi-avatar">π</div>
+</div>
 
-        <div>
-          <strong id="piUsername">
-            هنوز متصل نشده
-          </strong>
+<div
+id="connectionStatus"
+class="connection-status"
+>
+هنوز به حساب Pi متصل نشده‌اید.
+</div>
 
-          <small id="piWallet">
-            Wallet متصل نیست
-          </small>
-        </div>
+<div class="pi-profile">
 
-      </div>
+<div class="pi-avatar">
+π
+</div>
 
-      <button
-        class="form-button"
-        onclick="connectPi()"
-      >
-        🟣 اتصال به Pi
-      </button>
+<div>
 
-    </div>
+<strong id="piUsername">
+هنوز متصل نشده
+</strong>
 
-  </div>
+<small id="piWallet">
+Wallet متصل نیست
+</small>
+
+</div>
+
+</div>
+
+<button
+class="form-button"
+onclick="connectPi()"
+>
+🟣 اتصال واقعی به حساب Pi
+</button>
+
+</div>
 
 </div>
 
 
-<!-- SELL MODAL -->
+<!-- SELL -->
 
 <div class="modal" id="sellModal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-head">
-      <h2>ثبت آگهی</h2>
-      <button class="close" onclick="closeModal('sellModal')">×</button>
-    </div>
+<div class="modal-head">
 
-    <div class="field">
-      <label>عنوان</label>
-      <input
-        id="sellTitle"
-        placeholder="مثلاً BMW سری 7"
-      >
-    </div>
+<h2>ثبت آگهی</h2>
 
-    <div class="field">
-      <label>دسته‌بندی</label>
+<button
+class="close"
+onclick="closeModal('sellModal')"
+>
+×
+</button>
 
-      <select id="sellCategory">
-        <option value="cars">ماشین</option>
-        <option value="homes">خانه</option>
-        <option value="electronics">دیجیتال</option>
-        <option value="small">وسایل کوچک</option>
-        <option value="fashion">پوشاک</option>
-        <option value="gaming">گیم</option>
-        <option value="services">خدمات</option>
-      </select>
-    </div>
+</div>
 
-    <div class="field">
+<div class="field">
 
-      <label>
-        قیمت به Pi
-      </label>
+<label>عنوان</label>
 
-      <input
-        id="sellPrice"
-        type="number"
-        min="0"
-        max="1"
-        step="0.001"
-        placeholder="مثلاً 0.500"
-      >
+<input
+id="sellTitle"
+placeholder="مثلاً BMW سری 7"
+>
 
-      <small style="color:#6d7b91">
-        حداکثر قیمت: 1 π
-      </small>
+</div>
 
-    </div>
+<div class="field">
 
-    <div class="field">
+<label>دسته‌بندی</label>
 
-      <label>شهر</label>
+<select id="sellCategory">
 
-      <input
-        id="sellCity"
-        placeholder="مثلاً تهران"
-      >
+<option value="cars">ماشین</option>
+<option value="homes">خانه</option>
+<option value="electronics">دیجیتال</option>
+<option value="small">وسایل کوچک</option>
+<option value="fashion">پوشاک</option>
+<option value="gaming">گیم</option>
+<option value="services">خدمات</option>
 
-    </div>
+</select>
 
-    <div class="field">
+</div>
 
-      <label>توضیحات</label>
+<div class="field">
 
-      <textarea
-        id="sellDescription"
-        placeholder="توضیحات کالا..."
-      ></textarea>
+<label>قیمت به Pi</label>
 
-    </div>
+<input
+id="sellPrice"
+type="number"
+min="0"
+max="1"
+step="0.001"
+placeholder="مثلاً 0.500"
+>
 
-    <button
-      class="form-button"
-      onclick="publishListing()"
-    >
-      انتشار آگهی
-    </button>
+<small style="color:#6d7b91">
+حداکثر قیمت: 1 π
+</small>
 
-  </div>
+</div>
+
+<div class="field">
+
+<label>شهر</label>
+
+<input
+id="sellCity"
+placeholder="مثلاً تهران"
+>
+
+</div>
+
+<div class="field">
+
+<label>توضیحات</label>
+
+<textarea
+id="sellDescription"
+placeholder="توضیحات کالا..."
+></textarea>
+
+</div>
+
+<button
+class="form-button"
+onclick="publishListing()"
+>
+انتشار آگهی
+</button>
+
+</div>
 
 </div>
 
 
-<!-- BUY MODAL -->
+<!-- BUY -->
 
 <div class="modal" id="buyModal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-head">
+<div class="modal-head">
 
-      <h2 id="buyTitle">
-        خرید با Pi
-      </h2>
+<h2 id="buyTitle">
+خرید با Pi
+</h2>
 
-      <button
-        class="close"
-        onclick="closeModal('buyModal')"
-      >
-        ×
-      </button>
+<button
+class="close"
+onclick="closeModal('buyModal')"
+>
+×
+</button>
 
-    </div>
+</div>
 
-    <div
-      id="buyInfo"
-      style="
-        background:#f5f9ff;
-        padding:18px;
-        border-radius:16px;
-        margin-bottom:18px;
-        line-height:2;
-      "
-    ></div>
+<div
+id="buyInfo"
+style="
+background:#f5f9ff;
+padding:18px;
+border-radius:16px;
+margin-bottom:18px;
+line-height:2;
+"
+></div>
 
-    <button
-      class="form-button"
-      id="payButton"
-      onclick="startPiPayment()"
-    >
-      🟣 پرداخت با Pi
-    </button>
+<button
+class="form-button"
+id="payButton"
+onclick="startPiPayment()"
+>
+🟣 پرداخت با Pi
+</button>
 
-    <p
-      style="
-        margin-top:15px;
-        color:#6d7b91;
-        font-size:13px;
-        line-height:1.8;
-      "
-    >
-      پرداخت واقعی Pi باید توسط بک‌اند Nexora تأیید و تکمیل شود.
-    </p>
+<p
+style="
+margin-top:15px;
+color:#6d7b91;
+font-size:13px;
+line-height:1.8;
+"
+>
+پرداخت واقعی Pi پس از اتصال حساب شروع می‌شود.
+تأیید نهایی پرداخت باید توسط سرور Nexora انجام شود.
+</p>
 
-  </div>
+</div>
 
 </div>
 
@@ -1265,973 +1324,1717 @@
 
 <script>
 
-  /* =========================================================
-     PI CONFIGURATION
-     ========================================================= */
-
-  let piUser = null;
-  let piAccessToken = null;
-  let selectedProduct = null;
-
-  /*
-    Production:
-    sandbox باید false باشد.
-
-    برای تست در محیط Sandbox می‌توانی true کنی.
-  */
-
-  const PI_SANDBOX = false;
-
-
-  /* =========================================================
-     INITIALIZE PI
-     ========================================================= */
-
-  function initializePi(){
-
-    if(!window.Pi){
-
-      console.warn("Pi SDK هنوز در دسترس نیست.");
-
-      return;
-    }
-
-    try{
-
-      window.Pi.init({
-        version:"2.0",
-        sandbox:PI_SANDBOX
-      });
-
-      console.log("Pi SDK initialized.");
-
-    }catch(error){
-
-      console.error("Pi initialization failed:",error);
-
-    }
-
-  }
-
-
-  /* =========================================================
-     PRODUCTS
-     ========================================================= */
-
-  const products = [
-
-    {
-      id:1,
-      category:"cars",
-      title:"BMW سری 7",
-      seller:"Nexora Luxury Motors",
-      price:1,
-      image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=85",
-      city:"تهران",
-      description:"خودروی لوکس BMW سری 7"
-    },
-
-    {
-      id:2,
-      category:"cars",
-      title:"Mercedes-Benz S-Class",
-      seller:"Luxury Auto",
-      price:1,
-      image:"https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1000&q=85",
-      city:"دبی",
-      description:"مرسدس بنز کلاس S لوکس"
-    },
-
-    {
-      id:3,
-      category:"cars",
-      title:"Porsche 911",
-      seller:"Nexora Cars",
-      price:1,
-      image:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85",
-      city:"استانبول",
-      description:"Porsche 911 اسپرت"
-    },
-
-    {
-      id:4,
-      category:"cars",
-      title:"Audi R8",
-      seller:"Premium Cars",
-      price:1,
-      image:"https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&w=1000&q=85",
-      city:"دبی",
-      description:"Audi R8 لوکس و اسپرت"
-    },
-
-    {
-      id:5,
-      category:"homes",
-      title:"آپارتمان لوکس مدرن",
-      seller:"Nexora Homes",
-      price:1,
-      image:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85",
-      city:"تهران",
-      description:"خانه مدرن با طراحی لوکس"
-    },
-
-    {
-      id:6,
-      category:"homes",
-      title:"ویلای لوکس",
-      seller:"Luxury Estate",
-      price:1,
-      image:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85",
-      city:"دبی",
-      description:"ویلای مدرن و لوکس"
-    },
-
-    {
-      id:7,
-      category:"electronics",
-      title:"iPhone Pro",
-      seller:"Nexora Mobile",
-      price:0.800,
-      image:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=1000&q=85",
-      city:"تهران",
-      description:"گوشی هوشمند پرچمدار"
-    },
-
-    {
-      id:8,
-      category:"electronics",
-      title:"MacBook Pro",
-      seller:"Nexora Tech",
-      price:0.950,
-      image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1000&q=85",
-      city:"هلسینکی",
-      description:"لپ‌تاپ حرفه‌ای"
-    },
-
-    {
-      id:9,
-      category:"gaming",
-      title:"PlayStation 5",
-      seller:"Game Store",
-      price:0.650,
-      image:"https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=1000&q=85",
-      city:"تهران",
-      description:"کنسول بازی"
-    },
-
-    {
-      id:10,
-      category:"small",
-      title:"هدفون بی‌سیم",
-      seller:"Nexora Shop",
-      price:0.099,
-      image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=85",
-      city:"هلسینکی",
-      description:"هدفون بی‌سیم"
-    },
-
-    {
-      id:11,
-      category:"small",
-      title:"ساعت هوشمند",
-      seller:"Smart Shop",
-      price:0.075,
-      image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=85",
-      city:"تهران",
-      description:"ساعت هوشمند"
-    },
-
-    {
-      id:12,
-      category:"small",
-      title:"اسپیکر کوچک",
-      seller:"Audio Store",
-      price:0.025,
-      image:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=1000&q=85",
-      city:"هلسینکی",
-      description:"اسپیکر قابل حمل"
-    },
-
-    {
-      id:13,
-      category:"small",
-      title:"کیف چرمی",
-      seller:"Fashion Store",
-      price:0.050,
-      image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=85",
-      city:"تهران",
-      description:"کیف چرمی"
-    },
-
-    {
-      id:14,
-      category:"fashion",
-      title:"کت اسپرت",
-      seller:"Nexora Fashion",
-      price:0.120,
-      image:"https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=1000&q=85",
-      city:"هلسینکی",
-      description:"کت اسپرت"
-    },
-
-    {
-      id:15,
-      category:"small",
-      title:"عینک آفتابی",
-      seller:"Fashion Shop",
-      price:0.035,
-      image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1000&q=85",
-      city:"دبی",
-      description:"عینک آفتابی"
-    },
-
-    {
-      id:16,
-      category:"small",
-      title:"دوچرخه شهری",
-      seller:"Nexora Bikes",
-      price:0.400,
-      image:"https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1000&q=85",
-      city:"هلسینکی",
-      description:"دوچرخه شهری"
-    }
-
-  ];
-
-
-  /* =========================================================
-     RENDER
-     ========================================================= */
-
-  let currentCategory = "all";
-
-
-  function renderProducts(){
-
-    const search =
-      document
-      .getElementById("searchInput")
-      .value
-      .trim()
-      .toLowerCase();
-
-    const filtered = products.filter(product => {
-
-      const categoryOK =
-        currentCategory === "all" ||
-        product.category === currentCategory;
-
-      const searchOK =
-        !search ||
-        product.title.toLowerCase().includes(search) ||
-        product.seller.toLowerCase().includes(search) ||
-        product.city.toLowerCase().includes(search);
-
-      return categoryOK && searchOK;
-
-    });
-
-
-    const container =
-      document.getElementById("products");
-
-    document.getElementById("listingCount").textContent =
-      filtered.length;
-
-
-    if(!filtered.length){
-
-      container.innerHTML = `
-        <div style="
-          grid-column:1/-1;
-          background:white;
-          padding:50px;
-          border-radius:20px;
-          text-align:center;
-          color:#6d7b91;
-        ">
-          <div style="font-size:45px;margin-bottom:10px">
-            🔎
-          </div>
-          آگهی‌ای پیدا نشد.
-        </div>
-      `;
-
-      return;
-    }
-
-
-    container.innerHTML =
-      filtered.map(product => `
-
-        <article class="card">
-
-          <div class="image">
-
-            <img
-              src="${product.image}"
-              alt="${product.title}"
-              loading="lazy"
-              onerror="this.style.display='none'"
-            >
-
-            <span class="badge">
-              ${categoryName(product.category)}
-            </span>
-
-            <button
-              class="favorite"
-              onclick="favoriteProduct(${product.id})"
-            >
-              ♡
-            </button>
-
-          </div>
-
-          <div class="card-body">
-
-            <div class="card-title">
-              ${product.title}
-            </div>
-
-            <div class="seller">
-              👤 ${product.seller}
-              <br>
-              📍 ${product.city}
-            </div>
-
-            <div class="price-row">
-
-              <div class="price">
-                ${formatPi(product.price)}
-                <span class="pi-symbol">π</span>
-              </div>
-
-              <button
-                class="buy"
-                onclick="openBuy(${product.id})"
-              >
-                خرید با Pi
-              </button>
-
-            </div>
-
-          </div>
-
-        </article>
-
-      `).join("");
-
-  }
-
-
-  function categoryName(category){
-
-    const names = {
-
-      cars:"🚘 ماشین",
-      homes:"🏠 خانه",
-      electronics:"📱 دیجیتال",
-      small:"📦 کوچک",
-      fashion:"👕 پوشاک",
-      gaming:"🎮 گیم",
-      services:"🛠 خدمات"
-
-    };
-
-    return names[category] || "✨ کالا";
+/* =====================================================
+   PI
+===================================================== */
 
-  }
+let piUser=null;
+let piAccessToken=null;
+let selectedProduct=null;
 
+const PI_SANDBOX=false;
 
-  function formatPi(value){
 
-    /*
-      قیمت‌های کوچک با صفرهای کامل نمایش داده می‌شوند.
-      مثال:
-      1
-      0.800
-      0.099
-      0.025
-    */
+/* =====================================================
+   PI INITIALIZATION
+===================================================== */
 
-    if(value === 1){
-      return "1.000";
-    }
+function initializePi(){
 
-    return Number(value).toFixed(3);
+if(!window.Pi){
 
-  }
+console.warn("Pi SDK unavailable");
+return;
 
+}
 
-  /* =========================================================
-     CATEGORY FILTER
-     ========================================================= */
+try{
 
-  function filterCategory(category, button){
+window.Pi.init({
+version:"2.0",
+sandbox:PI_SANDBOX
+});
 
-    currentCategory = category;
+console.log("Pi SDK initialized");
 
-    if(button){
+}catch(error){
 
-      document
-      .querySelectorAll(".nav button")
-      .forEach(btn => btn.classList.remove("active"));
+console.error(error);
 
-      button.classList.add("active");
+}
 
-    }
+}
 
-    renderProducts();
 
-    window.scrollTo({
-      top:document.querySelector(".section").offsetTop - 90,
-      behavior:"smooth"
-    });
+/* =====================================================
+   REAL PI AUTHENTICATION
+===================================================== */
 
-  }
+async function connectPi(){
 
+if(!window.Pi){
 
-  /* =========================================================
-     SEARCH
-     ========================================================= */
+showToast(
+"Pi SDK پیدا نشد. Nexora را داخل Pi Browser باز کن."
+);
 
-  document
-  .getElementById("searchInput")
-  .addEventListener("input", renderProducts);
+return;
 
+}
 
-  /* =========================================================
-     PI AUTHENTICATION / WALLET
-     ========================================================= */
+try{
 
-  async function connectPi(){
+showToast("در حال باز کردن اتصال Pi...");
 
-    if(!window.Pi){
 
-      showToast(
-        "Pi SDK پیدا نشد. لطفاً Nexora را داخل Pi Browser باز کن."
-      );
+const auth=await window.Pi.authenticate(
+[
+"username",
+"wallet_address",
+"payments"
+],
+onIncompletePaymentFound
+);
 
-      return;
 
-    }
+if(!auth || !auth.user){
 
+throw new Error("Authentication failed");
 
-    try{
+}
 
-      showToast("در حال اتصال به Pi...");
 
+piUser=auth.user;
+piAccessToken=auth.accessToken;
 
-      const auth =
-        await window.Pi.authenticate(
 
-          [
-            "username",
-            "wallet_address",
-            "payments"
-          ],
+/* USERNAME */
 
-          onIncompletePaymentFound
+document.getElementById("piUsername").textContent=
+"@"+(piUser.username || "Pioneer");
 
-        );
 
+/* WALLET */
 
-      piUser = auth.user;
-      piAccessToken = auth.accessToken;
+const wallet=
+piUser.wallet_address ||
+piUser.walletAddress ||
+"Wallet address در اختیار برنامه قرار نگرفت";
 
 
-      document.getElementById("piUsername").textContent =
-        "@" + (piUser.username || "Pioneer");
+document.getElementById("piWallet").textContent=
+wallet;
 
 
-      /*
-        در صورت اعطای wallet_address توسط Pi
-        ممکن است این فیلد در user موجود باشد.
-      */
+/* STATUS */
 
-      const wallet =
-        piUser.wallet_address ||
-        piUser.walletAddress ||
-        "Wallet address توسط Pi ارائه نشده";
+const status=
+document.getElementById("connectionStatus");
 
+status.classList.add("connected");
 
-      document.getElementById("piWallet").textContent =
-        wallet;
+status.innerHTML=
+"🟢 حساب Pi با موفقیت به Nexora متصل شد.";
 
 
-      document.getElementById("connectPi").textContent =
-        "🟢 @" + (piUser.username || "Pi");
+/* HEADER */
 
+document.getElementById("connectPi").textContent=
+"🟢 @"+(piUser.username || "Pi");
 
-      openProfile();
 
+showToast(
+"حساب Pi با موفقیت متصل شد."
+);
 
-      showToast(
-        "حساب Pi با موفقیت متصل شد."
-      );
 
+openProfile();
 
-      /*
-        نکته امنیتی:
-        accessToken را به localStorage نمی‌نویسیم.
-        برای سیستم واقعی باید به بک‌اند ارسال
-        و با /v2/me تأیید شود.
-      */
 
+/*
+IMPORTANT:
+در نسخه Production باید accessToken
+به بک‌اند Nexora ارسال شود تا با /v2/me
+تأیید شود.
+*/
 
-    }catch(error){
+}catch(error){
 
-      console.error(error);
+console.error(
+"Pi Authentication Error:",
+error
+);
 
-      showToast(
-        "اتصال Pi لغو شد یا با خطا مواجه شد."
-      );
+showToast(
+"اتصال Pi لغو شد یا انجام نشد."
+);
 
-    }
+}
 
-  }
+}
 
-
-  function onIncompletePaymentFound(payment){
-
-    console.warn(
-      "Incomplete Pi payment:",
-      payment
-    );
-
-
-    showToast(
-      "یک پرداخت ناتمام Pi پیدا شد؛ باید توسط بک‌اند تکمیل شود."
-    );
-
-  }
-
-
-  /* =========================================================
-     BUY
-     ========================================================= */
-
-  function openBuy(id){
-
-    selectedProduct =
-      products.find(product => product.id === id);
-
-    if(!selectedProduct) return;
-
-
-    document.getElementById("buyTitle").textContent =
-      selectedProduct.title;
-
-
-    document.getElementById("buyInfo").innerHTML = `
-
-      <strong>${selectedProduct.title}</strong>
-
-      <br>
-
-      قیمت:
-      <strong style="color:#e69500">
-        ${formatPi(selectedProduct.price)} π
-      </strong>
-
-      <br>
-
-      فروشنده:
-      ${selectedProduct.seller}
-
-      <br>
-
-      شهر:
-      ${selectedProduct.city}
-
-    `;
-
-
-    document
-    .getElementById("buyModal")
-    .classList.add("show");
-
-  }
-
-
-  /* =========================================================
-     PI PAYMENT
-     ========================================================= */
-
-  function startPiPayment(){
-
-    if(!selectedProduct){
-
-      showToast("کالا انتخاب نشده است.");
-
-      return;
-
-    }
-
-
-    if(!window.Pi){
-
-      showToast(
-        "برای پرداخت باید Nexora را داخل Pi Browser باز کنی."
-      );
-
-      return;
-
-    }
-
-
-    if(!piUser){
-
-      showToast(
-        "اول حساب Pi خودت را متصل کن."
-      );
-
-      connectPi();
-
-      return;
-
-    }
-
-
-    /*
-      IMPORTANT:
-      Pi.createPayment شروع پرداخت را انجام می‌دهد.
-      تأیید و complete واقعی باید روی سرور انجام شود.
-    */
-
-    try{
-
-      window.Pi.createPayment(
-
-        {
-          amount:selectedProduct.price,
-
-          memo:
-            "خرید " +
-            selectedProduct.title +
-            " در Nexora",
-
-          metadata:{
-            productId:selectedProduct.id,
-            productTitle:selectedProduct.title
-          }
-
-        },
-
-        {
-
-          onReadyForServerApproval:
-            async function(paymentId){
-
-              console.log(
-                "Payment needs server approval:",
-                paymentId
-              );
-
-
-              /*
-                اینجا باید:
-
-                POST /api/payments/approve
-
-                به بک‌اند Nexora ارسال شود.
-
-                بک‌اند با Server API Key
-                به Pi Platform API متصل می‌شود.
-              */
-
-
-              showToast(
-                "پرداخت ایجاد شد؛ منتظر تأیید سرور Nexora..."
-              );
-
-            },
-
-
-          onReadyForServerCompletion:
-            async function(paymentId,txid){
-
-              console.log(
-                "Payment completion:",
-                paymentId,
-                txid
-              );
-
-
-              /*
-                اینجا باید:
-
-                POST /api/payments/complete
-
-                اجرا شود.
-
-                فقط بعد از تأیید موفق سرور
-                سفارش را تکمیل‌شده اعلام کن.
-              */
-
-
-              showToast(
-                "تراکنش Pi دریافت شد؛ در انتظار تأیید نهایی."
-              );
-
-            },
-
-
-          onCancel:
-            function(paymentId){
-
-              console.log(
-                "Payment cancelled:",
-                paymentId
-              );
-
-              showToast(
-                "پرداخت لغو شد."
-              );
-
-            },
-
-
-          onError:
-            function(error,payment){
-
-              console.error(
-                "Pi payment error:",
-                error,
-                payment
-              );
-
-              showToast(
-                "پرداخت Pi با خطا مواجه شد."
-              );
-
-            }
-
-        }
-
-      );
-
-    }catch(error){
-
-      console.error(error);
-
-      showToast(
-        "امکان شروع پرداخت وجود ندارد."
-      );
-
-    }
-
-  }
-
-
-  /* =========================================================
-     SELL
-     ========================================================= */
-
-  function openSell(){
-
-    document
-    .getElementById("sellModal")
-    .classList.add("show");
-
-  }
-
-
-  function publishListing(){
-
-    const title =
-      document.getElementById("sellTitle").value.trim();
-
-    const category =
-      document.getElementById("sellCategory").value;
-
-    const price =
-      Number(
-        document.getElementById("sellPrice").value
-      );
-
-    const city =
-      document.getElementById("sellCity").value.trim();
-
-    const description =
-      document
-      .getElementById("sellDescription")
-      .value.trim();
-
-
-    if(!title){
-
-      showToast("عنوان آگهی را وارد کن.");
-
-      return;
-
-    }
-
-
-    if(
-      !Number.isFinite(price) ||
-      price < 0 ||
-      price > 1
-    ){
-
-      showToast(
-        "قیمت باید بین 0 تا 1 Pi باشد."
-      );
-
-      return;
-
-    }
-
-
-    /*
-      این نسخه فعلاً آگهی را در رابط کاربری می‌سازد.
-      برای ذخیره دائمی باید به Supabase وصل شود.
-    */
-
-    const newProduct = {
-
-      id:Date.now(),
-
-      category,
-
-      title,
-
-      seller:
-        piUser?.username
-        ? "@" + piUser.username
-        : "فروشنده Nexora",
-
-      price,
-
-      image:
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80",
-
-      city:
-        city || "نامشخص",
-
-      description
-
-    };
-
-
-    products.unshift(newProduct);
-
-    renderProducts();
-
-    closeModal("sellModal");
-
-
-    document.getElementById("sellTitle").value="";
-    document.getElementById("sellPrice").value="";
-    document.getElementById("sellCity").value="";
-    document.getElementById("sellDescription").value="";
-
-
-    showToast(
-      "آگهی در نسخه فعلی به فروشگاه اضافه شد."
-    );
-
-  }
-
-
-  /* =========================================================
-     PROFILE
-     ========================================================= */
-
-  function openProfile(){
-
-    document
-    .getElementById("profileModal")
-    .classList.add("show");
-
-  }
-
-
-  /* =========================================================
-     FAVORITE
-     ========================================================= */
-
-  function favoriteProduct(id){
-
-    showToast(
-      "❤️ کالا به علاقه‌مندی‌ها اضافه شد."
-    );
-
-  }
-
-
-  /* =========================================================
-     MODALS
-     ========================================================= */
-
-  function closeModal(id){
-
-    document
-    .getElementById(id)
-    .classList.remove("show");
-
-  }
-
-
-  document
-  .querySelectorAll(".modal")
-  .forEach(modal => {
-
-    modal.addEventListener("click",function(e){
-
-      if(e.target === modal){
-
-        modal.classList.remove("show");
-
-      }
-
-    });
-
-  });
-
-
-  /* =========================================================
-     TOAST
-     ========================================================= */
-
-  let toastTimer;
-
-
-  function showToast(message){
-
-    const toast =
-      document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-
-    clearTimeout(toastTimer);
-
-
-    toastTimer =
-      setTimeout(() => {
-
-        toast.classList.remove("show");
-
-      },3500);
-
-  }
-
-
-  /* =========================================================
-     START
-     ========================================================= */
-
-  window.addEventListener("load",function(){
-
-    initializePi();
-
-    renderProducts();
-
-  });
+
+function onIncompletePaymentFound(payment){
+
+console.warn(
+"Incomplete Pi payment:",
+payment
+);
+
+showToast(
+"یک پرداخت ناتمام Pi وجود دارد."
+);
+
+}
+
+
+/* =====================================================
+   PRODUCT DATABASE
+===================================================== */
+
+const products=[
+
+/* ---------- LUXURY CARS ---------- */
+
+{
+id:1,category:"cars",
+title:"BMW سری 7",
+seller:"Nexora Luxury Motors",
+price:1,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:2,category:"cars",
+title:"Mercedes-Benz S-Class",
+seller:"Luxury Auto",
+price:1,
+city:"دبی",
+image:"https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:3,category:"cars",
+title:"Porsche 911",
+seller:"Nexora Cars",
+price:1,
+city:"استانبول",
+image:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:4,category:"cars",
+title:"Audi R8",
+seller:"Premium Cars",
+price:1,
+city:"دبی",
+image:"https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:5,category:"cars",
+title:"Lamborghini Huracán",
+seller:"Nexora Supercars",
+price:1,
+city:"میلان",
+image:"https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:6,category:"cars",
+title:"Ferrari 488",
+seller:"Ferrari Gallery",
+price:1,
+city:"رم",
+image:"https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:7,category:"cars",
+title:"Bentley Continental",
+seller:"Luxury Motors",
+price:1,
+city:"لندن",
+image:"https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:8,category:"cars",
+title:"Rolls-Royce Ghost",
+seller:"Royal Cars",
+price:1,
+city:"دبی",
+image:"https://images.unsplash.com/photo-1631295868223-63265b40d9e4?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:9,category:"cars",
+title:"Range Rover",
+seller:"Premium SUV",
+price:1,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:10,category:"cars",
+title:"Tesla Model S",
+seller:"Nexora Electric",
+price:1,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:11,category:"cars",
+title:"McLaren 720S",
+seller:"Supercar House",
+price:1,
+city:"لندن",
+image:"https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:12,category:"cars",
+title:"Aston Martin DB11",
+seller:"Aston Martin Store",
+price:1,
+city:"لندن",
+image:"https://images.unsplash.com/photo-1617814076668-7f2a6d4f0f1e?auto=format&fit=crop&w=1000&q=85"
+},
+
+
+/* ---------- HOMES ---------- */
+
+{
+id:20,category:"homes",
+title:"آپارتمان لوکس مدرن",
+seller:"Nexora Homes",
+price:1,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:21,category:"homes",
+title:"ویلای لوکس",
+seller:"Luxury Estate",
+price:1,
+city:"دبی",
+image:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:22,category:"homes",
+title:"پنت‌هاوس مدرن",
+seller:"Nexora Estate",
+price:1,
+city:"استانبول",
+image:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:23,category:"homes",
+title:"خانه ویلایی ساحلی",
+seller:"Ocean Estate",
+price:1,
+city:"میامی",
+image:"https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:24,category:"homes",
+title:"خانه خانوادگی",
+seller:"Nexora Home",
+price:1,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:25,category:"homes",
+title:"خانه مدرن شیشه‌ای",
+seller:"Modern Homes",
+price:1,
+city:"بارسلونا",
+image:"https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1000&q=85"
+},
+
+
+/* ---------- PHONES ---------- */
+
+{
+id:40,category:"electronics",
+title:"iPhone Pro Max",
+seller:"Nexora Mobile",
+price:.800,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:41,category:"electronics",
+title:"Samsung Galaxy Ultra",
+seller:"Galaxy Store",
+price:.700,
+city:"دبی",
+image:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:42,category:"electronics",
+title:"Google Pixel",
+seller:"Pixel Store",
+price:.500,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:43,category:"electronics",
+title:"MacBook Pro",
+seller:"Nexora Tech",
+price:.950,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:44,category:"electronics",
+title:"iPad Pro",
+seller:"Tablet Store",
+price:.600,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=1000&q=85"
+},
+
+
+/* ---------- GAMING ---------- */
+
+{
+id:60,category:"gaming",
+title:"PlayStation 5",
+seller:"Game Store",
+price:.650,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:61,category:"gaming",
+title:"Xbox Series X",
+seller:"Gaming World",
+price:.600,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:62,category:"gaming",
+title:"Nintendo Switch",
+seller:"Nintendo Shop",
+price:.400,
+city:"توکیو",
+image:"https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?auto=format&fit=crop&w=1000&q=85"
+},
+
+
+/* ---------- SMALL ITEMS ---------- */
+
+{
+id:80,category:"small",
+title:"هدفون بی‌سیم",
+seller:"Nexora Shop",
+price:.099,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:81,category:"small",
+title:"ساعت هوشمند",
+seller:"Smart Shop",
+price:.075,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:82,category:"small",
+title:"اسپیکر کوچک",
+seller:"Audio Store",
+price:.025,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:83,category:"small",
+title:"کیف چرمی",
+seller:"Fashion Store",
+price:.050,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:84,category:"small",
+title:"عینک آفتابی",
+seller:"Fashion Shop",
+price:.035,
+city:"دبی",
+image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:85,category:"small",
+title:"فلش USB",
+seller:"Tech Mini",
+price:.009,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1624823183493-ed5832f48f18?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:86,category:"small",
+title:"کابل شارژ",
+seller:"Cable Store",
+price:.005,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:87,category:"small",
+title:"ماوس بی‌سیم",
+seller:"Computer Mini",
+price:.018,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:88,category:"small",
+title:"کیبورد کوچک",
+seller:"Keyboard Shop",
+price:.029,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:89,category:"small",
+title:"پاوربانک",
+seller:"Nexora Power",
+price:.022,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1609592424634-7e7c1e7c9c20?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:90,category:"small",
+title:"محافظ صفحه",
+seller:"Mobile Accessories",
+price:.003,
+city:"دبی",
+image:"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:91,category:"small",
+title:"قاب گوشی",
+seller:"Phone Case",
+price:.007,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1601593346740-925612772716?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:92,category:"small",
+title:"چراغ مطالعه",
+seller:"Home Mini",
+price:.015,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:93,category:"small",
+title:"لیوان هوشمند",
+seller:"Smart Home",
+price:.012,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:94,category:"small",
+title:"کیف پول",
+seller:"Leather Store",
+price:.020,
+city:"استانبول",
+image:"https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:95,category:"small",
+title:"خودکار لوکس",
+seller:"Premium Stationery",
+price:.004,
+city:"پاریس",
+image:"https://images.unsplash.com/photo-1585336261022-680e295ce3fe?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:96,category:"small",
+title:"دفتر یادداشت",
+seller:"Nexora Office",
+price:.002,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:97,category:"small",
+title:"بطری آب",
+seller:"Daily Store",
+price:.006,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:98,category:"small",
+title:"چراغ LED",
+seller:"Smart Light",
+price:.008,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:99,category:"small",
+title:"ترازو دیجیتال",
+seller:"Home Tech",
+price:.019,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1000&q=85"
+},
+
+
+/* ---------- FASHION ---------- */
+
+{
+id:110,category:"fashion",
+title:"کت اسپرت",
+seller:"Nexora Fashion",
+price:.120,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:111,category:"fashion",
+title:"کفش ورزشی",
+seller:"Sport Shop",
+price:.180,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:112,category:"fashion",
+title:"ژاکت زمستانی",
+seller:"Winter Fashion",
+price:.150,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:113,category:"fashion",
+title:"کلاه",
+seller:"Fashion Mini",
+price:.025,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=1000&q=85"
+},
+
+
+/* ---------- BIKES ---------- */
+
+{
+id:130,
+category:"small",
+title:"دوچرخه شهری",
+seller:"Nexora Bikes",
+price:.400,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:131,
+category:"small",
+title:"دوچرخه کوهستان",
+seller:"Mountain Bikes",
+price:.300,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=1000&q=85"
+},
+
+
+/* ---------- HOME ITEMS ---------- */
+
+{
+id:150,
+category:"small",
+title:"صندلی مدرن",
+seller:"Home Design",
+price:.055,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:151,
+category:"small",
+title:"میز چوبی",
+seller:"Wood House",
+price:.090,
+city:"هلسینکی",
+image:"https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=1000&q=85"
+},
+
+{
+id:152,
+category:"small",
+title:"آباژور",
+seller:"Lighting Store",
+price:.035,
+city:"تهران",
+image:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=85"
+}
+
+];
+
+
+/* =====================================================
+   LANGUAGE SYSTEM
+===================================================== */
+
+const translations={
+
+fa:{
+search:"جستجوی ماشین، خانه، موبایل و...",
+all:"همه",
+cars:"ماشین",
+homes:"خانه",
+electronics:"دیجیتال",
+small:"وسایل کوچک",
+fashion:"پوشاک",
+gaming:"گیم",
+services:"خدمات"
+},
+
+en:{
+search:"Search cars, homes, phones and more...",
+all:"All",
+cars:"Cars",
+homes:"Homes",
+electronics:"Electronics",
+small:"Small Items",
+fashion:"Fashion",
+gaming:"Gaming",
+services:"Services"
+},
+
+zh:{
+search:"搜索汽车、房屋、手机等...",
+all:"全部",
+cars:"汽车",
+homes:"房屋",
+electronics:"电子产品",
+small:"小商品",
+fashion:"服装",
+gaming:"游戏",
+services:"服务"
+},
+
+es:{
+search:"Buscar coches, casas, móviles y más...",
+all:"Todo",
+cars:"Coches",
+homes:"Casas",
+electronics:"Electrónica",
+small:"Artículos pequeños",
+fashion:"Moda",
+gaming:"Videojuegos",
+services:"Servicios"
+},
+
+fr:{
+search:"Rechercher voitures, maisons, téléphones...",
+all:"Tout",
+cars:"Voitures",
+homes:"Maisons",
+electronics:"Électronique",
+small:"Petits objets",
+fashion:"Mode",
+gaming:"Jeux",
+services:"Services"
+},
+
+de:{
+search:"Autos, Häuser, Handys und mehr suchen...",
+all:"Alle",
+cars:"Autos",
+homes:"Häuser",
+electronics:"Elektronik",
+small:"Kleine Artikel",
+fashion:"Mode",
+gaming:"Gaming",
+services:"Dienstleistungen"
+},
+
+it:{
+search:"Cerca auto, case, telefoni e altro...",
+all:"Tutto",
+cars:"Auto",
+homes:"Case",
+electronics:"Elettronica",
+small:"Piccoli articoli",
+fashion:"Moda",
+gaming:"Gaming",
+services:"Servizi"
+},
+
+pt:{
+search:"Pesquisar carros, casas, celulares e mais...",
+all:"Todos",
+cars:"Carros",
+homes:"Casas",
+electronics:"Eletrônicos",
+small:"Itens pequenos",
+fashion:"Moda",
+gaming:"Jogos",
+services:"Serviços"
+},
+
+ru:{
+search:"Поиск автомобилей, домов, телефонов...",
+all:"Все",
+cars:"Автомобили",
+homes:"Дома",
+electronics:"Электроника",
+small:"Мелкие товары",
+fashion:"Одежда",
+gaming:"Игры",
+services:"Услуги"
+},
+
+ja:{
+search:"車、家、スマートフォンなどを検索...",
+all:"すべて",
+cars:"車",
+homes:"住宅",
+electronics:"電子機器",
+small:"小物",
+fashion:"ファッション",
+gaming:"ゲーム",
+services:"サービス"
+},
+
+ko:{
+search:"자동차, 집, 휴대폰 등을 검색...",
+all:"전체",
+cars:"자동차",
+homes:"주택",
+electronics:"전자제품",
+small:"소형 상품",
+fashion:"패션",
+gaming:"게임",
+services:"서비스"
+},
+
+ar:{
+search:"ابحث عن سيارات ومنازل وهواتف...",
+all:"الكل",
+cars:"سيارات",
+homes:"منازل",
+electronics:"إلكترونيات",
+small:"أغراض صغيرة",
+fashion:"أزياء",
+gaming:"ألعاب",
+services:"خدمات"
+},
+
+hi:{
+search:"कार, घर, मोबाइल और अधिक खोजें...",
+all:"सभी",
+cars:"कारें",
+homes:"घर",
+electronics:"इलेक्ट्रॉनिक्स",
+small:"छोटी वस्तुएं",
+fashion:"फैशन",
+gaming:"गेमिंग",
+services:"सेवाएं"
+},
+
+tr:{
+search:"Araba, ev, telefon ve daha fazlasını ara...",
+all:"Tümü",
+cars:"Arabalar",
+homes:"Evler",
+electronics:"Elektronik",
+small:"Küçük Ürünler",
+fashion:"Moda",
+gaming:"Oyun",
+services:"Hizmetler"
+},
+
+nl:{
+search:"Zoek auto's, huizen, telefoons en meer...",
+all:"Alles",
+cars:"Auto's",
+homes:"Huizen",
+electronics:"Elektronica",
+small:"Kleine artikelen",
+fashion:"Mode",
+gaming:"Gaming",
+services:"Diensten"
+},
+
+pl:{
+search:"Szukaj samochodów, domów, telefonów...",
+all:"Wszystko",
+cars:"Samochody",
+homes:"Domy",
+electronics:"Elektronika",
+small:"Małe przedmioty",
+fashion:"Moda",
+gaming:"Gry",
+services:"Usługi"
+},
+
+id:{
+search:"Cari mobil, rumah, ponsel, dan lainnya...",
+all:"Semua",
+cars:"Mobil",
+homes:"Rumah",
+electronics:"Elektronik",
+small:"Barang kecil",
+fashion:"Mode",
+gaming:"Game",
+services:"Layanan"
+},
+
+vi:{
+search:"Tìm ô tô, nhà, điện thoại và hơn nữa...",
+all:"Tất cả",
+cars:"Ô tô",
+homes:"Nhà",
+electronics:"Điện tử",
+small:"Đồ nhỏ",
+fashion:"Thời trang",
+gaming:"Trò chơi",
+services:"Dịch vụ"
+},
+
+th:{
+search:"ค้นหารถ บ้าน โทรศัพท์ และอื่นๆ...",
+all:"ทั้งหมด",
+cars:"รถยนต์",
+homes:"บ้าน",
+electronics:"อิเล็กทรอนิกส์",
+small:"ของชิ้นเล็ก",
+fashion:"แฟชั่น",
+gaming:"เกม",
+services:"บริการ"
+},
+
+uk:{
+search:"Пошук автомобілів, будинків, телефонів...",
+all:"Усі",
+cars:"Автомобілі",
+homes:"Будинки",
+electronics:"Електроніка",
+small:"Малі товари",
+fashion:"Мода",
+gaming:"Ігри",
+services:"Послуги"
+},
+
+el:{
+search:"Αναζήτηση αυτοκινήτων, σπιτιών, κινητών...",
+all:"Όλα",
+cars:"Αυτοκίνητα",
+homes:"Σπίτια",
+electronics:"Ηλεκτρονικά",
+small:"Μικρά αντικείμενα",
+fashion:"Μόδα",
+gaming:"Παιχνίδια",
+services:"Υπηρεσίες"
+},
+
+sv:{
+search:"Sök bilar, bostäder, telefoner och mer...",
+all:"Alla",
+cars:"Bilar",
+homes:"Bostäder",
+electronics:"Elektronik",
+small:"Små saker",
+fashion:"Mode",
+gaming:"Spel",
+services:"Tjänster"
+},
+
+da:{
+search:"Søg biler, boliger, telefoner og mere...",
+all:"Alle",
+cars:"Biler",
+homes:"Boliger",
+electronics:"Elektronik",
+small:"Små varer",
+fashion:"Mode",
+gaming:"Spil",
+services:"Tjenester"
+},
+
+no:{
+search:"Søk etter biler, boliger, telefoner og mer...",
+all:"Alle",
+cars:"Biler",
+homes:"Boliger",
+electronics:"Elektronikk",
+small:"Små varer",
+fashion:"Mote",
+gaming:"Spill",
+services:"Tjenester"
+},
+
+fi:{
+search:"Hae autoja, koteja, puhelimia ja muuta...",
+all:"Kaikki",
+cars:"Autot",
+homes:"Kodit",
+electronics:"Elektroniikka",
+small:"Pienet tuotteet",
+fashion:"Muoti",
+gaming:"Pelit",
+services:"Palvelut"
+},
+
+cs:{
+search:"Hledat auta, domy, telefony a další...",
+all:"Vše",
+cars:"Auta",
+homes:"Domy",
+electronics:"Elektronika",
+small:"Malé zboží",
+fashion:"Móda",
+gaming:"Hry",
+services:"Služby"
+},
+
+ro:{
+search:"Caută mașini, case, telefoane și multe altele...",
+all:"Toate",
+cars:"Mașini",
+homes:"Case",
+electronics:"Electronice",
+small:"Obiecte mici",
+fashion:"Modă",
+gaming:"Jocuri",
+services:"Servicii"
+},
+
+hu:{
+search:"Autók, otthonok, telefonok és egyebek keresése...",
+all:"Összes",
+cars:"Autók",
+homes:"Otthonok",
+electronics:"Elektronika",
+small:"Kis termékek",
+fashion:"Divat",
+gaming:"Játékok",
+services:"Szolgáltatások"
+},
+
+he:{
+search:"חיפוש מכוניות, בתים, טלפונים ועוד...",
+all:"הכל",
+cars:"מכוניות",
+homes:"בתים",
+electronics:"אלקטרוניקה",
+small:"פריטים קטנים",
+fashion:"אופנה",
+gaming:"משחקים",
+services:"שירותים"
+},
+
+fil:{
+search:"Maghanap ng kotse, bahay, cellphone at iba pa...",
+all:"Lahat",
+cars:"Mga Kotse",
+homes:"Mga Bahay",
+electronics:"Electronics",
+small:"Maliliit na Bagay",
+fashion:"Fashion",
+gaming:"Gaming",
+services:"Mga Serbisyo"
+}
+
+};
+
+
+/* =====================================================
+   LANGUAGE CHANGE
+===================================================== */
+
+function changeLanguage(lang){
+
+const t=translations[lang]||translations.fa;
+
+document.getElementById("searchInput").placeholder=t.search;
+
+const navButtons=document.querySelectorAll(".nav button");
+
+const keys=[
+"all",
+"cars",
+"homes",
+"electronics",
+"small",
+"fashion",
+"gaming",
+"services"
+];
+
+navButtons.forEach((button,index)=>{
+
+if(t[keys[index]]){
+button.textContent=t[keys[index]];
+}
+
+});
+
+
+document.documentElement.lang=lang;
+
+if(
+["ar","he","fa"].includes(lang)
+){
+
+document.documentElement.dir="rtl";
+
+}else{
+
+document.documentElement.dir="ltr";
+
+}
+
+}
+
+
+document
+.getElementById("languageSelect")
+.addEventListener(
+"change",
+function(){
+
+changeLanguage(this.value);
+
+}
+);
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+let currentCategory="all";
+
+
+function renderProducts(){
+
+const search=
+document
+.getElementById("searchInput")
+.value
+.trim()
+.toLowerCase();
+
+
+const filtered=products.filter(product=>{
+
+const categoryOK=
+currentCategory==="all"||
+product.category===currentCategory;
+
+const searchOK=
+!search||
+product.title.toLowerCase().includes(search)||
+product.seller.toLowerCase().includes(search)||
+product.city.toLowerCase().includes(search);
+
+return categoryOK&&searchOK;
+
+});
+
+
+const container=
+document.getElementById("products");
+
+document.getElementById("listingCount").textContent=
+filtered.length;
+
+
+if(!filtered.length){
+
+container.innerHTML=`
+
+<div style="
+grid-column:1/-1;
+background:white;
+padding:50px;
+border-radius:20px;
+text-align:center;
+color:#6d7b91;
+">
+
+<div style="font-size:45px;margin-bottom:10px">
+🔎
+</div>
+
+آگهی‌ای پیدا نشد.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+container.innerHTML=
+filtered.map(product=>`
+
+<article class="card">
+
+<div class="image">
+
+<img
+src="${product.image}"
+alt="${product.title}"
+loading="lazy"
+onerror="this.style.display='none'"
+>
+
+<span class="badge">
+${categoryName(product.category)}
+</span>
+
+<button
+class="favorite"
+onclick="favoriteProduct(${product.id})"
+>
+♡
+</button>
+
+</div>
+
+<div class="card-body">
+
+<div class="card-title">
+${product.title}
+</div>
+
+<div class="seller">
+👤 ${product.seller}
+<br>
+📍 ${product.city}
+</div>
+
+<div class="price-row">
+
+<div class="price">
+
+${formatPi(product.price)}
+
+<span class="pi-symbol">π</span>
+
+</div>
+
+<button
+class="buy"
+onclick="openBuy(${product.id})"
+>
+خرید با Pi
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+`).join("");
+
+}
+
+
+function categoryName(category){
+
+const names={
+cars:"🚘 ماشین",
+homes:"🏠 خانه",
+electronics:"📱 دیجیتال",
+small:"📦 کوچک",
+fashion:"👕 پوشاک",
+gaming:"🎮 گیم",
+services:"🛠 خدمات"
+};
+
+return names[category]||"✨ کالا";
+
+}
+
+
+function formatPi(value){
+
+if(value===1){
+return "1.000";
+}
+
+return Number(value).toFixed(3);
+
+}
+
+
+function filterCategory(category,button){
+
+currentCategory=category;
+
+if(button){
+
+document
+.querySelectorAll(".nav button")
+.forEach(btn=>btn.classList.remove("active"));
+
+button.classList.add("active");
+
+}
+
+renderProducts();
+
+}
+
+
+document
+.getElementById("searchInput")
+.addEventListener(
+"input",
+renderProducts
+);
+
+
+/* =====================================================
+   BUY
+===================================================== */
+
+function openBuy(id){
+
+selectedProduct=
+products.find(
+product=>product.id===id
+);
+
+if(!selectedProduct)return;
+
+
+document.getElementById("buyTitle").textContent=
+selectedProduct.title;
+
+
+document.getElementById("buyInfo").innerHTML=`
+
+<strong>
+${selectedProduct.title}
+</strong>
+
+<br>
+
+قیمت:
+
+<strong style="color:#e69500">
+
+${formatPi(selectedProduct.price)} π
+
+</strong>
+
+<br>
+
+فروشنده:
+${selectedProduct.seller}
+
+<br>
+
+شهر:
+${selectedProduct.city}
+
+`;
+
+
+document
+.getElementById("buyModal")
+.classList.add("show");
+
+}
+
+
+/* =====================================================
+   PI PAYMENT
+===================================================== */
+
+function startPiPayment(){
+
+if(!selectedProduct){
+
+showToast("کالا انتخاب نشده است.");
+
+return;
+
+}
+
+
+if(!window.Pi){
+
+showToast(
+"برای پرداخت باید داخل Pi Browser باشی."
+);
+
+return;
+
+}
+
+
+if(!piUser){
+
+showToast(
+"ابتدا حساب Pi را متصل کن."
+);
+
+connectPi();
+
+return;
+
+}
+
+
+try{
+
+window.Pi.createPayment(
+
+{
+
+amount:selectedProduct.price,
+
+memo:
+"خرید "+
+selectedProduct.title+
+" در Nexora",
+
+metadata:{
+productId:selectedProduct.id,
+productTitle:selectedProduct.title
+}
+
+},
+
+{
+
+onReadyForServerApproval:
+async function(paymentId){
+
+console.log(
+"Payment approval required:",
+paymentId
+);
+
+showToast(
+"پرداخت ایجاد شد؛ در انتظار تأیید Nexora."
+);
+
+},
+
+onReadyForServerCompletion:
+async function(paymentId,txid){
+
+console.log(
+"Payment completion required:",
+paymentId,
+txid
+);
+
+showToast(
+"تراکنش دریافت شد؛ منتظر تأیید نهایی."
+);
+
+},
+
+onCancel:
+function(paymentId){
+
+console.log(
+"Payment cancelled:",
+paymentId
+);
+
+showToast(
+"پرداخت لغو شد."
+);
+
+},
+
+onError:
+function(error,payment){
+
+console.error(
+error,
+payment
+);
+
+showToast(
+"خطا در پرداخت Pi."
+);
+
+}
+
+}
+
+);
+
+}catch(error){
+
+console.error(error);
+
+showToast(
+"امکان شروع پرداخت وجود ندارد."
+);
+
+}
+
+}
+
+
+/* =====================================================
+   SELL
+===================================================== */
+
+function openSell(){
+
+document
+.getElementById("sellModal")
+.classList.add("show");
+
+}
+
+
+function publishListing(){
+
+const title=
+document.getElementById("sellTitle").value.trim();
+
+const category=
+document.getElementById("sellCategory").value;
+
+const price=
+Number(
+document.getElementById("sellPrice").value
+);
+
+const city=
+document.getElementById("sellCity").value.trim();
+
+const description=
+document.getElementById("sellDescription").value.trim();
+
+
+if(!title){
+
+showToast("عنوان آگهی را وارد کن.");
+
+return;
+
+}
+
+
+if(
+!Number.isFinite(price)||
+price<0||
+price>1
+){
+
+showToast(
+"قیمت باید بین 0 تا 1 Pi باشد."
+);
+
+return;
+
+}
+
+
+products.unshift({
+
+id:Date.now(),
+
+category,
+
+title,
+
+seller:
+piUser?.username
+?
+"@"+piUser.username
+:
+"فروشنده Nexora",
+
+price,
+
+city:
+city||"نامشخص",
+
+image:
+"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80",
+
+description
+
+});
+
+
+renderProducts();
+
+closeModal("sellModal");
+
+document.getElementById("sellTitle").value="";
+document.getElementById("sellPrice").value="";
+document.getElementById("sellCity").value="";
+document.getElementById("sellDescription").value="";
+
+
+showToast(
+"آگهی به فروشگاه اضافه شد."
+);
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function openProfile(){
+
+document
+.getElementById("profileModal")
+.classList.add("show");
+
+}
+
+
+/* =====================================================
+   FAVORITE
+===================================================== */
+
+function favoriteProduct(id){
+
+showToast(
+"❤️ کالا به علاقه‌مندی‌ها اضافه شد."
+);
+
+}
+
+
+/* =====================================================
+   MODALS
+===================================================== */
+
+function closeModal(id){
+
+document
+.getElementById(id)
+.classList.remove("show");
+
+}
+
+
+document
+.querySelectorAll(".modal")
+.forEach(modal=>{
+
+modal.addEventListener(
+"click",
+function(e){
+
+if(e.target===modal){
+
+modal.classList.remove("show");
+
+}
+
+}
+);
+
+});
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+
+function showToast(message){
+
+const toast=
+document.getElementById("toast");
+
+toast.textContent=message;
+
+toast.classList.add("show");
+
+clearTimeout(toastTimer);
+
+toastTimer=setTimeout(
+()=>{
+toast.classList.remove("show");
+},
+3500
+);
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+window.addEventListener(
+"load",
+function(){
+
+initializePi();
+
+renderProducts();
+
+changeLanguage("fa");
+
+}
+);
 
 </script>
 
