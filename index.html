@@ -5,55 +5,123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nexora</title>
+
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+
   <style>
     body {
       margin: 0;
+      padding: 50px 20px;
       font-family: Arial, sans-serif;
-      background: #10172a;
-      color: white;
+      background: #eaf4ff;
+      color: #203454;
       text-align: center;
-      padding: 70px 20px;
     }
     .card {
-      max-width: 600px;
-      margin: auto;
-      padding: 35px 20px;
-      background: #1d2942;
-      border-radius: 20px;
+      max-width: 480px;
+      margin: 30px auto;
+      padding: 32px 20px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 10px 35px #9bbde533;
     }
-    h1 { color: #a99cff; font-size: 42px; }
-    p { line-height: 1.8; color: #e0e5f5; }
+    h1 {
+      color: #547fe8;
+      font-size: 42px;
+    }
+    p { line-height: 1.8; }
     button {
-      padding: 12px 20px;
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 14px;
       border: 0;
-      border-radius: 10px;
-      background: #8b7cff;
+      border-radius: 12px;
+      background: #547fe8;
       color: white;
       font-size: 16px;
       cursor: pointer;
     }
+    #status { overflow-wrap: anywhere; }
   </style>
 </head>
 <body>
   <main class="card">
     <h1>Nexora</h1>
     <p id="description">A new digital experience.</p>
-    <button id="languageButton" onclick="toggleLanguage()">فارسی</button>
+
+    <button id="loginButton" onclick="loginWithPi()">
+      Sign in with Pi
+    </button>
+
+    <button id="languageButton" onclick="toggleLanguage()">
+      فارسی
+    </button>
+
+    <p id="status" role="status">
+      Open Nexora in Pi Browser to test Pi sign-in.
+    </p>
   </main>
 
   <script>
     let isPersian = false;
+    let piReady = false;
+
+    try {
+      if (window.Pi) {
+        Pi.init({ version: "2.0", sandbox: true });
+        piReady = true;
+      }
+    } catch (error) {
+      console.error("Pi SDK initialization failed:", error);
+    }
+
+    async function loginWithPi() {
+      const status = document.getElementById("status");
+
+      if (!piReady) {
+        status.textContent =
+          "Please open Nexora in Pi Browser.";
+        return;
+      }
+
+      status.textContent = "Waiting for Pi sign-in...";
+
+      try {
+        const auth = await Pi.authenticate(
+          ["username"],
+          function (payment) {
+            console.log("Incomplete payment:", payment);
+          }
+        );
+
+        status.textContent =
+          "Signed in as: " + auth.user.username;
+      } catch (error) {
+        console.error(error);
+        status.textContent =
+          "Sign-in failed. Please try again in Pi Browser.";
+      }
+    }
 
     function toggleLanguage() {
       isPersian = !isPersian;
-      document.documentElement.lang = isPersian ? "fa" : "en";
-      document.documentElement.dir = isPersian ? "rtl" : "ltr";
+
+      document.documentElement.lang =
+        isPersian ? "fa" : "en";
+      document.documentElement.dir =
+        isPersian ? "rtl" : "ltr";
+
       document.getElementById("description").textContent =
         isPersian
           ? "به تجربه دیجیتال جدید Nexora خوش آمدید."
           : "A new digital experience.";
+
       document.getElementById("languageButton").textContent =
         isPersian ? "English" : "فارسی";
+
+      document.getElementById("loginButton").textContent =
+        isPersian ? "ورود با Pi" : "Sign in with Pi";
     }
   </script>
 </body>
