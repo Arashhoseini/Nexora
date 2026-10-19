@@ -3,69 +3,392 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexora</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eaf5ff">
+  <meta name="description" content="Nexora — a refined digital experience.">
+  <title>Nexora — A New Digital Experience</title>
 
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 
   <style>
+    :root {
+      --ice: #edf7ff;
+      --blue: #477fe9;
+      --deep: #203c66;
+      --muted: #748ba9;
+      --glass: rgba(255,255,255,.72);
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      padding: 50px 20px;
-      font-family: Arial, sans-serif;
-      background: #eaf4ff;
-      color: #203454;
+      min-height: 100vh;
+      min-height: 100svh;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--deep);
+      background:
+        radial-gradient(ellipse at 12% 12%, #fff 0, transparent 38%),
+        radial-gradient(ellipse at 88% 80%, #b8d9ff 0, transparent 40%),
+        linear-gradient(145deg, #f4faff, #e3f1ff 52%, #d7eaff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 18px 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(119,177,255,.28);
+      filter: blur(65px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body::before { top: -100px; right: -100px; }
+    body::after { bottom: -110px; left: -100px; }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 430px;
+      animation: appear .7s ease both;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .brand {
+      text-align: center;
+      margin: 0 0 28px;
+    }
+
+    .emblem {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 17px;
+      border-radius: 26px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #fff, #d7eaff);
+      border: 1px solid rgba(255,255,255,.95);
+      box-shadow: 0 12px 32px #6097d329,
+                  inset 0 1px 1px #fff;
+      position: relative;
+    }
+
+    .emblem span {
+      font-size: 43px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -4px;
+      padding-right: 4px;
+      background: linear-gradient(140deg, #82baff, #3d69ce);
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .brand-name {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 750;
+      letter-spacing: 5px;
+      color: #244b7d;
+    }
+
+    .brand-caption {
+      margin: 10px 0 0;
+      color: #7189a8;
+      font-size: 12px;
+      letter-spacing: 2.3px;
+      text-transform: uppercase;
+    }
+
+    .panel {
+      padding: 34px 26px 24px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.92);
+      background: var(--glass);
+      box-shadow: 0 24px 70px rgba(65,112,170,.13),
+                  inset 0 1px 0 rgba(255,255,255,.8);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       text-align: center;
     }
-    .card {
-      max-width: 480px;
-      margin: 30px auto;
-      padding: 32px 20px;
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 10px 35px #9bbde533;
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid #dcecff;
+      border-radius: 30px;
+      background: #f7fbff;
+      color: #6386b5;
+      font-size: 11px;
+      padding: 7px 12px;
+      margin-bottom: 19px;
+      letter-spacing: .5px;
     }
-    h1 {
-      color: #547fe8;
-      font-size: 42px;
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #6e9bea;
+      box-shadow: 0 0 9px #6e9bea;
     }
-    p { line-height: 1.8; }
-    button {
-      display: block;
+
+    h2 {
+      margin: 0;
+      font-size: clamp(24px, 6vw, 29px);
+      letter-spacing: -.7px;
+      color: #24436b;
+    }
+
+    .description {
+      max-width: 300px;
+      margin: 13px auto 27px;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .login {
       width: 100%;
-      margin: 12px 0;
-      padding: 14px;
-      border: 0;
-      border-radius: 12px;
-      background: #547fe8;
+      min-height: 57px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 11px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 16px;
       color: white;
-      font-size: 16px;
+      background: linear-gradient(115deg, #658fea, #526ed2 55%, #6256c9);
+      box-shadow: 0 11px 25px rgba(83,112,211,.27),
+                  inset 0 1px 0 rgba(255,255,255,.25);
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
+      transition: transform .2s, box-shadow .2s, opacity .2s;
     }
-    #status { overflow-wrap: anywhere; }
+
+    .login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(83,112,211,.33);
+    }
+
+    .login:active { transform: scale(.99); }
+    .login:disabled { opacity: .65; cursor: wait; }
+
+    .pi-symbol {
+      display: grid;
+      place-items: center;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,.9);
+      font-family: Georgia, serif;
+      font-size: 17px;
+    }
+
+    .status {
+      min-height: 20px;
+      margin: 15px 0 0;
+      color: #7087a4;
+      font-size: 12px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    .separator {
+      height: 1px;
+      margin: 24px 0 19px;
+      background: linear-gradient(90deg, transparent, #d8e7f8, transparent);
+    }
+
+    .language-label {
+      margin: 0 0 12px;
+      color: #92a4ba;
+      font-size: 10px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .languages {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      direction: ltr;
+    }
+
+    .lang {
+      min-width: 104px;
+      border: 1px solid #dbe8f7;
+      border-radius: 11px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,.62);
+      color: #7187a4;
+      font-size: 12px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .lang.active {
+      background: #e6f1ff;
+      color: #315fa8;
+      border-color: #a8c8f4;
+      box-shadow: inset 0 0 0 1px #d4e6ff;
+      font-weight: 700;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 22px;
+      color: #829ab6;
+      font-size: 11px;
+      letter-spacing: .3px;
+    }
+
+    button:focus-visible {
+      outline: 3px solid #8bb9ff;
+      outline-offset: 3px;
+    }
+
+    [hidden] { display: none !important; }
+
+    @media (max-width: 360px) {
+      .panel { padding: 29px 19px 22px; }
+      .brand-name { font-size: 29px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <main class="card">
-    <h1>Nexora</h1>
-    <p id="description">A new digital experience.</p>
+  <main class="shell">
+    <header class="brand">
+      <div class="emblem" aria-hidden="true"><span>N</span></div>
+      <h1 class="brand-name">NEXORA</h1>
+      <p class="brand-caption" id="tagline">A refined digital experience</p>
+    </header>
 
-    <button id="loginButton" onclick="loginWithPi()">
-      Sign in with Pi
-    </button>
+    <section class="panel" aria-labelledby="welcomeTitle">
+      <div class="eyebrow">
+        <span class="dot"></span>
+        <span id="eyebrowText">YOUR DIGITAL SPACE</span>
+      </div>
 
-    <button id="languageButton" onclick="toggleLanguage()">
-      فارسی
-    </button>
+      <h2 id="welcomeTitle">Welcome to Nexora</h2>
 
-    <p id="status" role="status">
-      Open Nexora in Pi Browser to test Pi sign-in.
-    </p>
+      <p class="description" id="description">
+        A fresh space for your digital journey.
+        Simple, elegant and designed around you.
+      </p>
+
+      <button class="login" id="loginButton" type="button"
+              onclick="loginWithPi()">
+        <span class="pi-symbol" aria-hidden="true">π</span>
+        <span id="loginText">Continue with Pi</span>
+      </button>
+
+      <p class="status" id="status" role="status" aria-live="polite">
+        Open Nexora in Pi Browser to sign in.
+      </p>
+
+      <div class="separator"></div>
+
+      <p class="language-label" id="languageLabel">CHOOSE LANGUAGE</p>
+
+      <div class="languages" aria-label="Choose language">
+        <button type="button" class="lang active"
+                id="englishButton" onclick="setLanguage('en')"
+                aria-pressed="true">English</button>
+        <button type="button" class="lang"
+                id="persianButton" onclick="setLanguage('fa')"
+                aria-pressed="false">فارسی</button>
+      </div>
+    </section>
+
+    <footer class="footer" id="footer">
+      © Nexora · A new digital experience
+    </footer>
   </main>
 
   <script>
-    let isPersian = false;
+    let language = "en";
     let piReady = false;
+
+    const copy = {
+      en: {
+        tagline: "A refined digital experience",
+        eyebrow: "YOUR DIGITAL SPACE",
+        title: "Welcome to Nexora",
+        description: "A fresh space for your digital journey. Simple, elegant and designed around you.",
+        login: "Continue with Pi",
+        status: "Open Nexora in Pi Browser to sign in.",
+        loading: "Connecting to Pi...",
+        unavailable: "Pi SDK is unavailable. Open this app in Pi Browser.",
+        failed: "Sign-in could not be completed. Please try again.",
+        greeting: "Welcome, ",
+        language: "CHOOSE LANGUAGE",
+        footer: "© Nexora · A new digital experience"
+      },
+      fa: {
+        tagline: "تجربه‌ای دیجیتال، متفاوت و شیک",
+        eyebrow: "فضای دیجیتال شما",
+        title: "به نکساورا خوش آمدید",
+        description: "فضایی تازه برای مسیر دیجیتال شما؛ ساده، زیبا و متناسب با نیازهای شما.",
+        login: "ادامه با حساب Pi",
+        status: "برای ورود، Nexora را در Pi Browser باز کنید.",
+        loading: "در حال اتصال به Pi...",
+        unavailable: "امکان اتصال به Pi نیست؛ اپ را در Pi Browser باز کنید.",
+        failed: "ورود انجام نشد. لطفاً دوباره تلاش کنید.",
+        greeting: "خوش آمدید، ",
+        language: "انتخاب زبان",
+        footer: "© Nexora · تجربه‌ای تازه در دنیای دیجیتال"
+      }
+    };
+
+    function setLanguage(value) {
+      language = value;
+      const t = copy[value];
+
+      document.documentElement.lang = value;
+      document.documentElement.dir = value === "fa" ? "rtl" : "ltr";
+      document.getElementById("tagline").textContent = t.tagline;
+      document.getElementById("eyebrowText").textContent = t.eyebrow;
+      document.getElementById("welcomeTitle").textContent = t.title;
+      document.getElementById("description").textContent = t.description;
+      document.getElementById("loginText").textContent = t.login;
+      document.getElementById("languageLabel").textContent = t.language;
+      document.getElementById("footer").textContent = t.footer;
+
+      document.getElementById("englishButton").classList.toggle("active", value === "en");
+      document.getElementById("persianButton").classList.toggle("active", value === "fa");
+      document.getElementById("englishButton").setAttribute("aria-pressed", String(value === "en"));
+      document.getElementById("persianButton").setAttribute("aria-pressed", String(value === "fa"));
+
+      document.getElementById("status").textContent = t.status;
+    }
 
     try {
       if (window.Pi) {
@@ -77,51 +400,33 @@
     }
 
     async function loginWithPi() {
+      const button = document.getElementById("loginButton");
       const status = document.getElementById("status");
+      const t = copy[language];
 
-      if (!piReady) {
-        status.textContent =
-          "Please open Nexora in Pi Browser.";
+      if (!window.Pi || !piReady) {
+        status.textContent = t.unavailable;
         return;
       }
 
-      status.textContent = "Waiting for Pi sign-in...";
+      button.disabled = true;
+      status.textContent = t.loading;
 
       try {
         const auth = await Pi.authenticate(
           ["username"],
-          function (payment) {
-            console.log("Incomplete payment:", payment);
+          function (incompletePayment) {
+            console.log("Incomplete Pi payment:", incompletePayment);
           }
         );
 
-        status.textContent =
-          "Signed in as: " + auth.user.username;
+        status.textContent = t.greeting + auth.user.username;
       } catch (error) {
-        console.error(error);
-        status.textContent =
-          "Sign-in failed. Please try again in Pi Browser.";
+        console.error("Pi authentication error:", error);
+        status.textContent = t.failed;
+      } finally {
+        button.disabled = false;
       }
-    }
-
-    function toggleLanguage() {
-      isPersian = !isPersian;
-
-      document.documentElement.lang =
-        isPersian ? "fa" : "en";
-      document.documentElement.dir =
-        isPersian ? "rtl" : "ltr";
-
-      document.getElementById("description").textContent =
-        isPersian
-          ? "به تجربه دیجیتال جدید Nexora خوش آمدید."
-          : "A new digital experience.";
-
-      document.getElementById("languageButton").textContent =
-        isPersian ? "English" : "فارسی";
-
-      document.getElementById("loginButton").textContent =
-        isPersian ? "ورود با Pi" : "Sign in with Pi";
     }
   </script>
 </body>
