@@ -4,2010 +4,3714 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#0b7cff">
-<title>Nexora — Marketplace</title>
+<meta name="theme-color" content="#071a33">
+
+<title>Nexora | بازار هوشمند</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
 :root{
- --primary:#087cff;
- --primary2:#19baff;
- --navy:#092d52;
- --text:#17324d;
- --muted:#71879b;
- --bg:#f3f8fc;
- --surface:#ffffff;
- --soft:#eaf6ff;
- --line:#dfebf3;
- --success:#16a36a;
- --danger:#ef5361;
- --gold:#f3a928;
- --shadow:0 10px 35px rgba(15,76,120,.08);
+    --dark:#06152b;
+    --dark2:#092442;
+    --blue:#1687ff;
+    --cyan:#31c4ff;
+    --white:#ffffff;
+    --bg:#edf5fb;
+    --text:#102943;
+    --muted:#72879a;
+    --line:#dbe7ef;
+    --shadow:0 15px 45px rgba(5,32,60,.12);
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
- font-family:Tahoma,Arial,sans-serif;
- background:
- radial-gradient(circle at 10% 0%,#dff4ff 0,transparent 30%),
- linear-gradient(180deg,#f3faff,#f8fbfd);
- color:var(--text);
- min-height:100vh;
- transition:.25s;
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
+    background:
+    linear-gradient(
+        180deg,
+        #06152b 0,
+        #092746 390px,
+        #edf5fb 390px,
+        #f7fbfe 100%
+    );
+
+    color:var(--text);
+    min-height:100vh;
+    font-size:15px;
 }
 
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none;color:inherit}
-
-::-webkit-scrollbar{width:7px;height:7px}
-::-webkit-scrollbar-thumb{background:#c9deec;border-radius:20px}
-
-.app{
- display:flex;
- min-height:100vh;
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
 }
 
-/* SIDEBAR */
-.sidebar{
- width:235px;
- background:rgba(255,255,255,.88);
- border-left:1px solid var(--line);
- padding:20px 14px;
- position:fixed;
- right:0;
- top:0;
- bottom:0;
- z-index:200;
- backdrop-filter:blur(15px);
+button{
+    cursor:pointer;
 }
 
-.brand{
- display:flex;
- align-items:center;
- gap:10px;
- padding:5px 8px 24px;
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    width:100%;
+    padding:18px 6%;
+    display:flex;
+    align-items:center;
+    gap:35px;
+    color:white;
+    position:relative;
+    z-index:50;
 }
 
-.brand-icon{
- width:43px;
- height:43px;
- border-radius:14px;
- background:linear-gradient(135deg,var(--primary),var(--primary2));
- display:grid;
- place-items:center;
- color:#fff;
- font-size:24px;
- font-weight:900;
- box-shadow:0 8px 25px #087cff35;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    min-width:170px;
 }
 
-.brand-text{
- font-size:22px;
- font-weight:900;
- color:var(--primary);
+.logo-symbol{
+    width:48px;
+    height:48px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:15px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #1687ff,
+        #35c5ff
+    );
+
+    color:white;
+    font-size:26px;
+    font-weight:900;
+
+    box-shadow:
+    0 12px 30px #1687ff40;
 }
 
-.brand-small{
- font-size:9px;
- color:var(--muted);
- margin-top:2px;
+.logo-name{
+    font-size:25px;
+    font-weight:900;
 }
 
-.side-title{
- color:#9aabba;
- font-size:10px;
- font-weight:bold;
- padding:10px 12px 7px;
+.logo-sub{
+    color:#8daac5;
+    font-size:9px;
+    margin-top:3px;
 }
 
-.side-link{
- width:100%;
- border:0;
- background:transparent;
- display:flex;
- align-items:center;
- gap:10px;
- padding:11px 12px;
- border-radius:12px;
- color:#526b7e;
- margin-bottom:3px;
- text-align:right;
- font-size:12px;
- font-weight:700;
- transition:.18s;
+.nav{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex:1;
 }
 
-.side-link:hover{
- background:var(--soft);
- color:var(--primary);
+.nav button{
+    border:0;
+    background:transparent;
+    color:#bcd1e3;
+    padding:10px 15px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:bold;
 }
 
-.side-link.active{
- background:linear-gradient(90deg,#e5f4ff,#f3fbff);
- color:var(--primary);
+.nav button:hover{
+    background:#ffffff12;
+    color:white;
 }
 
-.side-icon{
- width:24px;
- text-align:center;
- font-size:17px;
+.header-actions{
+    display:flex;
+    gap:8px;
 }
 
-.side-bottom{
- position:absolute;
- bottom:18px;
- right:14px;
- left:14px;
+.header-btn{
+    width:43px;
+    height:43px;
+
+    border:1px solid #ffffff20;
+    background:#ffffff0d;
+
+    border-radius:12px;
+
+    color:white;
+    font-size:18px;
 }
 
-.user-mini{
- background:#f4faff;
- border:1px solid var(--line);
- border-radius:14px;
- padding:10px;
- display:flex;
- align-items:center;
- gap:9px;
+.header-btn:hover{
+    background:#ffffff20;
 }
 
-.avatar{
- width:34px;
- height:34px;
- border-radius:11px;
- background:linear-gradient(135deg,#087cff,#19baff);
- color:white;
- display:grid;
- place-items:center;
- font-weight:900;
+.sell-header{
+    border:0;
+    background:white;
+    color:#087cff;
+    padding:12px 17px;
+    border-radius:11px;
+    font-size:12px;
+    font-weight:900;
 }
 
-.user-mini b{
- display:block;
- font-size:11px;
-}
-
-.user-mini span{
- display:block;
- font-size:9px;
- color:var(--muted);
- margin-top:3px;
-}
-
-/* MAIN */
-.main{
- margin-right:235px;
- width:calc(100% - 235px);
-}
-
-.topbar{
- height:74px;
- background:rgba(255,255,255,.8);
- border-bottom:1px solid var(--line);
- display:flex;
- align-items:center;
- gap:12px;
- padding:0 28px;
- position:sticky;
- top:0;
- z-index:100;
- backdrop-filter:blur(15px);
-}
-
-.mobile-menu{
- display:none;
- border:0;
- background:var(--soft);
- color:var(--primary);
- width:38px;
- height:38px;
- border-radius:11px;
-}
-
-.search{
- flex:1;
- position:relative;
- max-width:650px;
-}
-
-.search input{
- width:100%;
- height:43px;
- border:1px solid var(--line);
- background:#f7fbfe;
- border-radius:13px;
- outline:none;
- padding:0 43px 0 100px;
- color:var(--text);
- font-size:12px;
-}
-
-.search input:focus{
- background:#fff;
- border-color:#8bcaff;
- box-shadow:0 0 0 4px #087cff0d;
-}
-
-.search-icon{
- position:absolute;
- right:14px;
- top:11px;
- color:var(--primary);
- font-size:18px;
-}
-
-.search-filter{
- position:absolute;
- left:5px;
- top:5px;
- height:33px;
- border:0;
- background:#eaf6ff;
- color:var(--primary);
- border-radius:9px;
- padding:0 9px;
- font-size:10px;
- font-weight:bold;
-}
-
-.top-actions{
- margin-right:auto;
- display:flex;
- gap:7px;
-}
-
-.icon-btn{
- width:39px;
- height:39px;
- border:1px solid var(--line);
- background:#fff;
- color:#587085;
- border-radius:11px;
- position:relative;
-}
-
-.icon-btn:hover{
- color:var(--primary);
- background:var(--soft);
-}
-
-.badge{
- position:absolute;
- top:-3px;
- left:-3px;
- min-width:15px;
- height:15px;
- padding:0 4px;
- border-radius:20px;
- background:#ff5262;
- color:white;
- font-size:8px;
- display:grid;
- place-items:center;
- border:2px solid white;
-}
-
-/* CONTENT */
-.content{
- max-width:1350px;
- margin:auto;
- padding:25px 28px 90px;
-}
+/* =========================
+   HERO
+========================= */
 
 .hero{
- min-height:250px;
- border-radius:25px;
- padding:34px;
- color:#fff;
- position:relative;
- overflow:hidden;
- background:
- radial-gradient(circle at 80% 20%,#ffffff32,transparent 25%),
- linear-gradient(125deg,#087cff,#10b9ff);
- box-shadow:0 20px 50px #087cff25;
- display:flex;
- align-items:center;
- justify-content:space-between;
-}
+    max-width:1250px;
+    margin:20px auto 0;
+    padding:0 25px;
 
-.hero:after{
- content:"";
- width:330px;
- height:330px;
- border:1px solid #ffffff2a;
- border-radius:50%;
- position:absolute;
- left:-100px;
- bottom:-170px;
+    min-height:310px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    position:relative;
 }
 
 .hero-content{
- max-width:650px;
- position:relative;
- z-index:2;
+    max-width:680px;
+    position:relative;
+    z-index:3;
 }
 
-.hero-tag{
- display:inline-flex;
- background:#ffffff22;
- border:1px solid #ffffff35;
- padding:7px 10px;
- border-radius:9px;
- font-size:10px;
- margin-bottom:12px;
+.hero-label{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+
+    padding:8px 12px;
+
+    background:#ffffff12;
+    border:1px solid #ffffff20;
+
+    border-radius:30px;
+
+    color:#a9d8ff;
+    font-size:11px;
+
+    margin-bottom:16px;
 }
 
 .hero h1{
- font-size:32px;
- line-height:1.35;
- margin-bottom:10px;
+    color:white;
+    font-size:42px;
+    line-height:1.35;
+    margin-bottom:14px;
 }
 
-.hero p{
- font-size:13px;
- line-height:2;
- opacity:.92;
+.hero h1 span{
+    color:#3bc5ff;
 }
 
-.hero-actions{
- display:flex;
- gap:8px;
- margin-top:19px;
+.hero-text{
+    color:#b7cce0;
+    font-size:15px;
+    line-height:2;
+    max-width:580px;
 }
 
-.hero-btn{
- border:0;
- padding:11px 16px;
- border-radius:11px;
- font-weight:900;
- font-size:11px;
+.hero-search{
+    margin-top:25px;
+
+    width:100%;
+    max-width:680px;
+
+    height:62px;
+
+    background:white;
+
+    border-radius:17px;
+
+    padding:7px;
+
+    display:flex;
+    align-items:center;
+
+    box-shadow:
+    0 20px 50px #00000035;
 }
 
-.hero-btn.primary{
- background:#fff;
- color:var(--primary);
+.hero-search-icon{
+    width:50px;
+    text-align:center;
+    font-size:25px;
+    color:#1687ff;
 }
 
-.hero-btn.secondary{
- color:#fff;
- background:#ffffff20;
- border:1px solid #ffffff42;
+.hero-search input{
+    flex:1;
+    border:0;
+    outline:0;
+    height:100%;
+    font-size:14px;
+    color:var(--text);
+}
+
+.hero-search button{
+    height:48px;
+    border:0;
+
+    padding:0 22px;
+
+    border-radius:12px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #1687ff,
+        #2ebcff
+    );
+
+    color:white;
+    font-weight:900;
 }
 
 .hero-art{
- font-size:105px;
- filter:drop-shadow(0 20px 20px #00549d55);
- position:relative;
- z-index:2;
+    width:360px;
+    height:300px;
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-/* TABS */
-.market-tabs{
- display:flex;
- gap:7px;
- margin:20px 0;
- background:#fff;
- border:1px solid var(--line);
- border-radius:16px;
- padding:5px;
- box-shadow:var(--shadow);
+.hero-circle{
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        #1c96ff,
+        #0b4273
+    );
+
+    box-shadow:
+    0 0 80px #1687ff55;
 }
 
-.market-tab{
- flex:1;
- border:0;
- background:transparent;
- color:var(--muted);
- padding:12px;
- border-radius:12px;
- font-weight:900;
- font-size:12px;
+.hero-phone{
+    position:absolute;
+
+    width:125px;
+    height:220px;
+
+    border-radius:24px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #f9fdff,
+        #a8dcff
+    );
+
+    border:7px solid #c8efff;
+
+    box-shadow:
+    20px 25px 50px #00000045;
+
+    transform:
+    rotate(8deg);
 }
 
-.market-tab.active{
- background:linear-gradient(135deg,var(--primary),var(--primary2));
- color:#fff;
- box-shadow:0 7px 18px #087cff25;
+.hero-phone:before{
+    content:"";
+
+    position:absolute;
+
+    top:11px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:45px;
+    height:7px;
+
+    border-radius:20px;
+
+    background:#173b59;
 }
 
-/* SECTION */
-.section-head{
- display:flex;
- align-items:end;
- justify-content:space-between;
- margin:24px 0 12px;
+.hero-phone:after{
+    content:"N";
+
+    position:absolute;
+
+    inset:50px 15px auto;
+
+    height:70px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #1687ff,
+        #2fc4ff
+    );
+
+    color:white;
+
+    font-size:35px;
+    font-weight:900;
 }
 
-.section-head h2{
- font-size:19px;
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    background:#edf5fb;
+
+    border-radius:35px 35px 0 0;
+
+    min-height:700px;
+
+    padding:35px 6% 70px;
+
+    position:relative;
+    z-index:5;
 }
 
-.section-head p{
- color:var(--muted);
- font-size:10px;
- margin-top:4px;
+/* =========================
+   MARKET BUTTONS
+========================= */
+
+.market-switch{
+    max-width:1100px;
+
+    margin:-60px auto 35px;
+
+    background:white;
+
+    padding:8px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 20px 55px #002d5515;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:8px;
+
+    position:relative;
 }
 
-.more{
- color:var(--primary);
- border:0;
- background:transparent;
- font-size:11px;
- font-weight:bold;
+.market-switch button{
+    height:62px;
+
+    border:0;
+
+    background:white;
+
+    color:#71869a;
+
+    border-radius:14px;
+
+    font-size:15px;
+    font-weight:900;
+
+    transition:.2s;
 }
 
-/* CATEGORIES */
+.market-switch button:hover{
+    background:#edf8ff;
+}
+
+.market-switch button.active{
+    color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #087cff,
+        #27baff
+    );
+
+    box-shadow:
+    0 8px 25px #1687ff30;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    max-width:1250px;
+    margin:0 auto 40px;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:17px;
+}
+
+.section-title h2{
+    font-size:22px;
+    color:#102943;
+}
+
+.section-title p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
+}
+
+.section-link{
+    border:0;
+    background:transparent;
+
+    color:#087cff;
+
+    font-weight:900;
+    font-size:12px;
+}
+
+/* =========================
+   CATEGORIES
+========================= */
+
 .categories{
- display:grid;
- grid-template-columns:repeat(8,1fr);
- gap:9px;
+    display:grid;
+
+    grid-template-columns:
+    repeat(8,1fr);
+
+    gap:12px;
 }
 
 .category{
- border:1px solid var(--line);
- background:#fff;
- border-radius:16px;
- padding:15px 8px;
- text-align:center;
- transition:.2s;
+    border:1px solid var(--line);
+
+    background:white;
+
+    border-radius:18px;
+
+    min-height:125px;
+
+    padding:15px 8px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:9px;
+
+    color:var(--text);
+
+    transition:.2s;
 }
 
 .category:hover{
- transform:translateY(-3px);
- box-shadow:var(--shadow);
- border-color:#b9e0f8;
-}
+    transform:translateY(-5px);
 
-.category.active{
- background:linear-gradient(135deg,#e6f6ff,#f7fcff);
- border-color:#8dccf5;
+    box-shadow:
+    var(--shadow);
+
+    border-color:#9bd7ff;
 }
 
 .category-icon{
- width:45px;
- height:45px;
- margin:auto;
- border-radius:13px;
- display:grid;
- place-items:center;
- background:var(--soft);
- font-size:23px;
- margin-bottom:8px;
+    width:52px;
+    height:52px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:16px;
+
+    background:#e9f6ff;
+
+    font-size:26px;
 }
 
-.category b{
- display:block;
- font-size:10px;
+.category strong{
+    font-size:12px;
 }
 
-.category span{
- display:block;
- color:var(--muted);
- font-size:8px;
- margin-top:4px;
+.category small{
+    color:var(--muted);
+    font-size:9px;
 }
 
-/* FEATURED */
-.featured{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:13px;
+/* =========================
+   FEATURED
+========================= */
+
+.products{
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:15px;
 }
 
-.card{
- background:#fff;
- border:1px solid var(--line);
- border-radius:18px;
- overflow:hidden;
- box-shadow:var(--shadow);
- transition:.2s;
+.product{
+    background:white;
+
+    border:1px solid var(--line);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 8px 25px #06365c0b;
+
+    transition:.2s;
 }
 
-.card:hover{
- transform:translateY(-4px);
- box-shadow:0 16px 38px #0069a814;
+.product:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 18px 45px #06365c18;
 }
 
-.card-image{
- height:170px;
- background:linear-gradient(135deg,#e5f6ff,#f8fdff);
- display:grid;
- place-items:center;
- font-size:65px;
- position:relative;
+.product-image{
+    height:205px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #e4f5ff,
+        #f9fdff
+    );
+
+    display:grid;
+    place-items:center;
+
+    font-size:76px;
+
+    position:relative;
 }
 
-.card-label{
- position:absolute;
- top:9px;
- right:9px;
- background:#fff;
- color:var(--primary);
- border-radius:8px;
- padding:5px 7px;
- font-size:8px;
- font-weight:900;
- box-shadow:0 4px 15px #0064a012;
+.product-badge{
+    position:absolute;
+
+    top:11px;
+    right:11px;
+
+    background:white;
+
+    color:#087cff;
+
+    padding:6px 9px;
+
+    border-radius:8px;
+
+    font-size:9px;
+    font-weight:900;
 }
 
-.card-heart{
- position:absolute;
- top:8px;
- left:8px;
- width:30px;
- height:30px;
- border:0;
- border-radius:9px;
- background:#ffffffdf;
- color:#668094;
+.favorite{
+    position:absolute;
+
+    top:10px;
+    left:10px;
+
+    width:36px;
+    height:36px;
+
+    border:0;
+
+    background:#ffffffdd;
+
+    border-radius:11px;
+
+    color:#60798c;
+
+    font-size:19px;
 }
 
-.card-body{
- padding:13px;
+.product-info{
+    padding:15px;
 }
 
-.card-title{
- font-size:12px;
- font-weight:900;
- white-space:nowrap;
- overflow:hidden;
- text-overflow:ellipsis;
+.product-name{
+    font-size:14px;
+    font-weight:900;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-.card-meta{
- display:flex;
- align-items:center;
- justify-content:space-between;
- margin-top:8px;
- color:var(--muted);
- font-size:9px;
+.product-description{
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-top:7px;
+
+    line-height:1.7;
+}
+
+.product-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-top:14px;
+}
+
+.product-location{
+    color:#71869a;
+    font-size:10px;
+}
+
+.product-view{
+    border:0;
+
+    background:#eaf6ff;
+
+    color:#087cff;
+
+    padding:8px 11px;
+
+    border-radius:9px;
+
+    font-size:10px;
+
+    font-weight:900;
+}
+
+/* =========================
+   BANNER
+========================= */
+
+.sell-banner{
+    max-width:1250px;
+
+    margin:0 auto 45px;
+
+    min-height:190px;
+
+    border-radius:24px;
+
+    background:
+    linear-gradient(
+        110deg,
+        #061a31,
+        #0a3d68
+    );
+
+    padding:32px;
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.sell-banner:after{
+    content:"";
+
+    position:absolute;
+
+    width:330px;
+    height:330px;
+
+    border:1px solid #ffffff15;
+
+    border-radius:50%;
+
+    left:-70px;
+    top:-150px;
+}
+
+.sell-banner h2{
+    font-size:25px;
+    margin-bottom:9px;
+}
+
+.sell-banner p{
+    color:#abc4d9;
+    font-size:12px;
+    line-height:2;
+}
+
+.sell-button{
+    border:0;
+
+    background:white;
+
+    color:#087cff;
+
+    padding:13px 20px;
+
+    border-radius:12px;
+
+    font-size:12px;
+    font-weight:900;
+
+    position:relative;
+    z-index:2;
+}
+
+/* =========================
+   SELLERS
+========================= */
+
+.sellers{
+    display:grid;
+
+    grid-template-columns:
+    repeat(5,1fr);
+
+    gap:13px;
 }
 
 .seller{
- display:flex;
- align-items:center;
- gap:5px;
-}
+    background:white;
 
-.seller-dot{
- width:19px;
- height:19px;
- border-radius:7px;
- background:#dff3ff;
- display:grid;
- place-items:center;
- font-size:10px;
-}
+    border:1px solid var(--line);
 
-.card-footer{
- display:flex;
- align-items:center;
- justify-content:space-between;
- margin-top:12px;
-}
+    border-radius:18px;
 
-.status{
- color:var(--success);
- background:#e9faf3;
- padding:5px 7px;
- border-radius:7px;
- font-size:8px;
- font-weight:bold;
-}
+    padding:18px;
 
-.view-btn{
- border:0;
- background:var(--soft);
- color:var(--primary);
- border-radius:8px;
- padding:6px 9px;
- font-size:9px;
- font-weight:bold;
-}
-
-/* SELLER */
-.sellers{
- display:grid;
- grid-template-columns:repeat(5,1fr);
- gap:10px;
-}
-
-.seller-card{
- background:#fff;
- border:1px solid var(--line);
- border-radius:16px;
- padding:14px;
- text-align:center;
+    text-align:center;
 }
 
 .seller-avatar{
- width:48px;
- height:48px;
- border-radius:15px;
- margin:0 auto 8px;
- display:grid;
- place-items:center;
- background:linear-gradient(135deg,#dff5ff,#f6fcff);
- font-size:23px;
+    width:60px;
+    height:60px;
+
+    margin:0 auto 11px;
+
+    border-radius:18px;
+
+    display:grid;
+    place-items:center;
+
+    background:#e7f5ff;
+
+    font-size:28px;
 }
 
-.seller-card b{
- font-size:10px;
- display:block;
+.seller strong{
+    display:block;
+    font-size:13px;
 }
 
-.seller-card span{
- font-size:8px;
- color:var(--muted);
- display:block;
- margin-top:4px;
+.seller span{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-top:5px;
 }
 
 .follow{
- margin-top:9px;
- width:100%;
- border:1px solid #bde2fa;
- color:var(--primary);
- background:#f3faff;
- border-radius:8px;
- padding:6px;
- font-size:9px;
- font-weight:bold;
+    width:100%;
+
+    margin-top:12px;
+
+    border:1px solid #b9dff6;
+
+    background:#f3faff;
+
+    color:#087cff;
+
+    padding:8px;
+
+    border-radius:9px;
+
+    font-size:10px;
+    font-weight:900;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
+
 .footer{
- margin-top:45px;
- background:#082d52;
- color:#b7d2e5;
- border-radius:22px;
- padding:28px;
- display:grid;
- grid-template-columns:2fr 1fr 1fr 1fr;
- gap:25px;
+    max-width:1250px;
+
+    margin:55px auto 0;
+
+    padding:35px;
+
+    border-radius:24px;
+
+    background:#061a31;
+
+    color:#a9c1d5;
+
+    display:grid;
+
+    grid-template-columns:
+    2fr 1fr 1fr 1fr;
+
+    gap:30px;
 }
 
 .footer h3{
- color:#fff;
- margin-bottom:10px;
- font-size:14px;
+    color:white;
+    font-size:16px;
+    margin-bottom:12px;
 }
 
-.footer p,.footer li{
- font-size:9px;
- line-height:2;
+.footer p,
+.footer li{
+    font-size:11px;
+    line-height:2.3;
 }
 
 .footer ul{
- list-style:none;
+    list-style:none;
 }
 
-/* MODAL */
+/* =========================
+   MODALS
+========================= */
+
 .modal{
- display:none;
- position:fixed;
- inset:0;
- background:#002b4d66;
- z-index:800;
- align-items:center;
- justify-content:center;
- padding:15px;
- backdrop-filter:blur(4px);
+    position:fixed;
+
+    inset:0;
+
+    background:#00152dcc;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:500;
+
+    backdrop-filter:blur(8px);
 }
 
-.modal.show{display:flex}
+.modal.show{
+    display:flex;
+}
 
 .modal-box{
- width:min(520px,100%);
- max-height:90vh;
- overflow:auto;
- background:#fff;
- border-radius:22px;
- padding:22px;
- box-shadow:0 25px 80px #001c3d35;
+    width:min(550px,100%);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:white;
+
+    border-radius:23px;
+
+    padding:25px;
+
+    box-shadow:
+    0 30px 100px #00000040;
 }
 
 .modal-head{
- display:flex;
- align-items:center;
- justify-content:space-between;
- margin-bottom:17px;
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:20px;
 }
 
-.modal-head h2{font-size:18px}
+.modal-head h2{
+    font-size:20px;
+}
 
 .close{
- width:34px;
- height:34px;
- border:0;
- background:var(--soft);
- color:var(--primary);
- border-radius:9px;
+    width:37px;
+    height:37px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:#edf7ff;
+
+    color:#087cff;
+
+    font-size:22px;
 }
 
 .field{
- margin-bottom:12px;
+    margin-bottom:14px;
 }
 
 .field label{
- display:block;
- font-size:10px;
- font-weight:900;
- margin-bottom:5px;
+    display:block;
+
+    font-size:11px;
+    font-weight:900;
+
+    margin-bottom:6px;
 }
 
 .field input,
 .field select,
 .field textarea{
- width:100%;
- border:1px solid var(--line);
- background:#f9fdff;
- border-radius:10px;
- padding:10px;
- outline:none;
- font-size:11px;
+    width:100%;
+
+    border:1px solid var(--line);
+
+    background:#f8fcff;
+
+    border-radius:11px;
+
+    padding:12px;
+
+    outline:none;
+
+    font-size:13px;
 }
 
 .field textarea{
- min-height:90px;
- resize:vertical;
+    min-height:100px;
 }
 
 .primary{
- width:100%;
- border:0;
- background:linear-gradient(135deg,var(--primary),var(--primary2));
- color:#fff;
- border-radius:11px;
- padding:12px;
- font-weight:900;
+    width:100%;
+
+    border:0;
+
+    padding:13px;
+
+    border-radius:11px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #087cff,
+        #29baff
+    );
+
+    color:white;
+
+    font-weight:900;
+
+    font-size:13px;
 }
 
-.setting-list{
- display:grid;
- gap:8px;
-}
-
-.setting{
- width:100%;
- border:1px solid var(--line);
- background:#f9fdff;
- padding:13px;
- border-radius:12px;
- display:flex;
- align-items:center;
- justify-content:space-between;
- text-align:right;
-}
-
-.setting b{
- font-size:11px;
- display:block;
-}
-
-.setting span{
- color:var(--muted);
- font-size:9px;
- display:block;
- margin-top:3px;
-}
-
-.switch{
- width:41px;
- height:23px;
- border-radius:20px;
- background:#ccdbe5;
- position:relative;
-}
-
-.switch:after{
- content:"";
- position:absolute;
- top:3px;
- right:3px;
- width:17px;
- height:17px;
- background:white;
- border-radius:50%;
- transition:.2s;
-}
-
-.switch.on{
- background:var(--primary);
-}
-
-.switch.on:after{
- right:21px;
-}
+/* =========================
+   TOAST
+========================= */
 
 .toast{
- position:fixed;
- bottom:25px;
- left:50%;
- transform:translate(-50%,20px);
- opacity:0;
- background:#092d52;
- color:#fff;
- padding:10px 15px;
- border-radius:10px;
- z-index:1000;
- font-size:10px;
- transition:.25s;
- pointer-events:none;
+    position:fixed;
+
+    bottom:25px;
+    left:50%;
+
+    transform:
+    translate(-50%,30px);
+
+    opacity:0;
+
+    background:#061a31;
+
+    color:white;
+
+    padding:12px 18px;
+
+    border-radius:11px;
+
+    font-size:11px;
+
+    z-index:1000;
+
+    transition:.25s;
 }
 
 .toast.show{
- opacity:1;
- transform:translate(-50%,0);
+    opacity:1;
+
+    transform:
+    translate(-50%,0);
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE NAV
+========================= */
+
 .mobile-nav{
- display:none;
+    display:none;
 }
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:1100px){
- .categories{grid-template-columns:repeat(6,1fr)}
- .featured{grid-template-columns:repeat(3,1fr)}
- .sellers{grid-template-columns:repeat(4,1fr)}
+
+    .header{
+        padding:15px 3%;
+    }
+
+    .hero{
+        padding:0 4%;
+    }
+
+    .categories{
+        grid-template-columns:
+        repeat(4,1fr);
+    }
+
+    .products{
+        grid-template-columns:
+        repeat(3,1fr);
+    }
+
+    .sellers{
+        grid-template-columns:
+        repeat(3,1fr);
+    }
+
 }
 
 @media(max-width:800px){
- .sidebar{
-  transform:translateX(100%);
-  transition:.25s;
- }
 
- .sidebar.open{transform:translateX(0)}
+    body{
+        background:
+        linear-gradient(
+            180deg,
+            #06152b 0,
+            #092746 350px,
+            #edf5fb 350px
+        );
+    }
 
- .main{
-  margin-right:0;
-  width:100%;
- }
+    .header{
+        padding:13px;
+        gap:8px;
+    }
 
- .mobile-menu{display:block}
+    .logo{
+        min-width:auto;
+    }
 
- .topbar{padding:0 13px}
+    .logo-name{
+        font-size:21px;
+    }
 
- .top-actions .hide-mobile{display:none}
+    .logo-sub,
+    .nav{
+        display:none;
+    }
 
- .content{
-  padding:15px 12px 85px;
- }
+    .header-actions{
+        margin-right:auto;
+    }
 
- .hero{
-  min-height:215px;
-  padding:23px;
- }
+    .sell-header{
+        display:none;
+    }
 
- .hero h1{font-size:25px}
- .hero-art{font-size:70px}
+    .hero{
+        min-height:300px;
+        padding:20px 13px;
+    }
 
- .categories{
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
- }
+    .hero h1{
+        font-size:30px;
+    }
 
- .featured{
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
- }
+    .hero-text{
+        font-size:13px;
+    }
 
- .card-image{
-  height:145px;
- }
+    .hero-art{
+        display:none;
+    }
 
- .sellers{
-  grid-template-columns:repeat(2,1fr);
- }
+    .hero-search{
+        height:56px;
+    }
 
- .footer{
-  grid-template-columns:1fr 1fr;
- }
+    .hero-search button{
+        padding:0 15px;
+    }
 
- .mobile-nav{
-  display:flex;
-  position:fixed;
-  bottom:0;
-  right:0;
-  left:0;
-  height:63px;
-  background:#fff;
-  border-top:1px solid var(--line);
-  z-index:300;
-  align-items:center;
-  justify-content:space-around;
- }
+    .main{
+        padding:
+        25px 13px 90px;
 
- .mobile-nav button{
-  border:0;
-  background:none;
-  color:var(--muted);
-  font-size:9px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:3px;
- }
+        border-radius:
+        27px 27px 0 0;
+    }
 
- .mobile-nav button.active{
-  color:var(--primary);
-  font-weight:900;
- }
+    .market-switch{
+        margin:-50px auto 28px;
+    }
+
+    .market-switch button{
+        height:56px;
+        font-size:13px;
+    }
+
+    .section-title h2{
+        font-size:19px;
+    }
+
+    .categories{
+        grid-template-columns:
+        repeat(4,1fr);
+
+        gap:7px;
+    }
+
+    .category{
+        min-height:105px;
+    }
+
+    .products{
+        grid-template-columns:
+        repeat(2,1fr);
+
+        gap:10px;
+    }
+
+    .product-image{
+        height:155px;
+        font-size:58px;
+    }
+
+    .sellers{
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+    .footer{
+        grid-template-columns:
+        1fr 1fr;
+    }
+
+    .mobile-nav{
+        display:flex;
+
+        position:fixed;
+
+        bottom:0;
+        right:0;
+        left:0;
+
+        height:66px;
+
+        background:white;
+
+        border-top:
+        1px solid var(--line);
+
+        z-index:300;
+
+        align-items:center;
+        justify-content:space-around;
+
+        box-shadow:
+        0 -10px 30px #00365c10;
+    }
+
+    .mobile-nav button{
+        border:0;
+
+        background:transparent;
+
+        color:#71869a;
+
+        display:flex;
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:4px;
+
+        font-size:10px;
+    }
+
+    .mobile-nav button:first-child{
+        color:#087cff;
+        font-weight:900;
+    }
+
 }
 
 @media(max-width:500px){
- .search-filter{display:none}
- .search input{padding-left:12px}
- .hero-art{display:none}
- .hero h1{font-size:21px}
- .hero p{font-size:11px}
- .hero-actions{margin-top:14px}
- .hero-btn{padding:9px 12px}
- .categories{grid-template-columns:repeat(4,1fr)}
- .category{padding:11px 5px}
- .category-icon{
-  width:38px;
-  height:38px;
-  font-size:19px;
- }
- .category b{font-size:8px}
- .category span{font-size:7px}
- .card-image{height:125px;font-size:50px}
- .card-body{padding:10px}
- .card-title{font-size:10px}
- .footer{grid-template-columns:1fr}
+
+    .hero h1{
+        font-size:26px;
+    }
+
+    .hero-search input{
+        font-size:11px;
+    }
+
+    .hero-search button{
+        font-size:10px;
+    }
+
+    .categories{
+        grid-template-columns:
+        repeat(4,1fr);
+    }
+
+    .category{
+        min-height:95px;
+        padding:9px 4px;
+    }
+
+    .category-icon{
+        width:39px;
+        height:39px;
+        font-size:20px;
+    }
+
+    .category strong{
+        font-size:9px;
+    }
+
+    .category small{
+        font-size:7px;
+    }
+
+    .product-image{
+        height:130px;
+    }
+
+    .product-name{
+        font-size:11px;
+    }
+
+    .product-description{
+        font-size:8px;
+    }
+
+    .product-location{
+        font-size:8px;
+    }
+
+    .product-view{
+        font-size:8px;
+        padding:6px 8px;
+    }
+
+    .sell-banner{
+        padding:23px;
+    }
+
+    .sell-banner h2{
+        font-size:19px;
+    }
+
+    .sell-banner p{
+        font-size:10px;
+    }
+
+    .sell-button{
+        padding:10px;
+        font-size:10px;
+    }
+
+    .footer{
+        grid-template-columns:1fr;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<!-- =========================
+     HEADER
+========================= -->
 
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
+<header class="header">
 
- <div class="brand">
-  <div class="brand-icon">N</div>
-  <div>
-   <div class="brand-text">Nexora</div>
-   <div class="brand-small">GLOBAL MARKETPLACE</div>
-  </div>
- </div>
+    <div class="logo">
 
- <div class="side-title">منوی اصلی</div>
+        <div class="logo-symbol">
+            N
+        </div>
 
- <button class="side-link active" onclick="home()">
-  <span class="side-icon">⌂</span> خانه
- </button>
+        <div>
+            <div class="logo-name">
+                Nexora
+            </div>
 
- <button class="side-link" onclick="mode('buy')">
-  <span class="side-icon">🛒</span> خرید
- </button>
+            <div class="logo-sub">
+                SMART GLOBAL MARKET
+            </div>
+        </div>
 
- <button class="side-link" onclick="mode('sell')">
-  <span class="side-icon">🏷️</span> فروش
- </button>
+    </div>
 
- <button class="side-link" onclick="showToast('بخش خدمات')">
-  <span class="side-icon">🛠️</span> خدمات
- </button>
+    <nav class="nav">
 
- <button class="side-link" onclick="showToast('آگهی‌های ذخیره شده')">
-  <span class="side-icon">♡</span> علاقه‌مندی‌ها
- </button>
+        <button onclick="scrollToSection('products')">
+            کشف محصولات
+        </button>
 
- <button class="side-link" onclick="showToast('پیام‌ها')">
-  <span class="side-icon">💬</span> پیام‌ها
- </button>
+        <button onclick="scrollToSection('categories')">
+            دسته‌بندی‌ها
+        </button>
 
- <button class="side-link" onclick="showToast('اعلان‌ها')">
-  <span class="side-icon">🔔</span> اعلان‌ها
- </button>
+        <button onclick="scrollToSection('sellers')">
+            فروشگاه‌ها
+        </button>
 
- <div class="side-title">حساب</div>
+        <button onclick="openSell()">
+            فروشنده شوید
+        </button>
 
- <button class="side-link" onclick="openProfile()">
-  <span class="side-icon">👤</span> پروفایل من
- </button>
+    </nav>
 
- <button class="side-link" onclick="openSettings()">
-  <span class="side-icon">⚙️</span> تنظیمات
- </button>
+    <div class="header-actions">
 
- <div class="side-bottom">
-  <div class="user-mini">
-   <div class="avatar" id="miniAvatar">N</div>
-   <div>
-    <b id="miniName">مهمان Nexora</b>
-    <span>حساب کاربری</span>
-   </div>
-  </div>
- </div>
+        <button
+            class="header-btn"
+            onclick="showToast('اعلان جدیدی ندارید')">
+            🔔
+        </button>
 
-</aside>
+        <button
+            class="header-btn"
+            onclick="openProfile()">
+            👤
+        </button>
 
-<!-- MAIN -->
+        <button
+            class="header-btn"
+            onclick="openSettings()">
+            ⚙️
+        </button>
+
+    </div>
+
+    <button
+        class="sell-header"
+        onclick="openSell()">
+        + ثبت آگهی
+    </button>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-label">
+            ✨ بازار جدید Nexora
+        </div>
+
+        <h1>
+            هر چیزی که می‌خواهی،
+            <span>اینجاست.</span>
+        </h1>
+
+        <p class="hero-text">
+            خرید، فروش، خدمات و فروشگاه‌ها
+            در یک تجربه سریع، مدرن و حرفه‌ای.
+        </p>
+
+        <div class="hero-search">
+
+            <div class="hero-search-icon">
+                ⌕
+            </div>
+
+            <input
+                id="search"
+                type="text"
+                placeholder="دنبال چه چیزی می‌گردی؟">
+
+            <button onclick="doSearch()">
+                جستجو
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-art">
+
+        <div class="hero-circle"></div>
+
+        <div class="hero-phone"></div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
 <main class="main">
 
- <header class="topbar">
 
-  <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+    <!-- MARKET SWITCH -->
 
-  <div class="search">
-   <span class="search-icon">⌕</span>
-   <input id="search" placeholder="جستجو در میلیون‌ها کالا و خدمات...">
+    <div class="market-switch">
 
-   <select class="search-filter">
-    <option>همه</option>
-    <option>کالا</option>
-    <option>خدمات</option>
-    <option>فروشگاه</option>
-   </select>
-  </div>
+        <button
+            id="buyButton"
+            class="active"
+            onclick="switchMode('buy')">
 
-  <div class="top-actions">
+            🛒
+            خرید
 
-   <button class="icon-btn hide-mobile" onclick="showToast('اعلان جدیدی ندارید')">
-    🔔
-    <span class="badge">2</span>
-   </button>
+        </button>
 
-   <button class="icon-btn" onclick="openProfile()">👤</button>
+        <button
+            id="sellButton"
+            onclick="switchMode('sell')">
 
-   <button class="icon-btn" onclick="openSettings()">⚙️</button>
+            🏷️
+            فروش
 
-  </div>
+        </button>
 
- </header>
+        <button
+            id="serviceButton"
+            onclick="switchMode('service')">
 
- <div class="content">
+            🛠️
+            خدمات
 
-  <!-- HERO -->
-  <section class="hero">
+        </button>
 
-   <div class="hero-content">
-
-    <span class="hero-tag">✨ نسل جدید بازار آنلاین</span>
-
-    <h1>
-     هر چیزی که می‌خواهی،
-     در Nexora پیدا کن.
-    </h1>
-
-    <p>
-     خرید، فروش و ارائه خدمات در یک بازار مدرن،
-     سریع و جهانی.
-    </p>
-
-    <div class="hero-actions">
-     <button class="hero-btn primary" onclick="mode('buy')">
-      شروع خرید
-     </button>
-
-     <button class="hero-btn secondary" onclick="openSell()">
-      ثبت آگهی
-     </button>
     </div>
 
-   </div>
 
-   <div class="hero-art">🌎</div>
+    <!-- CATEGORIES -->
 
-  </section>
+    <section
+        class="section"
+        id="categories">
 
-  <!-- BUY SELL -->
-  <div class="market-tabs">
+        <div class="section-title">
 
-   <button class="market-tab active" id="buyTab" onclick="mode('buy')">
-    🛒 خرید
-   </button>
+            <div>
 
-   <button class="market-tab" id="sellTab" onclick="mode('sell')">
-    🏷️ فروش
-   </button>
+                <h2>
+                    چه چیزی پیدا می‌کنی؟
+                </h2>
 
-   <button class="market-tab" id="serviceTab" onclick="mode('service')">
-    🛠️ خدمات
-   </button>
+                <p>
+                    دسته‌بندی مورد علاقه‌ات را انتخاب کن
+                </p>
 
-  </div>
+            </div>
 
-  <!-- CATEGORIES -->
-  <div class="section-head">
-   <div>
-    <h2>دسته‌بندی‌ها</h2>
-    <p>محبوب‌ترین دسته‌ها در Nexora</p>
-   </div>
+            <button
+                class="section-link"
+                onclick="showToast('همه دسته‌بندی‌ها')">
 
-   <button class="more" onclick="showToast('تمام دسته‌بندی‌ها')">
-    مشاهده همه ←
-   </button>
-  </div>
+                همه دسته‌ها ←
 
-  <section class="categories">
+            </button>
 
-   <button class="category active" onclick="category('all',this)">
-    <div class="category-icon">✨</div>
-    <b>همه</b>
-    <span>همه موارد</span>
-   </button>
+        </div>
 
-   <button class="category" onclick="category('phone',this)">
-    <div class="category-icon">📱</div>
-    <b>موبایل</b>
-    <span>تکنولوژی</span>
-   </button>
 
-   <button class="category" onclick="category('car',this)">
-    <div class="category-icon">🚗</div>
-    <b>خودرو</b>
-    <span>وسایل نقلیه</span>
-   </button>
+        <div class="categories">
 
-   <button class="category" onclick="category('home',this)">
-    <div class="category-icon">🏠</div>
-    <b>املاک</b>
-    <span>خانه و زمین</span>
-   </button>
+            <button
+                class="category"
+                onclick="filterProducts('phone')">
 
-   <button class="category" onclick="category('computer',this)">
-    <div class="category-icon">💻</div>
-    <b>کامپیوتر</b>
-    <span>دیجیتال</span>
-   </button>
+                <div class="category-icon">
+                    📱
+                </div>
 
-   <button class="category" onclick="category('fashion',this)">
-    <div class="category-icon">👕</div>
-    <b>پوشاک</b>
-    <span>مد و لباس</span>
-   </button>
+                <strong>
+                    موبایل
+                </strong>
 
-   <button class="category" onclick="category('game',this)">
-    <div class="category-icon">🎮</div>
-    <b>بازی</b>
-    <span>سرگرمی</span>
-   </button>
+                <small>
+                    دیجیتال
+                </small>
 
-   <button class="category" onclick="category('service',this)">
-    <div class="category-icon">🛠️</div>
-    <b>خدمات</b>
-    <span>خدمات آنلاین</span>
-   </button>
+            </button>
 
-  </section>
 
-  <!-- PRODUCTS -->
-  <div class="section-head">
-   <div>
-    <h2 id="productsTitle">پیشنهادهای ویژه</h2>
-    <p>موارد محبوب کاربران Nexora</p>
-   </div>
+            <button
+                class="category"
+                onclick="filterProducts('car')">
 
-   <button class="more" onclick="showToast('لیست کامل')">
-    مشاهده همه ←
-   </button>
-  </div>
+                <div class="category-icon">
+                    🚗
+                </div>
 
-  <section class="featured" id="products">
+                <strong>
+                    خودرو
+                </strong>
 
-   <article class="card" data-cat="phone">
-    <div class="card-image">
-     <span class="card-label">ویژه</span>
-     <button class="card-heart" onclick="heart(this)">♡</button>
-     📱
-    </div>
-    <div class="card-body">
-     <div class="card-title">گوشی هوشمند Nex X1 Pro</div>
-     <div class="card-meta">
-      <div class="seller">
-       <div class="seller-dot">N</div>
-       Nex Store
-      </div>
-      <span>📍 تهران</span>
-     </div>
-     <div class="card-footer">
-      <span class="status">موجود</span>
-      <button class="view-btn" onclick="openProduct('گوشی هوشمند Nex X1 Pro','📱')">
-       مشاهده
-      </button>
-     </div>
-    </div>
-   </article>
+                <small>
+                    وسایل نقلیه
+                </small>
 
-   <article class="card" data-cat="car">
-    <div class="card-image">
-     <span class="card-label">محبوب</span>
-     <button class="card-heart" onclick="heart(this)">♡</button>
-     🚗
-    </div>
-    <div class="card-body">
-     <div class="card-title">خودروی مدرن 2026</div>
-     <div class="card-meta">
-      <div class="seller">
-       <div class="seller-dot">A</div>
-       Auto Plus
-      </div>
-      <span>📍 تهران</span>
-     </div>
-     <div class="card-footer">
-      <span class="status">موجود</span>
-      <button class="view-btn" onclick="openProduct('خودروی مدرن 2026','🚗')">
-       مشاهده
-      </button>
-     </div>
-    </div>
-   </article>
+            </button>
 
-   <article class="card" data-cat="home">
-    <div class="card-image">
-     <span class="card-label">جدید</span>
-     <button class="card-heart" onclick="heart(this)">♡</button>
-     🏠
-    </div>
-    <div class="card-body">
-     <div class="card-title">آپارتمان مدرن و لوکس</div>
-     <div class="card-meta">
-      <div class="seller">
-       <div class="seller-dot">H</div>
-       Home Land
-      </div>
-      <span>📍 استانبول</span>
-     </div>
-     <div class="card-footer">
-      <span class="status">فعال</span>
-      <button class="view-btn" onclick="openProduct('آپارتمان مدرن و لوکس','🏠')">
-       مشاهده
-      </button>
-     </div>
-    </div>
-   </article>
 
-   <article class="card" data-cat="computer">
-    <div class="card-image">
-     <span class="card-label">ویژه</span>
-     <button class="card-heart" onclick="heart(this)">♡</button>
-     💻
-    </div>
-    <div class="card-body">
-     <div class="card-title">لپ‌تاپ حرفه‌ای NexBook</div>
-     <div class="card-meta">
-      <div class="seller">
-       <div class="seller-dot">T</div>
-       Tech World
-      </div>
-      <span>📍 تبریز</span>
-     </div>
-     <div class="card-footer">
-      <span class="status">موجود</span>
-      <button class="view-btn" onclick="openProduct('لپ‌تاپ حرفه‌ای NexBook','💻')">
-       مشاهده
-      </button>
-     </div>
-    </div>
-   </article>
+            <button
+                class="category"
+                onclick="filterProducts('home')">
 
-   <article class="card" data-cat="fashion">
-    <div class="card-image">
-     <span class="card-label">محبوب</span>
-     <button class="card-heart" onclick="heart(this)">♡</button>
-     👟
-    </div>
-    <div class="card-body">
-     <div class="card-title">کفش اسپرت Premium</div>
-     <div class="card-meta">
-      <div class="seller">
-       <div class="seller-dot">F</div>
-       Fashion Hub
-      </div>
-      <span>📍 شیراز</span>
-     </div>
-     <div class="card-footer">
-      <span class="status">موجود</span>
-      <button class="view-btn" onclick="openProduct('کفش اسپرت Premium','👟')">
-       مشاهده
-      </button>
-     </div>
-    </div>
-   </article>
+                <div class="category-icon">
+                    🏠
+                </div>
 
-   <article class="card" data-cat="game">
-    <div class="card-image">
-     <span class="card-label">جدید</span>
-     <button class="card-heart" onclick="heart(this)">♡</button>
-     🎮
-    </div>
-    <div class="card-body">
-     <div class="card-title">کنسول بازی نسل جدید</div>
-     <div class="card-meta">
-      <div class="seller">
-       <div class="seller-dot">G</div>
-       Game Center
-      </div>
-      <span>📍 مشهد</span>
-     </div>
-     <div class="card-footer">
-      <span class="status">موجود</span>
-      <button class="view-btn" onclick="openProduct('کنسول بازی نسل جدید','🎮')">
-       مشاهده
-      </button>
-     </div>
-    </div>
-   </article>
+                <strong>
+                    املاک
+                </strong>
 
-   <article class="card" data-cat="service">
-    <div class="card-image">
-     <span class="card-label">آنلاین</span>
-     <button class="card-heart" onclick="heart(this)">♡</button>
-     🛠️
-    </div>
-    <div class="card-body">
-     <div class="card-title">طراحی سایت و اپلیکیشن</div>
-     <div class="card-meta">
-      <div class="seller">
-       <div class="seller-dot">D</div>
-       Dev Studio
-      </div>
-      <span>🌎 آنلاین</span>
-     </div>
-     <div class="card-footer">
-      <span class="status">فعال</span>
-      <button class="view-btn" onclick="openProduct('طراحی سایت و اپلیکیشن','🛠️')">
-       مشاهده
-      </button>
-     </div>
-    </div>
-   </article>
+                <small>
+                    خانه و زمین
+                </small>
 
-   <article class="card" data-cat="home">
-    <div class="card-image">
-     <span class="card-label">جدید</span>
-     <button class="card-heart" onclick="heart(this)">♡</button>
-     🛋️
-    </div>
-    <div class="card-body">
-     <div class="card-title">مبلمان مدرن خانه</div>
-     <div class="card-meta">
-      <div class="seller">
-       <div class="seller-dot">L</div>
-       Living Shop
-      </div>
-      <span>📍 اصفهان</span>
-     </div>
-     <div class="card-footer">
-      <span class="status">موجود</span>
-      <button class="view-btn" onclick="openProduct('مبلمان مدرن خانه','🛋️')">
-       مشاهده
-      </button>
-     </div>
-    </div>
-   </article>
+            </button>
 
-  </section>
 
-  <!-- SELLERS -->
-  <div class="section-head">
-   <div>
-    <h2>فروشندگان محبوب</h2>
-    <p>فروشگاه‌هایی که کاربران بیشتر دنبال می‌کنند</p>
-   </div>
-   <button class="more">همه ←</button>
-  </div>
+            <button
+                class="category"
+                onclick="filterProducts('computer')">
 
-  <section class="sellers">
+                <div class="category-icon">
+                    💻
+                </div>
 
-   <div class="seller-card">
-    <div class="seller-avatar">🏪</div>
-    <b>Nex Store</b>
-    <span>فروشگاه دیجیتال</span>
-    <button class="follow" onclick="follow(this)">دنبال کردن</button>
-   </div>
+                <strong>
+                    کامپیوتر
+                </strong>
 
-   <div class="seller-card">
-    <div class="seller-avatar">🚘</div>
-    <b>Auto Plus</b>
-    <span>خودرو</span>
-    <button class="follow" onclick="follow(this)">دنبال کردن</button>
-   </div>
+                <small>
+                    تکنولوژی
+                </small>
 
-   <div class="seller-card">
-    <div class="seller-avatar">👕</div>
-    <b>Fashion Hub</b>
-    <span>مد و پوشاک</span>
-    <button class="follow" onclick="follow(this)">دنبال کردن</button>
-   </div>
+            </button>
 
-   <div class="seller-card">
-    <div class="seller-avatar">💻</div>
-    <b>Tech World</b>
-    <span>تکنولوژی</span>
-    <button class="follow" onclick="follow(this)">دنبال کردن</button>
-   </div>
 
-   <div class="seller-card">
-    <div class="seller-avatar">🏠</div>
-    <b>Home Land</b>
-    <span>املاک</span>
-    <button class="follow" onclick="follow(this)">دنبال کردن</button>
-   </div>
+            <button
+                class="category"
+                onclick="filterProducts('fashion')">
 
-  </section>
+                <div class="category-icon">
+                    👕
+                </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
+                <strong>
+                    پوشاک
+                </strong>
 
-   <div>
-    <h3>Nexora</h3>
-    <p>
-     بازار جهانی نسل جدید برای خرید، فروش
-     و ارائه خدمات.
-    </p>
-   </div>
+                <small>
+                    مد و لباس
+                </small>
 
-   <div>
-    <h3>بازار</h3>
-    <ul>
-     <li>خرید</li>
-     <li>فروش</li>
-     <li>خدمات</li>
-     <li>فروشگاه‌ها</li>
-    </ul>
-   </div>
+            </button>
 
-   <div>
-    <h3>حساب</h3>
-    <ul>
-     <li>پروفایل</li>
-     <li>علاقه‌مندی‌ها</li>
-     <li>پیام‌ها</li>
-     <li>تنظیمات</li>
-    </ul>
-   </div>
 
-   <div>
-    <h3>اطلاعات</h3>
-    <ul>
-     <li>حریم خصوصی</li>
-     <li>قوانین</li>
-     <li>درباره Nexora</li>
-     <li>تماس</li>
-    </ul>
-   </div>
+            <button
+                class="category"
+                onclick="filterProducts('game')">
 
-  </footer>
+                <div class="category-icon">
+                    🎮
+                </div>
 
- </div>
+                <strong>
+                    بازی
+                </strong>
+
+                <small>
+                    سرگرمی
+                </small>
+
+            </button>
+
+
+            <button
+                class="category"
+                onclick="filterProducts('homegoods')">
+
+                <div class="category-icon">
+                    🛋️
+                </div>
+
+                <strong>
+                    خانه
+                </strong>
+
+                <small>
+                    لوازم خانه
+                </small>
+
+            </button>
+
+
+            <button
+                class="category"
+                onclick="filterProducts('service')">
+
+                <div class="category-icon">
+                    🛠️
+                </div>
+
+                <strong>
+                    خدمات
+                </strong>
+
+                <small>
+                    متخصصان
+                </small>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+
+    <section
+        class="section"
+        id="products">
+
+        <div class="section-title">
+
+            <div>
+
+                <h2 id="productTitle">
+                    پیشنهادهای منتخب
+                </h2>
+
+                <p>
+                    موارد جذاب انتخاب‌شده برای تو
+                </p>
+
+            </div>
+
+            <button
+                class="section-link"
+                onclick="showToast('نمایش همه محصولات')">
+
+                مشاهده همه ←
+
+            </button>
+
+        </div>
+
+
+        <div class="products">
+
+
+            <!-- PRODUCT 1 -->
+
+            <article
+                class="product"
+                data-category="phone">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        ویژه
+                    </span>
+
+                    <button
+                        class="favorite"
+                        onclick="favorite(this)">
+                        ♡
+                    </button>
+
+                    📱
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        گوشی هوشمند Nex X1 Pro
+                    </div>
+
+                    <div class="product-description">
+                        محصول جدید با طراحی حرفه‌ای
+                        و امکانات پیشرفته
+                    </div>
+
+                    <div class="product-bottom">
+
+                        <span class="product-location">
+                            📍 تهران
+                        </span>
+
+                        <button
+                            class="product-view"
+                            onclick="openProduct(
+                            'گوشی هوشمند Nex X1 Pro',
+                            '📱'
+                            )">
+
+                            مشاهده
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 2 -->
+
+            <article
+                class="product"
+                data-category="car">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        محبوب
+                    </span>
+
+                    <button
+                        class="favorite"
+                        onclick="favorite(this)">
+                        ♡
+                    </button>
+
+                    🚗
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        خودروی مدرن Nex Auto
+                    </div>
+
+                    <div class="product-description">
+                        خودروی تمیز و آماده انتقال
+                    </div>
+
+                    <div class="product-bottom">
+
+                        <span class="product-location">
+                            📍 تهران
+                        </span>
+
+                        <button
+                            class="product-view"
+                            onclick="openProduct(
+                            'خودروی مدرن Nex Auto',
+                            '🚗'
+                            )">
+
+                            مشاهده
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 3 -->
+
+            <article
+                class="product"
+                data-category="home">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        جدید
+                    </span>
+
+                    <button
+                        class="favorite"
+                        onclick="favorite(this)">
+                        ♡
+                    </button>
+
+                    🏠
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        آپارتمان مدرن
+                    </div>
+
+                    <div class="product-description">
+                        واحد مدرن با طراحی زیبا
+                    </div>
+
+                    <div class="product-bottom">
+
+                        <span class="product-location">
+                            📍 استانبول
+                        </span>
+
+                        <button
+                            class="product-view"
+                            onclick="openProduct(
+                            'آپارتمان مدرن',
+                            '🏠'
+                            )">
+
+                            مشاهده
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 4 -->
+
+            <article
+                class="product"
+                data-category="computer">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        ویژه
+                    </span>
+
+                    <button
+                        class="favorite"
+                        onclick="favorite(this)">
+                        ♡
+                    </button>
+
+                    💻
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        NexBook Pro
+                    </div>
+
+                    <div class="product-description">
+                        لپ‌تاپ حرفه‌ای مناسب کار
+                    </div>
+
+                    <div class="product-bottom">
+
+                        <span class="product-location">
+                            📍 شیراز
+                        </span>
+
+                        <button
+                            class="product-view"
+                            onclick="openProduct(
+                            'NexBook Pro',
+                            '💻'
+                            )">
+
+                            مشاهده
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 5 -->
+
+            <article
+                class="product"
+                data-category="fashion">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        محبوب
+                    </span>
+
+                    <button
+                        class="favorite"
+                        onclick="favorite(this)">
+                        ♡
+                    </button>
+
+                    👟
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        کفش اسپرت Premium
+                    </div>
+
+                    <div class="product-description">
+                        مناسب استفاده روزمره
+                    </div>
+
+                    <div class="product-bottom">
+
+                        <span class="product-location">
+                            📍 اصفهان
+                        </span>
+
+                        <button
+                            class="product-view"
+                            onclick="openProduct(
+                            'کفش اسپرت Premium',
+                            '👟'
+                            )">
+
+                            مشاهده
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 6 -->
+
+            <article
+                class="product"
+                data-category="game">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        جدید
+                    </span>
+
+                    <button
+                        class="favorite"
+                        onclick="favorite(this)">
+                        ♡
+                    </button>
+
+                    🎮
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        کنسول بازی نسل جدید
+                    </div>
+
+                    <div class="product-description">
+                        مناسب بازی و سرگرمی
+                    </div>
+
+                    <div class="product-bottom">
+
+                        <span class="product-location">
+                            📍 مشهد
+                        </span>
+
+                        <button
+                            class="product-view"
+                            onclick="openProduct(
+                            'کنسول بازی نسل جدید',
+                            '🎮'
+                            )">
+
+                            مشاهده
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 7 -->
+
+            <article
+                class="product"
+                data-category="homegoods">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        جدید
+                    </span>
+
+                    <button
+                        class="favorite"
+                        onclick="favorite(this)">
+                        ♡
+                    </button>
+
+                    🛋️
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        مبلمان مدرن
+                    </div>
+
+                    <div class="product-description">
+                        طراحی مدرن برای خانه
+                    </div>
+
+                    <div class="product-bottom">
+
+                        <span class="product-location">
+                            📍 تبریز
+                        </span>
+
+                        <button
+                            class="product-view"
+                            onclick="openProduct(
+                            'مبلمان مدرن',
+                            '🛋️'
+                            )">
+
+                            مشاهده
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 8 -->
+
+            <article
+                class="product"
+                data-category="service">
+
+                <div class="product-image">
+
+                    <span class="product-badge">
+                        آنلاین
+                    </span>
+
+                    <button
+                        class="favorite"
+                        onclick="favorite(this)">
+                        ♡
+                    </button>
+
+                    🛠️
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        طراحی سایت و اپلیکیشن
+                    </div>
+
+                    <div class="product-description">
+                        خدمات تخصصی طراحی و توسعه
+                    </div>
+
+                    <div class="product-bottom">
+
+                        <span class="product-location">
+                            🌎 آنلاین
+                        </span>
+
+                        <button
+                            class="product-view"
+                            onclick="openProduct(
+                            'طراحی سایت و اپلیکیشن',
+                            '🛠️'
+                            )">
+
+                            مشاهده
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- SELL BANNER -->
+
+    <section class="sell-banner">
+
+        <div>
+
+            <h2>
+                چیزی برای فروش داری؟
+            </h2>
+
+            <p>
+                آگهی خودت را بساز و آن را
+                در بازار Nexora نمایش بده.
+            </p>
+
+        </div>
+
+        <button
+            class="sell-button"
+            onclick="openSell()">
+
+            ثبت آگهی جدید
+
+        </button>
+
+    </section>
+
+
+    <!-- SELLERS -->
+
+    <section
+        class="section"
+        id="sellers">
+
+        <div class="section-title">
+
+            <div>
+
+                <h2>
+                    فروشگاه‌های محبوب
+                </h2>
+
+                <p>
+                    فروشندگان و برندهای منتخب Nexora
+                </p>
+
+            </div>
+
+            <button
+                class="section-link"
+                onclick="showToast('نمایش همه فروشگاه‌ها')">
+
+                همه فروشگاه‌ها ←
+
+            </button>
+
+        </div>
+
+
+        <div class="sellers">
+
+            <div class="seller">
+
+                <div class="seller-avatar">
+                    📱
+                </div>
+
+                <strong>
+                    Nex Store
+                </strong>
+
+                <span>
+                    فروشگاه دیجیتال
+                </span>
+
+                <button
+                    class="follow"
+                    onclick="follow(this)">
+
+                    دنبال کردن
+
+                </button>
+
+            </div>
+
+
+            <div class="seller">
+
+                <div class="seller-avatar">
+                    🚘
+                </div>
+
+                <strong>
+                    Auto Plus
+                </strong>
+
+                <span>
+                    خودرو
+                </span>
+
+                <button
+                    class="follow"
+                    onclick="follow(this)">
+
+                    دنبال کردن
+
+                </button>
+
+            </div>
+
+
+            <div class="seller">
+
+                <div class="seller-avatar">
+                    👕
+                </div>
+
+                <strong>
+                    Fashion Hub
+                </strong>
+
+                <span>
+                    پوشاک
+                </span>
+
+                <button
+                    class="follow"
+                    onclick="follow(this)">
+
+                    دنبال کردن
+
+                </button>
+
+            </div>
+
+
+            <div class="seller">
+
+                <div class="seller-avatar">
+                    💻
+                </div>
+
+                <strong>
+                    Tech World
+                </strong>
+
+                <span>
+                    تکنولوژی
+                </span>
+
+                <button
+                    class="follow"
+                    onclick="follow(this)">
+
+                    دنبال کردن
+
+                </button>
+
+            </div>
+
+
+            <div class="seller">
+
+                <div class="seller-avatar">
+                    🏠
+                </div>
+
+                <strong>
+                    Home Land
+                </strong>
+
+                <span>
+                    املاک
+                </span>
+
+                <button
+                    class="follow"
+                    onclick="follow(this)">
+
+                    دنبال کردن
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div>
+
+            <h3>
+                Nexora
+            </h3>
+
+            <p>
+                یک بازار مدرن برای خرید،
+                فروش و ارائه خدمات.
+                ساده، سریع و حرفه‌ای.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>
+                بازار
+            </h3>
+
+            <ul>
+                <li>خرید</li>
+                <li>فروش</li>
+                <li>خدمات</li>
+                <li>فروشگاه‌ها</li>
+            </ul>
+
+        </div>
+
+        <div>
+
+            <h3>
+                حساب
+            </h3>
+
+            <ul>
+                <li>پروفایل</li>
+                <li>علاقه‌مندی‌ها</li>
+                <li>پیام‌ها</li>
+                <li>تنظیمات</li>
+            </ul>
+
+        </div>
+
+        <div>
+
+            <h3>
+                Nexora
+            </h3>
+
+            <ul>
+                <li>درباره ما</li>
+                <li>قوانین</li>
+                <li>حریم خصوصی</li>
+                <li>تماس با ما</li>
+            </ul>
+
+        </div>
+
+    </footer>
+
 </main>
 
-</div>
 
-<!-- MOBILE NAV -->
+<!-- =========================
+     MOBILE NAV
+========================= -->
+
 <nav class="mobile-nav">
- <button class="active" onclick="home()">⌂<span>خانه</span></button>
- <button onclick="mode('buy')">🛒<span>خرید</span></button>
- <button onclick="openSell()">＋<span>فروش</span></button>
- <button onclick="openProfile()">👤<span>حساب</span></button>
- <button onclick="openSettings()">⚙️<span>تنظیمات</span></button>
+
+    <button onclick="scrollToSection('products')">
+        🏠
+        <span>خانه</span>
+    </button>
+
+    <button onclick="scrollToSection('categories')">
+        🔎
+        <span>کشف</span>
+    </button>
+
+    <button onclick="openSell()">
+        ＋
+        <span>فروش</span>
+    </button>
+
+    <button onclick="openProfile()">
+        👤
+        <span>حساب</span>
+    </button>
+
+    <button onclick="openSettings()">
+        ⚙️
+        <span>تنظیمات</span>
+    </button>
+
 </nav>
 
-<!-- PRODUCT MODAL -->
-<div class="modal" id="productModal">
- <div class="modal-box">
 
-  <div class="modal-head">
-   <h2 id="productName">محصول</h2>
-   <button class="close" onclick="closeModal('productModal')">×</button>
-  </div>
+<!-- =========================
+     PRODUCT MODAL
+========================= -->
 
-  <div style="
-   height:210px;
-   border-radius:16px;
-   background:linear-gradient(135deg,#e6f7ff,#f9fdff);
-   display:grid;
-   place-items:center;
-   font-size:85px;
-   margin-bottom:15px;
-  " id="productEmoji">📦</div>
+<div
+    class="modal"
+    id="productModal">
 
-  <p style="font-size:11px;color:#71879b;line-height:2">
-   این یک صفحه نمایشی محصول در نسخه فعلی Nexora است.
-   اطلاعات واقعی کالا بعد از اتصال دیتابیس از فروشنده دریافت خواهد شد.
-  </p>
+    <div class="modal-box">
 
-  <button class="primary" style="margin-top:15px"
-   onclick="showToast('برای خرید واقعی باید سیستم سفارش و Backend فعال شود')">
-   ادامه
-  </button>
+        <div class="modal-head">
 
- </div>
+            <h2 id="productModalTitle">
+                محصول
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal('productModal')">
+
+                ×
+
+            </button>
+
+        </div>
+
+        <div
+            id="productModalImage"
+            style="
+            height:220px;
+            border-radius:18px;
+            background:linear-gradient(
+                135deg,
+                #e4f5ff,
+                #f9fdff
+            );
+            display:grid;
+            place-items:center;
+            font-size:90px;
+            margin-bottom:17px;
+            ">
+
+            📦
+
+        </div>
+
+        <p
+            style="
+            color:#71869a;
+            font-size:12px;
+            line-height:2;
+            ">
+
+            این صفحه برای نمایش اطلاعات محصول
+            در نسخه فعلی Nexora ساخته شده است.
+            اطلاعات واقعی محصول پس از اتصال
+            دیتابیس نمایش داده خواهد شد.
+
+        </p>
+
+        <button
+            class="primary"
+            style="margin-top:17px"
+            onclick="
+            showToast('سیستم سفارش در نسخه Backend فعال می‌شود')
+            ">
+
+            ادامه
+
+        </button>
+
+    </div>
+
 </div>
 
-<!-- PROFILE -->
-<div class="modal" id="profileModal">
- <div class="modal-box">
 
-  <div class="modal-head">
-   <h2>👤 پروفایل</h2>
-   <button class="close" onclick="closeModal('profileModal')">×</button>
-  </div>
+<!-- =========================
+     SELL MODAL
+========================= -->
 
-  <div style="text-align:center;margin-bottom:18px">
-   <div class="avatar" style="
-    width:70px;height:70px;margin:auto;
-    font-size:25px;
-   " id="profileAvatar">N</div>
+<div
+    class="modal"
+    id="sellModal">
 
-   <h3 style="margin-top:9px" id="profileName">
-    مهمان Nexora
-   </h3>
+    <div class="modal-box">
 
-   <p style="font-size:10px;color:#71879b;margin-top:4px">
-    حساب کاربری
-   </p>
-  </div>
+        <div class="modal-head">
 
-  <div class="setting-list">
+            <h2>
+                🏷️ ثبت آگهی
+            </h2>
 
-   <button class="setting" onclick="openAccount()">
-    <div>
-     <b>اطلاعات حساب</b>
-     <span>نام کاربری و مشخصات</span>
+            <button
+                class="close"
+                onclick="closeModal('sellModal')">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                عنوان آگهی
+            </label>
+
+            <input
+                id="listingTitle"
+                placeholder="مثلاً گوشی، خودرو، لپ‌تاپ...">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                نوع آگهی
+            </label>
+
+            <select>
+
+                <option>
+                    کالا
+                </option>
+
+                <option>
+                    خدمات
+                </option>
+
+                <option>
+                    فروشگاه
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                دسته‌بندی
+            </label>
+
+            <select>
+
+                <option>
+                    موبایل
+                </option>
+
+                <option>
+                    خودرو
+                </option>
+
+                <option>
+                    املاک
+                </option>
+
+                <option>
+                    کامپیوتر
+                </option>
+
+                <option>
+                    پوشاک
+                </option>
+
+                <option>
+                    خانه
+                </option>
+
+                <option>
+                    بازی
+                </option>
+
+                <option>
+                    خدمات
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                شهر
+            </label>
+
+            <input
+                placeholder="مثلاً تهران">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                توضیحات
+            </label>
+
+            <textarea
+                placeholder="توضیحات کامل آگهی را بنویسید...">
+            </textarea>
+
+        </div>
+
+
+        <button
+            class="primary"
+            onclick="submitListing()">
+
+            انتشار آگهی
+
+        </button>
+
     </div>
-    <span>›</span>
-   </button>
 
-   <button class="setting" onclick="showToast('آگهی‌های من')">
-    <div>
-     <b>آگهی‌های من</b>
-     <span>مدیریت آگهی‌ها</span>
-    </div>
-    <span>›</span>
-   </button>
-
-   <button class="setting" onclick="showToast('علاقه‌مندی‌ها')">
-    <div>
-     <b>علاقه‌مندی‌ها</b>
-     <span>موارد ذخیره شده</span>
-    </div>
-    <span>›</span>
-   </button>
-
-  </div>
-
- </div>
 </div>
 
-<!-- ACCOUNT -->
-<div class="modal" id="accountModal">
- <div class="modal-box">
 
-  <div class="modal-head">
-   <h2>حساب کاربری</h2>
-   <button class="close" onclick="closeModal('accountModal')">×</button>
-  </div>
+<!-- =========================
+     PROFILE MODAL
+========================= -->
 
-  <div class="field">
-   <label>نام کاربری</label>
-   <input id="username" placeholder="مثلاً NexoraUser">
-  </div>
+<div
+    class="modal"
+    id="profileModal">
 
-  <div class="field">
-   <label>رمز عبور</label>
-   <input id="password" type="password" placeholder="رمز عبور">
-  </div>
+    <div class="modal-box">
 
-  <button class="primary" onclick="saveAccount()">
-   ذخیره
-  </button>
+        <div class="modal-head">
 
-  <p style="
-   font-size:9px;
-   color:#71879b;
-   line-height:1.8;
-   margin-top:12px;
-  ">
-   این نسخه نمایشی است. برای احراز هویت واقعی و امن،
-   اتصال Backend و Database لازم است.
-  </p>
+            <h2>
+                👤 حساب کاربری
+            </h2>
 
- </div>
+            <button
+                class="close"
+                onclick="closeModal('profileModal')">
+
+                ×
+
+            </button>
+
+        </div>
+
+        <div style="
+        text-align:center;
+        padding:15px 0 25px;
+        ">
+
+            <div style="
+            width:75px;
+            height:75px;
+            border-radius:22px;
+            margin:auto;
+            display:grid;
+            place-items:center;
+            background:
+            linear-gradient(
+                135deg,
+                #1687ff,
+                #35c5ff
+            );
+            color:white;
+            font-size:28px;
+            font-weight:900;
+            "
+            id="profileLetter">
+
+                N
+
+            </div>
+
+            <h3
+                id="profileUsername"
+                style="margin-top:12px">
+
+                مهمان Nexora
+
+            </h3>
+
+            <p style="
+            color:#71869a;
+            font-size:10px;
+            margin-top:5px;
+            ">
+
+                حساب کاربری
+
+            </p>
+
+        </div>
+
+
+        <button
+            class="setting"
+            style="
+            width:100%;
+            border:1px solid #dbe7ef;
+            background:#f8fcff;
+            padding:14px;
+            border-radius:12px;
+            margin-bottom:8px;
+            text-align:right;
+            "
+            onclick="openAccount()">
+
+            ✏️
+            ویرایش اطلاعات حساب
+
+        </button>
+
+
+        <button
+            class="setting"
+            style="
+            width:100%;
+            border:1px solid #dbe7ef;
+            background:#f8fcff;
+            padding:14px;
+            border-radius:12px;
+            margin-bottom:8px;
+            text-align:right;
+            "
+            onclick="
+            showToast('بخش آگهی‌های من')
+            ">
+
+            🏷️
+            آگهی‌های من
+
+        </button>
+
+
+        <button
+            class="setting"
+            style="
+            width:100%;
+            border:1px solid #dbe7ef;
+            background:#f8fcff;
+            padding:14px;
+            border-radius:12px;
+            text-align:right;
+            "
+            onclick="
+            showToast('علاقه‌مندی‌های شما')
+            ">
+
+            ♡
+            علاقه‌مندی‌ها
+
+        </button>
+
+    </div>
+
 </div>
 
-<!-- SETTINGS -->
-<div class="modal" id="settingsModal">
- <div class="modal-box">
 
-  <div class="modal-head">
-   <h2>⚙️ تنظیمات</h2>
-   <button class="close" onclick="closeModal('settingsModal')">×</button>
-  </div>
+<!-- =========================
+     ACCOUNT MODAL
+========================= -->
 
-  <div class="setting-list">
+<div
+    class="modal"
+    id="accountModal">
 
-   <button class="setting" onclick="toggleDark()">
-    <div>
-     <b>حالت تاریک</b>
-     <span>تغییر ظاهر Nexora</span>
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>
+                تنظیم حساب
+            </h2>
+
+            <button
+                class="close"
+                onclick="closeModal('accountModal')">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                نام کاربری
+            </label>
+
+            <input
+                id="username"
+                placeholder="نام کاربری">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                رمز عبور
+            </label>
+
+            <input
+                id="password"
+                type="password"
+                placeholder="رمز عبور">
+
+        </div>
+
+
+        <button
+            class="primary"
+            onclick="saveAccount()">
+
+            ذخیره تغییرات
+
+        </button>
+
+
+        <p style="
+        color:#71869a;
+        font-size:9px;
+        line-height:1.8;
+        margin-top:12px;
+        ">
+
+            در این نسخه رمز عبور در مرورگر ذخیره نمی‌شود.
+            برای ورود واقعی باید سیستم احراز هویت و
+            Backend به Nexora متصل شود.
+
+        </p>
+
     </div>
-    <div class="switch" id="darkSwitch"></div>
-   </button>
 
-   <button class="setting" onclick="changeLanguage()">
-    <div>
-     <b>زبان</b>
-     <span id="language">فارسی</span>
-    </div>
-    <span>›</span>
-   </button>
-
-   <button class="setting" onclick="showToast('اعلان‌ها فعال هستند')">
-    <div>
-     <b>اعلان‌ها</b>
-     <span>پیام‌ها و پیشنهادها</span>
-    </div>
-    <span>›</span>
-   </button>
-
-   <button class="setting" onclick="showToast('تنظیمات حریم خصوصی')">
-    <div>
-     <b>حریم خصوصی</b>
-     <span>مدیریت اطلاعات</span>
-    </div>
-    <span>›</span>
-   </button>
-
-   <button class="setting" onclick="showToast('تنظیمات کشور و شهر')">
-    <div>
-     <b>مکان</b>
-     <span>انتخاب کشور و شهر</span>
-    </div>
-    <span>›</span>
-   </button>
-
-   <button class="setting" onclick="showToast('Nexora نسخه Premium UI')">
-    <div>
-     <b>درباره Nexora</b>
-     <span>نسخه 1.0</span>
-    </div>
-    <span>›</span>
-   </button>
-
-  </div>
-
- </div>
 </div>
 
-<!-- SELL -->
-<div class="modal" id="sellModal">
- <div class="modal-box">
 
-  <div class="modal-head">
-   <h2>🏷️ ثبت آگهی</h2>
-   <button class="close" onclick="closeModal('sellModal')">×</button>
-  </div>
+<!-- =========================
+     SETTINGS MODAL
+========================= -->
 
-  <div class="field">
-   <label>عنوان آگهی</label>
-   <input id="sellTitle" placeholder="چه چیزی می‌فروشید؟">
-  </div>
+<div
+    class="modal"
+    id="settingsModal">
 
-  <div class="field">
-   <label>نوع</label>
-   <select>
-    <option>کالا</option>
-    <option>خدمات</option>
-    <option>فروشگاه</option>
-   </select>
-  </div>
+    <div class="modal-box">
 
-  <div class="field">
-   <label>دسته‌بندی</label>
-   <select>
-    <option>موبایل</option>
-    <option>خودرو</option>
-    <option>املاک</option>
-    <option>کامپیوتر</option>
-    <option>پوشاک</option>
-    <option>خانه</option>
-    <option>بازی</option>
-    <option>خدمات</option>
-   </select>
-  </div>
+        <div class="modal-head">
 
-  <div class="field">
-   <label>شهر</label>
-   <input placeholder="مثلاً تهران">
-  </div>
+            <h2>
+                ⚙️ تنظیمات Nexora
+            </h2>
 
-  <div class="field">
-   <label>توضیحات</label>
-   <textarea placeholder="توضیحات کامل آگهی..."></textarea>
-  </div>
+            <button
+                class="close"
+                onclick="closeModal('settingsModal')">
 
-  <button class="primary" onclick="submitSell()">
-   انتشار آگهی
-  </button>
+                ×
 
- </div>
+            </button>
+
+        </div>
+
+
+        <button
+            class="setting"
+            style="
+            width:100%;
+            border:1px solid #dbe7ef;
+            background:#f8fcff;
+            padding:15px;
+            border-radius:12px;
+            margin-bottom:9px;
+            display:flex;
+            justify-content:space-between;
+            "
+            onclick="toggleDark()">
+
+            <span>
+                🌙
+                حالت شب
+            </span>
+
+            <span id="darkState">
+                خاموش
+            </span>
+
+        </button>
+
+
+        <button
+            class="setting"
+            style="
+            width:100%;
+            border:1px solid #dbe7ef;
+            background:#f8fcff;
+            padding:15px;
+            border-radius:12px;
+            margin-bottom:9px;
+            display:flex;
+            justify-content:space-between;
+            "
+            onclick="changeLanguage()">
+
+            <span>
+                🌐
+                زبان
+            </span>
+
+            <span id="language">
+                فارسی
+            </span>
+
+        </button>
+
+
+        <button
+            class="setting"
+            style="
+            width:100%;
+            border:1px solid #dbe7ef;
+            background:#f8fcff;
+            padding:15px;
+            border-radius:12px;
+            margin-bottom:9px;
+            display:flex;
+            justify-content:space-between;
+            "
+            onclick="
+            showToast('اعلان‌ها فعال هستند')
+            ">
+
+            <span>
+                🔔
+                اعلان‌ها
+            </span>
+
+            <span>
+                فعال
+            </span>
+
+        </button>
+
+
+        <button
+            class="setting"
+            style="
+            width:100%;
+            border:1px solid #dbe7ef;
+            background:#f8fcff;
+            padding:15px;
+            border-radius:12px;
+            margin-bottom:9px;
+            display:flex;
+            justify-content:space-between;
+            "
+            onclick="
+            showToast('تنظیمات حریم خصوصی')
+            ">
+
+            <span>
+                🔐
+                حریم خصوصی
+            </span>
+
+            <span>
+                ›
+            </span>
+
+        </button>
+
+
+        <button
+            class="setting"
+            style="
+            width:100%;
+            border:1px solid #dbe7ef;
+            background:#f8fcff;
+            padding:15px;
+            border-radius:12px;
+            display:flex;
+            justify-content:space-between;
+            "
+            onclick="
+            showToast('Nexora Premium UI')
+            ">
+
+            <span>
+                ℹ️
+                درباره Nexora
+            </span>
+
+            <span>
+                ›
+            </span>
+
+        </button>
+
+    </div>
+
 </div>
 
-<div class="toast" id="toast"></div>
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+
+</div>
+
 
 <script>
 
-let currentCategory="all";
-let dark=false;
+/* =========================
+   GENERAL
+========================= */
 
 function showToast(text){
- const toast=document.getElementById("toast");
- toast.textContent=text;
- toast.classList.add("show");
 
- setTimeout(()=>{
-  toast.classList.remove("show");
- },2300);
+    const toast =
+    document.getElementById("toast");
+
+    toast.textContent = text;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2300);
+
 }
+
 
 function openModal(id){
- document.getElementById(id).classList.add("show");
+
+    document
+    .getElementById(id)
+    .classList.add("show");
+
 }
+
 
 function closeModal(id){
- document.getElementById(id).classList.remove("show");
-}
 
-function toggleSidebar(){
- document.getElementById("sidebar").classList.toggle("open");
-}
-
-function home(){
- window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function mode(type){
-
- document.getElementById("buyTab").classList.remove("active");
- document.getElementById("sellTab").classList.remove("active");
- document.getElementById("serviceTab").classList.remove("active");
-
- if(type==="buy"){
-  document.getElementById("buyTab").classList.add("active");
-  document.getElementById("productsTitle").textContent="پیشنهادهای ویژه";
-  showToast("حالت خرید فعال شد");
- }
-
- if(type==="sell"){
-  document.getElementById("sellTab").classList.add("active");
-  document.getElementById("productsTitle").textContent="آگهی‌های فروش";
-  showToast("حالت فروش فعال شد");
- }
-
- if(type==="service"){
-  document.getElementById("serviceTab").classList.add("active");
-  document.getElementById("productsTitle").textContent="خدمات پیشنهادی";
-  showToast("حالت خدمات فعال شد");
- }
-
- window.scrollTo({
-  top:document.querySelector(".market-tabs").offsetTop-80,
-  behavior:"smooth"
- });
-}
-
-function category(cat,btn){
-
- document.querySelectorAll(".category")
- .forEach(x=>x.classList.remove("active"));
-
- btn.classList.add("active");
-
- currentCategory=cat;
-
- document.querySelectorAll(".card").forEach(card=>{
-
-  if(cat==="all" || card.dataset.cat===cat){
-   card.style.display="";
-  }else{
-   card.style.display="none";
-  }
-
- });
+    document
+    .getElementById(id)
+    .classList.remove("show");
 
 }
 
-function heart(btn){
 
- btn.textContent=btn.textContent==="♡"?"♥":"♡";
+document
+.querySelectorAll(".modal")
+.forEach(function(modal){
 
- showToast(
-  btn.textContent==="♥"
-  ?"به علاقه‌مندی‌ها اضافه شد"
-  :"از علاقه‌مندی‌ها حذف شد"
- );
+    modal.addEventListener(
+        "click",
+        function(e){
+
+            if(e.target === modal){
+
+                modal.classList.remove("show");
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function scrollToSection(id){
+
+    const element =
+    document.getElementById(id);
+
+    if(!element) return;
+
+    element.scrollIntoView({
+        behavior:"smooth"
+    });
+
 }
 
-function follow(btn){
 
- if(btn.textContent==="دنبال کردن"){
-  btn.textContent="دنبال می‌کنید";
-  btn.style.background="#e9faf3";
-  btn.style.color="#16a36a";
- }else{
-  btn.textContent="دنبال کردن";
-  btn.style.background="";
-  btn.style.color="";
- }
+/* =========================
+   MARKET MODE
+========================= */
+
+function switchMode(mode){
+
+    const buttons = [
+        "buyButton",
+        "sellButton",
+        "serviceButton"
+    ];
+
+    buttons.forEach(function(id){
+
+        document
+        .getElementById(id)
+        .classList.remove("active");
+
+    });
+
+
+    if(mode === "buy"){
+
+        document
+        .getElementById("buyButton")
+        .classList.add("active");
+
+        document
+        .getElementById("productTitle")
+        .textContent =
+        "پیشنهادهای منتخب";
+
+        showToast("حالت خرید فعال شد");
+
+    }
+
+
+    if(mode === "sell"){
+
+        document
+        .getElementById("sellButton")
+        .classList.add("active");
+
+        document
+        .getElementById("productTitle")
+        .textContent =
+        "آگهی‌های فروش";
+
+        showToast("حالت فروش فعال شد");
+
+    }
+
+
+    if(mode === "service"){
+
+        document
+        .getElementById("serviceButton")
+        .classList.add("active");
+
+        document
+        .getElementById("productTitle")
+        .textContent =
+        "خدمات پیشنهادی";
+
+        filterProducts("service");
+
+        showToast("حالت خدمات فعال شد");
+
+    }
 
 }
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function doSearch(){
+
+    const query =
+    document
+    .getElementById("search")
+    .value
+    .trim()
+    .toLowerCase();
+
+    const products =
+    document.querySelectorAll(".product");
+
+
+    if(!query){
+
+        products.forEach(function(product){
+
+            product.style.display="";
+
+        });
+
+        showToast("همه محصولات نمایش داده شدند");
+
+        return;
+
+    }
+
+
+    let found=false;
+
+
+    products.forEach(function(product){
+
+        const name =
+        product
+        .querySelector(".product-name")
+        .textContent
+        .toLowerCase();
+
+
+        if(name.includes(query)){
+
+            product.style.display="";
+
+            found=true;
+
+        }else{
+
+            product.style.display="none";
+
+        }
+
+    });
+
+
+    if(found){
+
+        showToast("نتایج جستجو نمایش داده شد");
+
+        scrollToSection("products");
+
+    }else{
+
+        showToast("محصولی با این نام پیدا نشد");
+
+    }
+
+}
+
+
+document
+.getElementById("search")
+.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            doSearch();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   FILTER
+========================= */
+
+function filterProducts(category){
+
+    const products =
+    document.querySelectorAll(".product");
+
+    products.forEach(function(product){
+
+        if(
+            category === "all" ||
+            product.dataset.category === category
+        ){
+
+            product.style.display="";
+
+        }else{
+
+            product.style.display="none";
+
+        }
+
+    });
+
+
+    scrollToSection("products");
+
+}
+
+
+/* =========================
+   FAVORITE
+========================= */
+
+function favorite(button){
+
+    if(button.textContent === "♡"){
+
+        button.textContent="♥";
+
+        button.style.color="#ef5361";
+
+        showToast(
+            "به علاقه‌مندی‌ها اضافه شد"
+        );
+
+    }else{
+
+        button.textContent="♡";
+
+        button.style.color="";
+
+        showToast(
+            "از علاقه‌مندی‌ها حذف شد"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   PRODUCT
+========================= */
 
 function openProduct(name,emoji){
 
- document.getElementById("productName").textContent=name;
- document.getElementById("productEmoji").textContent=emoji;
+    document
+    .getElementById("productModalTitle")
+    .textContent=name;
 
- openModal("productModal");
+    document
+    .getElementById("productModalImage")
+    .textContent=emoji;
+
+    openModal("productModal");
+
 }
+
+
+/* =========================
+   FOLLOW
+========================= */
+
+function follow(button){
+
+    if(
+        button.textContent.trim()
+        === "دنبال کردن"
+    ){
+
+        button.textContent=
+        "دنبال می‌کنید";
+
+        button.style.background="#e9faf3";
+
+        button.style.color="#16a36a";
+
+        showToast(
+            "فروشگاه دنبال شد"
+        );
+
+    }else{
+
+        button.textContent=
+        "دنبال کردن";
+
+        button.style.background="";
+
+        button.style.color="";
+
+    }
+
+}
+
+
+/* =========================
+   SELL
+========================= */
+
+function openSell(){
+
+    openModal("sellModal");
+
+}
+
+
+function submitListing(){
+
+    const title =
+    document
+    .getElementById("listingTitle")
+    .value
+    .trim();
+
+
+    if(!title){
+
+        showToast(
+            "عنوان آگهی را وارد کنید"
+        );
+
+        return;
+
+    }
+
+
+    closeModal("sellModal");
+
+    showToast(
+        "آگهی آماده انتشار است؛ برای انتشار واقعی Backend لازم است"
+    );
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
 
 function openProfile(){
 
- const name=localStorage.getItem("nexora_username")||"مهمان Nexora";
+    const username =
+    localStorage
+    .getItem("nexora_username")
+    ||
+    "مهمان Nexora";
 
- document.getElementById("profileName").textContent=name;
- document.getElementById("miniName").textContent=name;
 
- const first=name.charAt(0).toUpperCase();
+    document
+    .getElementById("profileUsername")
+    .textContent=username;
 
- document.getElementById("profileAvatar").textContent=first;
- document.getElementById("miniAvatar").textContent=first;
 
- openModal("profileModal");
+    document
+    .getElementById("profileLetter")
+    .textContent=
+    username
+    .charAt(0)
+    .toUpperCase();
+
+
+    openModal("profileModal");
+
 }
+
 
 function openAccount(){
 
- const saved=localStorage.getItem("nexora_username")||"";
+    const saved =
+    localStorage
+    .getItem("nexora_username")
+    ||
+    "";
 
- document.getElementById("username").value=saved;
 
- openModal("accountModal");
+    document
+    .getElementById("username")
+    .value=saved;
+
+
+    openModal("accountModal");
+
 }
+
 
 function saveAccount(){
 
- const username=
- document.getElementById("username").value.trim();
+    const username =
+    document
+    .getElementById("username")
+    .value
+    .trim();
 
- const password=
- document.getElementById("password").value;
 
- if(!username || !password){
-  showToast("نام کاربری و رمز عبور را وارد کنید");
-  return;
- }
+    const password =
+    document
+    .getElementById("password")
+    .value;
 
- localStorage.setItem("nexora_username",username);
 
- document.getElementById("miniName").textContent=username;
- document.getElementById("miniAvatar").textContent=
- username.charAt(0).toUpperCase();
+    if(!username || !password){
 
- showToast("حساب روی این دستگاه ذخیره شد");
+        showToast(
+            "نام کاربری و رمز عبور را وارد کنید"
+        );
 
- closeModal("accountModal");
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "nexora_username",
+        username
+    );
+
+
+    closeModal("accountModal");
+
+    showToast(
+        "اطلاعات حساب ذخیره شد"
+    );
+
 }
+
+
+/* =========================
+   SETTINGS
+========================= */
 
 function openSettings(){
- openModal("settingsModal");
+
+    openModal("settingsModal");
+
 }
 
-function openSell(){
- openModal("sellModal");
-}
-
-function submitSell(){
-
- const title=
- document.getElementById("sellTitle").value.trim();
-
- if(!title){
-  showToast("عنوان آگهی را وارد کنید");
-  return;
- }
-
- showToast(
-  "برای انتشار دائمی آگهی باید Backend متصل شود"
- );
-
- closeModal("sellModal");
-}
 
 function toggleDark(){
 
- dark=!dark;
+    const current =
+    document.body.dataset.dark === "true";
 
- document.getElementById("darkSwitch")
- .classList.toggle("on",dark);
 
- if(dark){
+    if(!current){
 
-  document.body.style.background="#071a2c";
-  document.body.style.color="#edf8ff";
+        document.body.dataset.dark="true";
 
-  document.querySelectorAll(
-   ".card,.category,.seller-card,.market-tabs,.topbar,.sidebar"
-  ).forEach(el=>{
-   el.style.background="#0d263b";
-   el.style.borderColor="#1b4059";
-  });
+        document.body.style.background=
+        "#06152b";
 
- }else{
+        document
+        .getElementById("darkState")
+        .textContent="روشن";
 
-  location.reload();
+        showToast(
+            "حالت شب فعال شد"
+        );
 
- }
+    }else{
+
+        document.body.dataset.dark="false";
+
+        document.body.style.background="";
+
+        document
+        .getElementById("darkState")
+        .textContent="خاموش";
+
+        showToast(
+            "حالت شب خاموش شد"
+        );
+
+    }
 
 }
+
 
 function changeLanguage(){
 
- const langs=[
-  "فارسی",
-  "English",
-  "العربية",
-  "Türkçe",
-  "Deutsch",
-  "Français"
- ];
+    const languages=[
+        "فارسی",
+        "English",
+        "العربية",
+        "Türkçe",
+        "Deutsch",
+        "Français",
+        "Русский",
+        "中文"
+    ];
 
- const el=document.getElementById("language");
 
- let i=langs.indexOf(el.textContent);
+    const element =
+    document
+    .getElementById("language");
 
- i=(i+1)%langs.length;
 
- el.textContent=langs[i];
+    let index =
+    languages.indexOf(
+        element.textContent
+    );
 
- showToast("زبان: "+langs[i]);
+
+    index =
+    (index+1)
+    %
+    languages.length;
+
+
+    element.textContent=
+    languages[index];
+
+
+    showToast(
+        "زبان: "
+        +
+        languages[index]
+    );
 
 }
-
-document.getElementById("search")
-.addEventListener("input",function(){
-
- const q=this.value.trim().toLowerCase();
-
- document.querySelectorAll(".card").forEach(card=>{
-
-  const title=
-   card.querySelector(".card-title")
-   .textContent.toLowerCase();
-
-  const categoryOK=
-   currentCategory==="all" ||
-   card.dataset.cat===currentCategory;
-
-  const searchOK=
-   !q || title.includes(q);
-
-  card.style.display=
-   categoryOK && searchOK ? "" : "none";
-
- });
-
-});
-
-document.querySelectorAll(".modal").forEach(modal=>{
-
- modal.addEventListener("click",function(e){
-
-  if(e.target===modal){
-   modal.classList.remove("show");
-  }
-
- });
-
-});
 
 </script>
 
