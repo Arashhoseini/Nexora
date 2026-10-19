@@ -1,211 +1,754 @@
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#071426">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d1b">
+  <meta name="description" content="Nexora — your multilingual digital services platform.">
   <title>Nexora — Digital Services</title>
+
+  <!-- Pi SDK: initialize before authentication -->
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+
   <style>
-    * { box-sizing: border-box; }
+    :root {
+      --bg:#080d1b;
+      --panel:#10192b;
+      --panel2:#141f34;
+      --line:#263650;
+      --text:#f1f5ff;
+      --muted:#9aaac4;
+      --cyan:#7de3ff;
+      --purple:#a995ff;
+      --green:#7ee7b1;
+      --danger:#ff9eaa;
+      --radius:20px;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      color: #eef7ff;
-      background: #071426;
+      margin:0;
+      background:
+        radial-gradient(ellipse at 10% 0%,#15274a 0,transparent 35%),
+        radial-gradient(ellipse at 100% 35%,#201741 0,transparent 32%),
+        var(--bg);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+      min-height:100vh;
     }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 7%;
-      border-bottom: 1px solid #203750;
+    button,input,select { font:inherit; }
+    button { cursor:pointer; }
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {
+      outline:2px solid var(--cyan);
+      outline-offset:3px;
     }
-    .logo {
-      font-size: 26px;
-      font-weight: 800;
-      color: #8de5ff;
-      letter-spacing: 2px;
+    a { color:inherit;text-decoration:none; }
+    .shell { max-width:1400px;margin:auto;padding:0 24px; }
+    .topbar {
+      position:sticky;top:0;z-index:20;
+      background:rgba(8,13,27,.86);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(125,227,255,.12);
     }
-    .tag {
-      color: #9db4cc;
-      font-size: 12px;
+    .top-inner {
+      min-height:76px;display:flex;align-items:center;
+      justify-content:space-between;gap:18px;
     }
-    main {
-      max-width: 1050px;
-      margin: auto;
-      padding: 65px 22px;
+    .brand { display:flex;align-items:center;gap:11px;min-width:max-content; }
+    .brand-mark {
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      font-size:23px;font-weight:900;color:#08101d;
+      background:linear-gradient(135deg,var(--cyan),var(--purple));
+      box-shadow:0 0 30px #7de3ff25;
     }
+    .brand-name { font-size:21px;font-weight:850;letter-spacing:2px; }
+    .brand-sub { color:var(--muted);font-size:10px;letter-spacing:1.4px;margin-top:3px; }
+    .nav { display:flex;align-items:center;gap:5px; }
+    .nav button,.icon-btn {
+      border:1px solid transparent;background:transparent;color:var(--muted);
+      padding:10px 12px;border-radius:11px;
+    }
+    .nav button:hover,.nav button.active,.icon-btn:hover {
+      color:var(--text);background:#ffffff08;border-color:var(--line);
+    }
+    .actions { display:flex;align-items:center;gap:9px; }
+    .language {
+      color:var(--text);background:var(--panel);
+      border:1px solid var(--line);border-radius:11px;
+      padding:10px 9px;max-width:125px;
+    }
+    .primary,.secondary,.ghost {
+      border-radius:12px;padding:12px 16px;font-weight:750;
+      transition:transform .18s ease,opacity .18s ease;
+    }
+    .primary {
+      color:#08101d;border:0;
+      background:linear-gradient(120deg,var(--cyan),#a9d8ff);
+      box-shadow:0 8px 28px #7de3ff18;
+    }
+    .secondary { background:#a995ff18;color:#d8ceff;border:1px solid #a995ff55; }
+    .ghost { background:transparent;color:var(--text);border:1px solid var(--line); }
+    .primary:hover,.secondary:hover,.ghost:hover { transform:translateY(-1px); }
+    button:disabled { opacity:.55;cursor:not-allowed;transform:none; }
+    .menu-btn { display:none; }
+    main { padding-top:32px;padding-bottom:55px; }
     .hero {
-      padding: 38px 0 48px;
-      text-align: center;
+      position:relative;overflow:hidden;
+      padding:clamp(28px,5vw,65px);
+      border:1px solid #8bdfff25;border-radius:28px;
+      background:linear-gradient(125deg,#132640e8,#15162fe8 62%,#21183be8);
+      box-shadow:0 30px 90px #00000025;
     }
-    .pill {
-      display: inline-block;
-      padding: 8px 14px;
-      border: 1px solid #275477;
-      border-radius: 30px;
-      color: #8de5ff;
-      font-size: 13px;
+    .hero:after {
+      content:"N";position:absolute;right:5%;top:-65px;
+      font-size:clamp(180px,28vw,360px);font-weight:950;
+      line-height:1;color:#b9e9ff07;pointer-events:none;
     }
-    h1 {
-      font-size: clamp(36px, 7vw, 64px);
-      margin: 22px 0 15px;
-      line-height: 1.1;
+    [dir="rtl"] .hero:after { right:auto;left:5%; }
+    .eyebrow {
+      display:inline-flex;gap:8px;align-items:center;
+      padding:8px 12px;border-radius:99px;
+      border:1px solid #7de3ff45;background:#7de3ff0b;
+      color:var(--cyan);font-size:12px;font-weight:750;
     }
-    h1 span { color: #75dfff; }
-    .intro {
-      max-width: 580px;
-      margin: auto;
-      line-height: 1.8;
-      color: #afc1d5;
+    .dot { width:7px;height:7px;border-radius:50%;background:var(--green); }
+    h1 { font-size:clamp(38px,6vw,72px);line-height:1.07;letter-spacing:-2px;margin:24px 0 18px; }
+    h1 span {
+      background:linear-gradient(90deg,var(--cyan),#c4b6ff);
+      color:transparent;background-clip:text;-webkit-background-clip:text;
     }
-    button {
-      border: 0;
-      border-radius: 12px;
-      padding: 14px 22px;
-      background: #7be0ff;
-      color: #071426;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
+    .hero p { color:#b5c5dc;max-width:650px;line-height:1.85;font-size:16px; }
+    .hero-actions { display:flex;gap:12px;flex-wrap:wrap;margin-top:28px; }
+    .trust { display:flex;gap:22px;flex-wrap:wrap;margin-top:32px;color:var(--muted);font-size:12px; }
+    .trust span:before { content:"✓";color:var(--green);margin-inline-end:7px; }
+    .section { margin-top:38px;scroll-margin-top:100px; }
+    .section-head {
+      display:flex;align-items:end;justify-content:space-between;
+      gap:15px;margin-bottom:17px;flex-wrap:wrap;
     }
-    button:disabled { opacity: .6; cursor: wait; }
-    .hero button { margin-top: 26px; }
-    #status {
-      min-height: 24px;
-      margin-top: 15px;
-      color: #a8dff4;
-      font-size: 14px;
+    .section-head h2 { font-size:23px;margin:0 0 6px; }
+    .section-head p { color:var(--muted);margin:0;font-size:13px; }
+    .text-link { color:var(--cyan);font-size:13px;background:none;border:0;padding:8px; }
+    .stats { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px; }
+    .stat,.card,.wallet,.feature-panel,.service-card {
+      background:linear-gradient(145deg,#121d31,#0e1728);
+      border:1px solid var(--line);border-radius:var(--radius);
     }
-    .section-title { margin: 25px 0; font-size: 25px; }
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 16px;
+    .stat { padding:20px; }
+    .stat-top { display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px;gap:8px; }
+    .stat-icon,.service-icon {
+      display:grid;place-items:center;background:#7de3ff12;
+      border:1px solid #7de3ff25;border-radius:13px;
     }
-    .card {
-      background: #0c2037;
-      border: 1px solid #1d3a55;
-      border-radius: 18px;
-      padding: 24px;
+    .stat-icon { width:38px;height:38px;font-size:18px; }
+    .stat strong { display:block;font-size:23px;margin-top:16px; }
+    .stat small { color:var(--muted);font-size:11px; }
+    .grid-2 { display:grid;grid-template-columns:1.2fr .8fr;gap:16px; }
+    .wallet { padding:24px;position:relative;overflow:hidden; }
+    .wallet:after {
+      content:"";position:absolute;width:200px;height:200px;border-radius:50%;
+      background:#9d8aff10;right:-70px;top:-100px;filter:blur(5px);
     }
-    .symbol { font-size: 28px; }
-    .card h3 { margin-bottom: 9px; }
-    .card p {
-      color: #a9bdd1;
-      line-height: 1.7;
-      font-size: 14px;
+    [dir="rtl"] .wallet:after { right:auto;left:-70px; }
+    .wallet-label { color:var(--muted);font-size:13px; }
+    .balance { font-size:clamp(28px,4vw,43px);font-weight:850;margin:16px 0 7px; }
+    .balance small { font-size:13px;color:var(--muted);font-weight:500; }
+    .wallet-note { color:var(--muted);font-size:12px;line-height:1.7; }
+    .wallet-actions { display:flex;gap:9px;flex-wrap:wrap;margin-top:20px; }
+    .feature-panel { padding:24px; }
+    .feature-panel h3 { margin:0 0 9px;font-size:18px; }
+    .feature-panel p { color:var(--muted);font-size:13px;line-height:1.8; }
+    .services-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px; }
+    .service-card { padding:22px;transition:border-color .2s,transform .2s; }
+    .service-card:hover { transform:translateY(-3px);border-color:#7de3ff65; }
+    .service-icon { width:48px;height:48px;font-size:23px;margin-bottom:17px; }
+    .service-card h3 { margin:0 0 8px;font-size:17px; }
+    .service-card p { color:var(--muted);font-size:13px;line-height:1.75;min-height:45px; }
+    .service-card button { margin-top:12px;width:100%; }
+    .search {
+      width:min(100%,330px);padding:11px 13px;border-radius:12px;
+      border:1px solid var(--line);background:var(--panel);color:var(--text);
     }
-    .account {
-      margin-top: 35px;
-      padding: 25px;
-      border-radius: 18px;
-      border: 1px solid #244761;
-      background: #0a1b30;
+    .activity { padding:5px 22px; }
+    .activity-row {
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;padding:17px 0;border-bottom:1px solid #ffffff0d;
     }
-    footer {
-      padding: 25px;
-      text-align: center;
-      color: #7890a8;
-      border-top: 1px solid #203750;
-      font-size: 12px;
+    .activity-row:last-child { border-bottom:0; }
+    .activity-left { display:flex;align-items:center;gap:12px; }
+    .activity-left strong { display:block;font-size:13px; }
+    .activity-left small { color:var(--muted);font-size:11px;display:block;margin-top:5px; }
+    .badge { font-size:11px;padding:6px 9px;border-radius:99px;background:#ffffff0b;color:var(--muted); }
+    .support-box {
+      display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+      padding:25px;border:1px solid #9b8cff35;border-radius:20px;
+      background:linear-gradient(110deg,#9b8cff12,#7de3ff08);
     }
-    a { color: #8de5ff; }
+    .support-box h3 { margin:0 0 7px; }
+    .support-box p { color:var(--muted);margin:0;font-size:13px;line-height:1.7; }
+    footer { border-top:1px solid #ffffff12;padding:28px 0 38px;color:var(--muted);font-size:12px; }
+    .footer-inner { display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap; }
+    .footer-links { display:flex;gap:17px;flex-wrap:wrap; }
+    .footer-links a:hover { color:var(--cyan); }
+    .notice {
+      border:1px solid #e9c8793a;background:#e9c8790c;color:#e8d8ac;
+      border-radius:12px;padding:13px 15px;font-size:12px;line-height:1.7;margin-top:17px;
+    }
+    .hidden { display:none!important; }
+    .toast {
+      position:fixed;z-index:60;bottom:22px;left:50%;
+      transform:translateX(-50%);max-width:min(92vw,520px);
+      padding:14px 18px;background:#17253b;border:1px solid #47617d;
+      border-radius:14px;color:var(--text);box-shadow:0 15px 50px #0008;
+      font-size:13px;line-height:1.6;
+    }
+    .modal-backdrop {
+      position:fixed;inset:0;z-index:50;background:#020611c9;
+      display:grid;place-items:center;padding:18px;
+    }
+    .modal {
+      width:min(100%,460px);background:#101a2d;border:1px solid var(--line);
+      border-radius:22px;padding:26px;box-shadow:0 25px 100px #0008;
+    }
+    .modal h2 { margin-top:0; }
+    .modal p { color:var(--muted);line-height:1.8;font-size:13px; }
+    .modal-actions { display:flex;gap:10px;flex-wrap:wrap;margin-top:20px; }
+    @media(max-width:1000px) {
+      .nav { display:none; }
+      .nav.open {
+        display:flex;position:absolute;left:16px;right:16px;top:76px;
+        flex-direction:column;align-items:stretch;background:#0d1729;
+        border:1px solid var(--line);border-radius:16px;padding:10px;
+      }
+      .nav.open button { text-align:start; }
+      .menu-btn { display:inline-block; }
+      .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .services-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media(max-width:650px) {
+      .shell { padding:0 15px; }
+      .top-inner { min-height:68px;gap:9px; }
+      .brand-name { font-size:18px; }
+      .brand-sub { display:none; }
+      .brand-mark { width:36px;height:36px; }
+      .actions { gap:5px; }
+      .language { max-width:100px;padding:9px 5px;font-size:12px; }
+      #loginBtn { padding:10px 11px;font-size:12px; }
+      main { padding-top:20px; }
+      .hero { padding:27px 21px;border-radius:22px; }
+      .hero p { font-size:14px; }
+      .trust { gap:12px; }
+      .grid-2,.services-grid { grid-template-columns:1fr; }
+      .stat { padding:15px; }
+      .stat strong { font-size:20px; }
+      .stat-icon { width:32px;height:32px; }
+      .service-card p { min-height:0; }
+      .section-head { align-items:start; }
+      .search { width:100%; }
+      .activity { padding:5px 14px; }
+      .balance { font-size:32px; }
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo">NEXORA</div>
-    <div class="tag">DIGITAL PLATFORM</div>
-  </header>
+<header class="topbar">
+  <div class="shell top-inner">
+    <a class="brand" href="#home" aria-label="Nexora home">
+      <div class="brand-mark">N</div>
+      <div>
+        <div class="brand-name">NEXORA</div>
+        <div class="brand-sub" data-i18n="tagline">YOUR DIGITAL UNIVERSE</div>
+      </div>
+    </a>
 
-  <main>
-    <section class="hero">
-      <div class="pill">Your digital space</div>
-      <h1>Explore more with<br><span>Nexora.</span></h1>
-      <p class="intro">
-        A simple place to discover digital services, manage your profile,
-        and explore new tools in one modern platform.
-      </p>
-      <button id="loginBtn" onclick="loginWithPi()">Sign in with Pi</button>
-      <div id="status" role="status">Welcome to Nexora.</div>
-    </section>
+    <nav class="nav" id="nav">
+      <button class="active" data-go="home" data-i18n="navHome">Home</button>
+      <button data-go="services" data-i18n="navServices">Services</button>
+      <button data-go="wallet" data-i18n="navWallet">Wallet</button>
+      <button data-go="activity" data-i18n="navActivity">Activity</button>
+      <button data-go="support" data-i18n="navSupport">Support</button>
+    </nav>
 
-    <h2 class="section-title">Explore Services</h2>
-    <section class="services">
-      <article class="card">
-        <div class="symbol">✦</div>
-        <h3>Digital Tools</h3>
-        <p>Discover useful tools for everyday digital tasks.</p>
+    <div class="actions">
+      <select id="language" class="language" aria-label="Select language">
+        <option value="en">English</option>
+        <option value="fa">فارسی</option>
+        <option value="ar">العربية</option>
+        <option value="de">Deutsch</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="tr">Türkçe</option>
+        <option value="ru">Русский</option>
+        <option value="zh">中文</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+      <button id="loginBtn" class="primary" data-i18n="login" onclick="loginWithPi()">Sign in with Pi</button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="hero" id="home">
+    <div class="eyebrow"><span class="dot"></span><span data-i18n="heroBadge">A NEW DIGITAL EXPERIENCE</span></div>
+    <h1 data-i18n-html="heroTitle">One platform.<br><span>Endless possibilities.</span></h1>
+    <p data-i18n="heroText">
+      Discover digital services, manage your account, and explore a growing ecosystem built to make your online life simpler.
+    </p>
+    <div class="hero-actions">
+      <button class="primary" onclick="loginWithPi()" data-i18n="getStarted">Get started with Pi</button>
+      <button class="ghost" onclick="goTo('services')" data-i18n="exploreServices">Explore services ↓</button>
+    </div>
+    <div class="trust">
+      <span data-i18n="trust1">Designed for mobile</span>
+      <span data-i18n="trust2">Multilingual experience</span>
+      <span data-i18n="trust3">Pi sign-in integration</span>
+    </div>
+  </section>
+
+  <section class="section" id="overview">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="overviewTitle">Your overview</h2>
+        <p data-i18n="overviewSub">Your Nexora space at a glance</p>
+      </div>
+      <span class="badge" id="accountBadge" data-i18n="guestMode">Guest mode</span>
+    </div>
+    <div class="stats">
+      <article class="stat">
+        <div class="stat-top"><span data-i18n="statAccount">Account</span><span class="stat-icon">◉</span></div>
+        <strong id="accountStat" data-i18n="guest">Guest</strong>
+        <small data-i18n="statAccountSub">Sign in to connect your account</small>
       </article>
-      <article class="card">
-        <div class="symbol">◈</div>
-        <h3>Your Profile</h3>
-        <p>Your personal account area will be available after secure account setup.</p>
+      <article class="stat">
+        <div class="stat-top"><span data-i18n="statServices">Services</span><span class="stat-icon">✧</span></div>
+        <strong>06</strong>
+        <small data-i18n="statServicesSub">Service categories to explore</small>
       </article>
-      <article class="card">
-        <div class="symbol">⌘</div>
-        <h3>Services Hub</h3>
-        <p>A central place to explore services as the Nexora platform grows.</p>
+      <article class="stat">
+        <div class="stat-top"><span data-i18n="statSecurity">Security</span><span class="stat-icon">⌑</span></div>
+        <strong data-i18n="statSetup">Setup pending</strong>
+        <small data-i18n="statSecuritySub">Server verification required</small>
       </article>
-    </section>
+      <article class="stat">
+        <div class="stat-top"><span data-i18n="statPayments">Payments</span><span class="stat-icon">◇</span></div>
+        <strong data-i18n="statNotReady">Not enabled</strong>
+        <small data-i18n="statPaymentsSub">Available after secure setup</small>
+      </article>
+    </div>
+  </section>
 
-    <section class="account">
-      <h2>Your Nexora Account</h2>
-      <p id="accountInfo">Sign in with Pi to test authentication.</p>
-    </section>
-  </main>
+  <section class="section" id="wallet">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="walletTitle">Wallet & payments</h2>
+        <p data-i18n="walletSub">Payment features will be enabled after server integration</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <article class="wallet">
+        <div class="wallet-label" data-i18n="walletBalance">Nexora balance</div>
+        <div class="balance">— <small>π</small></div>
+        <div class="wallet-note" data-i18n="walletNoBalance">No real balance is connected. This page does not hold funds or read your Pi wallet balance.</div>
+        <div class="wallet-actions">
+          <button class="primary" onclick="showNotice('payment')" data-i18n="deposit">Deposit</button>
+          <button class="secondary" onclick="showNotice('payment')" data-i18n="withdraw">Withdraw</button>
+          <button class="ghost" onclick="showNotice('payment')" data-i18n="transfer">Transfer</button>
+        </div>
+      </article>
+      <article class="feature-panel">
+        <h3 data-i18n="paymentsTitle">Pi payments</h3>
+        <p data-i18n="paymentsText">A secure payment flow requires server-side approval, transaction verification, and completion. These safeguards are not yet connected to this demo.</p>
+        <button class="ghost" onclick="showNotice('payment')" data-i18n="paymentDetails">Payment information</button>
+        <div class="notice" data-i18n="paymentNotice">Demo interface only. Do not send Pi or share wallet secrets through this page.</div>
+      </article>
+    </div>
+  </section>
 
-  <footer>
-    Nexora · Digital Services Platform
-  </footer>
+  <section class="section" id="services">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="servicesTitle">Explore services</h2>
+        <p data-i18n="servicesSub">A growing hub for your digital needs</p>
+      </div>
+      <input class="search" id="serviceSearch" type="search" data-i18n-placeholder="searchPlaceholder" placeholder="Search services...">
+    </div>
+    <div class="services-grid" id="servicesGrid">
+      <article class="service-card" data-service="tools">
+        <div class="service-icon">✧</div><h3 data-i18n="service1">Digital tools</h3>
+        <p data-i18n="service1Text">Explore helpful tools for everyday digital tasks.</p>
+        <button class="ghost" onclick="openService('tools')" data-i18n="explore">Explore</button>
+      </article>
+      <article class="service-card" data-service="market">
+        <div class="service-icon">▦</div><h3 data-i18n="service2">Service marketplace</h3>
+        <p data-i18n="service2Text">Discover digital services and future provider listings.</p>
+        <button class="ghost" onclick="openService('market')" data-i18n="explore">Explore</button>
+      </article>
+      <article class="service-card" data-service="profile">
+        <div class="service-icon">◎</div><h3 data-i18n="service3">Personal profile</h3>
+        <p data-i18n="service3Text">A home for your account and preferences.</p>
+        <button class="ghost" onclick="openService('profile')" data-i18n="openSection">Open section</button>
+      </article>
+      <article class="service-card" data-service="community">
+        <div class="service-icon">⌘</div><h3 data-i18n="service4">Community</h3>
+        <p data-i18n="service4Text">A place for members to connect as the platform grows.</p>
+        <button class="ghost" onclick="openService('community')" data-i18n="explore">Explore</button>
+      </article>
+      <article class="service-card" data-service="payments">
+        <div class="service-icon">◇</div><h3 data-i18n="service5">Pi payments</h3>
+        <p data-i18n="service5Text">Payment integration is planned, not active yet.</p>
+        <button class="ghost" onclick="showNotice('payment')" data-i18n="learnMore">Learn more</button>
+      </article>
+      <article class="service-card" data-service="support">
+        <div class="service-icon">✉</div><h3 data-i18n="service6">Help & support</h3>
+        <p data-i18n="service6Text">Find help with using Nexora and its features.</p>
+        <button class="ghost" onclick="goTo('support')" data-i18n="getHelp">Get help</button>
+      </article>
+    </div>
+    <p class="wallet-note hidden" id="noResults" data-i18n="noResults">No matching services found.</p>
+  </section>
 
-  <script>
-    const statusBox = document.getElementById("status");
-    const loginBtn = document.getElementById("loginBtn");
-    const accountInfo = document.getElementById("accountInfo");
+  <section class="section" id="activity">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="activityTitle">Recent activity</h2>
+        <p data-i18n="activitySub">Updates about this demo interface</p>
+      </div>
+    </div>
+    <article class="card activity">
+      <div class="activity-row">
+        <div class="activity-left"><div class="service-icon">✦</div><div><strong data-i18n="activity1">Nexora interface ready</strong><small data-i18n="activity1Sub">Website interface loaded</small></div></div>
+        <span class="badge" data-i18n="activityStatus">Info</span>
+      </div>
+      <div class="activity-row">
+        <div class="activity-left"><div class="service-icon">◎</div><div><strong data-i18n="activity2">Pi authentication</strong><small data-i18n="activity2Sub">Server verification not connected</small></div></div>
+        <span class="badge" data-i18n="pending">Pending</span>
+      </div>
+      <div class="activity-row">
+        <div class="activity-left"><div class="service-icon">◇</div><div><strong data-i18n="activity3">Payments</strong><small data-i18n="activity3Sub">No real transactions have been made</small></div></div>
+        <span class="badge" data-i18n="disabled">Disabled</span>
+      </div>
+    </article>
+  </section>
 
-    async function loginWithPi() {
-      if (!window.Pi) {
-        statusBox.textContent =
-          "Pi Browser and the Pi SDK are required for Pi sign-in.";
-        return;
+  <section class="section" id="support">
+    <div class="support-box">
+      <div>
+        <h3 data-i18n="supportTitle">Need a hand?</h3>
+        <p data-i18n="supportText">Nexora is being built step by step. Contact details and live support can be added when configured.</p>
+      </div>
+      <button class="secondary" onclick="showNotice('support')" data-i18n="supportButton">Support options</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell footer-inner">
+    <div>© <span id="year"></span> NEXORA. <span data-i18n="footerRights">All rights reserved.</span></div>
+    <div class="footer-links">
+      <a href="privacy.html" data-i18n="privacy">Privacy</a>
+      <a href="terms.html" data-i18n="terms">Terms</a>
+      <a href="#support" data-i18n="navSupport">Support</a>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <h2 id="modalTitle">Nexora</h2>
+    <p id="modalText"></p>
+    <div class="modal-actions">
+      <button class="primary" id="modalOk">OK</button>
+      <button class="ghost" id="modalClose" data-i18n="close">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const translations = {
+    en: {
+      tagline:"YOUR DIGITAL UNIVERSE",navHome:"Home",navServices:"Services",navWallet:"Wallet",
+      navActivity:"Activity",navSupport:"Support",login:"Sign in with Pi",
+      heroBadge:"A NEW DIGITAL EXPERIENCE",
+      heroTitle:'One platform.<br><span>Endless possibilities.</span>',
+      heroText:"Discover digital services, manage your account, and explore a growing ecosystem built to make your online life simpler.",
+      getStarted:"Get started with Pi",exploreServices:"Explore services ↓",
+      trust1:"Designed for mobile",trust2:"Multilingual experience",trust3:"Pi sign-in integration",
+      overviewTitle:"Your overview",overviewSub:"Your Nexora space at a glance",guestMode:"Guest mode",
+      statAccount:"Account",guest:"Guest",statAccountSub:"Sign in to connect your account",
+      statServices:"Services",statServicesSub:"Service categories to explore",
+      statSecurity:"Security",statSetup:"Setup pending",statSecuritySub:"Server verification required",
+      statPayments:"Payments",statNotReady:"Not enabled",statPaymentsSub:"Available after secure setup",
+      walletTitle:"Wallet & payments",walletSub:"Payment features will be enabled after server integration",
+      walletBalance:"Nexora balance",walletNoBalance:"No real balance is connected. This page does not hold funds or read your Pi wallet balance.",
+      deposit:"Deposit",withdraw:"Withdraw",transfer:"Transfer",paymentsTitle:"Pi payments",
+      paymentsText:"A secure payment flow requires server-side approval, transaction verification, and completion. These safeguards are not yet connected to this demo.",
+      paymentDetails:"Payment information",paymentNotice:"Demo interface only. Do not send Pi or share wallet secrets through this page.",
+      servicesTitle:"Explore services",servicesSub:"A growing hub for your digital needs",
+      searchPlaceholder:"Search services...",service1:"Digital tools",service1Text:"Explore helpful tools for everyday digital tasks.",
+      service2:"Service marketplace",service2Text:"Discover digital services and future provider listings.",
+      service3:"Personal profile",service3Text:"A home for your account and preferences.",
+      service4:"Community",service4Text:"A place for members to connect as the platform grows.",
+      service5:"Pi payments",service5Text:"Payment integration is planned, not active yet.",
+      service6:"Help & support",service6Text:"Find help with using Nexora and its features.",
+      explore:"Explore",openSection:"Open section",learnMore:"Learn more",getHelp:"Get help",
+      noResults:"No matching services found.",activityTitle:"Recent activity",activitySub:"Updates about this demo interface",
+      activity1:"Nexora interface ready",activity1Sub:"Website interface loaded",activityStatus:"Info",
+      activity2:"Pi authentication",activity2Sub:"Server verification not connected",pending:"Pending",
+      activity3:"Payments",activity3Sub:"No real transactions have been made",disabled:"Disabled",
+      supportTitle:"Need a hand?",supportText:"Nexora is being built step by step. Contact details and live support can be added when configured.",
+      supportButton:"Support options",footerRights:"All rights reserved.",privacy:"Privacy",terms:"Terms",close:"Close",
+      loginStart:"Connecting to Pi Browser...",loginSuccess:"Pi authentication response received. Server verification is still required.",
+      loginError:"Pi sign-in could not be completed. Open this site in Pi Browser and try again.",
+      loginMissing:"Pi SDK is unavailable. Open Nexora in Pi Browser.",
+      paymentInfo:"Deposits, withdrawals, transfers, and payments are not active yet. A secure backend and official Pi payment verification must be implemented first.",
+      supportInfo:"Live support has not been configured yet. Add a real support email or contact channel before publishing.",
+      serviceInfo:"This service section is a preview. Its real functionality will be added in a later development step.",
+      signedIn:"Signed in (unverified)",welcome:"Welcome",ok:"OK"
+    },
+    fa: {
+      tagline:"جهان دیجیتال شما",navHome:"خانه",navServices:"خدمات",navWallet:"کیف پول",
+      navActivity:"فعالیت‌ها",navSupport:"پشتیبانی",login:"ورود با Pi",
+      heroBadge:"تجربه‌ای تازه در دنیای دیجیتال",
+      heroTitle:'یک پلتفرم.<br><span>بی‌نهایت امکان.</span>',
+      heroText:"خدمات دیجیتال را کشف کنید، حساب خود را مدیریت کنید و از امکاناتی که برای ساده‌تر شدن زندگی آنلاین شما ساخته می‌شوند بهره ببرید.",
+      getStarted:"شروع با Pi",exploreServices:"مشاهده خدمات ↓",
+      trust1:"مناسب موبایل",trust2:"چندزبانه",trust3:"ورود با Pi",
+      overviewTitle:"نمای کلی شما",overviewSub:"نمایی سریع از فضای Nexora",guestMode:"حالت مهمان",
+      statAccount:"حساب",guest:"مهمان",statAccountSub:"برای اتصال حساب وارد شوید",
+      statServices:"خدمات",statServicesSub:"دسته‌های خدمات برای بررسی",
+      statSecurity:"امنیت",statSetup:"نیازمند راه‌اندازی",statSecuritySub:"اعتبارسنجی سرور لازم است",
+      statPayments:"پرداخت‌ها",statNotReady:"فعال نیست",statPaymentsSub:"پس از راه‌اندازی امن فعال می‌شود",
+      walletTitle:"کیف پول و پرداخت",walletSub:"امکانات پرداخت پس از اتصال سرور فعال می‌شوند",
+      walletBalance:"موجودی Nexora",walletNoBalance:"موجودی واقعی متصل نیست. این صفحه پول نگهداری نمی‌کند و موجودی کیف پول Pi شما را نمی‌خواند.",
+      deposit:"واریز",withdraw:"برداشت",transfer:"انتقال",paymentsTitle:"پرداخت‌های Pi",
+      paymentsText:"پرداخت امن به تأیید سرور، بررسی تراکنش و تکمیل آن نیاز دارد. این موارد هنوز به نسخهٔ آزمایشی متصل نشده‌اند.",
+      paymentDetails:"اطلاعات پرداخت",paymentNotice:"این فقط رابط نمایشی است. از طریق این صفحه Pi ارسال نکنید و اطلاعات محرمانه کیف پول را به اشتراک نگذارید.",
+      servicesTitle:"خدمات را کشف کنید",servicesSub:"مرکزی در حال توسعه برای نیازهای دیجیتال شما",
+      searchPlaceholder:"جست‌وجوی خدمات...",service1:"ابزارهای دیجیتال",service1Text:"ابزارهای کاربردی برای کارهای روزمره دیجیتال.",
+      service2:"بازار خدمات",service2Text:"خدمات دیجیتال و فهرست ارائه‌دهندگان آینده را کشف کنید.",
+      service3:"پروفایل شخصی",service3Text:"بخش حساب کاربری و ترجیحات شما.",
+      service4:"انجمن کاربران",service4Text:"فضایی برای ارتباط کاربران در آینده.",
+      service5:"پرداخت Pi",service5Text:"اتصال پرداخت در برنامه است اما هنوز فعال نیست.",
+      service6:"راهنما و پشتیبانی",service6Text:"راهنمای استفاده از Nexora و امکانات آن.",
+      explore:"بررسی",openSection:"بازکردن بخش",learnMore:"اطلاعات بیشتر",getHelp:"دریافت راهنما",
+      noResults:"خدمتی با این عبارت پیدا نشد.",activityTitle:"فعالیت‌های اخیر",activitySub:"وضعیت رابط نمایشی",
+      activity1:"رابط Nexora آماده است",activity1Sub:"صفحهٔ وب بارگذاری شده است",activityStatus:"اطلاع",
+      activity2:"احراز هویت Pi",activity2Sub:"اعتبارسنجی سرور متصل نیست",pending:"در انتظار",
+      activity3:"پرداخت‌ها",activity3Sub:"هیچ تراکنش واقعی انجام نشده است",disabled:"غیرفعال",
+      supportTitle:"به راهنمایی نیاز دارید؟",supportText:"Nexora مرحله‌به‌مرحله ساخته می‌شود. پس از تنظیم، راه ارتباطی و پشتیبانی زنده اضافه خواهد شد.",
+      supportButton:"روش‌های پشتیبانی",footerRights:"تمام حقوق محفوظ است.",privacy:"حریم خصوصی",terms:"شرایط استفاده",close:"بستن",
+      loginStart:"در حال اتصال به Pi Browser...",loginSuccess:"پاسخ ورود Pi دریافت شد. اعتبارسنجی سرور هنوز لازم است.",
+      loginError:"ورود با Pi کامل نشد. سایت را در Pi Browser باز کنید و دوباره امتحان کنید.",
+      loginMissing:"Pi SDK در دسترس نیست. Nexora را در Pi Browser باز کنید.",
+      paymentInfo:"واریز، برداشت، انتقال و پرداخت هنوز فعال نیستند. ابتدا باید بک‌اند امن و اعتبارسنجی رسمی پرداخت Pi پیاده‌سازی شود.",
+      supportInfo:"پشتیبانی زنده هنوز تنظیم نشده است. پیش از انتشار، ایمیل یا راه ارتباطی واقعی اضافه کنید.",
+      serviceInfo:"این بخش پیش‌نمایش است. قابلیت واقعی آن در مرحلهٔ بعد توسعه داده می‌شود.",
+      signedIn:"وارد شده (تأییدنشده)",welcome:"خوش آمدید",ok:"تأیید"
+    },
+    ar: {
+      tagline:"عالمك الرقمي",navHome:"الرئيسية",navServices:"الخدمات",navWallet:"المحفظة",navActivity:"النشاط",navSupport:"الدعم",login:"الدخول عبر Pi",
+      heroBadge:"تجربة رقمية جديدة",heroTitle:'منصة واحدة.<br><span>إمكانيات بلا حدود.</span>',
+      heroText:"اكتشف الخدمات الرقمية وأدر حسابك واستكشف منصة متنامية لتبسيط حياتك عبر الإنترنت.",
+      getStarted:"ابدأ مع Pi",exploreServices:"استكشف الخدمات ↓",trust1:"مصمم للهاتف",trust2:"متعدد اللغات",trust3:"تسجيل دخول Pi",
+      overviewTitle:"نظرة عامة",overviewSub:"مساحتك في Nexora",guestMode:"وضع الزائر",statAccount:"الحساب",guest:"زائر",statAccountSub:"سجل الدخول لربط حسابك",
+      statServices:"الخدمات",statServicesSub:"فئات الخدمات",statSecurity:"الأمان",statSetup:"الإعداد معلق",statSecuritySub:"التحقق من الخادم مطلوب",
+      statPayments:"المدفوعات",statNotReady:"غير مفعلة",statPaymentsSub:"بعد الإعداد الآمن",
+      walletTitle:"المحفظة والمدفوعات",walletSub:"تتوفر المدفوعات بعد ربط الخادم",walletBalance:"رصيد Nexora",
+      walletNoBalance:"لا يوجد رصيد حقيقي متصل. لا تحتفظ هذه الصفحة بالأموال ولا تقرأ رصيد محفظة Pi.",
+      deposit:"إيداع",withdraw:"سحب",transfer:"تحويل",paymentsTitle:"مدفوعات Pi",
+      paymentsText:"تحتاج المدفوعات الآمنة إلى موافقة الخادم والتحقق من المعاملة وإكمالها. لم تُربط هذه الحماية بعد.",
+      paymentDetails:"معلومات الدفع",paymentNotice:"واجهة تجريبية فقط. لا ترسل Pi أو تشارك أسرار محفظتك عبر هذه الصفحة.",
+      servicesTitle:"استكشف الخدمات",servicesSub:"مركز متنامٍ لاحتياجاتك الرقمية",searchPlaceholder:"ابحث عن الخدمات...",
+      service1:"أدوات رقمية",service1Text:"أدوات مفيدة للمهام الرقمية اليومية.",service2:"سوق الخدمات",service2Text:"اكتشف الخدمات الرقمية ومقدميها مستقبلاً.",
+      service3:"الملف الشخصي",service3Text:"مساحة حسابك وتفضيلاتك.",service4:"المجتمع",service4Text:"مساحة للتواصل بين الأعضاء مستقبلاً.",
+      service5:"مدفوعات Pi",service5Text:"التكامل مخطط له لكنه غير نشط.",service6:"المساعدة والدعم",service6Text:"المساعدة في استخدام Nexora.",
+      explore:"استكشف",openSection:"افتح القسم",learnMore:"اعرف المزيد",getHelp:"احصل على المساعدة",noResults:"لم يتم العثور على خدمات مطابقة.",
+      activityTitle:"النشاط الأخير",activitySub:"تحديثات الواجهة التجريبية",activity1:"واجهة Nexora جاهزة",activity1Sub:"تم تحميل واجهة الموقع",activityStatus:"معلومات",
+      activity2:"مصادقة Pi",activity2Sub:"التحقق من الخادم غير متصل",pending:"قيد الانتظار",activity3:"المدفوعات",activity3Sub:"لم تتم معاملات حقيقية",disabled:"معطل",
+      supportTitle:"هل تحتاج إلى مساعدة؟",supportText:"يتم بناء Nexora تدريجياً. ستضاف وسائل الاتصال والدعم عند إعدادها.",supportButton:"خيارات الدعم",
+      footerRights:"جميع الحقوق محفوظة.",privacy:"الخصوصية",terms:"الشروط",close:"إغلاق",
+      loginStart:"جارٍ الاتصال بـ Pi Browser...",loginSuccess:"تم استلام رد المصادقة. لا يزال التحقق من الخادم مطلوباً.",
+      loginError:"تعذر إكمال الدخول عبر Pi. افتح الموقع في Pi Browser وحاول مرة أخرى.",loginMissing:"Pi SDK غير متاح. افتح Nexora في Pi Browser.",
+      paymentInfo:"الإيداع والسحب والتحويل والمدفوعات غير مفعلة بعد. يجب أولاً إعداد خادم آمن والتحقق من مدفوعات Pi.",
+      supportInfo:"لم يتم إعداد الدعم المباشر بعد. أضف بريد دعم حقيقياً قبل النشر.",
+      serviceInfo:"هذا القسم للمعاينة. ستضاف وظائفه لاحقاً.",signedIn:"تم الدخول (غير مؤكد)",welcome:"مرحباً",ok:"حسناً"
+    }
+  };
+
+  // Provide readable fallback labels for additional languages.
+  const extraTranslations = {
+    de:{navHome:"Startseite",navServices:"Dienste",navWallet:"Wallet",navActivity:"Aktivität",navSupport:"Support",login:"Mit Pi anmelden",heroBadge:"EIN NEUES DIGITALES ERLEBNIS",heroTitle:'Eine Plattform.<br><span>Unendliche Möglichkeiten.</span>',heroText:"Entdecke digitale Dienste und verwalte dein Konto an einem Ort.",getStarted:"Mit Pi starten",exploreServices:"Dienste entdecken ↓",overviewTitle:"Dein Überblick",walletTitle:"Wallet & Zahlungen",servicesTitle:"Dienste entdecken",activityTitle:"Letzte Aktivitäten",supportTitle:"Brauchst du Hilfe?",privacy:"Datenschutz",terms:"Bedingungen",close:"Schließen",guest:"Gast",guestMode:"Gastmodus",deposit:"Einzahlen",withdraw:"Auszahlen",transfer:"Übertragen",explore:"Entdecken",learnMore:"Mehr erfahren",getHelp:"Hilfe erhalten"},
+    fr:{navHome:"Accueil",navServices:"Services",navWallet:"Portefeuille",navActivity:"Activité",navSupport:"Assistance",login:"Connexion avec Pi",heroBadge:"UNE NOUVELLE EXPÉRIENCE NUMÉRIQUE",heroTitle:'Une plateforme.<br><span>Des possibilités infinies.</span>',heroText:"Découvrez des services numériques et gérez votre compte en un seul endroit.",getStarted:"Commencer avec Pi",exploreServices:"Découvrir les services ↓",overviewTitle:"Votre aperçu",walletTitle:"Portefeuille et paiements",servicesTitle:"Découvrir les services",activityTitle:"Activité récente",supportTitle:"Besoin d’aide ?",privacy:"Confidentialité",terms:"Conditions",close:"Fermer",guest:"Invité",guestMode:"Mode invité",deposit:"Déposer",withdraw:"Retirer",transfer:"Transférer",explore:"Explorer",learnMore:"En savoir plus",getHelp:"Obtenir de l’aide"},
+    es:{navHome:"Inicio",navServices:"Servicios",navWallet:"Cartera",navActivity:"Actividad",navSupport:"Soporte",login:"Entrar con Pi",heroBadge:"UNA NUEVA EXPERIENCIA DIGITAL",heroTitle:'Una plataforma.<br><span>Posibilidades infinitas.</span>',heroText:"Descubre servicios digitales y administra tu cuenta en un solo lugar.",getStarted:"Comenzar con Pi",exploreServices:"Explorar servicios ↓",overviewTitle:"Tu resumen",walletTitle:"Cartera y pagos",servicesTitle:"Explorar servicios",activityTitle:"Actividad reciente",supportTitle:"¿Necesitas ayuda?",privacy:"Privacidad",terms:"Términos",close:"Cerrar",guest:"Invitado",guestMode:"Modo invitado",deposit:"Depositar",withdraw:"Retirar",transfer:"Transferir",explore:"Explorar",learnMore:"Más información",getHelp:"Obtener ayuda"},
+    tr:{navHome:"Ana sayfa",navServices:"Hizmetler",navWallet:"Cüzdan",navActivity:"Etkinlik",navSupport:"Destek",login:"Pi ile giriş yap",heroBadge:"YENİ BİR DİJİTAL DENEYİM",heroTitle:'Tek platform.<br><span>Sınırsız olasılık.</span>',heroText:"Dijital hizmetleri keşfet ve hesabını tek bir yerden yönet.",getStarted:"Pi ile başla",exploreServices:"Hizmetleri keşfet ↓",overviewTitle:"Genel bakış",walletTitle:"Cüzdan ve ödemeler",servicesTitle:"Hizmetleri keşfet",activityTitle:"Son etkinlikler",supportTitle:"Yardıma mı ihtiyacın var?",privacy:"Gizlilik",terms:"Koşullar",close:"Kapat",guest:"Misafir",guestMode:"Misafir modu",deposit:"Yatır",withdraw:"Çek",transfer:"Transfer",explore:"Keşfet",learnMore:"Daha fazla bilgi",getHelp:"Yardım al"},
+    ru:{navHome:"Главная",navServices:"Услуги",navWallet:"Кошелёк",navActivity:"Активность",navSupport:"Поддержка",login:"Войти через Pi",heroBadge:"НОВЫЙ ЦИФРОВОЙ ОПЫТ",heroTitle:'Одна платформа.<br><span>Безграничные возможности.</span>',heroText:"Открывайте цифровые услуги и управляйте аккаунтом в одном месте.",getStarted:"Начать с Pi",exploreServices:"Услуги ↓",overviewTitle:"Обзор",walletTitle:"Кошелёк и платежи",servicesTitle:"Услуги",activityTitle:"Последняя активность",supportTitle:"Нужна помощь?",privacy:"Конфиденциальность",terms:"Условия",close:"Закрыть",guest:"Гость",guestMode:"Гостевой режим",deposit:"Внести",withdraw:"Вывести",transfer:"Перевести",explore:"Открыть",learnMore:"Подробнее",getHelp:"Помощь"},
+    zh:{navHome:"首页",navServices:"服务",navWallet:"钱包",navActivity:"动态",navSupport:"支持",login:"使用 Pi 登录",heroBadge:"全新的数字体验",heroTitle:'一个平台。<br><span>无限可能。</span>',heroText:"发现数字服务，并在一个地方管理您的账户。",getStarted:"使用 Pi 开始",exploreServices:"探索服务 ↓",overviewTitle:"概览",walletTitle:"钱包与支付",servicesTitle:"探索服务",activityTitle:"最近动态",supportTitle:"需要帮助？",privacy:"隐私",terms:"条款",close:"关闭",guest:"访客",guestMode:"访客模式",deposit:"存入",withdraw:"提取",transfer:"转账",explore:"探索",learnMore:"了解更多",getHelp:"获取帮助"},
+    hi:{navHome:"होम",navServices:"सेवाएँ",navWallet:"वॉलेट",navActivity:"गतिविधि",navSupport:"सहायता",login:"Pi से साइन इन",heroBadge:"एक नया डिजिटल अनुभव",heroTitle:'एक प्लेटफ़ॉर्म।<br><span>असीम संभावनाएँ।</span>',heroText:"डिजिटल सेवाएँ खोजें और अपना खाता एक ही जगह प्रबंधित करें।",getStarted:"Pi के साथ शुरू करें",exploreServices:"सेवाएँ देखें ↓",overviewTitle:"आपका अवलोकन",walletTitle:"वॉलेट और भुगतान",servicesTitle:"सेवाएँ देखें",activityTitle:"हाल की गतिविधि",supportTitle:"मदद चाहिए?",privacy:"गोपनीयता",terms:"नियम",close:"बंद करें",guest:"अतिथि",guestMode:"अतिथि मोड",deposit:"जमा करें",withdraw:"निकालें",transfer:"स्थानांतरित करें",explore:"देखें",learnMore:"और जानें",getHelp:"मदद लें"}
+  };
+
+  const languageNames = {
+    en:"English",fa:"فارسی",ar:"العربية",de:"Deutsch",fr:"Français",
+    es:"Español",tr:"Türkçe",ru:"Русский",zh:"中文",hi:"हिन्दी"
+  };
+  let currentLang = "en";
+  let currentUser = null;
+  let toastTimer;
+
+  function t(key) {
+    return (translations[currentLang] && translations[currentLang][key])
+      || (extraTranslations[currentLang] && extraTranslations[currentLang][key])
+      || translations.en[key] || extraTranslations.en?.[key] || key;
+  }
+
+  function applyLanguage(lang) {
+    currentLang = translations[lang] || extraTranslations[lang] ? lang : "en";
+    const rtl = ["fa","ar"].includes(currentLang);
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = rtl ? "rtl" : "ltr";
+    document.getElementById("language").value = currentLang;
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.dataset.i18n;
+      el.textContent = t(key);
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach(el => {
+      el.innerHTML = t(el.dataset.i18nHtml);
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      el.placeholder = t(el.dataset.i18nPlaceholder);
+    });
+    document.getElementById("loginBtn").textContent =
+      currentUser ? (currentUser.username || t("welcome")) : t("login");
+    document.getElementById("modalOk").textContent = t("ok");
+  }
+
+  function showToast(message) {
+    const el = document.getElementById("toast");
+    el.textContent = message;
+    el.classList.remove("hidden");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.add("hidden"), 4500);
+  }
+
+  function showModal(title, message) {
+    document.getElementById("modalTitle").textContent = title;
+    document.getElementById("modalText").textContent = message;
+    document.getElementById("modalBackdrop").classList.remove("hidden");
+  }
+  function closeModal() {
+    document.getElementById("modalBackdrop").classList.add("hidden");
+  }
+  document.getElementById("modalOk").addEventListener("click", closeModal);
+  document.getElementById("modalClose").addEventListener("click", closeModal);
+  document.getElementById("modalBackdrop").addEventListener("click", e => {
+    if (e.target.id === "modalBackdrop") closeModal();
+  });
+
+  function showNotice(type) {
+    if (type === "payment") showModal(t("paymentsTitle"), t("paymentInfo"));
+    else if (type === "support") showModal(t("supportTitle"), t("supportInfo"));
+    else showModal("Nexora", t("serviceInfo"));
+  }
+
+  function goTo(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({behavior:"smooth",block:"start"});
+    document.getElementById("nav").classList.remove("open");
+    document.querySelectorAll(".nav button").forEach(b =>
+      b.classList.toggle("active", b.dataset.go === id)
+    );
+  }
+  document.querySelectorAll("[data-go]").forEach(btn =>
+    btn.addEventListener("click", () => goTo(btn.dataset.go))
+  );
+  document.getElementById("menuBtn").addEventListener("click", () =>
+    document.getElementById("nav").classList.toggle("open")
+  );
+  document.getElementById("language").addEventListener("change", e => applyLanguage(e.target.value));
+
+  function openService(name) {
+    if (name === "profile") {
+      if (!currentUser) {
+        showModal(t("service3"), t("loginMissing"));
+      } else {
+        showModal(t("service3"), t("signedIn") + ": " + currentUser.username);
       }
+    } else {
+      showModal(t("service" + ({tools:1,market:2,community:4}[name] || 1)), t("serviceInfo"));
+    }
+  }
 
-      loginBtn.disabled = true;
-      statusBox.textContent = "Connecting to Pi...";
+  document.getElementById("serviceSearch").addEventListener("input", e => {
+    const query = e.target.value.trim().toLocaleLowerCase(currentLang);
+    let visible = 0;
+    document.querySelectorAll(".service-card").forEach(card => {
+      const match = card.textContent.toLocaleLowerCase(currentLang).includes(query);
+      card.classList.toggle("hidden", !match);
+      if (match) visible++;
+    });
+    document.getElementById("noResults").classList.toggle("hidden", visible > 0);
+  });
 
-      try {
-        const scopes = ["username"];
-        const auth = await window.Pi.authenticate(scopes);
+  async function loginWithPi() {
+    if (!window.Pi || typeof window.Pi.authenticate !== "function") {
+      showToast(t("loginMissing"));
+      return;
+    }
 
-        if (auth && auth.user) {
-          statusBox.textContent = "Pi sign-in response received.";
-          accountInfo.textContent =
-            "Signed-in Pi username: " +
-            (auth.user.username || "Username unavailable");
-        } else {
-          statusBox.textContent = "Could not complete sign-in.";
+    const button = document.getElementById("loginBtn");
+    button.disabled = true;
+    showToast(t("loginStart"));
+
+    try {
+      const auth = await window.Pi.authenticate(
+        ["username"],
+        payment => {
+          console.warn("Incomplete Pi payment needs backend handling:", payment?.identifier);
         }
-      } catch (error) {
-        statusBox.textContent =
-          "Sign-in failed. Open Nexora in Pi Browser and try again.";
-        console.error(error);
-      } finally {
-        loginBtn.disabled = false;
-      }
-    }
+      );
 
-    if (window.Pi) {
-      try {
-        window.Pi.init({ version: "2.0", sandbox: true });
-      } catch (error) {
-        console.error("Pi SDK initialization failed:", error);
+      if (!auth || !auth.user || !auth.accessToken) {
+        throw new Error("Incomplete authentication response");
       }
+
+      // Display only. This frontend has no backend yet, so the identity
+      // is NOT verified for secure account access.
+      currentUser = { username: auth.user.username || "" };
+      document.getElementById("accountStat").textContent =
+        currentUser.username || t("welcome");
+      document.getElementById("accountBadge").textContent = t("signedIn");
+      button.textContent = currentUser.username || t("welcome");
+      document.getElementById("accountStat").nextElementSibling.textContent =
+        t("statAccountSub");
+      showToast(t("loginSuccess"));
+    } catch (error) {
+      console.error("Pi authentication failed:", error);
+      showToast(t("loginError"));
+    } finally {
+      button.disabled = false;
     }
-  </script>
+  }
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Set sandbox:true while testing in Pi sandbox. Change to false for
+  // production only after configuring the app's production environment.
+  if (window.Pi && typeof window.Pi.init === "function") {
+    try {
+      window.Pi.init({ version: "2.0", sandbox: true });
+    } catch (error) {
+      console.error("Pi SDK initialization error:", error);
+    }
+  }
+
+  applyLanguage("en");
+</script>
 </body>
 </html>
 ```
