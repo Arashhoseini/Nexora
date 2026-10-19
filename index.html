@@ -2,2112 +2,2236 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071a3d">
-<title>Nexora | Pi Marketplace</title>
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
- --navy:#071a3d;
- --navy2:#0b2859;
- --blue:#1464d2;
- --blue2:#287ff0;
- --pi:#6b4cff;
- --pi2:#8a70ff;
- --gold:#ffbf24;
- --green:#15956a;
- --bg:#f3f6fb;
- --card:#fff;
- --text:#15213a;
- --muted:#6c7890;
- --border:#e1e7f0;
- --shadow:0 8px 25px rgba(9,31,68,.08);
- --radius:18px;
-}
-
-html{scroll-behavior:smooth}
-
-body{
- font-family:Arial,"Segoe UI",Tahoma,sans-serif;
- background:var(--bg);
- color:var(--text);
- font-size:16px;
- line-height:1.7;
-}
-
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-a{text-decoration:none;color:inherit}
-
-/* TOP */
-.topbar{
- background:#04132e;
- color:#dce7f7;
- min-height:38px;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:13px
-}
-
-.topbar-inner{
- width:min(1400px,94%);
- display:flex;
- justify-content:space-between;
- gap:20px
-}
-
-/* HEADER */
-.header{
- background:var(--navy);
- color:white;
- position:sticky;
- top:0;
- z-index:1000;
- box-shadow:0 5px 20px rgba(0,0,0,.16)
-}
-
-.header-main{
- width:min(1400px,94%);
- margin:auto;
- min-height:78px;
- display:flex;
- align-items:center;
- gap:22px
-}
-
-.logo{
- display:flex;
- align-items:center;
- gap:10px;
- min-width:150px
-}
-
-.logo-icon{
- width:45px;
- height:45px;
- border-radius:14px;
- background:linear-gradient(145deg,#826cff,#5033d5);
- display:grid;
- place-items:center;
- font-size:25px;
- font-weight:900;
- box-shadow:0 6px 20px rgba(107,76,255,.35)
-}
-
-.logo-text{
- font-size:23px;
- font-weight:900
-}
-
-.logo-pi{
- font-size:11px;
- color:#bdb3ff;
- display:block;
- margin-top:-4px
-}
-
-/* SEARCH */
-.search{
- flex:1;
- max-width:720px;
- height:50px;
- display:flex;
- background:white;
- border-radius:12px;
- overflow:hidden;
- border:3px solid rgba(255,255,255,.08)
-}
-
-.search-category{
- border:0;
- background:#f0f3f7;
- padding:0 14px;
- color:#34435c;
- border-left:1px solid #dce2eb
-}
-
-.search input{
- flex:1;
- border:0;
- outline:0;
- padding:0 17px;
- font-size:15px;
- color:#17243c;
- min-width:0
-}
-
-.search-btn{
- width:58px;
- border:0;
- background:#ffca28;
- color:#17243c;
- font-size:21px;
- font-weight:bold
-}
-
-.header-actions{
- display:flex;
- align-items:center;
- gap:9px
-}
-
-.header-btn{
- border:1px solid rgba(255,255,255,.15);
- background:rgba(255,255,255,.07);
- color:white;
- min-width:48px;
- height:48px;
- padding:0 12px;
- border-radius:11px;
- display:flex;
- align-items:center;
- justify-content:center;
- gap:7px
-}
-
-.header-btn:hover{
- background:rgba(255,255,255,.14)
-}
-
-.sell-btn{
- background:#ffb800;
- color:#15233c;
- border:0;
- font-weight:800;
- padding:0 18px
-}
-
-/* NAV */
-.nav{
- background:#0b2859;
- border-top:1px solid rgba(255,255,255,.08)
-}
-
-.nav-inner{
- width:min(1400px,94%);
- margin:auto;
- min-height:45px;
- display:flex;
- align-items:center;
- gap:27px;
- overflow:auto
-}
-
-.nav-item{
- white-space:nowrap;
- color:#dbe7f8;
- font-size:14px
-}
-
-.nav-item:hover{color:white}
-
-/* PI BAR */
-.pi-bar{
- background:linear-gradient(90deg,#5138d5,#7a61ff);
- color:white;
- padding:10px 0
-}
-
-.pi-bar-inner{
- width:min(1400px,94%);
- margin:auto;
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:20px
-}
-
-.pi-badge{
- display:flex;
- align-items:center;
- gap:9px;
- font-weight:800
-}
-
-.pi-symbol{
- width:30px;
- height:30px;
- border-radius:50%;
- background:white;
- color:#5a42db;
- display:grid;
- place-items:center;
- font-weight:900
-}
-
-.pi-note{
- font-size:13px;
- color:#eeeaff
-}
-
-/* HERO */
-.hero{
- background:
- radial-gradient(circle at 10% 20%,rgba(89,69,255,.38),transparent 30%),
- linear-gradient(120deg,#071a3d,#0d3471);
- color:white
-}
-
-.hero-inner{
- width:min(1400px,94%);
- margin:auto;
- min-height:350px;
- display:grid;
- grid-template-columns:1.25fr .75fr;
- align-items:center;
- gap:30px
-}
-
-.hero-title{
- font-size:clamp(30px,4vw,52px);
- line-height:1.25;
- font-weight:900;
- margin-bottom:16px
-}
-
-.hero-title .pi{
- color:#b9aaff
-}
-
-.hero-text{
- color:#d7e4f7;
- max-width:680px;
- font-size:18px
-}
-
-.hero-actions{
- display:flex;
- gap:12px;
- margin-top:28px;
- flex-wrap:wrap
-}
-
-.primary{
- background:white;
- color:#0a2a5c;
- border:0;
- padding:13px 24px;
- border-radius:11px;
- font-weight:800
-}
-
-.secondary{
- background:rgba(255,255,255,.1);
- color:white;
- border:1px solid rgba(255,255,255,.3);
- padding:13px 24px;
- border-radius:11px;
- font-weight:700
-}
-
-.hero-panel{
- background:rgba(255,255,255,.08);
- border:1px solid rgba(255,255,255,.14);
- border-radius:24px;
- padding:24px;
- backdrop-filter:blur(12px)
-}
-
-.hero-panel-title{
- font-weight:800;
- font-size:18px;
- margin-bottom:18px
-}
-
-.hero-stat{
- display:flex;
- justify-content:space-between;
- align-items:center;
- padding:13px 0;
- border-bottom:1px solid rgba(255,255,255,.1)
-}
-
-.hero-stat:last-child{border-bottom:0}
-
-/* MAIN */
-.main{
- width:min(1400px,94%);
- margin:35px auto 80px
-}
-
-.section{margin-bottom:40px}
-
-.section-head{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:18px;
- gap:20px
-}
-
-.section-title{
- font-size:25px;
- font-weight:900
-}
-
-.section-link{
- color:var(--blue);
- font-weight:700
-}
-
-/* CATEGORIES */
-.categories{
- display:grid;
- grid-template-columns:repeat(8,1fr);
- gap:14px
-}
-
-.category{
- background:var(--card);
- border:1px solid var(--border);
- border-radius:var(--radius);
- padding:22px 12px;
- min-height:135px;
- display:flex;
- flex-direction:column;
- justify-content:center;
- align-items:center;
- gap:10px;
- transition:.2s;
- box-shadow:0 4px 14px rgba(9,31,68,.04)
-}
-
-.category:hover{
- transform:translateY(-4px);
- border-color:#b8cdf0;
- box-shadow:var(--shadow)
-}
-
-.category-icon{
- width:56px;
- height:56px;
- display:grid;
- place-items:center;
- border-radius:16px;
- background:#edf4ff;
- color:#125ac0;
- font-size:28px
-}
-
-.category-name{
- font-weight:800;
- font-size:15px
-}
-
-/* TABS */
-.market-tabs{
- display:flex;
- gap:10px;
- margin-bottom:22px;
- background:white;
- border:1px solid var(--border);
- padding:7px;
- border-radius:14px;
- width:max-content;
- box-shadow:var(--shadow)
-}
-
-.market-tab{
- border:0;
- background:transparent;
- padding:11px 25px;
- border-radius:10px;
- font-weight:800;
- color:#65728a
-}
-
-.market-tab.active{
- background:var(--navy);
- color:white
-}
-
-/* PRODUCTS */
-.products{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:20px
-}
-
-.product{
- background:var(--card);
- border:1px solid var(--border);
- border-radius:18px;
- overflow:hidden;
- box-shadow:0 5px 18px rgba(9,31,68,.06);
- transition:.2s;
- position:relative
-}
-
-.product:hover{
- transform:translateY(-5px);
- box-shadow:0 15px 35px rgba(9,31,68,.12)
-}
-
-.product-image{
- height:210px;
- background:linear-gradient(135deg,#dceaff,#f8fbff);
- display:grid;
- place-items:center;
- font-size:70px;
- position:relative
-}
-
-.product-badge{
- position:absolute;
- top:12px;
- right:12px;
- background:#0b2859;
- color:white;
- border-radius:7px;
- padding:5px 9px;
- font-size:11px;
- font-weight:800
-}
-
-.pi-badge-card{
- position:absolute;
- left:11px;
- top:11px;
- background:#6b4cff;
- color:white;
- border-radius:8px;
- padding:5px 9px;
- font-size:12px;
- font-weight:900
-}
-
-.favorite{
- position:absolute;
- top:52px;
- left:10px;
- width:38px;
- height:38px;
- border:0;
- border-radius:50%;
- background:white;
- box-shadow:0 4px 12px rgba(0,0,0,.1);
- font-size:18px
-}
-
-.product-body{padding:18px}
-
-.product-category{
- color:#75829a;
- font-size:12px;
- margin-bottom:5px
-}
-
-.product-title{
- font-size:17px;
- font-weight:850;
- line-height:1.5;
- min-height:51px
-}
-
-.product-meta{
- display:flex;
- justify-content:space-between;
- margin-top:13px;
- color:#68758c;
- font-size:13px
-}
-
-.product-footer{
- display:flex;
- align-items:center;
- justify-content:space-between;
- border-top:1px solid var(--border);
- margin-top:15px;
- padding-top:14px
-}
-
-.seller{
- display:flex;
- align-items:center;
- gap:7px;
- font-size:12px;
- font-weight:700
-}
-
-.avatar{
- width:31px;
- height:31px;
- border-radius:50%;
- background:#dbe9ff;
- display:grid;
- place-items:center
-}
-
-.price{
- color:#5c43dd;
- font-size:19px;
- font-weight:950;
- white-space:nowrap
-}
-
-.price small{
- font-size:12px;
- color:#806fea;
- font-weight:800
-}
-
-/* PI SPECIAL */
-.pi-price-box{
- margin-top:15px;
- background:#f4f1ff;
- border:1px solid #ded7ff;
- border-radius:12px;
- padding:11px 13px;
- display:flex;
- justify-content:space-between;
- align-items:center
-}
-
-.pi-price-label{
- font-size:12px;
- color:#6f629f;
- font-weight:700
-}
-
-/* FEATURE */
-.feature-grid{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:20px
-}
-
-.feature{
- background:white;
- border:1px solid var(--border);
- border-radius:18px;
- padding:24px;
- display:flex;
- gap:16px;
- align-items:flex-start;
- box-shadow:0 5px 16px rgba(9,31,68,.05)
-}
-
-.feature-icon{
- width:52px;
- height:52px;
- min-width:52px;
- border-radius:14px;
- display:grid;
- place-items:center;
- background:#eaf2ff;
- color:#125cc6;
- font-size:25px
-}
-
-.feature h3{margin-bottom:4px;font-size:17px}
-
-.feature p{
- color:var(--muted);
- font-size:14px
-}
-
-/* SELLERS */
-.sellers{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:18px
-}
-
-.seller-card{
- background:white;
- border:1px solid var(--border);
- border-radius:18px;
- padding:20px;
- box-shadow:0 5px 16px rgba(9,31,68,.05)
-}
-
-.seller-top{
- display:flex;
- align-items:center;
- gap:12px
-}
-
-.seller-big-avatar{
- width:56px;
- height:56px;
- border-radius:50%;
- display:grid;
- place-items:center;
- background:#e4efff;
- font-size:25px
-}
-
-.seller-name{font-weight:850}
-
-.verified{
- color:#178a62;
- font-size:12px
-}
-
-.rating{
- margin-top:15px;
- color:#d79712
-}
-
-.follow{
- margin-top:15px;
- width:100%;
- height:40px;
- border:1px solid #c9d8ee;
- background:white;
- color:#1459b7;
- border-radius:9px;
- font-weight:800
-}
-
-/* PROMO */
-.promo{
- border-radius:24px;
- background:linear-gradient(120deg,#0b2859,#145fc8);
- color:white;
- padding:34px;
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:30px
-}
-
-.promo h2{
- font-size:27px;
- margin-bottom:6px
-}
-
-.promo p{color:#dbe8fa}
-
-.promo button{
- background:white;
- border:0;
- color:#0b2859;
- border-radius:10px;
- padding:13px 22px;
- font-weight:900;
- white-space:nowrap
-}
-
-/* FOOTER */
-.footer{
- background:#061633;
- color:#d6e1f1;
- padding:50px 0 25px
-}
-
-.footer-inner{
- width:min(1400px,94%);
- margin:auto;
- display:grid;
- grid-template-columns:2fr repeat(3,1fr);
- gap:35px
-}
-
-.footer h3{
- color:white;
- margin-bottom:14px
-}
-
-.footer p,.footer li{
- color:#9eabc0;
- font-size:14px
-}
-
-.footer ul{list-style:none}
-
-.footer li{margin-bottom:9px}
-
-.copyright{
- width:min(1400px,94%);
- margin:35px auto 0;
- border-top:1px solid rgba(255,255,255,.08);
- padding-top:20px;
- color:#7f8ca3;
- font-size:12px
-}
-
-/* MODAL */
-.overlay{
- position:fixed;
- inset:0;
- background:rgba(2,12,29,.65);
- z-index:2000;
- display:none;
- align-items:center;
- justify-content:center;
- padding:18px
-}
-
-.overlay.show{display:flex}
-
-.modal{
- background:white;
- width:min(650px,100%);
- max-height:90vh;
- overflow:auto;
- border-radius:22px;
- padding:26px;
- box-shadow:0 25px 80px rgba(0,0,0,.25)
-}
-
-.modal-head{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:22px
-}
-
-.close{
- width:38px;
- height:38px;
- border:0;
- background:#eef2f7;
- border-radius:50%
-}
-
-.form-group{margin-bottom:16px}
-
-.form-group label{
- display:block;
- font-weight:750;
- margin-bottom:6px
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea{
- width:100%;
- border:1px solid #d4dce8;
- border-radius:10px;
- padding:12px;
- outline:0
-}
-
-.form-group textarea{
- min-height:110px;
- resize:vertical
-}
-
-.form-submit{
- width:100%;
- border:0;
- background:var(--navy);
- color:white;
- padding:14px;
- border-radius:11px;
- font-weight:850
-}
-
-/* TOAST */
-.toast{
- position:fixed;
- bottom:25px;
- right:25px;
- z-index:5000;
- background:#071a3d;
- color:white;
- padding:14px 18px;
- border-radius:11px;
- box-shadow:0 12px 35px rgba(0,0,0,.2);
- transform:translateY(100px);
- opacity:0;
- transition:.3s
-}
-
-.toast.show{
- transform:translateY(0);
- opacity:1
-}
-
-/* MOBILE */
-.mobile-nav{
- display:none
-}
-
-@media(max-width:1100px){
-
- .categories{grid-template-columns:repeat(4,1fr)}
-
- .products{grid-template-columns:repeat(3,1fr)}
-
- .sellers{grid-template-columns:repeat(2,1fr)}
-
- .header-main{
-  flex-wrap:wrap;
-  padding:12px 0
- }
-
- .search{
-  order:3;
-  flex-basis:100%;
-  max-width:none
- }
-}
-
-@media(max-width:760px){
-
- body{
-  font-size:15px;
-  padding-bottom:65px
- }
-
- .topbar{display:none}
-
- .header-main{
-  width:94%;
-  min-height:65px;
-  gap:10px
- }
-
- .logo{min-width:auto}
-
- .logo-text{font-size:20px}
-
- .logo-icon{
-  width:39px;
-  height:39px
- }
-
- .header-actions{margin-right:auto}
-
- .header-btn{
-  width:40px;
-  height:40px;
-  min-width:40px;
-  padding:0
- }
-
- .header-btn label{display:none}
-
- .sell-btn{display:none}
-
- .search{height:46px}
-
- .search-category{display:none}
-
- .nav{display:none}
-
- .pi-bar-inner{
-  flex-direction:column;
-  align-items:flex-start;
-  gap:3px
- }
-
- .hero-inner{
-  grid-template-columns:1fr;
-  min-height:auto;
-  padding:42px 0
- }
-
- .hero-title{font-size:32px}
-
- .hero-text{font-size:16px}
-
- .hero-panel{display:none}
-
- .main{
-  width:94%;
-  margin-top:25px
- }
-
- .section-title{font-size:21px}
-
- .categories{
-  display:flex;
-  overflow:auto;
-  padding-bottom:8px
- }
-
- .category{
-  min-width:115px;
-  min-height:120px
- }
-
- .products{
-  grid-template-columns:repeat(2,1fr);
-  gap:12px
- }
-
- .product-image{
-  height:155px;
-  font-size:48px
- }
-
- .product-body{padding:13px}
-
- .product-title{font-size:14px}
-
- .product-meta{font-size:11px}
-
- .price{font-size:16px}
-
- .feature-grid{grid-template-columns:1fr}
-
- .sellers{grid-template-columns:1fr}
-
- .promo{
-  padding:25px;
-  display:block
- }
-
- .promo button{margin-top:18px}
-
- .footer-inner{grid-template-columns:1fr 1fr}
-
- .mobile-nav{
-  position:fixed;
-  display:flex;
-  bottom:0;
-  right:0;
-  left:0;
-  height:64px;
-  background:white;
-  border-top:1px solid var(--border);
-  z-index:1500;
-  box-shadow:0 -5px 20px rgba(0,0,0,.08);
-  justify-content:space-around
- }
-
- .mobile-nav button{
-  border:0;
-  background:white;
-  color:#637087;
-  font-size:11px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:2px
- }
-
- .mobile-nav span{font-size:21px}
-}
-
-@media(max-width:430px){
-
- .products{grid-template-columns:1fr 1fr}
-
- .product-image{height:135px}
-
- .footer-inner{grid-template-columns:1fr}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  <title>Nexora | Pi Marketplace</title>
+  <meta name="description" content="Nexora - بازار خرید و فروش با Pi">
+
+  <!-- Pi SDK -->
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    :root{
+      --navy:#061a38;
+      --navy2:#0b2b58;
+      --blue:#1565d8;
+      --blue2:#287be8;
+      --light:#f4f8ff;
+      --white:#ffffff;
+      --text:#12213a;
+      --muted:#6d7b91;
+      --border:#e1e9f5;
+      --pi:#f5a623;
+      --green:#18a673;
+      --danger:#dc3545;
+      --shadow:0 14px 40px rgba(8,35,75,.10);
+      --radius:22px;
+    }
+
+    body{
+      font-family:
+        Tahoma,
+        Arial,
+        "Segoe UI",
+        sans-serif;
+      background:var(--light);
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    button,
+    input,
+    textarea,
+    select{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+      border:0;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    /* HEADER */
+
+    header{
+      background:
+        linear-gradient(135deg,#04142d,#082c5d 60%,#0d4c98);
+      color:white;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 8px 30px rgba(0,0,0,.16);
+    }
+
+    .header-inner{
+      max-width:1400px;
+      margin:auto;
+      padding:16px 22px;
+      display:flex;
+      align-items:center;
+      gap:20px;
+    }
+
+    .logo{
+      min-width:145px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:25px;
+      font-weight:900;
+    }
+
+    .logo-icon{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#f8b84e,#e99000);
+      display:grid;
+      place-items:center;
+      color:white;
+      font-size:24px;
+      box-shadow:0 7px 20px rgba(245,166,35,.35);
+    }
+
+    .search{
+      flex:1;
+      position:relative;
+    }
+
+    .search input{
+      width:100%;
+      height:48px;
+      border-radius:15px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.12);
+      color:white;
+      outline:none;
+      padding:0 48px 0 18px;
+      font-size:15px;
+    }
+
+    .search input::placeholder{
+      color:#d7e3f5;
+    }
+
+    .search-icon{
+      position:absolute;
+      right:17px;
+      top:12px;
+      font-size:21px;
+    }
+
+    .pi-connect{
+      min-width:150px;
+      height:48px;
+      border-radius:15px;
+      background:#f5a623;
+      color:white;
+      font-weight:900;
+      box-shadow:0 8px 20px rgba(245,166,35,.28);
+      transition:.2s;
+    }
+
+    .pi-connect:hover{
+      transform:translateY(-2px);
+    }
+
+    /* NAV */
+
+    .nav{
+      max-width:1400px;
+      margin:auto;
+      padding:0 22px 15px;
+      display:flex;
+      gap:9px;
+      overflow:auto;
+    }
+
+    .nav button{
+      white-space:nowrap;
+      background:rgba(255,255,255,.09);
+      color:#edf5ff;
+      border:1px solid rgba(255,255,255,.08);
+      padding:9px 15px;
+      border-radius:12px;
+      font-size:14px;
+    }
+
+    .nav button:hover,
+    .nav button.active{
+      background:white;
+      color:var(--navy);
+    }
+
+    /* HERO */
+
+    .hero{
+      max-width:1400px;
+      margin:25px auto;
+      padding:0 22px;
+    }
+
+    .hero-box{
+      min-height:300px;
+      border-radius:30px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 80% 30%,rgba(54,136,255,.35),transparent 30%),
+        linear-gradient(135deg,#051a39,#0b3973);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:45px;
+      box-shadow:var(--shadow);
+    }
+
+    .hero-content{
+      max-width:680px;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.18);
+      padding:8px 14px;
+      border-radius:30px;
+      margin-bottom:20px;
+      font-size:14px;
+    }
+
+    .hero h1{
+      font-size:42px;
+      line-height:1.3;
+      margin-bottom:15px;
+    }
+
+    .hero p{
+      color:#d8e6f8;
+      font-size:17px;
+      line-height:2;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      margin-top:25px;
+      flex-wrap:wrap;
+    }
+
+    .primary{
+      background:#f5a623;
+      color:white;
+      padding:13px 23px;
+      border-radius:14px;
+      font-weight:900;
+    }
+
+    .secondary{
+      background:white;
+      color:var(--navy);
+      padding:13px 23px;
+      border-radius:14px;
+      font-weight:900;
+    }
+
+    .hero-pi{
+      width:230px;
+      height:230px;
+      border-radius:50%;
+      background:
+        radial-gradient(circle,#ffd47b,#f5a623 55%,#d98700);
+      display:grid;
+      place-items:center;
+      font-size:105px;
+      font-weight:900;
+      box-shadow:
+        0 0 70px rgba(245,166,35,.32);
+      transform:rotate(-7deg);
+    }
+
+    /* MAIN */
+
+    .container{
+      max-width:1400px;
+      margin:auto;
+      padding:0 22px 70px;
+    }
+
+    .section{
+      margin-top:35px;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:18px;
+      gap:15px;
+    }
+
+    .section-title{
+      font-size:25px;
+      font-weight:900;
+      color:var(--navy);
+    }
+
+    .section-sub{
+      color:var(--muted);
+      margin-top:5px;
+      font-size:14px;
+    }
+
+    .categories{
+      display:grid;
+      grid-template-columns:repeat(8,1fr);
+      gap:13px;
+    }
+
+    .category{
+      background:white;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:19px 10px;
+      text-align:center;
+      transition:.2s;
+      box-shadow:0 5px 18px rgba(10,40,80,.04);
+    }
+
+    .category:hover{
+      transform:translateY(-4px);
+      box-shadow:var(--shadow);
+    }
+
+    .category-icon{
+      font-size:31px;
+      margin-bottom:8px;
+    }
+
+    .category span{
+      font-weight:700;
+      font-size:14px;
+    }
+
+    /* PRODUCTS */
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+
+    .card{
+      background:white;
+      border:1px solid var(--border);
+      border-radius:22px;
+      overflow:hidden;
+      box-shadow:0 6px 20px rgba(10,40,80,.05);
+      transition:.22s;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+      box-shadow:var(--shadow);
+    }
+
+    .image{
+      height:220px;
+      position:relative;
+      background:#edf3fa;
+      overflow:hidden;
+    }
+
+    .image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .badge{
+      position:absolute;
+      top:13px;
+      right:13px;
+      background:rgba(4,24,53,.85);
+      color:white;
+      padding:7px 10px;
+      border-radius:10px;
+      font-size:12px;
+      font-weight:800;
+      backdrop-filter:blur(8px);
+    }
+
+    .favorite{
+      position:absolute;
+      top:12px;
+      left:12px;
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      background:white;
+      color:#52647d;
+      font-size:19px;
+      box-shadow:0 5px 15px rgba(0,0,0,.12);
+    }
+
+    .card-body{
+      padding:18px;
+    }
+
+    .card-title{
+      font-size:17px;
+      font-weight:900;
+      margin-bottom:8px;
+      line-height:1.6;
+    }
+
+    .seller{
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:15px;
+    }
+
+    .price-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .price{
+      font-size:21px;
+      font-weight:1000;
+      color:var(--navy);
+      direction:ltr;
+      white-space:nowrap;
+    }
+
+    .pi-symbol{
+      color:#e69500;
+    }
+
+    .buy{
+      background:var(--navy);
+      color:white;
+      border-radius:11px;
+      padding:9px 13px;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .buy:hover{
+      background:var(--blue);
+    }
+
+    /* FEATURES */
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+
+    .feature{
+      background:white;
+      border:1px solid var(--border);
+      padding:25px;
+      border-radius:20px;
+    }
+
+    .feature-icon{
+      font-size:32px;
+      margin-bottom:10px;
+    }
+
+    .feature h3{
+      margin-bottom:7px;
+    }
+
+    .feature p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.8;
+    }
+
+    /* SELL BUTTON */
+
+    .sell-box{
+      margin-top:40px;
+      background:
+        linear-gradient(135deg,#08234a,#0b4a9c);
+      color:white;
+      border-radius:25px;
+      padding:30px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .sell-box h2{
+      margin-bottom:8px;
+    }
+
+    .sell-box p{
+      color:#d9e8fa;
+    }
+
+    .sell-button{
+      background:#f5a623;
+      color:white;
+      padding:14px 25px;
+      border-radius:14px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    /* MODAL */
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,15,35,.68);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:3000;
+      backdrop-filter:blur(8px);
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-box{
+      width:min(560px,100%);
+      max-height:90vh;
+      overflow:auto;
+      background:white;
+      border-radius:25px;
+      padding:25px;
+      box-shadow:0 25px 70px rgba(0,0,0,.25);
+    }
+
+    .modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:20px;
+    }
+
+    .modal-head h2{
+      color:var(--navy);
+    }
+
+    .close{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      background:#edf3fa;
+      color:#253c5c;
+      font-size:21px;
+    }
+
+    .field{
+      margin-bottom:15px;
+    }
+
+    .field label{
+      display:block;
+      font-weight:800;
+      margin-bottom:7px;
+      font-size:14px;
+    }
+
+    .field input,
+    .field textarea,
+    .field select{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:13px;
+      padding:12px;
+      outline:none;
+      background:#fbfdff;
+    }
+
+    .field textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+
+    .form-button{
+      width:100%;
+      padding:14px;
+      background:var(--navy);
+      color:white;
+      border-radius:14px;
+      font-weight:900;
+    }
+
+    /* PI PROFILE */
+
+    .pi-profile{
+      display:flex;
+      gap:15px;
+      align-items:center;
+      padding:15px;
+      background:#f5f9ff;
+      border-radius:16px;
+      margin-bottom:20px;
+    }
+
+    .pi-avatar{
+      width:52px;
+      height:52px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#f8bd55,#e69100);
+      display:grid;
+      place-items:center;
+      color:white;
+      font-weight:900;
+      font-size:22px;
+    }
+
+    .pi-profile small{
+      display:block;
+      color:var(--muted);
+      margin-top:4px;
+      word-break:break-all;
+    }
+
+    /* TOAST */
+
+    .toast{
+      position:fixed;
+      bottom:25px;
+      left:25px;
+      max-width:360px;
+      background:#061a38;
+      color:white;
+      padding:15px 19px;
+      border-radius:14px;
+      box-shadow:0 15px 40px rgba(0,0,0,.25);
+      transform:translateY(120px);
+      opacity:0;
+      transition:.3s;
+      z-index:5000;
+      line-height:1.7;
+    }
+
+    .toast.show{
+      transform:translateY(0);
+      opacity:1;
+    }
+
+    /* MOBILE NAV */
+
+    .mobile-nav{
+      display:none;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:1100px){
+      .categories{
+        grid-template-columns:repeat(4,1fr);
+      }
+
+      .products{
+        grid-template-columns:repeat(3,1fr);
+      }
+
+      .features{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:800px){
+      .header-inner{
+        flex-wrap:wrap;
+      }
+
+      .logo{
+        min-width:auto;
+      }
+
+      .search{
+        order:3;
+        flex-basis:100%;
+      }
+
+      .hero-box{
+        padding:30px;
+      }
+
+      .hero h1{
+        font-size:31px;
+      }
+
+      .hero-pi{
+        display:none;
+      }
+
+      .products{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .image{
+        height:190px;
+      }
+    }
+
+    @media(max-width:560px){
+      body{
+        padding-bottom:70px;
+      }
+
+      .header-inner{
+        padding:12px 14px;
+      }
+
+      .pi-connect{
+        min-width:125px;
+      }
+
+      .hero{
+        padding:0 14px;
+      }
+
+      .container{
+        padding:0 14px 40px;
+      }
+
+      .hero-box{
+        min-height:330px;
+        padding:25px;
+      }
+
+      .hero h1{
+        font-size:27px;
+      }
+
+      .hero p{
+        font-size:15px;
+      }
+
+      .categories{
+        grid-template-columns:repeat(4,1fr);
+        gap:8px;
+      }
+
+      .category{
+        padding:13px 5px;
+      }
+
+      .category-icon{
+        font-size:24px;
+      }
+
+      .category span{
+        font-size:12px;
+      }
+
+      .products{
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+      }
+
+      .image{
+        height:145px;
+      }
+
+      .card-body{
+        padding:12px;
+      }
+
+      .card-title{
+        font-size:14px;
+      }
+
+      .seller{
+        font-size:11px;
+      }
+
+      .price{
+        font-size:16px;
+      }
+
+      .buy{
+        padding:7px 9px;
+        font-size:11px;
+      }
+
+      .features{
+        grid-template-columns:1fr;
+      }
+
+      .sell-box{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .mobile-nav{
+        position:fixed;
+        display:flex;
+        bottom:0;
+        left:0;
+        right:0;
+        height:65px;
+        background:white;
+        border-top:1px solid var(--border);
+        z-index:2000;
+        justify-content:space-around;
+        box-shadow:0 -8px 25px rgba(0,0,0,.08);
+      }
+
+      .mobile-nav button{
+        background:none;
+        color:#687992;
+        font-size:12px;
+        font-weight:700;
+      }
+
+      .mobile-nav button strong{
+        display:block;
+        font-size:21px;
+        margin-bottom:2px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- TOP -->
-<div class="topbar">
- <div class="topbar-inner">
-  <span>بازار آنلاین Nexora</span>
-  <span>تمام قیمت‌ها با Pi نمایش داده می‌شوند</span>
- </div>
-</div>
+<header>
+  <div class="header-inner">
 
-<!-- HEADER -->
-<header class="header">
+    <div class="logo">
+      <div class="logo-icon">N</div>
+      Nexora
+    </div>
 
- <div class="header-main">
+    <div class="search">
+      <span class="search-icon">⌕</span>
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="جستجوی ماشین، خانه، موبایل و..."
+      >
+    </div>
 
-  <a class="logo" href="#">
-   <div class="logo-icon">π</div>
-   <div>
-    <div class="logo-text">Nexora</div>
-    <span class="logo-pi">Pi Marketplace</span>
-   </div>
-  </a>
-
-  <div class="search">
-
-   <select class="search-category">
-    <option>همه دسته‌ها</option>
-    <option>خانه</option>
-    <option>خودرو</option>
-    <option>موبایل</option>
-    <option>کامپیوتر</option>
-    <option>پوشاک</option>
-    <option>خدمات</option>
-   </select>
-
-   <input
-    id="searchInput"
-    type="text"
-    placeholder="جستجو در بازار Nexora..."
-   >
-
-   <button class="search-btn" onclick="searchProducts()">🔍</button>
+    <button class="pi-connect" id="connectPi">
+      🟣 اتصال به Pi
+    </button>
 
   </div>
 
-  <div class="header-actions">
-
-   <button class="header-btn" onclick="openModal('notifications')">
-    🔔
-   </button>
-
-   <button class="header-btn" onclick="openModal('profile')">
-    👤
-    <label>حساب</label>
-   </button>
-
-   <button class="header-btn sell-btn" onclick="openModal('listing')">
-    + ثبت آگهی
-   </button>
-
-  </div>
-
- </div>
-
- <nav class="nav">
-  <div class="nav-inner">
-   <a class="nav-item" href="#categories">دسته‌بندی‌ها</a>
-   <a class="nav-item" href="#featured">آگهی‌های Pi</a>
-   <a class="nav-item" href="#houses">خانه و املاک</a>
-   <a class="nav-item" href="#cars">خودرو</a>
-   <a class="nav-item" href="#digital">دیجیتال</a>
-   <a class="nav-item" href="#sellers">فروشندگان</a>
-   <a class="nav-item" href="#services">خدمات</a>
-  </div>
- </nav>
-
+  <nav class="nav">
+    <button class="active" onclick="filterCategory('all',this)">همه</button>
+    <button onclick="filterCategory('cars',this)">🚘 ماشین</button>
+    <button onclick="filterCategory('homes',this)">🏠 خانه</button>
+    <button onclick="filterCategory('electronics',this)">📱 دیجیتال</button>
+    <button onclick="filterCategory('small',this)">📦 وسایل کوچک</button>
+    <button onclick="filterCategory('fashion',this)">👕 پوشاک</button>
+    <button onclick="filterCategory('gaming',this)">🎮 گیم</button>
+    <button onclick="filterCategory('services',this)">🛠 خدمات</button>
+  </nav>
 </header>
 
-<!-- PI BAR -->
-<div class="pi-bar">
- <div class="pi-bar-inner">
 
-  <div class="pi-badge">
-   <span class="pi-symbol">π</span>
-   <span>بازار Pi در Nexora</span>
-  </div>
-
-  <div class="pi-note">
-   قیمت تمام کالاهای نمونه: حداکثر 1 π
-  </div>
-
- </div>
-</div>
-
-<!-- HERO -->
 <section class="hero">
+  <div class="hero-box">
 
- <div class="hero-inner">
+    <div class="hero-content">
 
-  <div>
+      <span class="hero-badge">
+        🟣 Nexora × Pi Network
+      </span>
 
-   <h1 class="hero-title">
-    خرید و فروش با
-    <span class="pi">Pi</span>
-    در Nexora
-   </h1>
+      <h1>
+        بازار مدرن خرید و فروش با Pi
+      </h1>
 
-   <p class="hero-text">
-    کالاها، خانه، خودرو، لوازم دیجیتال و خدمات را
-    در یک بازار مدرن پیدا کن. واحد نمایش قیمت در Nexora
-    فقط Pi است.
-   </p>
+      <p>
+        ماشین‌های لوکس، خانه‌ها، موبایل، وسایل دیجیتال
+        و هزاران کالا را با قیمت‌گذاری Pi در Nexora پیدا کنید.
+      </p>
 
-   <div class="hero-actions">
+      <div class="hero-actions">
+        <button class="primary" onclick="connectPi()">
+          اتصال حساب Pi
+        </button>
 
-    <button class="primary" onclick="openModal('listing')">
-     π ثبت آگهی
+        <button class="secondary" onclick="openSell()">
+          + ثبت آگهی
+        </button>
+      </div>
+
+    </div>
+
+    <div class="hero-pi">π</div>
+
+  </div>
+</section>
+
+
+<main class="container">
+
+  <!-- CATEGORIES -->
+
+  <section class="section">
+
+    <div class="section-head">
+      <div>
+        <div class="section-title">دسته‌بندی‌ها</div>
+        <div class="section-sub">
+          همه چیز در یک بازار
+        </div>
+      </div>
+    </div>
+
+    <div class="categories">
+
+      <div class="category" onclick="filterCategory('cars')">
+        <div class="category-icon">🚘</div>
+        <span>ماشین</span>
+      </div>
+
+      <div class="category" onclick="filterCategory('homes')">
+        <div class="category-icon">🏠</div>
+        <span>خانه</span>
+      </div>
+
+      <div class="category" onclick="filterCategory('electronics')">
+        <div class="category-icon">📱</div>
+        <span>دیجیتال</span>
+      </div>
+
+      <div class="category" onclick="filterCategory('small')">
+        <div class="category-icon">📦</div>
+        <span>وسایل کوچک</span>
+      </div>
+
+      <div class="category" onclick="filterCategory('fashion')">
+        <div class="category-icon">👕</div>
+        <span>پوشاک</span>
+      </div>
+
+      <div class="category" onclick="filterCategory('gaming')">
+        <div class="category-icon">🎮</div>
+        <span>گیم</span>
+      </div>
+
+      <div class="category" onclick="filterCategory('services')">
+        <div class="category-icon">🛠</div>
+        <span>خدمات</span>
+      </div>
+
+      <div class="category" onclick="filterCategory('all')">
+        <div class="category-icon">✨</div>
+        <span>همه</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PRODUCTS -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <div>
+        <div class="section-title">آگهی‌های ویژه</div>
+        <div class="section-sub">
+          قیمت‌ها همگی بر اساس Pi هستند
+        </div>
+      </div>
+
+      <div>
+        <strong id="listingCount">0</strong>
+        آگهی
+      </div>
+
+    </div>
+
+    <div class="products" id="products"></div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+
+  <section class="section">
+
+    <div class="section-title">
+      چرا Nexora؟
+    </div>
+
+    <div class="features">
+
+      <div class="feature">
+        <div class="feature-icon">🟣</div>
+        <h3>Pi Native</h3>
+        <p>
+          اتصال حساب Pioneer و آماده‌سازی برای پرداخت‌های Pi.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🔐</div>
+        <h3>امنیت</h3>
+        <p>
+          احراز هویت از طریق Pi SDK و معماری مناسب برای بک‌اند.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🚘</div>
+        <h3>بازار متنوع</h3>
+        <p>
+          از خودرو و خانه تا وسایل کوچک و دیجیتال.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>سریع و ساده</h3>
+        <p>
+          طراحی واکنش‌گرا برای موبایل و Pi Browser.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SELL -->
+
+  <section class="sell-box">
+
+    <div>
+      <h2>کالایت را در Nexora بفروش</h2>
+      <p>
+        آگهی خودت را ثبت کن و قیمت را به Pi تعیین کن.
+      </p>
+    </div>
+
+    <button class="sell-button" onclick="openSell()">
+      + ثبت آگهی
     </button>
 
-    <button
-     class="secondary"
-     onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})">
-     مشاهده بازار
-    </button>
-
-   </div>
-
-  </div>
-
-  <div class="hero-panel">
-
-   <div class="hero-panel-title">
-    بازار Nexora
-   </div>
-
-   <div class="hero-stat">
-    <span>واحد قیمت</span>
-    <strong>π Pi</strong>
-   </div>
-
-   <div class="hero-stat">
-    <span>حداکثر قیمت نمونه</span>
-    <strong>1 π</strong>
-   </div>
-
-   <div class="hero-stat">
-    <span>دسته‌بندی</span>
-    <strong>متنوع</strong>
-   </div>
-
-   <div class="hero-stat">
-    <span>نوع بازار</span>
-    <strong>Marketplace</strong>
-   </div>
-
-  </div>
-
- </div>
-
-</section>
-
-<main class="main">
-
-<!-- CATEGORIES -->
-<section class="section" id="categories">
-
- <div class="section-head">
-  <h2 class="section-title">دسته‌بندی‌های محبوب</h2>
-  <a class="section-link" href="#">همه دسته‌ها ←</a>
- </div>
-
- <div class="categories">
-
-  <a class="category" href="#digital">
-   <div class="category-icon">📱</div>
-   <div class="category-name">موبایل</div>
-  </a>
-
-  <a class="category" href="#cars">
-   <div class="category-icon">🚗</div>
-   <div class="category-name">خودرو</div>
-  </a>
-
-  <a class="category" href="#digital">
-   <div class="category-icon">💻</div>
-   <div class="category-name">کامپیوتر</div>
-  </a>
-
-  <a class="category" href="#houses">
-   <div class="category-icon">🏠</div>
-   <div class="category-name">خانه</div>
-  </a>
-
-  <a class="category" href="#">
-   <div class="category-icon">👕</div>
-   <div class="category-name">پوشاک</div>
-  </a>
-
-  <a class="category" href="#">
-   <div class="category-icon">🎮</div>
-   <div class="category-name">بازی</div>
-  </a>
-
-  <a class="category" href="#services">
-   <div class="category-icon">🔧</div>
-   <div class="category-name">خدمات</div>
-  </a>
-
-  <a class="category" href="#">
-   <div class="category-icon">📦</div>
-   <div class="category-name">سایر</div>
-  </a>
-
- </div>
-
-</section>
-
-<!-- TABS -->
-<section class="section">
-
- <div class="market-tabs">
-
-  <button class="market-tab active" onclick="switchTab(this)">
-   همه
-  </button>
-
-  <button class="market-tab" onclick="switchTab(this)">
-   خانه
-  </button>
-
-  <button class="market-tab" onclick="switchTab(this)">
-   خودرو
-  </button>
-
-  <button class="market-tab" onclick="switchTab(this)">
-   دیجیتال
-  </button>
-
-  <button class="market-tab" onclick="switchTab(this)">
-   خدمات
-  </button>
-
- </div>
-
-</section>
-
-<!-- FEATURED -->
-<section class="section" id="featured">
-
- <div class="section-head">
-  <h2 class="section-title">آگهی‌های منتخب با Pi</h2>
-  <a class="section-link" href="#">مشاهده همه ←</a>
- </div>
-
- <div class="products">
-
-  <!-- 1 -->
-  <article class="product">
-
-   <div class="product-image">
-    📱
-    <span class="product-badge">ویژه</span>
-    <span class="pi-badge-card">π Pi</span>
-    <button class="favorite" onclick="favorite(this)">♡</button>
-   </div>
-
-   <div class="product-body">
-
-    <div class="product-category">موبایل</div>
-
-    <h3 class="product-title">
-     گوشی هوشمند Nexora
-    </h3>
-
-    <div class="product-meta">
-     <span>📍 تهران</span>
-     <span>امروز</span>
-    </div>
-
-    <div class="pi-price-box">
-     <span class="pi-price-label">قیمت</span>
-     <span class="price">0.8 <small>π</small></span>
-    </div>
-
-    <div class="product-footer">
-     <div class="seller">
-      <div class="avatar">A</div>
-      فروشنده تأیید شده
-     </div>
-     <span>✓</span>
-    </div>
-
-   </div>
-
-  </article>
-
-  <!-- 2 -->
-  <article class="product" id="digital">
-
-   <div class="product-image">
-    💻
-    <span class="product-badge">محبوب</span>
-    <span class="pi-badge-card">π Pi</span>
-    <button class="favorite" onclick="favorite(this)">♡</button>
-   </div>
-
-   <div class="product-body">
-
-    <div class="product-category">کامپیوتر</div>
-
-    <h3 class="product-title">
-     لپ‌تاپ حرفه‌ای برای کار و طراحی
-    </h3>
-
-    <div class="product-meta">
-     <span>📍 تهران</span>
-     <span>۲ ساعت پیش</span>
-    </div>
-
-    <div class="pi-price-box">
-     <span class="pi-price-label">قیمت</span>
-     <span class="price">1 π</span>
-    </div>
-
-    <div class="product-footer">
-     <div class="seller">
-      <div class="avatar">M</div>
-      فروشگاه دیجیتال
-     </div>
-     <span>★ 4.9</span>
-    </div>
-
-   </div>
-
-  </article>
-
-  <!-- 3 -->
-  <article class="product" id="cars">
-
-   <div class="product-image">
-    🚗
-    <span class="product-badge">خودرو</span>
-    <span class="pi-badge-card">π Pi</span>
-    <button class="favorite" onclick="favorite(this)">♡</button>
-   </div>
-
-   <div class="product-body">
-
-    <div class="product-category">خودرو</div>
-
-    <h3 class="product-title">
-     خودروی خانوادگی کم‌کارکرد
-    </h3>
-
-    <div class="product-meta">
-     <span>📍 تهران</span>
-     <span>امروز</span>
-    </div>
-
-    <div class="pi-price-box">
-     <span class="pi-price-label">قیمت</span>
-     <span class="price">1 π</span>
-    </div>
-
-    <div class="product-footer">
-     <div class="seller">
-      <div class="avatar">R</div>
-      فروشنده خودرو
-     </div>
-     <span>✓</span>
-    </div>
-
-   </div>
-
-  </article>
-
-  <!-- 4 -->
-  <article class="product" id="houses">
-
-   <div class="product-image">
-    🏠
-    <span class="product-badge">جدید</span>
-    <span class="pi-badge-card">π Pi</span>
-    <button class="favorite" onclick="favorite(this)">♡</button>
-   </div>
-
-   <div class="product-body">
-
-    <div class="product-category">خانه و املاک</div>
-
-    <h3 class="product-title">
-     واحد مسکونی مدرن
-    </h3>
-
-    <div class="product-meta">
-     <span>📍 تهران</span>
-     <span>امروز</span>
-    </div>
-
-    <div class="pi-price-box">
-     <span class="pi-price-label">قیمت</span>
-     <span class="price">1 π</span>
-    </div>
-
-    <div class="product-footer">
-     <div class="seller">
-      <div class="avatar">S</div>
-      مشاور املاک
-     </div>
-     <span>★ 4.8</span>
-    </div>
-
-   </div>
-
-  </article>
-
-  <!-- 5 -->
-  <article class="product">
-
-   <div class="product-image">
-    👕
-    <span class="product-badge">پوشاک</span>
-    <span class="pi-badge-card">π Pi</span>
-    <button class="favorite" onclick="favorite(this)">♡</button>
-   </div>
-
-   <div class="product-body">
-
-    <div class="product-category">پوشاک</div>
-
-    <h3 class="product-title">
-     ست لباس اسپرت
-    </h3>
-
-    <div class="product-meta">
-     <span>📍 تهران</span>
-     <span>امروز</span>
-    </div>
-
-    <div class="pi-price-box">
-     <span class="pi-price-label">قیمت</span>
-     <span class="price">0.25 <small>π</small></span>
-    </div>
-
-    <div class="product-footer">
-     <div class="seller">
-      <div class="avatar">N</div>
-      فروشگاه پوشاک
-     </div>
-     <span>★ 4.7</span>
-    </div>
-
-   </div>
-
-  </article>
-
-  <!-- 6 -->
-  <article class="product">
-
-   <div class="product-image">
-    🎮
-    <span class="product-badge">گیمینگ</span>
-    <span class="pi-badge-card">π Pi</span>
-    <button class="favorite" onclick="favorite(this)">♡</button>
-   </div>
-
-   <div class="product-body">
-
-    <div class="product-category">بازی و سرگرمی</div>
-
-    <h3 class="product-title">
-     کنسول بازی و تجهیزات
-    </h3>
-
-    <div class="product-meta">
-     <span>📍 تهران</span>
-     <span>دیروز</span>
-    </div>
-
-    <div class="pi-price-box">
-     <span class="pi-price-label">قیمت</span>
-     <span class="price">0.65 <small>π</small></span>
-    </div>
-
-    <div class="product-footer">
-     <div class="seller">
-      <div class="avatar">G</div>
-      فروشگاه گیم
-     </div>
-     <span>★ 4.9</span>
-    </div>
-
-   </div>
-
-  </article>
-
-  <!-- 7 -->
-  <article class="product">
-
-   <div class="product-image">
-    🛋️
-    <span class="product-badge">خانه</span>
-    <span class="pi-badge-card">π Pi</span>
-    <button class="favorite" onclick="favorite(this)">♡</button>
-   </div>
-
-   <div class="product-body">
-
-    <div class="product-category">لوازم خانه</div>
-
-    <h3 class="product-title">
-     ست مبلمان مدرن
-    </h3>
-
-    <div class="product-meta">
-     <span>📍 تهران</span>
-     <span>امروز</span>
-    </div>
-
-    <div class="pi-price-box">
-     <span class="pi-price-label">قیمت</span>
-     <span class="price">0.55 <small>π</small></span>
-    </div>
-
-    <div class="product-footer">
-     <div class="seller">
-      <div class="avatar">H</div>
-      خانه مدرن
-     </div>
-     <span>✓</span>
-    </div>
-
-   </div>
-
-  </article>
-
-  <!-- 8 -->
-  <article class="product">
-
-   <div class="product-image">
-    🚲
-    <span class="product-badge">جدید</span>
-    <span class="pi-badge-card">π Pi</span>
-    <button class="favorite" onclick="favorite(this)">♡</button>
-   </div>
-
-   <div class="product-body">
-
-    <div class="product-category">ورزش</div>
-
-    <h3 class="product-title">
-     دوچرخه حرفه‌ای شهری
-    </h3>
-
-    <div class="product-meta">
-     <span>📍 تهران</span>
-     <span>امروز</span>
-    </div>
-
-    <div class="pi-price-box">
-     <span class="pi-price-label">قیمت</span>
-     <span class="price">0.4 <small>π</small></span>
-    </div>
-
-    <div class="product-footer">
-     <div class="seller">
-      <div class="avatar">P</div>
-      فروشنده خصوصی
-     </div>
-     <span>★ 4.6</span>
-    </div>
-
-   </div>
-
-  </article>
-
- </div>
-
-</section>
-
-<!-- FEATURES -->
-<section class="section" id="services">
-
- <div class="section-head">
-  <h2 class="section-title">امکانات Nexora</h2>
- </div>
-
- <div class="feature-grid">
-
-  <div class="feature">
-   <div class="feature-icon">π</div>
-   <div>
-    <h3>قیمت‌گذاری با Pi</h3>
-    <p>
-     در نسخه بازار Nexora واحد قیمت کالاها Pi است.
-    </p>
-   </div>
-  </div>
-
-  <div class="feature">
-   <div class="feature-icon">🛡️</div>
-   <div>
-    <h3>بازار امن‌تر</h3>
-    <p>
-     اطلاعات آگهی و فروشنده به شکل منظم نمایش داده می‌شود.
-    </p>
-   </div>
-  </div>
-
-  <div class="feature">
-   <div class="feature-icon">💬</div>
-   <div>
-    <h3>ارتباط با فروشنده</h3>
-    <p>
-     خریدار می‌تواند درباره کالا با فروشنده ارتباط برقرار کند.
-    </p>
-   </div>
-  </div>
-
- </div>
-
-</section>
-
-<!-- SELLERS -->
-<section class="section" id="sellers">
-
- <div class="section-head">
-  <h2 class="section-title">فروشندگان منتخب</h2>
-  <a class="section-link" href="#">مشاهده همه ←</a>
- </div>
-
- <div class="sellers">
-
-  <div class="seller-card">
-   <div class="seller-top">
-    <div class="seller-big-avatar">🏪</div>
-    <div>
-     <div class="seller-name">Nexora Digital</div>
-     <div class="verified">✓ فروشنده تأیید شده</div>
-    </div>
-   </div>
-   <div class="rating">★★★★★</div>
-   <button class="follow" onclick="followSeller(this)">دنبال کردن</button>
-  </div>
-
-  <div class="seller-card">
-   <div class="seller-top">
-    <div class="seller-big-avatar">🚗</div>
-    <div>
-     <div class="seller-name">Nexora Auto</div>
-     <div class="verified">✓ فروشنده تأیید شده</div>
-    </div>
-   </div>
-   <div class="rating">★★★★★</div>
-   <button class="follow" onclick="followSeller(this)">دنبال کردن</button>
-  </div>
-
-  <div class="seller-card">
-   <div class="seller-top">
-    <div class="seller-big-avatar">🏠</div>
-    <div>
-     <div class="seller-name">Nexora Home</div>
-     <div class="verified">✓ فروشنده تأیید شده</div>
-    </div>
-   </div>
-   <div class="rating">★★★★☆</div>
-   <button class="follow" onclick="followSeller(this)">دنبال کردن</button>
-  </div>
-
-  <div class="seller-card">
-   <div class="seller-top">
-    <div class="seller-big-avatar">🛍️</div>
-    <div>
-     <div class="seller-name">Pi Store</div>
-     <div class="verified">✓ فروشنده تأیید شده</div>
-    </div>
-   </div>
-   <div class="rating">★★★★★</div>
-   <button class="follow" onclick="followSeller(this)">دنبال کردن</button>
-  </div>
-
- </div>
-
-</section>
-
-<!-- PROMO -->
-<section class="section">
-
- <div class="promo">
-
-  <div>
-   <h2>چیزی برای فروش داری؟</h2>
-   <p>
-    آگهی خودت را ایجاد کن و قیمت را با Pi تعیین کن.
-   </p>
-  </div>
-
-  <button onclick="openModal('listing')">
-   π ثبت آگهی
-  </button>
-
- </div>
-
-</section>
+  </section>
 
 </main>
 
-<!-- FOOTER -->
-<footer class="footer">
 
- <div class="footer-inner">
+<!-- MOBILE NAV -->
 
-  <div>
-   <h3>Nexora</h3>
-   <p>
-    بازار آنلاین مدرن با تمرکز بر اکوسیستم Pi.
-   </p>
-  </div>
-
-  <div>
-   <h3>بازار</h3>
-   <ul>
-    <li>خانه و املاک</li>
-    <li>خودرو</li>
-    <li>دیجیتال</li>
-    <li>پوشاک</li>
-   </ul>
-  </div>
-
-  <div>
-   <h3>فروش</h3>
-   <ul>
-    <li>ثبت آگهی</li>
-    <li>فروشندگان</li>
-    <li>راهنمای فروش</li>
-    <li>قوانین</li>
-   </ul>
-  </div>
-
-  <div>
-   <h3>Pi</h3>
-   <ul>
-    <li>بازار Pi</li>
-    <li>حساب کاربری</li>
-    <li>کیف پول</li>
-    <li>امنیت</li>
-   </ul>
-  </div>
-
- </div>
-
- <div class="copyright">
-  © 2026 Nexora — Pi Marketplace
- </div>
-
-</footer>
-
-<!-- MOBILE -->
 <nav class="mobile-nav">
 
- <button onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <span>⌂</span>
-  خانه
- </button>
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <strong>⌂</strong>
+    خانه
+  </button>
 
- <button onclick="document.getElementById('categories').scrollIntoView()">
-  <span>▦</span>
-  دسته‌ها
- </button>
+  <button onclick="filterCategory('cars')">
+    <strong>🚘</strong>
+    ماشین
+  </button>
 
- <button onclick="openModal('listing')">
-  <span>＋</span>
-  ثبت آگهی
- </button>
+  <button onclick="openSell()">
+    <strong>＋</strong>
+    فروش
+  </button>
 
- <button onclick="openModal('profile')">
-  <span>♙</span>
-  حساب
- </button>
+  <button onclick="connectPi()">
+    <strong>π</strong>
+    Pi
+  </button>
+
+  <button onclick="openProfile()">
+    <strong>◎</strong>
+    حساب
+  </button>
 
 </nav>
 
-<!-- LISTING MODAL -->
-<div class="overlay" id="listingModal">
 
- <div class="modal">
+<!-- PI PROFILE MODAL -->
 
-  <div class="modal-head">
-   <h2>ثبت آگهی با Pi</h2>
-   <button class="close" onclick="closeModal('listing')">×</button>
+<div class="modal" id="profileModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2>حساب Pi</h2>
+      <button class="close" onclick="closeModal('profileModal')">×</button>
+    </div>
+
+    <div id="profileContent">
+
+      <div class="pi-profile">
+
+        <div class="pi-avatar">π</div>
+
+        <div>
+          <strong id="piUsername">
+            هنوز متصل نشده
+          </strong>
+
+          <small id="piWallet">
+            Wallet متصل نیست
+          </small>
+        </div>
+
+      </div>
+
+      <button
+        class="form-button"
+        onclick="connectPi()"
+      >
+        🟣 اتصال به Pi
+      </button>
+
+    </div>
+
   </div>
-
-  <div class="form-group">
-   <label>عنوان آگهی</label>
-   <input id="listingTitle" placeholder="مثلاً لپ‌تاپ..." />
-  </div>
-
-  <div class="form-group">
-   <label>دسته‌بندی</label>
-   <select id="listingCategory">
-    <option>موبایل</option>
-    <option>کامپیوتر</option>
-    <option>خودرو</option>
-    <option>خانه</option>
-    <option>پوشاک</option>
-    <option>خدمات</option>
-    <option>سایر</option>
-   </select>
-  </div>
-
-  <div class="form-group">
-   <label>قیمت به Pi</label>
-   <input
-    id="listingPrice"
-    type="number"
-    min="0"
-    max="1"
-    step="0.01"
-    placeholder="حداکثر 1 Pi"
-   />
-  </div>
-
-  <div class="form-group">
-   <label>شهر</label>
-   <input id="listingCity" placeholder="شهر" />
-  </div>
-
-  <div class="form-group">
-   <label>توضیحات</label>
-   <textarea
-    id="listingDescription"
-    placeholder="توضیحات آگهی..."
-   ></textarea>
-  </div>
-
-  <button class="form-submit" onclick="publishListing()">
-   π انتشار آگهی
-  </button>
-
- </div>
 
 </div>
 
-<!-- PROFILE -->
-<div class="overlay" id="profileModal">
 
- <div class="modal">
+<!-- SELL MODAL -->
 
-  <div class="modal-head">
-   <h2>حساب من</h2>
-   <button class="close" onclick="closeModal('profile')">×</button>
+<div class="modal" id="sellModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2>ثبت آگهی</h2>
+      <button class="close" onclick="closeModal('sellModal')">×</button>
+    </div>
+
+    <div class="field">
+      <label>عنوان</label>
+      <input
+        id="sellTitle"
+        placeholder="مثلاً BMW سری 7"
+      >
+    </div>
+
+    <div class="field">
+      <label>دسته‌بندی</label>
+
+      <select id="sellCategory">
+        <option value="cars">ماشین</option>
+        <option value="homes">خانه</option>
+        <option value="electronics">دیجیتال</option>
+        <option value="small">وسایل کوچک</option>
+        <option value="fashion">پوشاک</option>
+        <option value="gaming">گیم</option>
+        <option value="services">خدمات</option>
+      </select>
+    </div>
+
+    <div class="field">
+
+      <label>
+        قیمت به Pi
+      </label>
+
+      <input
+        id="sellPrice"
+        type="number"
+        min="0"
+        max="1"
+        step="0.001"
+        placeholder="مثلاً 0.500"
+      >
+
+      <small style="color:#6d7b91">
+        حداکثر قیمت: 1 π
+      </small>
+
+    </div>
+
+    <div class="field">
+
+      <label>شهر</label>
+
+      <input
+        id="sellCity"
+        placeholder="مثلاً تهران"
+      >
+
+    </div>
+
+    <div class="field">
+
+      <label>توضیحات</label>
+
+      <textarea
+        id="sellDescription"
+        placeholder="توضیحات کالا..."
+      ></textarea>
+
+    </div>
+
+    <button
+      class="form-button"
+      onclick="publishListing()"
+    >
+      انتشار آگهی
+    </button>
+
   </div>
 
-  <div class="feature">
+</div>
 
-   <div class="feature-icon">👤</div>
 
-   <div>
-    <h3>کاربر Nexora</h3>
-    <p>
-     آگهی‌ها، علاقه‌مندی‌ها و فعالیت‌های حساب شما اینجا قرار می‌گیرد.
+<!-- BUY MODAL -->
+
+<div class="modal" id="buyModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2 id="buyTitle">
+        خرید با Pi
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal('buyModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div
+      id="buyInfo"
+      style="
+        background:#f5f9ff;
+        padding:18px;
+        border-radius:16px;
+        margin-bottom:18px;
+        line-height:2;
+      "
+    ></div>
+
+    <button
+      class="form-button"
+      id="payButton"
+      onclick="startPiPayment()"
+    >
+      🟣 پرداخت با Pi
+    </button>
+
+    <p
+      style="
+        margin-top:15px;
+        color:#6d7b91;
+        font-size:13px;
+        line-height:1.8;
+      "
+    >
+      پرداخت واقعی Pi باید توسط بک‌اند Nexora تأیید و تکمیل شود.
     </p>
-   </div>
 
   </div>
-
-  <br>
-
-  <button
-   class="form-submit"
-   onclick="toast('داشبورد کاربری به‌زودی فعال می‌شود')">
-   ورود به داشبورد
-  </button>
-
- </div>
 
 </div>
 
-<!-- NOTIFICATIONS -->
-<div class="overlay" id="notificationsModal">
-
- <div class="modal">
-
-  <div class="modal-head">
-   <h2>اعلان‌ها</h2>
-   <button class="close" onclick="closeModal('notifications')">×</button>
-  </div>
-
-  <div class="feature">
-
-   <div class="feature-icon">🔔</div>
-
-   <div>
-    <h3>به Nexora خوش آمدید</h3>
-    <p>
-     اعلان‌های آگهی‌ها، پیام‌ها و فعالیت‌های Pi شما اینجا نمایش داده می‌شوند.
-    </p>
-   </div>
-
-  </div>
-
- </div>
-
-</div>
 
 <div class="toast" id="toast"></div>
 
+
 <script>
 
-/* MODAL */
+  /* =========================================================
+     PI CONFIGURATION
+     ========================================================= */
 
-function openModal(type){
+  let piUser = null;
+  let piAccessToken = null;
+  let selectedProduct = null;
 
- const modal=document.getElementById(type+"Modal");
+  /*
+    Production:
+    sandbox باید false باشد.
 
- if(modal){
-  modal.classList.add("show");
- }
+    برای تست در محیط Sandbox می‌توانی true کنی.
+  */
 
-}
+  const PI_SANDBOX = false;
 
-function closeModal(type){
 
- const modal=document.getElementById(type+"Modal");
+  /* =========================================================
+     INITIALIZE PI
+     ========================================================= */
 
- if(modal){
-  modal.classList.remove("show");
- }
+  function initializePi(){
 
-}
+    if(!window.Pi){
 
-document.querySelectorAll(".overlay").forEach(overlay=>{
+      console.warn("Pi SDK هنوز در دسترس نیست.");
 
- overlay.addEventListener("click",e=>{
+      return;
+    }
 
-  if(e.target===overlay){
-   overlay.classList.remove("show");
+    try{
+
+      window.Pi.init({
+        version:"2.0",
+        sandbox:PI_SANDBOX
+      });
+
+      console.log("Pi SDK initialized.");
+
+    }catch(error){
+
+      console.error("Pi initialization failed:",error);
+
+    }
+
   }
 
- });
 
-});
+  /* =========================================================
+     PRODUCTS
+     ========================================================= */
+
+  const products = [
+
+    {
+      id:1,
+      category:"cars",
+      title:"BMW سری 7",
+      seller:"Nexora Luxury Motors",
+      price:1,
+      image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=85",
+      city:"تهران",
+      description:"خودروی لوکس BMW سری 7"
+    },
+
+    {
+      id:2,
+      category:"cars",
+      title:"Mercedes-Benz S-Class",
+      seller:"Luxury Auto",
+      price:1,
+      image:"https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1000&q=85",
+      city:"دبی",
+      description:"مرسدس بنز کلاس S لوکس"
+    },
+
+    {
+      id:3,
+      category:"cars",
+      title:"Porsche 911",
+      seller:"Nexora Cars",
+      price:1,
+      image:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85",
+      city:"استانبول",
+      description:"Porsche 911 اسپرت"
+    },
+
+    {
+      id:4,
+      category:"cars",
+      title:"Audi R8",
+      seller:"Premium Cars",
+      price:1,
+      image:"https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&w=1000&q=85",
+      city:"دبی",
+      description:"Audi R8 لوکس و اسپرت"
+    },
+
+    {
+      id:5,
+      category:"homes",
+      title:"آپارتمان لوکس مدرن",
+      seller:"Nexora Homes",
+      price:1,
+      image:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85",
+      city:"تهران",
+      description:"خانه مدرن با طراحی لوکس"
+    },
+
+    {
+      id:6,
+      category:"homes",
+      title:"ویلای لوکس",
+      seller:"Luxury Estate",
+      price:1,
+      image:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85",
+      city:"دبی",
+      description:"ویلای مدرن و لوکس"
+    },
+
+    {
+      id:7,
+      category:"electronics",
+      title:"iPhone Pro",
+      seller:"Nexora Mobile",
+      price:0.800,
+      image:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=1000&q=85",
+      city:"تهران",
+      description:"گوشی هوشمند پرچمدار"
+    },
+
+    {
+      id:8,
+      category:"electronics",
+      title:"MacBook Pro",
+      seller:"Nexora Tech",
+      price:0.950,
+      image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1000&q=85",
+      city:"هلسینکی",
+      description:"لپ‌تاپ حرفه‌ای"
+    },
+
+    {
+      id:9,
+      category:"gaming",
+      title:"PlayStation 5",
+      seller:"Game Store",
+      price:0.650,
+      image:"https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=1000&q=85",
+      city:"تهران",
+      description:"کنسول بازی"
+    },
+
+    {
+      id:10,
+      category:"small",
+      title:"هدفون بی‌سیم",
+      seller:"Nexora Shop",
+      price:0.099,
+      image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=85",
+      city:"هلسینکی",
+      description:"هدفون بی‌سیم"
+    },
+
+    {
+      id:11,
+      category:"small",
+      title:"ساعت هوشمند",
+      seller:"Smart Shop",
+      price:0.075,
+      image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=85",
+      city:"تهران",
+      description:"ساعت هوشمند"
+    },
+
+    {
+      id:12,
+      category:"small",
+      title:"اسپیکر کوچک",
+      seller:"Audio Store",
+      price:0.025,
+      image:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=1000&q=85",
+      city:"هلسینکی",
+      description:"اسپیکر قابل حمل"
+    },
+
+    {
+      id:13,
+      category:"small",
+      title:"کیف چرمی",
+      seller:"Fashion Store",
+      price:0.050,
+      image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=85",
+      city:"تهران",
+      description:"کیف چرمی"
+    },
+
+    {
+      id:14,
+      category:"fashion",
+      title:"کت اسپرت",
+      seller:"Nexora Fashion",
+      price:0.120,
+      image:"https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=1000&q=85",
+      city:"هلسینکی",
+      description:"کت اسپرت"
+    },
+
+    {
+      id:15,
+      category:"small",
+      title:"عینک آفتابی",
+      seller:"Fashion Shop",
+      price:0.035,
+      image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1000&q=85",
+      city:"دبی",
+      description:"عینک آفتابی"
+    },
+
+    {
+      id:16,
+      category:"small",
+      title:"دوچرخه شهری",
+      seller:"Nexora Bikes",
+      price:0.400,
+      image:"https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1000&q=85",
+      city:"هلسینکی",
+      description:"دوچرخه شهری"
+    }
+
+  ];
+
+
+  /* =========================================================
+     RENDER
+     ========================================================= */
+
+  let currentCategory = "all";
+
+
+  function renderProducts(){
+
+    const search =
+      document
+      .getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+    const filtered = products.filter(product => {
+
+      const categoryOK =
+        currentCategory === "all" ||
+        product.category === currentCategory;
+
+      const searchOK =
+        !search ||
+        product.title.toLowerCase().includes(search) ||
+        product.seller.toLowerCase().includes(search) ||
+        product.city.toLowerCase().includes(search);
+
+      return categoryOK && searchOK;
+
+    });
+
+
+    const container =
+      document.getElementById("products");
+
+    document.getElementById("listingCount").textContent =
+      filtered.length;
+
+
+    if(!filtered.length){
+
+      container.innerHTML = `
+        <div style="
+          grid-column:1/-1;
+          background:white;
+          padding:50px;
+          border-radius:20px;
+          text-align:center;
+          color:#6d7b91;
+        ">
+          <div style="font-size:45px;margin-bottom:10px">
+            🔎
+          </div>
+          آگهی‌ای پیدا نشد.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    container.innerHTML =
+      filtered.map(product => `
+
+        <article class="card">
+
+          <div class="image">
+
+            <img
+              src="${product.image}"
+              alt="${product.title}"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            >
+
+            <span class="badge">
+              ${categoryName(product.category)}
+            </span>
+
+            <button
+              class="favorite"
+              onclick="favoriteProduct(${product.id})"
+            >
+              ♡
+            </button>
 
+          </div>
+
+          <div class="card-body">
 
-/* TOAST */
+            <div class="card-title">
+              ${product.title}
+            </div>
 
-let toastTimer;
+            <div class="seller">
+              👤 ${product.seller}
+              <br>
+              📍 ${product.city}
+            </div>
 
-function toast(message){
+            <div class="price-row">
 
- const box=document.getElementById("toast");
+              <div class="price">
+                ${formatPi(product.price)}
+                <span class="pi-symbol">π</span>
+              </div>
 
- box.textContent=message;
- box.classList.add("show");
+              <button
+                class="buy"
+                onclick="openBuy(${product.id})"
+              >
+                خرید با Pi
+              </button>
 
- clearTimeout(toastTimer);
+            </div>
 
- toastTimer=setTimeout(()=>{
-  box.classList.remove("show");
- },2600);
+          </div>
 
-}
+        </article>
 
+      `).join("");
 
-/* FAVORITE */
+  }
 
-function favorite(button){
 
- if(button.textContent==="♡"){
+  function categoryName(category){
 
-  button.textContent="♥";
-  button.style.color="#d43c55";
+    const names = {
 
-  toast("به علاقه‌مندی‌ها اضافه شد");
+      cars:"🚘 ماشین",
+      homes:"🏠 خانه",
+      electronics:"📱 دیجیتال",
+      small:"📦 کوچک",
+      fashion:"👕 پوشاک",
+      gaming:"🎮 گیم",
+      services:"🛠 خدمات"
 
- }else{
+    };
 
-  button.textContent="♡";
-  button.style.color="";
+    return names[category] || "✨ کالا";
 
-  toast("از علاقه‌مندی‌ها حذف شد");
+  }
 
- }
 
-}
+  function formatPi(value){
 
+    /*
+      قیمت‌های کوچک با صفرهای کامل نمایش داده می‌شوند.
+      مثال:
+      1
+      0.800
+      0.099
+      0.025
+    */
 
-/* FOLLOW */
+    if(value === 1){
+      return "1.000";
+    }
 
-function followSeller(button){
+    return Number(value).toFixed(3);
 
- if(button.textContent==="دنبال کردن"){
+  }
 
-  button.textContent="✓ دنبال می‌کنید";
-  button.style.background="#edf5ff";
 
-  toast("فروشنده دنبال شد");
+  /* =========================================================
+     CATEGORY FILTER
+     ========================================================= */
 
- }else{
+  function filterCategory(category, button){
 
-  button.textContent="دنبال کردن";
-  button.style.background="";
+    currentCategory = category;
 
-  toast("دنبال کردن لغو شد");
+    if(button){
 
- }
+      document
+      .querySelectorAll(".nav button")
+      .forEach(btn => btn.classList.remove("active"));
 
-}
+      button.classList.add("active");
 
+    }
 
-/* TABS */
+    renderProducts();
 
-function switchTab(button){
+    window.scrollTo({
+      top:document.querySelector(".section").offsetTop - 90,
+      behavior:"smooth"
+    });
 
- document.querySelectorAll(".market-tab")
- .forEach(tab=>tab.classList.remove("active"));
+  }
 
- button.classList.add("active");
 
- toast("بخش «"+button.textContent.trim()+"» انتخاب شد");
+  /* =========================================================
+     SEARCH
+     ========================================================= */
 
-}
+  document
+  .getElementById("searchInput")
+  .addEventListener("input", renderProducts);
 
 
-/* SEARCH */
+  /* =========================================================
+     PI AUTHENTICATION / WALLET
+     ========================================================= */
 
-function searchProducts(){
+  async function connectPi(){
 
- const input=document.getElementById("searchInput");
+    if(!window.Pi){
 
- const query=input.value.trim();
+      showToast(
+        "Pi SDK پیدا نشد. لطفاً Nexora را داخل Pi Browser باز کن."
+      );
 
- if(!query){
+      return;
 
-  toast("عبارت موردنظر را وارد کنید");
+    }
 
-  input.focus();
 
-  return;
+    try{
 
- }
+      showToast("در حال اتصال به Pi...");
 
- toast("جستجو برای «"+query+"»");
 
- document.getElementById("featured")
- .scrollIntoView({
-  behavior:"smooth"
- });
+      const auth =
+        await window.Pi.authenticate(
 
-}
+          [
+            "username",
+            "wallet_address",
+            "payments"
+          ],
 
+          onIncompletePaymentFound
 
-/* LISTING */
+        );
 
-function publishListing(){
 
- const title=document
- .getElementById("listingTitle")
- .value
- .trim();
+      piUser = auth.user;
+      piAccessToken = auth.accessToken;
 
- const priceInput=document
- .getElementById("listingPrice")
- .value;
 
- const price=Number(priceInput);
+      document.getElementById("piUsername").textContent =
+        "@" + (piUser.username || "Pioneer");
 
- if(!title){
 
-  toast("عنوان آگهی را وارد کنید");
+      /*
+        در صورت اعطای wallet_address توسط Pi
+        ممکن است این فیلد در user موجود باشد.
+      */
 
-  return;
+      const wallet =
+        piUser.wallet_address ||
+        piUser.walletAddress ||
+        "Wallet address توسط Pi ارائه نشده";
 
- }
 
- if(!priceInput || price<0 || price>1){
+      document.getElementById("piWallet").textContent =
+        wallet;
 
-  toast("قیمت باید بین 0 تا 1 Pi باشد");
 
-  return;
+      document.getElementById("connectPi").textContent =
+        "🟢 @" + (piUser.username || "Pi");
 
- }
 
- closeModal("listing");
+      openProfile();
 
- toast(
-  "آگهی «"+title+"» با قیمت "+price+" Pi آماده انتشار شد"
- );
 
- document.getElementById("listingTitle").value="";
- document.getElementById("listingPrice").value="";
- document.getElementById("listingCity").value="";
- document.getElementById("listingDescription").value="";
+      showToast(
+        "حساب Pi با موفقیت متصل شد."
+      );
 
-}
 
+      /*
+        نکته امنیتی:
+        accessToken را به localStorage نمی‌نویسیم.
+        برای سیستم واقعی باید به بک‌اند ارسال
+        و با /v2/me تأیید شود.
+      */
 
-/* ESC */
 
-document.addEventListener("keydown",e=>{
+    }catch(error){
 
- if(e.key==="Escape"){
+      console.error(error);
 
-  document.querySelectorAll(".overlay")
-  .forEach(x=>x.classList.remove("show"));
+      showToast(
+        "اتصال Pi لغو شد یا با خطا مواجه شد."
+      );
 
- }
+    }
 
-});
+  }
+
+
+  function onIncompletePaymentFound(payment){
+
+    console.warn(
+      "Incomplete Pi payment:",
+      payment
+    );
+
+
+    showToast(
+      "یک پرداخت ناتمام Pi پیدا شد؛ باید توسط بک‌اند تکمیل شود."
+    );
+
+  }
+
+
+  /* =========================================================
+     BUY
+     ========================================================= */
+
+  function openBuy(id){
+
+    selectedProduct =
+      products.find(product => product.id === id);
+
+    if(!selectedProduct) return;
+
+
+    document.getElementById("buyTitle").textContent =
+      selectedProduct.title;
+
+
+    document.getElementById("buyInfo").innerHTML = `
+
+      <strong>${selectedProduct.title}</strong>
+
+      <br>
+
+      قیمت:
+      <strong style="color:#e69500">
+        ${formatPi(selectedProduct.price)} π
+      </strong>
+
+      <br>
+
+      فروشنده:
+      ${selectedProduct.seller}
+
+      <br>
+
+      شهر:
+      ${selectedProduct.city}
+
+    `;
+
+
+    document
+    .getElementById("buyModal")
+    .classList.add("show");
+
+  }
+
+
+  /* =========================================================
+     PI PAYMENT
+     ========================================================= */
+
+  function startPiPayment(){
+
+    if(!selectedProduct){
+
+      showToast("کالا انتخاب نشده است.");
+
+      return;
+
+    }
+
+
+    if(!window.Pi){
+
+      showToast(
+        "برای پرداخت باید Nexora را داخل Pi Browser باز کنی."
+      );
+
+      return;
+
+    }
+
+
+    if(!piUser){
+
+      showToast(
+        "اول حساب Pi خودت را متصل کن."
+      );
+
+      connectPi();
+
+      return;
+
+    }
+
+
+    /*
+      IMPORTANT:
+      Pi.createPayment شروع پرداخت را انجام می‌دهد.
+      تأیید و complete واقعی باید روی سرور انجام شود.
+    */
+
+    try{
+
+      window.Pi.createPayment(
+
+        {
+          amount:selectedProduct.price,
+
+          memo:
+            "خرید " +
+            selectedProduct.title +
+            " در Nexora",
+
+          metadata:{
+            productId:selectedProduct.id,
+            productTitle:selectedProduct.title
+          }
+
+        },
+
+        {
+
+          onReadyForServerApproval:
+            async function(paymentId){
+
+              console.log(
+                "Payment needs server approval:",
+                paymentId
+              );
+
+
+              /*
+                اینجا باید:
+
+                POST /api/payments/approve
+
+                به بک‌اند Nexora ارسال شود.
+
+                بک‌اند با Server API Key
+                به Pi Platform API متصل می‌شود.
+              */
+
+
+              showToast(
+                "پرداخت ایجاد شد؛ منتظر تأیید سرور Nexora..."
+              );
+
+            },
+
+
+          onReadyForServerCompletion:
+            async function(paymentId,txid){
+
+              console.log(
+                "Payment completion:",
+                paymentId,
+                txid
+              );
+
+
+              /*
+                اینجا باید:
+
+                POST /api/payments/complete
+
+                اجرا شود.
+
+                فقط بعد از تأیید موفق سرور
+                سفارش را تکمیل‌شده اعلام کن.
+              */
+
+
+              showToast(
+                "تراکنش Pi دریافت شد؛ در انتظار تأیید نهایی."
+              );
+
+            },
+
+
+          onCancel:
+            function(paymentId){
+
+              console.log(
+                "Payment cancelled:",
+                paymentId
+              );
+
+              showToast(
+                "پرداخت لغو شد."
+              );
+
+            },
+
+
+          onError:
+            function(error,payment){
+
+              console.error(
+                "Pi payment error:",
+                error,
+                payment
+              );
+
+              showToast(
+                "پرداخت Pi با خطا مواجه شد."
+              );
+
+            }
+
+        }
+
+      );
+
+    }catch(error){
+
+      console.error(error);
+
+      showToast(
+        "امکان شروع پرداخت وجود ندارد."
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     SELL
+     ========================================================= */
+
+  function openSell(){
+
+    document
+    .getElementById("sellModal")
+    .classList.add("show");
+
+  }
+
+
+  function publishListing(){
+
+    const title =
+      document.getElementById("sellTitle").value.trim();
+
+    const category =
+      document.getElementById("sellCategory").value;
+
+    const price =
+      Number(
+        document.getElementById("sellPrice").value
+      );
+
+    const city =
+      document.getElementById("sellCity").value.trim();
+
+    const description =
+      document
+      .getElementById("sellDescription")
+      .value.trim();
+
+
+    if(!title){
+
+      showToast("عنوان آگهی را وارد کن.");
+
+      return;
+
+    }
+
+
+    if(
+      !Number.isFinite(price) ||
+      price < 0 ||
+      price > 1
+    ){
+
+      showToast(
+        "قیمت باید بین 0 تا 1 Pi باشد."
+      );
+
+      return;
+
+    }
+
+
+    /*
+      این نسخه فعلاً آگهی را در رابط کاربری می‌سازد.
+      برای ذخیره دائمی باید به Supabase وصل شود.
+    */
+
+    const newProduct = {
+
+      id:Date.now(),
+
+      category,
+
+      title,
+
+      seller:
+        piUser?.username
+        ? "@" + piUser.username
+        : "فروشنده Nexora",
+
+      price,
+
+      image:
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80",
+
+      city:
+        city || "نامشخص",
+
+      description
+
+    };
+
+
+    products.unshift(newProduct);
+
+    renderProducts();
+
+    closeModal("sellModal");
+
+
+    document.getElementById("sellTitle").value="";
+    document.getElementById("sellPrice").value="";
+    document.getElementById("sellCity").value="";
+    document.getElementById("sellDescription").value="";
+
+
+    showToast(
+      "آگهی در نسخه فعلی به فروشگاه اضافه شد."
+    );
+
+  }
+
+
+  /* =========================================================
+     PROFILE
+     ========================================================= */
+
+  function openProfile(){
+
+    document
+    .getElementById("profileModal")
+    .classList.add("show");
+
+  }
+
+
+  /* =========================================================
+     FAVORITE
+     ========================================================= */
+
+  function favoriteProduct(id){
+
+    showToast(
+      "❤️ کالا به علاقه‌مندی‌ها اضافه شد."
+    );
+
+  }
+
+
+  /* =========================================================
+     MODALS
+     ========================================================= */
+
+  function closeModal(id){
+
+    document
+    .getElementById(id)
+    .classList.remove("show");
+
+  }
+
+
+  document
+  .querySelectorAll(".modal")
+  .forEach(modal => {
+
+    modal.addEventListener("click",function(e){
+
+      if(e.target === modal){
+
+        modal.classList.remove("show");
+
+      }
+
+    });
+
+  });
+
+
+  /* =========================================================
+     TOAST
+     ========================================================= */
+
+  let toastTimer;
+
+
+  function showToast(message){
+
+    const toast =
+      document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+
+    clearTimeout(toastTimer);
+
+
+    toastTimer =
+      setTimeout(() => {
+
+        toast.classList.remove("show");
+
+      },3500);
+
+  }
+
+
+  /* =========================================================
+     START
+     ========================================================= */
+
+  window.addEventListener("load",function(){
+
+    initializePi();
+
+    renderProducts();
+
+  });
 
 </script>
 
